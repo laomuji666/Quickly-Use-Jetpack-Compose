@@ -18,6 +18,7 @@ kotlin {
 }
 
 dependencies {
+    //仅在编译时需要的依赖,不会打包到包中.
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
     compileOnly(libs.ksp.gradlePlugin)
@@ -38,6 +39,10 @@ gradlePlugin {
         register("hiltConvention") {
             id = "laomuji666.compose.hilt"
             implementationClass = "HiltConventionPlugin"
+        }
+        register("applicationConvention"){
+            id = "laomuji666.compose.application"
+            implementationClass = "ApplicationConventionPlugin"
         }
     }
 }

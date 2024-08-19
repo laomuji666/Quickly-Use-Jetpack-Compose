@@ -50,5 +50,6 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
 # build-logic
+laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
 laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecified" }
 

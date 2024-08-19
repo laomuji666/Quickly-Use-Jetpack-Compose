@@ -1,58 +1,23 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.composePlugin)
+    alias(libs.plugins.laomuji666.compose.application)
     alias(libs.plugins.laomuji666.compose.hilt)
 }
 
+//其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
 android {
+    //命名空间,尽量和applicationId一致,涉及到一些文件的路径.
     namespace = "com.laomuji666.compose.quickly"
-    compileSdk = 34
 
+    //默认配置
     defaultConfig {
         applicationId = "com.laomuji666.compose.quickly"
-        minSdk = 24
-        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
-    }
-
-    buildTypes {
-        release {
-            isMinifyEnabled = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
-    }
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = "17"
-    }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
     }
 }
 
 dependencies {
-
+    //基础库
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
