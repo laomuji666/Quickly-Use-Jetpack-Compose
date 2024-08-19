@@ -11,16 +11,17 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
-在Android Studio更新时,项目也会更新,我会持续把学到的新知识更新到本仓库.
+<br/>在Android Studio更新时,项目也会更新,我会持续把学到的新知识更新到本仓库.
+
 ## 运行
 确保切换到app,点击运行按钮.
 ![Run App](docs/images/RunApp.png)
 ## 密钥
 密钥文件存放在根目录的**keystore**目录中.
-密钥配置在**ApplicationConventionPlugin.kt**文件中
+<br/>密钥配置在**ApplicationConventionPlugin.kt**文件中
 ## 打包
 bundleRelease打包aab.
-assembleRelease打包apk.
+<br/>assembleRelease打包apk.
 
 # Module目录简介
 + app: 程序的入口,把各个module关联起来.
