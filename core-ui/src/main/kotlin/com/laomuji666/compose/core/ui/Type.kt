@@ -1,4 +1,4 @@
-package com.laomuji666.compose.quickly.ui.theme
+package com.laomuji666.compose.core.ui
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

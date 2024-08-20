@@ -17,8 +17,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     init {
         viewModelScope.launch {
-            //这里可以是向服务器请求数据
-            delay(1000)
+            //假设在这里初始化一些三方SDK
+            delay(500)
             _mainUiState.value = MainUiState.Success
         }
     }

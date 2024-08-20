@@ -22,3 +22,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "quickly"
 include(":app")
+include(":core-ui")
+include(":core-logic")
+include(":feature:hello")

@@ -1,8 +1,8 @@
 import com.android.build.api.dsl.ApplicationExtension
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
+import util.applicationDefaultConfig
 
 class ApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
@@ -11,12 +11,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
             applicationPlugins()
 
             extensions.configure<ApplicationExtension> {
-                //使用JDK17
-                compileOptions {
-                    sourceCompatibility = JavaVersion.VERSION_17
-                    targetCompatibility = JavaVersion.VERSION_17
-                }
-
                 //application默认配置
                 applicationDefaultConfig()
 
@@ -31,25 +25,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
             apply("com.android.application")
             apply("org.jetbrains.kotlin.android")
             apply("org.jetbrains.kotlin.plugin.compose")
-        }
-    }
-
-    private fun ApplicationExtension.applicationDefaultConfig(){
-        //构建sdk版本
-        compileSdk = 34
-        defaultConfig {
-            //最低支持sdk版本
-            minSdk = 24
-            //目标sdk版本,尽量和compileSdk版本一致
-            targetSdk = compileSdk
-
-            //测试InstrumentationRunner
-            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-            //开启vectorDrawables支持
-            vectorDrawables {
-                useSupportLibrary = true
-            }
         }
     }
 

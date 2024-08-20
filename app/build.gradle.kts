@@ -17,27 +17,17 @@ android {
 }
 
 dependencies {
-    //基础库
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
+    //关联view和compose
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
-    implementation(libs.androidx.lifecycle.runtime.compose)
-
     //hilt
     ksp(libs.hilt.compiler)
-
     //启动屏幕
     implementation(libs.androidx.core.splashscreen)
+
+    //其它module
+    implementation(project(":core-ui"))
+    implementation(project(":core-logic"))
+    implementation(project(":feature:hello"))
+
+
 }
