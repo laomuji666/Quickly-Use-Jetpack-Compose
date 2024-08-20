@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="AppTheme.Quickly" parent="android:Theme.Material.NoActionBar" />
 
-    <style name="Theme.Quickly" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="AppTheme.SplashScreen" parent="Theme.SplashScreen">
+        <!--  启动页style  -->
+        <item name="postSplashScreenTheme">@style/AppTheme.Quickly</item>
+        <!--  启动页背景色  -->
+        <item name="windowSplashScreenBackground">#FFFFFFFF</item>
+        <!--  启动页背景图  -->
+        <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_start_page</item>
+    </style>
 </resources>

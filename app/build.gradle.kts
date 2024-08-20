@@ -33,7 +33,11 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.androidx.lifecycle.runtime.compose)
 
     //hilt
     ksp(libs.hilt.compiler)
+
+    //启动屏幕
+    implementation(libs.androidx.core.splashscreen)
 }
