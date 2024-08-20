@@ -14,6 +14,7 @@ androidxHiltNavigationCompose = "1.2.0"
 navigationCompose = "2.7.7"
 googleGmsGoogleServices = "4.4.2"
 firebaseBom = "33.1.2"
+accompanist = "0.34.0"
 
 [libraries]
 # app
@@ -44,7 +45,8 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 # firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
-
+# compose权限
+accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 
 
 [plugins]

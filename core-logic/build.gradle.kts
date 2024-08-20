@@ -29,4 +29,7 @@ dependencies {
     //firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+
+    //权限
+    api(libs.accompanist.permissions)
 }

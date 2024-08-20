@@ -1,5 +1,6 @@
 package com.laomuji666.compose.feature.hello
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +16,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
 import com.laomuji666.compose.core.ui.QuicklyTheme
+import com.google.accompanist.permissions.rememberPermissionState
 
 @Composable
 fun FirebaseScreen(
@@ -30,22 +34,44 @@ fun FirebaseScreen(
     )
 }
 
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 private fun FirebaseScreenUi(
     uiState: FirebaseUiState,
     logEventClick: () -> Unit = {},
 ){
+    @SuppressLint("InlinedApi")
+    val postNotificationPermissionState = rememberPermissionState(
+        android.Manifest.permission.POST_NOTIFICATIONS
+    )
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            Button(
-                onClick = logEventClick,
-                modifier = Modifier.fillMaxWidth().height(50.dp)
-            ) {
-                Text(text = "埋点")
+            FirebaseScreenSlot(text = "埋点", onClick = logEventClick)
+            if (postNotificationPermissionState.status.isGranted) {
+                Text(text = uiState.pushToken)
+            }else{
+                FirebaseScreenSlot(text = "申请通知权限", onClick = {
+                    postNotificationPermissionState.launchPermissionRequest()
+                })
             }
-            Spacer(modifier = Modifier.height(10.dp))
         }
     }
+}
+
+@Composable
+private fun FirebaseScreenSlot(
+    text:String,
+    onClick:()->Unit
+){
+    Button(
+        onClick = onClick,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+    ) {
+        Text(text = text)
+    }
+    Spacer(modifier = Modifier.height(10.dp))
 }
 
 @Preview
