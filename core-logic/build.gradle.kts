@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.laomuji666.compose.library)
+    alias(libs.plugins.laomuji666.compose.hilt)
 }
 
 android {
@@ -21,4 +22,11 @@ dependencies {
 
     //compose的lifecycle扩展
     api(libs.androidx.lifecycle.runtime.compose)
+
+    //hilt
+    ksp(libs.hilt.compiler)
+
+    //firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

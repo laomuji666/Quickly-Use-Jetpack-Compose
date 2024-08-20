@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226623250513",
+    "project_id": "quickly-use-jetpack-compose",
+    "storage_bucket": "quickly-use-jetpack-compose.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226623250513:android:bab2d0b21938b0d5a25870",
+        "android_client_info": {
+          "package_name": "com.laomuji666.compose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD10PmCMBifwam3GUK8cQZq0ruBXdYcyY4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

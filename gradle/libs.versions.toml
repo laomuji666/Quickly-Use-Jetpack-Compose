@@ -12,7 +12,8 @@ hilt = "2.52"
 androidxCoreSplashscreen = "1.0.1"
 androidxHiltNavigationCompose = "1.2.0"
 navigationCompose = "2.7.7"
-
+googleGmsGoogleServices = "4.4.2"
+firebaseBom = "33.1.2"
 
 [libraries]
 # app
@@ -40,6 +41,10 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 # splashscreen
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+# firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+
 
 
 [plugins]
@@ -52,5 +57,6 @@ hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecified" }
 laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
 laomuji666-compose-library = { id = "laomuji666.compose.library", version = "unspecified" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 
 

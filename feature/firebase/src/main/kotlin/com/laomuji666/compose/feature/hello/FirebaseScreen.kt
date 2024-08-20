@@ -10,7 +10,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,60 +18,42 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.QuicklyTheme
 
 @Composable
-fun HelloScreen(
-    viewModel: HelloViewModel = hiltViewModel(),
-    onFirebaseClick: ()->Unit
+fun FirebaseScreen(
+    viewModel: FirebaseViewModel = hiltViewModel()
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    HelloScreenUi(
+    FirebaseScreenUi(
         uiState = uiState,
-        onFirebaseClick =onFirebaseClick
+        logEventClick = {
+            viewModel.logEventClick()
+        }
     )
 }
 
 @Composable
-private fun HelloScreenUi(
-    uiState: HelloUiState,
-    onFirebaseClick:()->Unit
+private fun FirebaseScreenUi(
+    uiState: FirebaseUiState,
+    logEventClick: () -> Unit = {},
 ){
     Scaffold {
-        Column(
-            modifier = Modifier.padding(it),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = uiState.helloText)
-            HelloScreenSlot(
-                text = "Firebase页面",
-                onClick = onFirebaseClick
-            )
+        Column(modifier = Modifier.padding(it)) {
+            Button(
+                onClick = logEventClick,
+                modifier = Modifier.fillMaxWidth().height(50.dp)
+            ) {
+                Text(text = "埋点")
+            }
+            Spacer(modifier = Modifier.height(10.dp))
         }
     }
 }
-
-@Composable
-private fun HelloScreenSlot(
-    text:String,
-    onClick:()->Unit
-){
-    Column {
-        Button(
-            onClick = onClick,
-            modifier = Modifier.fillMaxWidth().height(50.dp)
-        ) {
-            Text(text = text)
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-    }
-}
-
 
 @Preview
 @Composable
-fun PreviewHelloScreenUi(){
+fun PreviewFirebaseScreen(){
     QuicklyTheme {
-        HelloScreenUi(
-            uiState = HelloUiState(),
-            onFirebaseClick = {}
+        FirebaseScreenUi(
+            uiState = FirebaseUiState()
         )
     }
 }
