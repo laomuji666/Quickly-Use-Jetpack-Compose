@@ -14,7 +14,7 @@ import com.laomuji666.compose.core.ui.QuicklyTheme
 
 @Composable
 fun HelloScreen(
-    viewModel: HelloScreenViewModel = hiltViewModel()
+    viewModel: HelloViewModel = hiltViewModel()
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->

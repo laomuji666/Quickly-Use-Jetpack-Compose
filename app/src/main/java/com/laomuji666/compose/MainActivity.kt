@@ -13,8 +13,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.laomuji666.compose.core.ui.QuicklyTheme
 import com.laomuji666.compose.feature.hello.HelloScreen
+import com.laomuji666.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -29,8 +31,11 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
+            val navHostController = rememberNavController()
             QuicklyTheme {
-                HelloScreen()
+                NavigationHost(
+                    navHostController = navHostController
+                )
             }
         }
     }
