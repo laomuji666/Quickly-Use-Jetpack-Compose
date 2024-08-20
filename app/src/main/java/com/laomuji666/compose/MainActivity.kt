@@ -1,4 +1,4 @@
-package com.laomuji666.compose.quickly
+package com.laomuji666.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
      * 如果需要在启动时初始化一些三方SDK,可以保留启动屏幕到初始化完成后再显示
      */
     private fun checkKeepOnScreenCondition(splashScreen: SplashScreen){
-        var uiState:MainUiState by mutableStateOf(MainUiState.Loading)
+        var uiState: MainUiState by mutableStateOf(MainUiState.Loading)
         splashScreen.setKeepOnScreenCondition {
             uiState == MainUiState.Loading
         }
