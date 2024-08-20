@@ -19,14 +19,15 @@ android {
 dependencies {
     //关联view和compose
     implementation(libs.androidx.activity.compose)
+    //hilt
+    ksp(libs.hilt.compiler)
+    //启动屏幕
+    implementation(libs.androidx.core.splashscreen)
 
     //其它module
     implementation(project(":core-ui"))
     implementation(project(":core-logic"))
+    implementation(project(":feature:hello"))
 
-    //hilt
-    ksp(libs.hilt.compiler)
 
-    //启动屏幕
-    implementation(libs.androidx.core.splashscreen)
 }

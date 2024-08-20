@@ -12,6 +12,7 @@ dependencies {
     //管理Android生命周期
     api(libs.androidx.lifecycle.runtime.ktx)
 
+    //基础库
     api(libs.androidx.material3)
     api(platform(libs.androidx.compose.bom))
     api(libs.androidx.compose.ui.tooling)
@@ -21,4 +22,7 @@ dependencies {
 
     //compose的lifecycle扩展
     api(libs.androidx.lifecycle.runtime.compose)
+
+    //hilt的navigation扩展
+    api(libs.androidx.hilt.navigation.compose)
 }
