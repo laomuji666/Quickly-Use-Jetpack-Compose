@@ -44,5 +44,9 @@ gradlePlugin {
             id = "laomuji666.compose.application"
             implementationClass = "ApplicationConventionPlugin"
         }
+        register("libraryConvention"){
+            id = "laomuji666.compose.library"
+            implementationClass = "LibraryConventionPlugin"
+        }
     }
 }
