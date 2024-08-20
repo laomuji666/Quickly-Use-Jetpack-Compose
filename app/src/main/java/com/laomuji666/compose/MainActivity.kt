@@ -1,4 +1,4 @@
-package com.laomuji666.compose.quickly
+package com.laomuji666.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -13,8 +13,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.compose.rememberNavController
 import com.laomuji666.compose.core.ui.QuicklyTheme
 import com.laomuji666.compose.feature.hello.HelloScreen
+import com.laomuji666.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -29,8 +31,11 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
+            val navHostController = rememberNavController()
             QuicklyTheme {
-                HelloScreen()
+                NavigationHost(
+                    navHostController = navHostController
+                )
             }
         }
     }
@@ -41,7 +46,7 @@ class MainActivity : ComponentActivity() {
      * 如果需要在启动时初始化一些三方SDK,可以保留启动屏幕到初始化完成后再显示
      */
     private fun checkKeepOnScreenCondition(splashScreen: SplashScreen){
-        var uiState:MainUiState by mutableStateOf(MainUiState.Loading)
+        var uiState: MainUiState by mutableStateOf(MainUiState.Loading)
         splashScreen.setKeepOnScreenCondition {
             uiState == MainUiState.Loading
         }

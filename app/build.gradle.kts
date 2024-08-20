@@ -6,11 +6,11 @@ plugins {
 //其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
 android {
     //命名空间,尽量和applicationId一致,涉及到一些文件的路径.
-    namespace = "com.laomuji666.compose.quickly"
+    namespace = "com.laomuji666.compose"
 
     //默认配置
     defaultConfig {
-        applicationId = "com.laomuji666.compose.quickly"
+        applicationId = "com.laomuji666.compose"
         versionCode = 1
         versionName = "1.0"
     }

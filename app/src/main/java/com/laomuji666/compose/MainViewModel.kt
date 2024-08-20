@@ -1,4 +1,4 @@
-package com.laomuji666.compose.quickly
+package com.laomuji666.compose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,7 +13,9 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor() : ViewModel() {
     private val _mainUiState = MutableStateFlow<MainUiState>(MainUiState.Loading)
-    val uiState = _mainUiState.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000),MainUiState.Loading)
+    val uiState = _mainUiState.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000),
+        MainUiState.Loading
+    )
 
     init {
         viewModelScope.launch {
@@ -25,6 +27,6 @@ class MainViewModel @Inject constructor() : ViewModel() {
 }
 
 sealed interface MainUiState{
-    data object Loading:MainUiState
-    data object Success:MainUiState
+    data object Loading: MainUiState
+    data object Success: MainUiState
 }

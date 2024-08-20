@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
-class HelloScreenViewModel @Inject constructor() : ViewModel() {
+class HelloViewModel @Inject constructor() : ViewModel() {
     private val _helloText = HelloRepository().requestHelloText()
 
     val uiState = _helloText.map {

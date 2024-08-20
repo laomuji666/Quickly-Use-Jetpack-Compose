@@ -1,4 +1,4 @@
-package com.laomuji666.compose.quickly
+package com.laomuji666.compose
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
