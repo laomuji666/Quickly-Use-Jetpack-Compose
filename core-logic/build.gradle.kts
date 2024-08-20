@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji666.compose.core.ui"
+    namespace = "com.laomuji666.compose.core.logic"
 }
 
 dependencies {

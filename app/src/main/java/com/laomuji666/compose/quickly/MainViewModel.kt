@@ -2,6 +2,7 @@ package com.laomuji666.compose.quickly
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.laomuji666.compose.core.logic.DemoLogic
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,14 +18,12 @@ class MainViewModel @Inject constructor() : ViewModel() {
 
     init {
         viewModelScope.launch {
-            //这里可以是向服务器请求数据
-            delay(1000)
-            _mainUiState.value = MainUiState.Success
+            _mainUiState.value = MainUiState.Success(DemoLogic().requestMainText())
         }
     }
 }
 
 sealed interface MainUiState{
     data object Loading:MainUiState
-    data object Success:MainUiState
+    data class Success(val text:String):MainUiState
 }

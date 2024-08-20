@@ -22,6 +22,7 @@ dependencies {
 
     //其它module
     implementation(project(":core-ui"))
+    implementation(project(":core-logic"))
 
     //hilt
     ksp(libs.hilt.compiler)

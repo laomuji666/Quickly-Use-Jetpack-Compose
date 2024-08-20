@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             QuicklyTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Compose",
+                        name =  "${(uiState as? MainUiState.Success)?.text}",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
