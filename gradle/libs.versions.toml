@@ -45,6 +45,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 # firebase
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 # compose权限
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 
