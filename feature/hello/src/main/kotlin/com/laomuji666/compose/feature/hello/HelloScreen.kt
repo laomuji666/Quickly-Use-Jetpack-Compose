@@ -21,19 +21,22 @@ import com.laomuji666.compose.core.ui.QuicklyTheme
 @Composable
 fun HelloScreen(
     viewModel: HelloViewModel = hiltViewModel(),
-    onFirebaseClick: ()->Unit
+    onFirebaseClick: ()->Unit,
+    onHttpClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     HelloScreenUi(
         uiState = uiState,
-        onFirebaseClick =onFirebaseClick
+        onFirebaseClick = onFirebaseClick,
+        onHttpClick = onHttpClick
     )
 }
 
 @Composable
 private fun HelloScreenUi(
     uiState: HelloUiState,
-    onFirebaseClick:()->Unit
+    onFirebaseClick:()->Unit,
+    onHttpClick:()->Unit
 ){
     Scaffold {
         Column(
@@ -41,9 +44,14 @@ private fun HelloScreenUi(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = uiState.helloText)
+            Spacer(modifier = Modifier.height(10.dp))
             HelloScreenSlot(
-                text = "Firebase页面",
+                text = "Firebase例子",
                 onClick = onFirebaseClick
+            )
+            HelloScreenSlot(
+                text = "Http例子",
+                onClick = onHttpClick
             )
         }
     }
@@ -72,7 +80,8 @@ fun PreviewHelloScreenUi(){
     QuicklyTheme {
         HelloScreenUi(
             uiState = HelloUiState(),
-            onFirebaseClick = {}
+            onFirebaseClick = {},
+            onHttpClick = {}
         )
     }
 }

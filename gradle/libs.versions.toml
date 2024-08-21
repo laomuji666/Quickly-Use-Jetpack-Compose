@@ -15,6 +15,7 @@ googleGmsGoogleServices = "4.4.2"
 firebaseBom = "33.1.2"
 accompanist = "0.34.0"
 googleFirebaseCrashlytics = "3.0.2"
+ktor = "2.3.12"
 
 [libraries]
 # app
@@ -49,6 +50,12 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 # compose权限
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
+# ktor
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 
 
 [plugins]
@@ -57,6 +64,7 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 composePlugin = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 # build-logic
 laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecified" }
 laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
