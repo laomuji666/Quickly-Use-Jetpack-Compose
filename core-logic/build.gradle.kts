@@ -27,9 +27,10 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     //firebase
-    implementation(platform(libs.firebase.bom))
+    api(platform(libs.firebase.bom))
     api(libs.firebase.analytics)
     api(libs.firebase.messaging)
+    api(libs.firebase.crashlytics)
 
     //权限
     api(libs.accompanist.permissions)

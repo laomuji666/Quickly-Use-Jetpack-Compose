@@ -41,6 +41,9 @@ fun FirebaseScreen(
         },
         updatePushToken = {
             viewModel.updatePushToken()
+        },
+        testCrashlytics = {
+            viewModel.testCrashlytics()
         }
     )
 }
@@ -49,15 +52,17 @@ fun FirebaseScreen(
 private fun FirebaseScreenUi(
     uiState: FirebaseUiState,
     logEventClick: () -> Unit,
-    updatePushToken:()->Unit
+    updatePushToken:()->Unit,
+    testCrashlytics:()->Unit
 ){
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            FirebaseScreenSlot(text = "埋点", onClick = logEventClick)
+            FirebaseScreenSlot(text = "测试埋点", onClick = logEventClick)
             FirebasePermissionSlot(
                 pushToken = uiState.pushToken,
                 updatePushToken = updatePushToken
             )
+            FirebaseScreenSlot(text = "测试崩溃", onClick = testCrashlytics)
         }
     }
 }
@@ -124,7 +129,8 @@ fun PreviewFirebaseScreen(){
         FirebaseScreenUi(
             uiState = FirebaseUiState(),
             logEventClick = {},
-            updatePushToken = {}
+            updatePushToken = {},
+            testCrashlytics = {}
         )
     }
 }

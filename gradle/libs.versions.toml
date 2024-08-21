@@ -2,7 +2,6 @@
 agp = "8.5.2"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
-espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.4"
 activityCompose = "1.9.1"
 composeBom = "2024.04.01"
@@ -15,6 +14,7 @@ navigationCompose = "2.7.7"
 googleGmsGoogleServices = "4.4.2"
 firebaseBom = "33.1.2"
 accompanist = "0.34.0"
+googleFirebaseCrashlytics = "3.0.2"
 
 [libraries]
 # app
@@ -46,6 +46,7 @@ androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscree
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 # compose权限
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 
@@ -61,5 +62,6 @@ laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecifi
 laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
 laomuji666-compose-library = { id = "laomuji666.compose.library", version = "unspecified" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 
 

@@ -31,4 +31,8 @@ class FirebaseViewModel @Inject constructor(
             _pushToken.value = it
         }
     }
+
+    fun testCrashlytics() {
+        throw RuntimeException("Test Crash")
+    }
 }
