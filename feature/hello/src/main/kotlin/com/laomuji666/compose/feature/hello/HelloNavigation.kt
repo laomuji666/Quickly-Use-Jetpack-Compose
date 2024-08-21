@@ -5,8 +5,12 @@ import androidx.navigation.compose.composable
 
 const val HELLO_SCREEN = "HELLO_SCREEN"
 
-fun NavGraphBuilder.composeHelloScreen(){
+fun NavGraphBuilder.composeHelloScreen(
+    onFirebaseClick: ()->Unit
+){
     composable(route = HELLO_SCREEN){
-        HelloScreen()
+        HelloScreen(
+            onFirebaseClick = onFirebaseClick
+        )
     }
 }

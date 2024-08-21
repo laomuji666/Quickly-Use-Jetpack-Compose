@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.laomuji666.compose.application)
     alias(libs.plugins.laomuji666.compose.hilt)
+    alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 //其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
@@ -28,6 +30,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic"))
     implementation(project(":feature:hello"))
+    implementation(project(":feature:firebase"))
 
 
 }

@@ -1,4 +1,4 @@
-package com.laomuji666.compose.navigation
+package com.laomuji666.compose.core.ui
 
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions

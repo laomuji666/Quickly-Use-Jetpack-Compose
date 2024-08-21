@@ -6,7 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.laomuji666.compose.feature.hello.HELLO_SCREEN
+import com.laomuji666.compose.feature.hello.composeFirebaseScreen
 import com.laomuji666.compose.feature.hello.composeHelloScreen
+import com.laomuji666.compose.feature.hello.navigateToFirebaseScreen
 
 @Composable
 fun NavigationHost(
@@ -42,6 +44,12 @@ fun NavigationHost(
             )
         }
     ){
-        composeHelloScreen()
+        composeHelloScreen(
+            onFirebaseClick = {
+                navHostController.navigateToFirebaseScreen()
+            }
+        )
+
+        composeFirebaseScreen()
     }
 }
