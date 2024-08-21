@@ -6,11 +6,13 @@ import androidx.navigation.compose.composable
 const val HELLO_SCREEN = "HELLO_SCREEN"
 
 fun NavGraphBuilder.composeHelloScreen(
-    onFirebaseClick: ()->Unit
+    onFirebaseClick: ()->Unit,
+    onHttpClick:()->Unit
 ){
     composable(route = HELLO_SCREEN){
         HelloScreen(
-            onFirebaseClick = onFirebaseClick
+            onFirebaseClick = onFirebaseClick,
+            onHttpClick = onHttpClick
         )
     }
 }

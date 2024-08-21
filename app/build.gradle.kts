@@ -31,6 +31,7 @@ dependencies {
     implementation(project(":core-logic"))
     implementation(project(":feature:hello"))
     implementation(project(":feature:firebase"))
+    implementation(project(":feature:http"))
 
 
 }
