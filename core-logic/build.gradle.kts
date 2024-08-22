@@ -46,4 +46,9 @@ dependencies {
     implementation(libs.ktor.serialization.kotlinx.json)
     //ktor okhttp 引擎
     implementation(libs.ktor.client.okhttp)
+
+    //谷歌认证
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
 }
