@@ -1,6 +1,6 @@
 package com.laomuji666.compose.feature.hello
 
-import android.util.Log
+import com.laomuji666.compose.core.logic.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.http.HttpRepository
@@ -67,16 +67,16 @@ class HttpViewModel @Inject constructor(
             ).collect{
                 when(it){
                     is Result.Error -> {
-                        Log.d("tag_create","error")
+                        Log.debug("tag_create","error")
                         _isLoading.value = false
                         _isError.value = true
                     }
                     Result.Loading -> {
-                        Log.d("tag_create","loading")
+                        Log.debug("tag_create","loading")
                         _isLoading.value = true
                     }
                     is Result.Success -> {
-                        Log.d("tag_create","Success")
+                        Log.debug("tag_create","Success")
                         _isLoading.value = false
                     }
                 }

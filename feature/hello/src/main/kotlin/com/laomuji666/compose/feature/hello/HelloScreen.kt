@@ -1,6 +1,5 @@
 package com.laomuji666.compose.feature.hello
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
+import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.QuicklyTheme
 import com.laomuji666.compose.res.R
 
@@ -42,7 +42,7 @@ fun HelloScreen(
                 coroutineScope = coroutineScope,
                 activityContext = context,
                 onSuccess = { email, idToken ->
-                    Toast.makeText(context,"$email $idToken",Toast.LENGTH_LONG).show()
+                    Toast.showText(context, "$email $idToken")
                 },
                 onFail = {
                     //登录失败或取消登录
