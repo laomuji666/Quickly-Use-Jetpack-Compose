@@ -15,12 +15,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.ui.QuicklyTheme
+import com.laomuji666.compose.res.R
 
 @Composable
 fun HelloScreen(
@@ -40,10 +42,10 @@ fun HelloScreen(
                 coroutineScope = coroutineScope,
                 activityContext = context,
                 onSuccess = { email, idToken ->
-                    Toast.makeText(context,"$email : $idToken",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"$email $idToken",Toast.LENGTH_LONG).show()
                 },
                 onFail = {
-                    Toast.makeText(context,"登录失败",Toast.LENGTH_SHORT).show()
+                    //登录失败或取消登录
                 }
             )
         }
@@ -65,15 +67,15 @@ private fun HelloScreenUi(
             Text(text = uiState.helloText)
             Spacer(modifier = Modifier.height(10.dp))
             HelloScreenSlot(
-                text = "Firebase例子",
+                text = stringResource(id = R.string.string_hello_screen_firebase_demo),
                 onClick = onFirebaseClick
             )
             HelloScreenSlot(
-                text = "Http例子",
+                text = stringResource(id = R.string.string_hello_screen_http_demo),
                 onClick = onHttpClick
             )
             HelloScreenSlot(
-                text = "谷歌登录",
+                text = stringResource(id = R.string.string_hello_screen_google_login_demo),
                 onClick = onGoogleLoginClick
             )
         }
