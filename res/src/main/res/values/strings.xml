@@ -1,0 +1,23 @@
+<resources>
+<!--  Common  -->
+    <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+
+<!--  ErrorView  -->
+    <string name="string_error_view_title">出错了</string>
+    <string name="string_error_view_content">请检查网络或稍后重试</string>
+    <string name="string_error_view_refresh">刷新当前页面</string>
+
+<!--  HelloScreen  -->
+    <string name="string_hello_screen_firebase_demo">Firebase例子</string>
+    <string name="string_hello_screen_http_demo">Ktor Http例子</string>
+    <string name="string_hello_screen_google_login_demo">谷歌登录例子</string>
+
+<!--  HttpScreen  -->
+    <string name="string_http_screen_get_demo">发送GET请求</string>
+    <string name="string_http_screen_post_demo">发送POST请求</string>
+
+<!--  FirebaseScreen  -->
+    <string name="string_firebase_screen_log_event">测试埋点</string>
+    <string name="string_firebase_screen_crush">测试崩溃</string>
+    <string name="string_firebase_screen_notification">申请通知权限</string>
+</resources>

@@ -1,7 +1,6 @@
 package com.laomuji666.compose.feature.hello
 
 import android.annotation.SuppressLint
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,8 +16,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -28,6 +27,7 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.laomuji666.compose.core.ui.QuicklyTheme
+import com.laomuji666.compose.res.R
 
 @Composable
 fun FirebaseScreen(
@@ -57,12 +57,12 @@ private fun FirebaseScreenUi(
 ){
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            FirebaseScreenSlot(text = "测试埋点", onClick = logEventClick)
+            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
             FirebasePermissionSlot(
                 pushToken = uiState.pushToken,
                 updatePushToken = updatePushToken
             )
-            FirebaseScreenSlot(text = "测试崩溃", onClick = testCrashlytics)
+            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
         }
     }
 }
@@ -105,7 +105,7 @@ private fun FirebasePermissionSlot(
         if(isRequestPermission){
             isRequestPermission = false
             if (!postNotificationPermissionState.status.isGranted && postNotificationPermissionState.status.shouldShowRationale) {
-                Toast.makeText(LocalContext.current, "请允许通知权限", Toast.LENGTH_SHORT).show()
+                //永久拒绝了权限,需要打开设置页面手动授权
             } else {
                 LaunchedEffect(Unit) {
                     postNotificationPermissionState.launchPermissionRequest()
@@ -116,7 +116,7 @@ private fun FirebasePermissionSlot(
     if(hasPermission){
         Text(text = pushToken)
     }else{
-        FirebaseScreenSlot(text = "申请通知权限", onClick = {
+        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             isRequestPermission = true
         })
     }

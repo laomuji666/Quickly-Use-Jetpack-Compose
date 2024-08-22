@@ -26,8 +26,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.laomuji666.compose.res.R
 
 class ErrorViewContent{
     @Composable
@@ -61,12 +63,12 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
-                text = "出错了",
+                text = stringResource(id = R.string.string_error_view_title),
                 color = MaterialTheme.colorScheme.onBackground,
                 style = MaterialTheme.typography.titleMedium
             )
             Text(
-                text = "请检查网络或稍后重试",
+                text = stringResource(id = R.string.string_error_view_content),
                 color = MaterialTheme.colorScheme.onBackground,
                 style = MaterialTheme.typography.bodyMedium
             )
@@ -82,7 +84,7 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
             ) {
                 Box(modifier = Modifier.fillMaxSize()){
                     Text(
-                        text = "刷新页面",
+                        text = stringResource(id = R.string.string_error_view_refresh),
                         modifier = Modifier.align(Alignment.Center),
                         color = MaterialTheme.colorScheme.error,
                         style = MaterialTheme.typography.labelLarge
