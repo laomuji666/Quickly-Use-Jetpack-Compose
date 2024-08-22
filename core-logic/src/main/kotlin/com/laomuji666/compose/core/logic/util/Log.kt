@@ -1,6 +1,5 @@
 package com.laomuji666.compose.core.logic.util
 
-import com.laomuji666.compose.core.logic.util.Log
 import com.laomuji666.compose.core.logic.BuildConfig
 
 /**
@@ -11,6 +10,6 @@ object Log{
         if(!BuildConfig.DEBUG){
             return
         }
-        Log.debug(tag, "$msg")
+        android.util.Log.d(tag, "$msg")
     }
 }
