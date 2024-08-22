@@ -1,6 +1,7 @@
 # Quickly-Use-Jetpack-Compose
 简单易用的 Jetpack Compose 快速开发框架,以Compose的方式实现功能.
 <br/>比如权限申请,调用相册等功能都会使用Compose的方式而不是依赖Activity的方式.
+<br/>项目还在不断更新中...
 
 # 架构
 Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵守[官方架构指南](https://developer.android.com/topic/architecture?hl=zh-cn).
@@ -33,5 +34,5 @@ bundleRelease打包aab.
 
 # 已提供的示例代码
 + firebase 埋点,崩溃分析,推送.
-+ ktor 序列化,ViewModel+Flow,等待响应,异常.
-+ google 登录,CredentialManager添加登录选项.
++ ktor 序列化,ViewModel+Flow,等待响应,异常处理.
++ google 登录最佳实践,CredentialManager添加登录选项.
