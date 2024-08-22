@@ -31,6 +31,7 @@ bundleRelease打包aab.
 + core-logic: 数据处理,与本地数据库或远程服务器交互.
 + core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的ui组件.
 + feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
++ res: 资源文件,统一管理图片,文字等资源文件.
 
 # 已提供的示例代码
 + firebase 埋点,崩溃分析,推送.
