@@ -1,8 +1,8 @@
 package com.laomuji666.compose.core.logic.http
 
 import android.annotation.SuppressLint
-import android.util.Log
 import com.laomuji666.compose.core.logic.http.cookie.MyCookiesStorage
+import com.laomuji666.compose.core.logic.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.okhttp.OkHttpConfig
@@ -41,7 +41,7 @@ class HttpService @Inject constructor(
             logger = Logger.DEFAULT
             logger = object : Logger {
                 override fun log(message: String) {
-                    Log.d("tag_http", message)
+                    Log.debug("tag_http", message)
                 }
             }
         }
