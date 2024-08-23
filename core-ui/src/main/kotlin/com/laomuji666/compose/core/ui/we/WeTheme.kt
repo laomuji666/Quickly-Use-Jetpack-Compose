@@ -21,12 +21,13 @@ fun WeTheme(
     //竖屏以375来适配屏幕
     val orientation = LocalConfiguration.current.orientation
     val screenOrientation by remember { derivedStateOf { orientation } }
+
     CompositionLocalProvider(
         LocalWeColorScheme provides weColorScheme,
         LocalWeTypography provides weTypography,
         LocalDensity provides if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE) Density(
             density = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
-            fontScale = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
+            fontScale = LocalDensity.current.fontScale,
         ) else LocalDensity.current
     ) {
         content()

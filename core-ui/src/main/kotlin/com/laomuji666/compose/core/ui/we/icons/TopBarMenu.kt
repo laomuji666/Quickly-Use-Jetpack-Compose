@@ -6,7 +6,6 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.we.WeIcons
 import kotlin.Suppress
 
 val WeIcons.TopBarMenu: ImageVector

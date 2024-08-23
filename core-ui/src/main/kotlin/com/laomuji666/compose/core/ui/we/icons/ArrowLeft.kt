@@ -5,15 +5,14 @@ import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.we.WeIcons
 
-val WeIcons.TopBarBack: ImageVector
+val WeIcons.ArrowLeft: ImageVector
     get() {
-        if (_TopBarBack != null) {
-            return _TopBarBack!!
+        if (_ArrowLeft != null) {
+            return _ArrowLeft!!
         }
-        _TopBarBack = ImageVector.Builder(
-            name = "We.TopBarBack",
+        _ArrowLeft = ImageVector.Builder(
+            name = "We.ArrowLeft",
             defaultWidth = 12.dp,
             defaultHeight = 24.dp,
             viewportWidth = 12f,
@@ -33,8 +32,8 @@ val WeIcons.TopBarBack: ImageVector
                 lineTo(2.682f, 12f)
             }
         }.build()
-        return _TopBarBack!!
+        return _ArrowLeft!!
     }
 
 @Suppress("ObjectPropertyName")
-private var _TopBarBack: ImageVector? = null
+private var _ArrowLeft: ImageVector? = null

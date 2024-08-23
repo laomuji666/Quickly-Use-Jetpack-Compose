@@ -6,13 +6,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 /**
- * @param largeTitle 大页面标题
- * @param mediumTitle 弹窗标题
- * @param smallTitle 列表内标题
- * @param groupTitle 分组标题
- * @param largeText 大页面文字
- * @param mediumText 弹窗文字
- * @param smallText 描述文字
+ * @param largeTitle 大页面标题,推荐透明0.9f
+ * @param mediumTitle 弹窗标题,推荐透明0.9f
+ * @param smallTitle 列表内标题,推荐透明0.9f
+ * @param groupTitle 分组标题,推荐透明0.5f
+ * @param largeText 大页面文字,推荐透明0.9f
+ * @param mediumText 弹窗文字,推荐透明0.5f
+ * @param smallText 描述文字,推荐透明0.3f
  */
 data class WeTypography(
     val largeTitle: TextStyle = TextStyle(
@@ -20,7 +20,7 @@ data class WeTypography(
         fontWeight = FontWeight.Medium
     ),
     val mediumTitle: TextStyle = TextStyle(
-        fontSize = 17.sp,
+        fontSize = 20.sp,
         fontWeight = FontWeight.Medium
     ),
     val smallTitle: TextStyle = TextStyle(
@@ -28,12 +28,12 @@ data class WeTypography(
         fontWeight = FontWeight.Normal
     ),
     val groupTitle: TextStyle = TextStyle(
-        fontSize = 15.sp,
-        fontWeight = FontWeight.Medium
+        fontSize = 14.sp,
+        fontWeight = FontWeight.Normal
     ),
     val largeText: TextStyle = TextStyle(
         fontSize = 17.sp,
-        fontWeight = FontWeight.Normal
+        fontWeight = FontWeight.Medium
     ),
     val mediumText: TextStyle = TextStyle(
         fontSize = 17.sp,

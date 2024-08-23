@@ -1,12 +1,8 @@
 package com.laomuji666.compose.feature.hello
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
@@ -15,17 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeIcons
-import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
-import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
+import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.widget.TableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
-import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -64,55 +57,38 @@ private fun HelloScreenUi(
     onGoogleLoginClick:()->Unit
 ){
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier.background(WeTheme.weColorScheme.backgroundColor).fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         WeTopBar(
-            title = "标题",
-            actions = {
-                WeTopBarAction(
-                    imageVector = WeIcons.TopBarSearch
-                )
-                WeTopBarAction(
-                    imageVector = WeIcons.TopBarAdd
-                )
-            }
+            title = "标题"
         )
-        Text(text = uiState.helloText)
-        Spacer(modifier = Modifier.height(10.dp))
-        HelloScreenSlot(
-            text = stringResource(id = R.string.string_hello_screen_firebase_demo),
-            onClick = onFirebaseClick
+        TableClickRow(
+            title = uiState.helloText,
+            showOutLine = true
         )
-        HelloScreenSlot(
-            text = stringResource(id = R.string.string_hello_screen_http_demo),
-            onClick = onHttpClick
+        TableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+            onClick = onFirebaseClick,
+            showOutLine = true
         )
-        HelloScreenSlot(
-            text = stringResource(id = R.string.string_hello_screen_google_login_demo),
-            onClick = onGoogleLoginClick
+        TableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+            onClick = onFirebaseClick,
+            showOutLine = true
+        )
+        TableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_http_demo),
+            onClick = onHttpClick,
+            showOutLine = true
+        )
+        TableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_google_login_demo),
+            onClick = onGoogleLoginClick,
+            showOutLine = false
         )
     }
 }
-
-@Composable
-private fun HelloScreenSlot(
-    text:String,
-    onClick:()->Unit
-){
-    Column {
-        Button(
-            onClick = onClick,
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-        ) {
-            Text(text = text)
-        }
-        Spacer(modifier = Modifier.height(10.dp))
-    }
-}
-
 
 @Preview
 @Composable
