@@ -7,5 +7,6 @@ android {
 }
 
 dependencies {
-
+    //启动屏幕
+    api(libs.androidx.core.splashscreen)
 }

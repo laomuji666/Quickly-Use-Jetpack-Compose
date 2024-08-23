@@ -2,11 +2,10 @@ package com.laomuji666.compose.feature.hello
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,6 +21,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.WeIcons
+import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
+import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
+import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -59,26 +63,35 @@ private fun HelloScreenUi(
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit
 ){
-    Scaffold {
-        Column(
-            modifier = Modifier.padding(it),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = uiState.helloText)
-            Spacer(modifier = Modifier.height(10.dp))
-            HelloScreenSlot(
-                text = stringResource(id = R.string.string_hello_screen_firebase_demo),
-                onClick = onFirebaseClick
-            )
-            HelloScreenSlot(
-                text = stringResource(id = R.string.string_hello_screen_http_demo),
-                onClick = onHttpClick
-            )
-            HelloScreenSlot(
-                text = stringResource(id = R.string.string_hello_screen_google_login_demo),
-                onClick = onGoogleLoginClick
-            )
-        }
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        WeTopBar(
+            title = "标题",
+            actions = {
+                WeTopBarAction(
+                    imageVector = WeIcons.TopBarSearch
+                )
+                WeTopBarAction(
+                    imageVector = WeIcons.TopBarAdd
+                )
+            }
+        )
+        Text(text = uiState.helloText)
+        Spacer(modifier = Modifier.height(10.dp))
+        HelloScreenSlot(
+            text = stringResource(id = R.string.string_hello_screen_firebase_demo),
+            onClick = onFirebaseClick
+        )
+        HelloScreenSlot(
+            text = stringResource(id = R.string.string_hello_screen_http_demo),
+            onClick = onHttpClick
+        )
+        HelloScreenSlot(
+            text = stringResource(id = R.string.string_hello_screen_google_login_demo),
+            onClick = onGoogleLoginClick
+        )
     }
 }
 
