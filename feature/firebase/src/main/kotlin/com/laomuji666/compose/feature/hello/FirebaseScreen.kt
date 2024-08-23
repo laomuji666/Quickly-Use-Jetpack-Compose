@@ -26,7 +26,7 @@ import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
-import com.laomuji666.compose.core.ui.QuicklyTheme
+import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.res.R
 
 @Composable

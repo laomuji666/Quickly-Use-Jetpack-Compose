@@ -14,8 +14,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
-import com.laomuji666.compose.core.ui.QuicklyTheme
-import com.laomuji666.compose.feature.hello.HelloScreen
+import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch

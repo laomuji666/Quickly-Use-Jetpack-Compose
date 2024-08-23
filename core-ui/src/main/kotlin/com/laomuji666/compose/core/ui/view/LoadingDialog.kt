@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui
+package com.laomuji666.compose.core.ui.view
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.CircularProgressIndicator
@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 
 @Composable
 fun LoadingDialog(loading: Boolean) {

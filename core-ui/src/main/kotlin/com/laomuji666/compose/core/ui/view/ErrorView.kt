@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui
+package com.laomuji666.compose.core.ui.view
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -29,6 +29,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.res.R
 
 class ErrorViewContent{
