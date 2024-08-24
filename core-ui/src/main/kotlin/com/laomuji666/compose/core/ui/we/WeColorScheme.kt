@@ -1,7 +1,9 @@
 package com.laomuji666.compose.core.ui.we
 
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.DefaultTintBlendMode
 
 /**
  * @param backgroundColor 页面背景色
@@ -15,7 +17,10 @@ data class WeColorScheme (
     val onBackgroundColor: Color,
     val rowBackgroundColor: Color,
     val onRowBackgroundColor: Color,
-    val onRowBackSecondaryColor: Color
+    val onRowBackSecondaryColor: Color,
+    val outlineColor: Color,
+    val indicationColor:Color = Color.Black.copy(alpha = 0.3f),
+    val indicationBlendMode: BlendMode = DefaultTintBlendMode
 )
 
 val lightWeColorScheme = WeColorScheme(
@@ -23,7 +28,10 @@ val lightWeColorScheme = WeColorScheme(
     onBackgroundColor = Color(0xFF000000),
     rowBackgroundColor = Color(0xFFFFFFFF),
     onRowBackgroundColor = Color(0xFF000000).copy(alpha = 0.9f),
-    onRowBackSecondaryColor = Color(0xFF000000).copy(alpha = 0.5f)
+    onRowBackSecondaryColor = Color(0xFF000000).copy(alpha = 0.5f),
+    outlineColor = Color(0xFFEDEDED).copy(alpha = 0.8f),
+    indicationColor = Color(0xFFEDEDED).copy(alpha = 0.9f),
+    indicationBlendMode = BlendMode.DstIn
 )
 
 val darkWeColorScheme = WeColorScheme(
@@ -31,7 +39,10 @@ val darkWeColorScheme = WeColorScheme(
     onBackgroundColor = Color(0xFFFFFFFF).copy(alpha = 0.9f),
     rowBackgroundColor = Color(0xFF191919),
     onRowBackgroundColor = Color(0xFFFFFFFF).copy(alpha = 0.9f),
-    onRowBackSecondaryColor = Color(0xFFFFFFFF).copy(alpha = 0.5f)
+    onRowBackSecondaryColor = Color(0xFFFFFFFF).copy(alpha = 0.5f),
+    outlineColor = Color(0xFFEDEDED).copy(alpha = 0.035f),
+    indicationColor = Color(0xFFEDEDED).copy(alpha = 0.06f),
+    indicationBlendMode = BlendMode.SrcOver
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { lightWeColorScheme }

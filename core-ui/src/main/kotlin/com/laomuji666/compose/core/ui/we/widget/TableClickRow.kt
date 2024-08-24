@@ -109,7 +109,7 @@ fun TableClickRow(
                     .fillMaxWidth()
                     .padding(start = 16.dp)
                     .height(1.dp)
-                    .background(WeTheme.weColorScheme.backgroundColor)
+                    .background(WeTheme.weColorScheme.outlineColor)
             )
         }
     }
