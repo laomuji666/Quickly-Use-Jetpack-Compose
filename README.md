@@ -29,7 +29,7 @@ bundleRelease打包aab.
 + app: 程序的入口,把各个module关联起来,组成一个完整的app.
 + build-logic: 自定义的插件都放在这里,统一管理依赖.
 + core-logic: 数据处理,与本地数据库或远程服务器交互.
-+ core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的ui组件.
++ core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的UI组件.
 + feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
 + res: 资源文件,统一管理图片,文字等资源文件.
 
@@ -37,3 +37,16 @@ bundleRelease打包aab.
 + firebase 埋点,崩溃分析,推送.
 + ktor 序列化,ViewModel+Flow,等待响应,异常处理.
 + google 登录最佳实践,CredentialManager添加登录选项.
+
+# We设计系统
+自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.
+## Theme
++ 竖屏以375宽度适配屏幕,横屏不适配正常显示.
++ WeTheme: 替代MaterialTheme.
++ WeColorScheme: 定义颜色.
++ WeTypography: 定义字体.
++ WeIndication: 仿WX点击效果.
++ WeIcons: 使用ImageVector绘制WX图标.
+## Widget
+目前只实现了一部分WX组件,还在持续更新中...
++ WeTopBar: 仿WX顶部导航栏.
