@@ -17,9 +17,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji666.compose.core.ui.ErrorView
-import com.laomuji666.compose.core.ui.LoadingDialog
-import com.laomuji666.compose.core.ui.QuicklyTheme
+import com.laomuji666.compose.core.ui.view.ErrorView
+import com.laomuji666.compose.core.ui.view.LoadingDialog
+import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.res.R
 
 @Composable
