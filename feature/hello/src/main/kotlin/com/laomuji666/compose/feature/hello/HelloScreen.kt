@@ -17,8 +17,12 @@ import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
+import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.TableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -61,7 +65,16 @@ private fun HelloScreenUi(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         WeTopBar(
-            title = "标题"
+            title = "标题",
+            actions = {
+                WeTopBarAction(
+                    imageVector = WeIcons.TopBarSearch
+                )
+                WeTopBarAction(
+                    imageVector = WeIcons.TopBarAdd
+                )
+            },
+            onBackClick = {}
         )
         TableClickRow(
             title = uiState.helloText,
