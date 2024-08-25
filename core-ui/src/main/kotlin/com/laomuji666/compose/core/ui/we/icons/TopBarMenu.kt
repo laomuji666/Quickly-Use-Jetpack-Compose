@@ -14,7 +14,7 @@ val WeIcons.TopBarMenu: ImageVector
             return _TopBarMenu!!
         }
         _TopBarMenu = ImageVector.Builder(
-            name = "We.TopBarMenu",
+            name = "WeIcons.TopBarMenu",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,

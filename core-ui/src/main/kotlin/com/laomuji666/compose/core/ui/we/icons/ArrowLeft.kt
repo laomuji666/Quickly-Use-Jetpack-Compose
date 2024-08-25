@@ -12,7 +12,7 @@ val WeIcons.ArrowLeft: ImageVector
             return _ArrowLeft!!
         }
         _ArrowLeft = ImageVector.Builder(
-            name = "We.ArrowLeft",
+            name = "WeIcons.ArrowLeft",
             defaultWidth = 12.dp,
             defaultHeight = 24.dp,
             viewportWidth = 12f,

@@ -20,7 +20,7 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
 import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
-import com.laomuji666.compose.core.ui.we.widget.TableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.res.R
@@ -76,26 +76,21 @@ private fun HelloScreenUi(
             },
             onBackClick = {}
         )
-        TableClickRow(
+        WeTableClickRow(
             title = uiState.helloText,
             showOutLine = true
         )
-        TableClickRow(
+        WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_firebase_demo),
             onClick = onFirebaseClick,
             showOutLine = true
         )
-        TableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-            onClick = onFirebaseClick,
-            showOutLine = true
-        )
-        TableClickRow(
+        WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_http_demo),
             onClick = onHttpClick,
             showOutLine = true
         )
-        TableClickRow(
+        WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_google_login_demo),
             onClick = onGoogleLoginClick,
             showOutLine = false
