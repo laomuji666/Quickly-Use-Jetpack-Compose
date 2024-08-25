@@ -14,7 +14,7 @@ val WeIcons.TopBarAdd: ImageVector
             return _TopBarAdd!!
         }
         _TopBarAdd = ImageVector.Builder(
-            name = "We.TopBarAdd",
+            name = "WeIcons.TopBarAdd",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,

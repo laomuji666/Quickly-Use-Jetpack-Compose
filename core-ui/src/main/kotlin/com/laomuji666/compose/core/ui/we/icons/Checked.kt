@@ -6,13 +6,13 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.unit.dp
 
-val WeIcons.RadioChecked: ImageVector
+val WeIcons.Checked: ImageVector
     get() {
-        if (_RadioChecked != null) {
-            return _RadioChecked!!
+        if (_Checked != null) {
+            return _Checked!!
         }
-        _RadioChecked = ImageVector.Builder(
-            name = "We.RadioChecked",
+        _Checked = ImageVector.Builder(
+            name = "WeIcons.Checked",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,
@@ -30,8 +30,8 @@ val WeIcons.RadioChecked: ImageVector
             }
         }.build()
 
-        return _RadioChecked!!
+        return _Checked!!
     }
 
 @Suppress("ObjectPropertyName")
-private var _RadioChecked: ImageVector? = null
+private var _Checked: ImageVector? = null

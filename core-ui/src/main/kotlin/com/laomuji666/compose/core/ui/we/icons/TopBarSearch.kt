@@ -14,7 +14,7 @@ val WeIcons.TopBarSearch: ImageVector
             return _TopBarSearch!!
         }
         _TopBarSearch = ImageVector.Builder(
-            name = "We.TopBarSearch",
+            name = "WeIcons.TopBarSearch",
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,
