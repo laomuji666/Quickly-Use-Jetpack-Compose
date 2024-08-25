@@ -25,7 +25,7 @@ import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
-fun TableClickRow(
+fun WeTableClickRow(
     title:String,
     summary:String? = null,
     summaryInBottom:Boolean = false,
@@ -73,7 +73,6 @@ fun TableClickRow(
         }else{
             Row(
                 modifier = Modifier
-
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp)
                     .height(56.dp),
@@ -117,23 +116,23 @@ fun TableClickRow(
 
 @PreviewLightDark
 @Composable
-fun PreviewTableClickRow1(){
+fun PreviewWeTableClickRow1(){
     QuicklyTheme {
-        TableClickRow(
+        WeTableClickRow(
             title = "单行标题",
             summary = "详细信息",
+            summaryInBottom = true
         )
     }
 }
 
 @PreviewLightDark
 @Composable
-fun PreviewTableClickRow2(){
+fun PreviewWeTableClickRow2(){
     QuicklyTheme {
-        TableClickRow(
+        WeTableClickRow(
             title = "单行标题",
-            summary = "详细信息",
-            summaryInBottom = true
+            summary = "详细信息"
         )
     }
 }
