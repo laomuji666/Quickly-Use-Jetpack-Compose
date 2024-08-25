@@ -49,4 +49,10 @@ bundleRelease打包aab.
 + WeIcons: 使用ImageVector绘制WX图标.
 ## Widget
 目前只实现了一部分WX组件,还在持续更新中...
-+ WeTopBar: 仿WX顶部导航栏.
+| 组件 | 截图 |
+|---------|---------|
+| WeTopBar | <img src="docs/images/WeTopBar.png" width="240"></img> | 
+| WeTableCheckRow | <img src="docs/images/WeTableCheckRow.gif" width="240"></img> |
+| WeTableClickRow | <img src="docs/images/WeTableClickRow.png" width="240"></img> |
+| WeTableRadioRow | <img src="docs/images/WeTableRadioRow.gif" width="240"></img> |
+| WeTableSwitchRow | <img src="docs/images/WeTableSwitchRow.gif" width="240"></img> |
