@@ -1,19 +1,12 @@
 package com.laomuji666.compose.core.ui.we.widget
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
@@ -30,22 +23,12 @@ fun WeTableClickRow(
     title:String,
     summary:String? = null,
     summaryInBottom:Boolean = false,
-    showOutLine:Boolean = false,
-    onClick:()->Unit = {}
+    onClick:()->Unit = {},
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    Box(
-        modifier = Modifier
-            .clickable { onClick() }
-            .background(WeTheme.weColorScheme.rowBackgroundColor)
-    ){
-        if(summaryInBottom){
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                    .height(LocalWeDimens.current.twoRowHeightDp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+    WeTableRow(
+        start = {
+            if(summaryInBottom){
                 Column {
                     Text(
                         text = title,
@@ -61,30 +44,16 @@ fun WeTableClickRow(
                         )
                     }
                 }
-
-                Spacer(modifier = Modifier.weight(1f))
-                Image(
-                    imageVector = WeIcons.ArrowRight,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
-                    colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                    modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
-                )
-            }
-        }else{
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                    .height(LocalWeDimens.current.rowHeightDp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
+            }else{
                 Text(
                     text = title,
                     style = WeTheme.weTypography.largeText,
                     color = WeTheme.weColorScheme.onRowBackgroundColor
                 )
-                Spacer(modifier = Modifier.weight(1f))
+            }
+        },
+        end = {
+            if(!summaryInBottom){
                 summary?.let {
                     Text(
                         text = it,
@@ -93,26 +62,19 @@ fun WeTableClickRow(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                 }
-                Image(
-                    imageVector = WeIcons.ArrowRight,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
-                    colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                    modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
-                )
             }
-        }
-        if(showOutLine){
-            Spacer(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
-                    .height(1.dp)
-                    .background(WeTheme.weColorScheme.outlineColor)
+            Image(
+                imageVector = WeIcons.ArrowRight,
+                contentDescription = null,
+                contentScale = ContentScale.FillHeight,
+                colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
+                modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
             )
-        }
-    }
+        },
+        rowHeight = if(summaryInBottom) LocalWeDimens.current.twoRowHeightDp else LocalWeDimens.current.rowHeightDp,
+        onClick = onClick,
+        weTableRowOutlineType = weTableRowOutlineType
+    )
 }
 
 @PreviewLightDark

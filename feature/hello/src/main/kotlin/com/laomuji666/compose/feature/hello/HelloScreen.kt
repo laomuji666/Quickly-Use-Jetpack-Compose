@@ -21,6 +21,7 @@ import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
 import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarActionSpace
@@ -80,22 +81,22 @@ private fun HelloScreenUi(
         )
         WeTableClickRow(
             title = uiState.helloText,
-            showOutLine = true
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_firebase_demo),
             onClick = onFirebaseClick,
-            showOutLine = true
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_http_demo),
             onClick = onHttpClick,
-            showOutLine = true
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_google_login_demo),
             onClick = onGoogleLoginClick,
-            showOutLine = false
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
     }
 }
