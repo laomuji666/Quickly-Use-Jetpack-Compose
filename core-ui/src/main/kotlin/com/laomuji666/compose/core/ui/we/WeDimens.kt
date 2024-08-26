@@ -14,7 +14,12 @@ data class WeDimens(
     val iconHeightDp:Dp,
     val toastSize:Dp,
     val toastIconSize:Dp,
-    val roundedCornerDp:Dp
+    val roundedCornerDp:Dp,
+    val bigButtonWidthDp:Dp,
+    val bigButtonHeightDp:Dp,
+    val smallButtonWidthDp:Dp,
+    val smallButtonHeightDp:Dp,
+    val buttonRoundedCornerDp:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -27,7 +32,12 @@ val DefaultWeDimens = WeDimens(
     iconHeightDp = 28.dp,
     toastSize = 136.dp,
     toastIconSize = 40.dp,
-    roundedCornerDp = 12.dp
+    roundedCornerDp = 12.dp,
+    bigButtonWidthDp = 184.dp,
+    bigButtonHeightDp = 40.dp,
+    smallButtonWidthDp = 58.dp,
+    smallButtonHeightDp = 32.dp,
+    buttonRoundedCornerDp = 4.dp
 )
 
 
