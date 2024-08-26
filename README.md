@@ -42,6 +42,8 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 | WeTableClickRow | <img src="docs/images/WeTableClickRow.png" width="240"></img> |
 | WeTableRadioRow | <img src="docs/images/WeTableRadioRow.gif" width="240"></img> |
 | WeTableSwitchRow | <img src="docs/images/WeTableSwitchRow.gif" width="240"></img> |
+| WeActionSheet | <img src="docs/images/WeActionSheet.png" width="240"></img> |
+| WeToast | <img src="docs/images/WeToast.gif" width="240"></img> |
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
