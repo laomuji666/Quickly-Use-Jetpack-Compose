@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Checked
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -48,8 +49,8 @@ fun WeTableRadioRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .height(56.dp),
+                .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                .height(LocalWeDimens.current.rowHeightDp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -58,7 +59,7 @@ fun WeTableRadioRow(
                 color = WeTheme.weColorScheme.onRowBackgroundColor
             )
             Spacer(modifier = Modifier.weight(1f))
-            Row(modifier = Modifier.size(26.dp)) {
+            Row(modifier = Modifier.size(24.dp)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(
@@ -81,7 +82,7 @@ fun WeTableRadioRow(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .padding(start = 16.dp)
+                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
                     .height(1.dp)
                     .background(WeTheme.weColorScheme.outlineColor)
             )

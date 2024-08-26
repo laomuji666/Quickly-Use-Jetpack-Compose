@@ -30,6 +30,7 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
@@ -48,8 +49,8 @@ fun WeTableSwitchRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .height(56.dp),
+                .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                .height(LocalWeDimens.current.rowHeightDp),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
@@ -68,7 +69,7 @@ fun WeTableSwitchRow(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .padding(start = 16.dp)
+                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
                     .height(1.dp)
                     .background(WeTheme.weColorScheme.outlineColor)
             )

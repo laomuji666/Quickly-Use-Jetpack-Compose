@@ -23,6 +23,7 @@ import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
+import com.laomuji666.compose.core.ui.we.widget.WeTopBarActionSpace
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -70,6 +71,7 @@ private fun HelloScreenUi(
                 WeTopBarAction(
                     imageVector = WeIcons.TopBarSearch
                 )
+                WeTopBarActionSpace()
                 WeTopBarAction(
                     imageVector = WeIcons.TopBarAdd
                 )

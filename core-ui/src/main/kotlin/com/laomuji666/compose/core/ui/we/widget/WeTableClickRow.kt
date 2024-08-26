@@ -20,6 +20,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -41,8 +42,8 @@ fun WeTableClickRow(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .height(80.dp),
+                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                    .height(LocalWeDimens.current.twoRowHeightDp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column {
@@ -67,15 +68,15 @@ fun WeTableClickRow(
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                     colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                    modifier = Modifier.height(26.dp)
+                    modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
                 )
             }
         }else{
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .height(56.dp),
+                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                    .height(LocalWeDimens.current.rowHeightDp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -97,7 +98,7 @@ fun WeTableClickRow(
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                     colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                    modifier = Modifier.height(26.dp)
+                    modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
                 )
             }
         }
@@ -106,7 +107,7 @@ fun WeTableClickRow(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
-                    .padding(start = 16.dp)
+                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
                     .height(1.dp)
                     .background(WeTheme.weColorScheme.outlineColor)
             )
