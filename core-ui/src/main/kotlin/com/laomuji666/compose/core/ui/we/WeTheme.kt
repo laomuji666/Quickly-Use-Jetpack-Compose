@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.Density
 fun WeTheme(
     weColorScheme: WeColorScheme,
     weTypography: WeTypography,
+    weDimens: WeDimens = DefaultWeDimens,
     content: @Composable () -> Unit,
 ) {
     //竖屏以375来适配屏幕
@@ -44,7 +45,8 @@ fun WeTheme(
                 color = weColorScheme.indicationColor,
                 blendMode = weColorScheme.indicationBlendMode
             )
-        }
+        },
+        LocalWeDimens provides weDimens
     ) {
         content()
     }

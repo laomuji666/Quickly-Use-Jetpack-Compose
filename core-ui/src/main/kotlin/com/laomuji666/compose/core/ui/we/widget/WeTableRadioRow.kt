@@ -5,16 +5,9 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.expandHorizontally
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -36,29 +29,19 @@ import com.laomuji666.compose.core.ui.we.icons.WeIcons
 fun WeTableRadioRow(
     title: String,
     checked: Boolean,
-    showOutLine:Boolean = false,
-    onClick: ()->Unit = {}
+    onClick: ()->Unit = {},
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    Box(
-        modifier = Modifier
-            .clickable { onClick() }
-            .fillMaxWidth()
-            .background(WeTheme.weColorScheme.rowBackgroundColor)
-    ){
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp)
-                .height(56.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
+    WeTableRow(
+        start = {
             Text(
                 text = title,
                 style = WeTheme.weTypography.largeText,
                 color = WeTheme.weColorScheme.onRowBackgroundColor
             )
-            Spacer(modifier = Modifier.weight(1f))
-            Row(modifier = Modifier.size(26.dp)) {
+        },
+        end = {
+            Row(modifier = Modifier.size(24.dp)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(
@@ -75,19 +58,10 @@ fun WeTableRadioRow(
                     )
                 }
             }
-        }
-        if(showOutLine){
-            Spacer(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(start = 16.dp)
-                    .height(1.dp)
-                    .background(WeTheme.weColorScheme.outlineColor)
-            )
-        }
-    }
-
+        },
+        onClick = onClick,
+        weTableRowOutlineType = weTableRowOutlineType
+    )
 }
 
 @Composable
@@ -102,7 +76,7 @@ fun WeTableRadioColumn(
             WeTableRadioRow(
                 title = title,
                 checked = index == currentItem,
-                showOutLine = index != titleList.lastIndex,
+                weTableRowOutlineType = if(index == titleList.lastIndex) WeTableRowOutlineType.NONE else WeTableRowOutlineType.PADDING_HORIZONTAL,
                 onClick = { onItemClick(index) }
             )
         }
