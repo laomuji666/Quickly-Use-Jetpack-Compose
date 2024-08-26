@@ -13,7 +13,8 @@ data class WeDimens(
     val twoRowHeightDp:Dp,
     val iconHeightDp:Dp,
     val toastSize:Dp,
-    val toastIconSize:Dp
+    val toastIconSize:Dp,
+    val roundedCornerDp:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -25,7 +26,8 @@ val DefaultWeDimens = WeDimens(
     twoRowHeightDp = 80.dp,
     iconHeightDp = 24.dp,
     toastSize = 136.dp,
-    toastIconSize = 40.dp
+    toastIconSize = 40.dp,
+    roundedCornerDp = 12.dp
 )
 
 

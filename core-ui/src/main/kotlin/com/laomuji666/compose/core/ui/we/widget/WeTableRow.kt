@@ -3,6 +3,7 @@ package com.laomuji666.compose.core.ui.we.widget
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
@@ -26,40 +27,59 @@ fun WeTableRow(
     rowHeight: Dp = LocalWeDimens.current.rowHeightDp,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    Box(
-        modifier = Modifier
-            .clickable { onClick() }
-            .background(WeTheme.weColorScheme.rowBackgroundColor)
-    ){
-        Row(
+    Column {
+        Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                .height(rowHeight),
-            verticalAlignment = Alignment.CenterVertically
+                .clickable { onClick() }
+                .background(WeTheme.weColorScheme.rowBackgroundColor)
         ){
-            start()
-            center()
-            end()
-        }
-        if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_START){
-            Spacer(
+            Row(
                 modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .fillMaxWidth()
-                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
-                    .height(1.dp)
-                    .background(WeTheme.weColorScheme.outlineColor)
-            )
-        }
-        if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_HORIZONTAL){
-            Spacer(
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
                     .fillMaxWidth()
                     .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                    .height(1.dp)
-                    .background(WeTheme.weColorScheme.outlineColor)
+                    .height(rowHeight),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                start()
+                center()
+                end()
+            }
+            if(weTableRowOutlineType == WeTableRowOutlineType.FULL){
+                Spacer(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .height(1.dp)
+                        .background(WeTheme.weColorScheme.outlineColor)
+                )
+            }
+            if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_START){
+                Spacer(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(start = LocalWeDimens.current.paddingHorizontalDp)
+                        .height(1.dp)
+                        .background(WeTheme.weColorScheme.outlineColor)
+                )
+            }
+            if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_HORIZONTAL){
+                Spacer(
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                        .height(1.dp)
+                        .background(WeTheme.weColorScheme.outlineColor)
+                )
+            }
+        }
+        if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(8.dp)
+                    .background(WeTheme.weColorScheme.splitLineColor)
             )
         }
     }
@@ -67,6 +87,8 @@ fun WeTableRow(
 
 enum class WeTableRowOutlineType{
     NONE,
+    FULL,
     PADDING_START,
-    PADDING_HORIZONTAL
+    PADDING_HORIZONTAL,
+    SPLIT
 }

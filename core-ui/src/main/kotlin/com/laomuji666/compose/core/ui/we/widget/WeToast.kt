@@ -27,7 +27,6 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.laomuji666.compose.core.ui.R
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
@@ -50,7 +49,7 @@ fun WeToast(
             Column(
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .clip(RoundedCornerShape(12.dp))
+                    .clip(RoundedCornerShape(LocalWeDimens.current.roundedCornerDp))
                     .background(WeTheme.weColorScheme.toastBackgroundColor)
                     .size(LocalWeDimens.current.toastSize),
                 horizontalAlignment = Alignment.CenterHorizontally,
