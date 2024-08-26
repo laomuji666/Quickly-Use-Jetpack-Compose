@@ -20,9 +20,9 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeTableRow(
-    start: @Composable RowScope.() -> Unit,
+    start: @Composable RowScope.() -> Unit = {},
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
-    end: @Composable RowScope.() -> Unit,
+    end: @Composable RowScope.() -> Unit = {},
     onClick: () -> Unit = {},
     rowHeight: Dp = LocalWeDimens.current.rowHeightDp,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
