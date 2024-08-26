@@ -20,7 +20,9 @@ data class WeColorScheme (
     val onRowBackSecondaryColor: Color,
     val outlineColor: Color,
     val indicationColor:Color = Color.Black.copy(alpha = 0.3f),
-    val indicationBlendMode: BlendMode = DefaultTintBlendMode
+    val indicationBlendMode: BlendMode = DefaultTintBlendMode,
+    val toastBackgroundColor: Color,
+    val onToastBackgroundColor: Color,
 )
 
 val lightWeColorScheme = WeColorScheme(
@@ -31,7 +33,9 @@ val lightWeColorScheme = WeColorScheme(
     onRowBackSecondaryColor = Color(0xFF000000).copy(alpha = 0.5f),
     outlineColor = Color(0xFFEDEDED).copy(alpha = 0.8f),
     indicationColor = Color(0xFFEDEDED).copy(alpha = 0.9f),
-    indicationBlendMode = BlendMode.DstIn
+    indicationBlendMode = BlendMode.DstIn,
+    toastBackgroundColor = Color(0xFF4C4C4C).copy(alpha = 0.9f),
+    onToastBackgroundColor = Color(0xFFFFFFFF).copy(alpha = 0.9f)
 )
 
 val darkWeColorScheme = WeColorScheme(
@@ -42,7 +46,9 @@ val darkWeColorScheme = WeColorScheme(
     onRowBackSecondaryColor = Color(0xFFFFFFFF).copy(alpha = 0.5f),
     outlineColor = Color(0xFFEDEDED).copy(alpha = 0.035f),
     indicationColor = Color(0xFFEDEDED).copy(alpha = 0.06f),
-    indicationBlendMode = BlendMode.SrcOver
+    indicationBlendMode = BlendMode.SrcOver,
+    toastBackgroundColor = Color(0xFF606060).copy(alpha = 0.9f),
+    onToastBackgroundColor = Color(0xFFFFFFFF).copy(alpha = 0.9f)
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { lightWeColorScheme }
