@@ -37,13 +37,14 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 目前只实现了一部分WX组件,还在持续更新中...
 | 组件 | 截图 |
 |---------|---------|
-| WeTopBar | <img src="docs/images/WeTopBar.png" width="240"></img> | 
-| WeTableCheckRow | <img src="docs/images/WeTableCheckRow.gif" width="240"></img> |
-| WeTableClickRow | <img src="docs/images/WeTableClickRow.png" width="240"></img> |
-| WeTableRadioRow | <img src="docs/images/WeTableRadioRow.gif" width="240"></img> |
-| WeTableSwitchRow | <img src="docs/images/WeTableSwitchRow.gif" width="240"></img> |
-| WeActionSheet | <img src="docs/images/WeActionSheet.png" width="240"></img> |
-| WeToast | <img src="docs/images/WeToast.gif" width="240"></img> |
+| WeTopBar | <img src="docs/images/WeTopBar.png" width="280"></img> | 
+| WeTableSwitchRow | <img src="docs/images/WeTableSwitchRow.gif" width="280"></img> |
+| WeTableCheckRow | <img src="docs/images/WeTableCheckRow.gif" width="280"></img> |
+| WeTableClickRow | <img src="docs/images/WeTableClickRow.png" width="280"></img> |
+| WeTableRadioRow | <img src="docs/images/WeTableRadioRow.gif" width="280"></img> |
+| WeActionSheet | <img src="docs/images/WeActionSheet.png" width="280"></img> |
+| WeToast | <img src="docs/images/WeToast.gif" width="280"></img> |
+| WeButton | <img src="docs/images/WeButton.png" width="280"></img> |
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
