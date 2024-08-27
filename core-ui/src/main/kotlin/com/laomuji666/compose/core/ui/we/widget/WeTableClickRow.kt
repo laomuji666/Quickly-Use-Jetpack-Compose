@@ -32,7 +32,7 @@ fun WeTableClickRow(
                 Column {
                     Text(
                         text = title,
-                        style = WeTheme.weTypography.largeText,
+                        style = WeTheme.weTypography.mediumText,
                         color = WeTheme.weColorScheme.onBackgroundColor
                     )
                     summary?.let {
@@ -47,7 +47,7 @@ fun WeTableClickRow(
             }else{
                 Text(
                     text = title,
-                    style = WeTheme.weTypography.largeText,
+                    style = WeTheme.weTypography.mediumText,
                     color = WeTheme.weColorScheme.onBackgroundColor
                 )
             }

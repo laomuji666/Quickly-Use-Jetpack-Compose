@@ -1,9 +1,8 @@
 package com.laomuji666.compose.feature.hello
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,6 +20,7 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
+import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
@@ -66,16 +66,14 @@ private fun HttpScreenUi(
     onClickSendGet:()->Unit,
     onClickSendPost:()->Unit
 ){
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(WeTheme.weColorScheme.backgroundColor),
-        horizontalAlignment = Alignment.CenterHorizontally
+    WeScaffold(
+        topBar = {
+            WeTopBar(
+                title = stringResource(id = R.string.string_hello_screen_http_demo),
+                onBackClick = onBackClick
+            )
+        }
     ) {
-        WeTopBar(
-            title = stringResource(id = R.string.string_hello_screen_http_demo),
-            onBackClick = onBackClick
-        )
         Spacer(modifier = Modifier.height(20.dp))
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_get_demo),
@@ -94,9 +92,12 @@ private fun HttpScreenSlot(
     text:String,
     onClick:()->Unit
 ){
-    WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text) {
-        onClick()
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text) {
+            onClick()
+        }
     }
+
     Spacer(modifier = Modifier.height(20.dp))
 }
 
