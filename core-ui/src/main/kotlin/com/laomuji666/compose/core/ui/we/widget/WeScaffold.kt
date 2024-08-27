@@ -16,7 +16,6 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 fun WeScaffold(
     topBar: @Composable ()->Unit = {},
     bottomBar: @Composable ()->Unit = {},
-    scrollState: ScrollState = rememberScrollState(),
     content: @Composable ColumnScope.()->Unit
 ){
     Column(
@@ -25,12 +24,7 @@ fun WeScaffold(
             .fillMaxSize()
     ) {
         topBar()
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(1f)
-                .verticalScroll(scrollState)
-        ) {
+        Column(modifier = Modifier.fillMaxWidth().weight(1f)) {
             content()
         }
         bottomBar()

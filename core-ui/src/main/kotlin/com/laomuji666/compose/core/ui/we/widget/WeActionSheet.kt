@@ -53,14 +53,14 @@ fun WeActionSheetRow(
                 WeActionSheetType.NORMAL -> {
                     Text(
                         text = text,
-                        style = WeTheme.weTypography.largeText,
+                        style = WeTheme.weTypography.mediumText,
                         color = WeTheme.weColorScheme.onBackgroundColor
                     )
                 }
                 WeActionSheetType.WRONG -> {
                     Text(
                         text = text,
-                        style = WeTheme.weTypography.largeText,
+                        style = WeTheme.weTypography.mediumText,
                         color = WeTheme.weColorScheme.error
                     )
                 }
@@ -84,33 +84,36 @@ fun WeActionSheetDialog(
         onDismissRequest = {},
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
-        AnimatedSlide(scope = {
-            Show()
-        }){
-            val dismissRequest = {
-                hide { onDismissRequest() }
-            }
-            Box(
-                modifier = Modifier
-                    .clickable { dismissRequest() }
-                    .fillMaxSize()
-            ){
-                Column(
+        Box(modifier = Modifier.fillMaxSize()){
+            AnimatedSlide(scope = {
+                Show()
+            }){
+                val dismissRequest = {
+                    hide { onDismissRequest() }
+                }
+                Box(
                     modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .clip(
-                            RoundedCornerShape(
-                                topStart = LocalWeDimens.current.roundedCornerDp,
-                                topEnd = LocalWeDimens.current.roundedCornerDp
+                        .clickable { dismissRequest() }
+                        .fillMaxSize()
+                ){
+                    Column(
+                        modifier = Modifier
+                            .align(Alignment.BottomCenter)
+                            .clip(
+                                RoundedCornerShape(
+                                    topStart = LocalWeDimens.current.roundedCornerDp,
+                                    topEnd = LocalWeDimens.current.roundedCornerDp
+                                )
                             )
-                        )
-                ) {
-                    content()
-                    dismissText?.let{
-                        WeActionSheetRow(
-                            text = it,
-                            onClick = dismissRequest
-                        )
+                    ) {
+                        content()
+                        dismissText?.let{
+                            WeTableRowOutline(weTableRowOutlineType = WeTableRowOutlineType.SPLIT)
+                            WeActionSheetRow(
+                                text = it,
+                                onClick = dismissRequest
+                            )
+                        }
                     }
                 }
             }
