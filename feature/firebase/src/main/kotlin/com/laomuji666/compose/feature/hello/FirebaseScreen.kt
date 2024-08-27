@@ -1,13 +1,11 @@
 package com.laomuji666.compose.feature.hello
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -15,6 +13,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -27,15 +26,22 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.widget.WeButton
+import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
+import com.laomuji666.compose.core.ui.we.widget.WeButtonType
+import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.res.R
 
 @Composable
 fun FirebaseScreen(
-    viewModel: FirebaseViewModel = hiltViewModel()
+    viewModel: FirebaseViewModel = hiltViewModel(),
+    onBackClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     FirebaseScreenUi(
         uiState = uiState,
+        onBackClick = onBackClick,
         logEventClick = {
             viewModel.logEventClick()
         },
@@ -51,19 +57,30 @@ fun FirebaseScreen(
 @Composable
 private fun FirebaseScreenUi(
     uiState: FirebaseUiState,
+    onBackClick: ()->Unit,
     logEventClick: () -> Unit,
     updatePushToken:()->Unit,
     testCrashlytics:()->Unit
 ){
-    Scaffold {
-        Column(modifier = Modifier.padding(it)) {
-            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
-            FirebasePermissionSlot(
-                pushToken = uiState.pushToken,
-                updatePushToken = updatePushToken
-            )
-            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
-        }
+    Column(
+        modifier = Modifier
+            .background(WeTheme.weColorScheme.backgroundColor)
+            .fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        WeTopBar(
+            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+            onBackClick = onBackClick
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebasePermissionSlot(
+            pushToken = uiState.pushToken,
+            updatePushToken = updatePushToken
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
     }
 }
 
@@ -72,15 +89,7 @@ private fun FirebaseScreenSlot(
     text:String,
     onClick:()->Unit
 ){
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(50.dp)
-    ) {
-        Text(text = text)
-    }
-    Spacer(modifier = Modifier.height(10.dp))
+    WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text, onClick = onClick)
 }
 
 @SuppressLint("InlinedApi")
@@ -114,7 +123,7 @@ private fun FirebasePermissionSlot(
         }
     }
     if(hasPermission){
-        Text(text = pushToken)
+        Text(text = pushToken, color = WeTheme.weColorScheme.onBackgroundColor)
     }else{
         FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             isRequestPermission = true
@@ -128,6 +137,7 @@ fun PreviewFirebaseScreen(){
     QuicklyTheme {
         FirebaseScreenUi(
             uiState = FirebaseUiState(),
+            onBackClick = {},
             logEventClick = {},
             updatePushToken = {},
             testCrashlytics = {}

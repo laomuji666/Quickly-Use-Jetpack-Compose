@@ -54,7 +54,7 @@ fun WeActionSheetRow(
                     Text(
                         text = text,
                         style = WeTheme.weTypography.largeText,
-                        color = WeTheme.weColorScheme.onRowBackgroundColor
+                        color = WeTheme.weColorScheme.onBackgroundColor
                     )
                 }
                 WeActionSheetType.WRONG -> {

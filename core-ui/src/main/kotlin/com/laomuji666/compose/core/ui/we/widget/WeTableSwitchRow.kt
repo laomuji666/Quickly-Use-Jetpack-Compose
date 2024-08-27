@@ -41,7 +41,7 @@ fun WeTableSwitchRow(
             Text(
                 text = title,
                 style = WeTheme.weTypography.largeText,
-                color = WeTheme.weColorScheme.onRowBackgroundColor
+                color = WeTheme.weColorScheme.onBackgroundColor
             )
         },
         end = {
@@ -76,7 +76,7 @@ fun WeSwitch(
             .height(height)
             .clip(CircleShape)
             .clickable { onClick() }
-            .background(if (checked) Color(0xFF07C160) else Color(0xFFE5E5E5))
+            .background(if (checked) WeTheme.weColorScheme.primary else WeTheme.weColorScheme.secondary)
     ) {
         Spacer(modifier = Modifier
             .size(thumbSize)

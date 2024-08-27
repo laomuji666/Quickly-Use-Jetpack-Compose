@@ -13,8 +13,12 @@ fun NavHostController.navigateToHttpScreen(navOptions: NavOptions = navOptionsPu
     navigate(HTTP_SCREEN, navOptions)
 }
 
-fun NavGraphBuilder.composeHttpScreen(){
+fun NavGraphBuilder.composeHttpScreen(
+    onBackClick:()->Unit
+){
     composable(route = HTTP_SCREEN){
-        HttpScreen()
+        HttpScreen(
+            onBackClick = onBackClick
+        )
     }
 }
