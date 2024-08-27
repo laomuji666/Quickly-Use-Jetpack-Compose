@@ -17,11 +17,6 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
 + res: 资源文件,统一管理图片,文字等资源文件.
 
-# 已提供的示例代码
-+ firebase 埋点,崩溃分析,推送.
-+ ktor 序列化,ViewModel+Flow,等待响应,异常处理.
-+ google 登录最佳实践,CredentialManager添加登录选项.
-
 # We设计系统
 自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.
 ## Theme
@@ -34,10 +29,9 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + WeIcons: 使用ImageVector绘制图标.
 
 ## Widget
-目前只实现了一部分WX组件,还在持续更新中...
 | 组件 | 截图 |
 |---------|---------|
-| WeTopBar | <img src="docs/images/WeTopBar.png" width="280"></img> | 
+| WeTopBar | <img src="docs/images/WeTopBar.png" width="280"></img> |
 | WeTableSwitchRow | <img src="docs/images/WeTableSwitchRow.gif" width="280"></img> |
 | WeTableCheckRow | <img src="docs/images/WeTableCheckRow.gif" width="280"></img> |
 | WeTableClickRow | <img src="docs/images/WeTableClickRow.png" width="280"></img> |
@@ -45,6 +39,16 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 | WeActionSheet | <img src="docs/images/WeActionSheet.png" width="280"></img> |
 | WeToast | <img src="docs/images/WeToast.gif" width="280"></img> |
 | WeButton | <img src="docs/images/WeButton.png" width="280"></img> |
+目前只实现了一部分WX组件,还在持续更新中...
+
+# 已提供的示例代码
++ firebase: 埋点,崩溃分析,推送.
++ ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
++ google: 登录最佳实践,CredentialManager添加登录选项.
+## 运行效果
+| 例子         | 截图                                                        |
+|------------|-----------------------------------------------------------|
+| Ktor网络异常处理 | <img src="docs/images/HttpScreen.gif" width="280"/></img> |
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
