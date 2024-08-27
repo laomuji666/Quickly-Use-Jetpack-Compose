@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.laomuji666.compose.core.ui.safePopBackStack
 import com.laomuji666.compose.feature.hello.HELLO_SCREEN
 import com.laomuji666.compose.feature.hello.composeFirebaseScreen
 import com.laomuji666.compose.feature.hello.composeHelloScreen
@@ -55,8 +56,16 @@ fun NavigationHost(
             }
         )
 
-        composeFirebaseScreen()
+        composeFirebaseScreen(
+            onBackClick = {
+                navHostController.safePopBackStack()
+            }
+        )
 
-        composeHttpScreen()
+        composeHttpScreen(
+            onBackClick = {
+                navHostController.safePopBackStack()
+            }
+        )
     }
 }

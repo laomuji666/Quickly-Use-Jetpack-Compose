@@ -1,6 +1,5 @@
 package com.laomuji666.compose.feature.hello
 
-import com.laomuji666.compose.core.logic.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.http.HttpRepository
@@ -19,14 +18,17 @@ class HttpViewModel @Inject constructor(
 ) : ViewModel() {
     private val _isError = MutableStateFlow(false)
     private val _isLoading = MutableStateFlow(false)
+    private val _responseText = MutableStateFlow("")
 
     val uiState = combine(
         _isError,
-        _isLoading
-    ){ isError,isLoading->
+        _isLoading,
+        _responseText
+    ){ isError,isLoading,responseText ->
         HttpUiState(
             isError = isError,
-            isLoading = isLoading
+            isLoading = isLoading,
+            responseText = responseText
         )
     }.stateInTimeout(viewModelScope, HttpUiState())
 
@@ -36,7 +38,7 @@ class HttpViewModel @Inject constructor(
         }
 
         viewModelScope.launch {
-            httpRepository.getListUsers(1).collect{
+            httpRepository.delayRequest().collect{
                 when(it){
                     is Result.Error -> {
                         _isLoading.value = false
@@ -47,6 +49,7 @@ class HttpViewModel @Inject constructor(
                     }
                     is Result.Success -> {
                         _isLoading.value = false
+                        _responseText.value = it.data
                     }
                 }
             }
@@ -67,17 +70,15 @@ class HttpViewModel @Inject constructor(
             ).collect{
                 when(it){
                     is Result.Error -> {
-                        Log.debug("tag_create","error")
                         _isLoading.value = false
                         _isError.value = true
                     }
                     Result.Loading -> {
-                        Log.debug("tag_create","loading")
                         _isLoading.value = true
                     }
                     is Result.Success -> {
-                        Log.debug("tag_create","Success")
                         _isLoading.value = false
+                        _responseText.value = it.data
                     }
                 }
             }

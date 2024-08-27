@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.window.Popup
 import com.laomuji666.compose.core.ui.R
@@ -41,7 +42,7 @@ import kotlinx.coroutines.isActive
 @Composable
 fun WeToast(
     weToastType: WeToastType,
-    message: String,
+    message: String = stringResource(id = com.laomuji666.compose.res.R.string.string_loading),
     onDismissRequest: ()->Unit = {}
 ){
     Popup(onDismissRequest = onDismissRequest) {
@@ -50,7 +51,7 @@ fun WeToast(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .clip(RoundedCornerShape(LocalWeDimens.current.roundedCornerDp))
-                    .background(WeTheme.weColorScheme.toastBackgroundColor)
+                    .background(WeTheme.weColorScheme.tertiary)
                     .size(LocalWeDimens.current.toastSize),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center

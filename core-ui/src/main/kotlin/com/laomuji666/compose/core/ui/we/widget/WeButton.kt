@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
@@ -34,9 +33,9 @@ fun WeButton(
             .clip(RoundedCornerShape(LocalWeDimens.current.buttonRoundedCornerDp))
             .background(
                 if (weButtonType == WeButtonType.PRIMARY) {
-                    Color(0xFF07C160)
+                    WeTheme.weColorScheme.primary
                 } else {
-                    Color(0xFFF2F2F2).copy(alpha = 0.9f)
+                    WeTheme.weColorScheme.secondary
                 }
             )
             .width(
@@ -63,10 +62,10 @@ fun WeButton(
                 WeButtonSizeType.BIG -> WeTheme.weTypography.largeText
             },
             color = when(weButtonType){
-                WeButtonType.PRIMARY -> Color(0xFFFFFFFF)
-                WeButtonType.SECONDARY -> Color(0xFF07C160)
-                WeButtonType.DISABLE -> Color(0xFF000000).copy(alpha = 0.18f)
-                WeButtonType.WRONG -> Color(0xFFFA5151)
+                WeButtonType.PRIMARY -> WeTheme.weColorScheme.secondary
+                WeButtonType.SECONDARY -> WeTheme.weColorScheme.primary
+                WeButtonType.DISABLE -> WeTheme.weColorScheme.tertiary
+                WeButtonType.WRONG -> WeTheme.weColorScheme.error
             }
         )
     }

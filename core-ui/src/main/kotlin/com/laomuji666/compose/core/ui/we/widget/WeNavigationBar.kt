@@ -19,7 +19,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
@@ -37,10 +36,8 @@ fun RowScope.WeNavigationBarItem(
     selected: Boolean,
     onClick: () -> Unit,
     imageVector: ImageVector? = null,
-    selectColor: Color = Color(0xFF07C160),
-    unselectColor: Color = WeTheme.weColorScheme.onRowBackgroundColor
 ){
-    val color = if(selected) selectColor else unselectColor
+    val color = if(selected) WeTheme.weColorScheme.primary else WeTheme.weColorScheme.onBackgroundColor
     Column(
         modifier = Modifier
             .weight(1f)

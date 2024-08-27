@@ -12,8 +12,12 @@ fun NavHostController.navigateToFirebaseScreen(navOptions: NavOptions = navOptio
     navigate(FIREBASE_SCREEN, navOptions)
 }
 
-fun NavGraphBuilder.composeFirebaseScreen(){
+fun NavGraphBuilder.composeFirebaseScreen(
+    onBackClick: ()->Unit
+){
     composable(route = FIREBASE_SCREEN){
-        FirebaseScreen()
+        FirebaseScreen(
+            onBackClick = onBackClick
+        )
     }
 }

@@ -33,7 +33,7 @@ fun WeTableClickRow(
                     Text(
                         text = title,
                         style = WeTheme.weTypography.largeText,
-                        color = WeTheme.weColorScheme.onRowBackgroundColor
+                        color = WeTheme.weColorScheme.onBackgroundColor
                     )
                     summary?.let {
                         Spacer(modifier = Modifier.height(3.dp))
@@ -48,7 +48,7 @@ fun WeTableClickRow(
                 Text(
                     text = title,
                     style = WeTheme.weTypography.largeText,
-                    color = WeTheme.weColorScheme.onRowBackgroundColor
+                    color = WeTheme.weColorScheme.onBackgroundColor
                 )
             }
         },

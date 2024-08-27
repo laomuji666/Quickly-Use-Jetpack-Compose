@@ -42,7 +42,7 @@ fun WeTableCheckRow(
             Text(
                 text = title,
                 style = WeTheme.weTypography.largeText,
-                color = WeTheme.weColorScheme.onRowBackgroundColor
+                color = WeTheme.weColorScheme.onBackgroundColor
             )
         },
         end = {

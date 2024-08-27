@@ -11,14 +11,16 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.contentType
 import kotlinx.coroutines.flow.flow
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 
 class HttpRepository(
     private val client: HttpClient
 ) {
-    fun getListUsers(page:Int) = flow {
-        val response = client.get("https://reqres.in/api/users?page=$page") {}
+    fun delayRequest() = flow {
+        val response = client.get("https://reqres.in/api/users?delay=3") {}
         val body:UserInfoResponse = response.body()
-        emit(body)
+        emit(Json.Default.encodeToString(body))
     }.asResult()
 
     fun createUser(request:CreateUserRequest) = flow {
@@ -27,6 +29,6 @@ class HttpRepository(
             contentType(ContentType.Application.Json)
         }
         val body: CreateUserResponse = response.body()
-        emit(body)
+        emit(Json.Default.encodeToString(body))
     }.asResult()
 }
