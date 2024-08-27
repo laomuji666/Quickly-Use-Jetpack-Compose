@@ -18,7 +18,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + res: 资源文件,统一管理图片,文字等资源文件.
 
 # We设计系统
-自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.
+自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统,有白天和夜间两种颜色模式.
 ## Theme
 + 竖屏以375宽度适配屏幕,横屏不适配正常显示.
 + WeTheme: 替代MaterialTheme.
@@ -39,6 +39,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 | WeActionSheet | <img src="docs/images/WeActionSheet.png" width="320"></img> |
 | WeToast | <img src="docs/images/WeToast.gif" width="320"></img> |
 | WeButton | <img src="docs/images/WeButton.png" width="320"></img> |
+
 目前只实现了一部分WX组件,还在持续更新中...
 
 # 已提供的示例代码
