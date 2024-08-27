@@ -1,7 +1,9 @@
 <resources>
 <!--  Common  -->
     <string name="app_name">Quickly-Use-Jetpack-Compose</string>
-    <string name="string_loading">加载中</string>
+    <string name="string_toast_done">成功</string>
+    <string name="string_toast_loading">加载中</string>
+    <string name="string_toast_error">失败</string>
 
 <!--  ErrorView  -->
     <string name="string_error_view_title">出错了</string>
@@ -23,4 +25,16 @@
     <string name="string_firebase_screen_log_event">测试埋点</string>
     <string name="string_firebase_screen_crush">测试崩溃</string>
     <string name="string_firebase_screen_notification">申请通知权限</string>
+
+<!--  WidgetScreen  -->
+    <string name="string_widget_screen_title">UI组件示例</string>
+    <string name="string_widget_screen_toast_title">Toast示例</string>
+    <string name="string_widget_screen_show_toast">弹出弹窗</string>
+    <string name="string_widget_screen_action_sheet_title">ActionSheet示例</string>
+    <string name="string_widget_screen_show_action_sheet">弹出ActionSheet</string>
+    <string name="string_widget_screen_action_sheet_cancel">取消</string>
+    <string name="string_widget_screen_action_sheet_item1">提示文案</string>
+    <string name="string_widget_screen_action_sheet_item2">操作一</string>
+    <string name="string_widget_screen_action_sheet_item3">操作二</string>
+    <string name="string_widget_screen_action_sheet_item4">警示操作</string>
 </resources>

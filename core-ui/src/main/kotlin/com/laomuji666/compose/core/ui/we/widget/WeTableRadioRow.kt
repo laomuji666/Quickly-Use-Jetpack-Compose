@@ -36,7 +36,7 @@ fun WeTableRadioRow(
         start = {
             Text(
                 text = title,
-                style = WeTheme.weTypography.largeText,
+                style = WeTheme.weTypography.mediumText,
                 color = WeTheme.weColorScheme.onBackgroundColor
             )
         },
@@ -65,7 +65,7 @@ fun WeTableRadioRow(
 }
 
 @Composable
-fun WeTableRadioColumn(
+private fun WeTableRadioColumn(
     modifier: Modifier = Modifier,
     titleList: List<String>,
     currentItem: Int,

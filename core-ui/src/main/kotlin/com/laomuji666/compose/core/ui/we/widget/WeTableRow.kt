@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 
@@ -44,51 +43,7 @@ fun WeTableRow(
                 center()
                 end()
             }
-            if(weTableRowOutlineType == WeTableRowOutlineType.FULL){
-                Spacer(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .height(1.dp)
-                        .background(WeTheme.weColorScheme.outlineColor)
-                )
-            }
-            if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_START){
-                Spacer(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .padding(start = LocalWeDimens.current.paddingHorizontalDp)
-                        .height(1.dp)
-                        .background(WeTheme.weColorScheme.outlineColor)
-                )
-            }
-            if(weTableRowOutlineType == WeTableRowOutlineType.PADDING_HORIZONTAL){
-                Spacer(
-                    modifier = Modifier
-                        .align(Alignment.BottomCenter)
-                        .fillMaxWidth()
-                        .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                        .height(1.dp)
-                        .background(WeTheme.weColorScheme.outlineColor)
-                )
-            }
         }
-        if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
-            Spacer(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(8.dp)
-                    .background(WeTheme.weColorScheme.splitLineColor)
-            )
-        }
+        WeTableRowOutline(weTableRowOutlineType)
     }
-}
-
-enum class WeTableRowOutlineType{
-    NONE,
-    FULL,
-    PADDING_START,
-    PADDING_HORIZONTAL,
-    SPLIT
 }

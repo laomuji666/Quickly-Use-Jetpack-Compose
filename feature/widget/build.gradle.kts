@@ -4,12 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji666.compose.feature.hello"
+    namespace = "com.laomuji666.compose.feature.widget"
 }
 
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic"))
     ksp(libs.hilt.compiler)
-    implementation(project(":feature:widget"))
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.Indication
 import androidx.compose.foundation.IndicationInstance
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.interaction.InteractionSource
+import androidx.compose.foundation.interaction.collectIsDraggedAsState
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.interaction.collectIsHoveredAsState
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -72,14 +73,13 @@ class WeIndication(
         private val isPressed: State<Boolean>,
         private val isHovered: State<Boolean>,
         private val isFocused: State<Boolean>,
+        private val isDragged: State<Boolean>,
         private val color:Color,
         private val blendMode: BlendMode
     ) : IndicationInstance {
         override fun ContentDrawScope.drawIndication() {
             drawContent()
-            //BlendMode.DstIn 亮色
-            //BlendMode.SrcOver 暗色
-            if (isPressed.value || isHovered.value || isFocused.value) {
+            if (isPressed.value || isHovered.value || isFocused.value || isDragged.value) {
                 drawRect(
                     color = color,
                     size = size,
@@ -94,8 +94,9 @@ class WeIndication(
         val isPressed = interactionSource.collectIsPressedAsState()
         val isHovered = interactionSource.collectIsHoveredAsState()
         val isFocused = interactionSource.collectIsFocusedAsState()
+        val isDragged = interactionSource.collectIsDraggedAsState()
         return remember(interactionSource) {
-            DefaultDebugIndicationInstance(isPressed, isHovered, isFocused, color, blendMode)
+            DefaultDebugIndicationInstance(isPressed, isHovered, isFocused, isDragged, color, blendMode)
         }
     }
 }

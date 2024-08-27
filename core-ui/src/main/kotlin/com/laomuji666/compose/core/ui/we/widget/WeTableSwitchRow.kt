@@ -40,7 +40,7 @@ fun WeTableSwitchRow(
         start = {
             Text(
                 text = title,
-                style = WeTheme.weTypography.largeText,
+                style = WeTheme.weTypography.mediumText,
                 color = WeTheme.weColorScheme.onBackgroundColor
             )
         },

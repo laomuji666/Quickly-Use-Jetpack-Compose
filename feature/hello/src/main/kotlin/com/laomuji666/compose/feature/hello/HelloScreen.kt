@@ -1,12 +1,13 @@
 package com.laomuji666.compose.feature.hello
 
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,7 +29,9 @@ import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopBarActionSpace
+import com.laomuji666.compose.feature.wiget.WidgetScreen
 import com.laomuji666.compose.res.R
+import kotlinx.coroutines.launch
 
 @Composable
 fun HelloScreen(
@@ -58,6 +61,7 @@ fun HelloScreen(
     )
 }
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun HelloScreenUi(
     uiState: HelloUiState,
@@ -65,7 +69,64 @@ private fun HelloScreenUi(
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit
 ){
-    var selected by rememberSaveable{ mutableStateOf(HelloSelectEnum.EXAMPLE) }
+    val pagerState = rememberPagerState(
+        initialPage = HelloSelectEnum.EXAMPLE.ordinal,
+        pageCount = { HelloSelectEnum.entries.size }
+    )
+    val coroutineScope = rememberCoroutineScope()
+    WeScaffold(
+        bottomBar = {
+            WeNavigationBar {
+                WeNavigationBarItem(
+                    imageVector = WeIcons.Example,
+                    title = stringResource(id = R.string.string_hello_screen_navigation_example),
+                    selected = pagerState.currentPage == HelloSelectEnum.EXAMPLE.ordinal,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(HelloSelectEnum.EXAMPLE.ordinal)
+                        }
+                    }
+                )
+                WeNavigationBarItem(
+                    imageVector = WeIcons.Widget,
+                    title = stringResource(id = R.string.string_hello_screen_navigation_widget),
+                    selected = pagerState.currentPage == HelloSelectEnum.WIDGET.ordinal,
+                    onClick = {
+                        coroutineScope.launch {
+                            pagerState.scrollToPage(HelloSelectEnum.WIDGET.ordinal)
+                        }
+                    }
+                )
+            }
+        }
+    ) {
+        HorizontalPager(
+            state = pagerState,
+            modifier = Modifier.fillMaxSize(),
+            userScrollEnabled = false
+        ) {
+            if(it == HelloSelectEnum.EXAMPLE.ordinal){
+                Example(
+                    helloText = uiState.helloText,
+                    onFirebaseClick = onFirebaseClick,
+                    onHttpClick = onHttpClick,
+                    onGoogleLoginClick = onGoogleLoginClick
+                )
+            }
+            if(it == HelloSelectEnum.WIDGET.ordinal){
+                WidgetScreen()
+            }
+        }
+    }
+}
+
+@Composable
+private fun Example(
+    helloText: String,
+    onFirebaseClick:()->Unit,
+    onHttpClick:()->Unit,
+    onGoogleLoginClick:()->Unit
+){
     WeScaffold(
         topBar = {
             WeTopBar(
@@ -79,68 +140,29 @@ private fun HelloScreenUi(
                     )
                 }
             )
-        },
-        bottomBar = {
-            WeNavigationBar {
-                WeNavigationBarItem(
-                    imageVector = WeIcons.Example,
-                    title = stringResource(id = R.string.string_hello_screen_navigation_example),
-                    selected = selected == HelloSelectEnum.EXAMPLE,
-                    onClick = { selected = HelloSelectEnum.EXAMPLE }
-                )
-                WeNavigationBarItem(
-                    imageVector = WeIcons.Widget,
-                    title = stringResource(id = R.string.string_hello_screen_navigation_widget),
-                    selected = selected == HelloSelectEnum.WIDGET,
-                    onClick = { selected = HelloSelectEnum.WIDGET }
-                )
-            }
         }
     ) {
-        when(selected){
-            HelloSelectEnum.EXAMPLE -> {
-                Example(
-                    helloText = uiState.helloText,
-                    onFirebaseClick = onFirebaseClick,
-                    onHttpClick = onHttpClick,
-                    onGoogleLoginClick = onGoogleLoginClick
-                )
-            }
-            HelloSelectEnum.WIDGET -> {
-
-            }
-        }
+        WeTableClickRow(
+            title = helloText,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+            onClick = onFirebaseClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_http_demo),
+            onClick = onHttpClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_google_login_demo),
+            onClick = onGoogleLoginClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
     }
 }
-
-@Composable
-private fun Example(
-    helloText: String,
-    onFirebaseClick:()->Unit,
-    onHttpClick:()->Unit,
-    onGoogleLoginClick:()->Unit
-){
-    WeTableClickRow(
-        title = helloText,
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-    )
-    WeTableClickRow(
-        title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-        onClick = onFirebaseClick,
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-    )
-    WeTableClickRow(
-        title = stringResource(id = R.string.string_hello_screen_http_demo),
-        onClick = onHttpClick,
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-    )
-    WeTableClickRow(
-        title = stringResource(id = R.string.string_hello_screen_google_login_demo),
-        onClick = onGoogleLoginClick,
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-    )
-}
-
 
 @Preview
 @Composable

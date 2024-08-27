@@ -59,7 +59,7 @@ fun WeButton(
             text = text,
             style = when(weButtonSizeType){
                 WeButtonSizeType.SMALL -> WeTheme.weTypography.smallText
-                WeButtonSizeType.BIG -> WeTheme.weTypography.largeText
+                WeButtonSizeType.BIG -> WeTheme.weTypography.mediumText
             },
             color = when(weButtonType){
                 WeButtonType.PRIMARY -> WeTheme.weColorScheme.secondary

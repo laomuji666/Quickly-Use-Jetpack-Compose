@@ -72,7 +72,7 @@ fun WeTopBar(
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = title,
-                style = WeTheme.weTypography.mediumTitle,
+                style = WeTheme.weTypography.largeText,
                 color = WeTheme.weColorScheme.onBackgroundColor
             )
             Spacer(modifier = Modifier.weight(1f))
