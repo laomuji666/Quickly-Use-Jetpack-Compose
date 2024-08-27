@@ -49,6 +49,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 | 例子         | 截图                                                        |
 |------------|-----------------------------------------------------------|
 | Ktor网络异常处理 | <img src="docs/images/HttpScreen.gif" width="280"/></img> |
+| 组件示例       | <img src="docs/images/WidgetScreen.gif" width="280"/></img> |
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
