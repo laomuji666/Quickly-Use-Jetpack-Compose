@@ -1,13 +1,12 @@
 package com.laomuji666.compose.feature.hello
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,10 +15,14 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
 import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we.icons.Widget
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
+import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
@@ -62,44 +65,82 @@ private fun HelloScreenUi(
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit
 ){
-    Column(
-        modifier = Modifier.background(WeTheme.weColorScheme.backgroundColor).fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
+    var selected by rememberSaveable{ mutableStateOf(HelloSelectEnum.EXAMPLE) }
+    WeScaffold(
+        topBar = {
+            WeTopBar(
+                actions = {
+                    WeTopBarAction(
+                        imageVector = WeIcons.TopBarSearch
+                    )
+                    WeTopBarActionSpace()
+                    WeTopBarAction(
+                        imageVector = WeIcons.TopBarAdd
+                    )
+                }
+            )
+        },
+        bottomBar = {
+            WeNavigationBar {
+                WeNavigationBarItem(
+                    imageVector = WeIcons.Example,
+                    title = stringResource(id = R.string.string_hello_screen_navigation_example),
+                    selected = selected == HelloSelectEnum.EXAMPLE,
+                    onClick = { selected = HelloSelectEnum.EXAMPLE }
+                )
+                WeNavigationBarItem(
+                    imageVector = WeIcons.Widget,
+                    title = stringResource(id = R.string.string_hello_screen_navigation_widget),
+                    selected = selected == HelloSelectEnum.WIDGET,
+                    onClick = { selected = HelloSelectEnum.WIDGET }
+                )
+            }
+        }
     ) {
-        WeTopBar(
-            title = "标题",
-            actions = {
-                WeTopBarAction(
-                    imageVector = WeIcons.TopBarSearch
+        when(selected){
+            HelloSelectEnum.EXAMPLE -> {
+                Example(
+                    helloText = uiState.helloText,
+                    onFirebaseClick = onFirebaseClick,
+                    onHttpClick = onHttpClick,
+                    onGoogleLoginClick = onGoogleLoginClick
                 )
-                WeTopBarActionSpace()
-                WeTopBarAction(
-                    imageVector = WeIcons.TopBarAdd
-                )
-            },
-            onBackClick = {}
-        )
-        WeTableClickRow(
-            title = uiState.helloText,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-            onClick = onFirebaseClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_http_demo),
-            onClick = onHttpClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_google_login_demo),
-            onClick = onGoogleLoginClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
+            }
+            HelloSelectEnum.WIDGET -> {
+
+            }
+        }
     }
 }
+
+@Composable
+private fun Example(
+    helloText: String,
+    onFirebaseClick:()->Unit,
+    onHttpClick:()->Unit,
+    onGoogleLoginClick:()->Unit
+){
+    WeTableClickRow(
+        title = helloText,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+    )
+    WeTableClickRow(
+        title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+        onClick = onFirebaseClick,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+    )
+    WeTableClickRow(
+        title = stringResource(id = R.string.string_hello_screen_http_demo),
+        onClick = onHttpClick,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+    )
+    WeTableClickRow(
+        title = stringResource(id = R.string.string_hello_screen_google_login_demo),
+        onClick = onGoogleLoginClick,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+    )
+}
+
 
 @Preview
 @Composable

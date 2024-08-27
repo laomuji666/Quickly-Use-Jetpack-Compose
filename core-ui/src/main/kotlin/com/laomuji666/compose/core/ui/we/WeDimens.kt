@@ -24,12 +24,12 @@ data class WeDimens(
 
 val DefaultWeDimens = WeDimens(
     topBarHeightDp = 44.dp,
-    topBarPaddingBottomDp = 5.dp,
+    topBarPaddingBottomDp = 2.dp,
     topBarActionRowWidthDp = 90.dp,
     paddingHorizontalDp = 16.dp,
     rowHeightDp = 56.dp,
     twoRowHeightDp = 80.dp,
-    iconHeightDp = 28.dp,
+    iconHeightDp = 24.dp,
     toastSize = 136.dp,
     toastIconSize = 40.dp,
     roundedCornerDp = 12.dp,

@@ -36,9 +36,9 @@ fun WeTheme(
     CompositionLocalProvider(
         LocalWeColorScheme provides weColorScheme,
         LocalWeTypography provides weTypography,
-        LocalDensity provides if (screenOrientation == Configuration.ORIENTATION_LANDSCAPE) Density(
+        LocalDensity provides if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) Density(
             density = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
-            fontScale = LocalDensity.current.fontScale,
+            fontScale = LocalDensity.current.fontScale
         ) else LocalDensity.current,
         LocalIndication provides remember {
             WeIndication(

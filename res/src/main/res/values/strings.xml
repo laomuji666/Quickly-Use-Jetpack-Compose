@@ -12,6 +12,8 @@
     <string name="string_hello_screen_firebase_demo">Firebase例子</string>
     <string name="string_hello_screen_http_demo">Ktor Http例子</string>
     <string name="string_hello_screen_google_login_demo">谷歌登录例子</string>
+    <string name="string_hello_screen_navigation_example">功能示例</string>
+    <string name="string_hello_screen_navigation_widget">UI组件</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>

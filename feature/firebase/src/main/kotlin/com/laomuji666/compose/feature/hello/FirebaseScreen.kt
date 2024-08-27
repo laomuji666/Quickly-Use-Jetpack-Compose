@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +31,7 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
+import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
 import com.laomuji666.compose.res.R
 
@@ -68,19 +70,25 @@ private fun FirebaseScreenUi(
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        WeTopBar(
-            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-            onBackClick = onBackClick
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
-        Spacer(modifier = Modifier.height(20.dp))
-        FirebasePermissionSlot(
-            pushToken = uiState.pushToken,
-            updatePushToken = updatePushToken
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
+        WeScaffold(
+            topBar = {
+                WeTopBar(
+                    title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+                    onBackClick = onBackClick
+                )
+            }
+        ){
+            Spacer(modifier = Modifier.height(20.dp))
+            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
+            Spacer(modifier = Modifier.height(20.dp))
+            FirebasePermissionSlot(
+                pushToken = uiState.pushToken,
+                updatePushToken = updatePushToken
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
+
+        }
     }
 }
 
@@ -89,7 +97,9 @@ private fun FirebaseScreenSlot(
     text:String,
     onClick:()->Unit
 ){
-    WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text, onClick = onClick)
+    Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text, onClick = onClick)
+    }
 }
 
 @SuppressLint("InlinedApi")
