@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.laomuji666.compose.core.ui.safePopBackStack
+import com.laomuji666.compose.feature.chat.composeAiChatScreen
+import com.laomuji666.compose.feature.chat.navigateToAiChatScreen
 import com.laomuji666.compose.feature.hello.HELLO_SCREEN
 import com.laomuji666.compose.feature.hello.composeFirebaseScreen
 import com.laomuji666.compose.feature.hello.composeHelloScreen
@@ -53,6 +55,9 @@ fun NavigationHost(
             },
             onHttpClick = {
                 navHostController.navigateToHttpScreen()
+            },
+            onAiChatClick = {
+                navHostController.navigateToAiChatScreen()
             }
         )
 
@@ -67,5 +72,7 @@ fun NavigationHost(
                 navHostController.safePopBackStack()
             }
         )
+
+        composeAiChatScreen()
     }
 }

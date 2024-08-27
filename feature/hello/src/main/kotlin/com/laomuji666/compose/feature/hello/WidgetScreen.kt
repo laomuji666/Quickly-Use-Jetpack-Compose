@@ -1,4 +1,4 @@
-package com.laomuji666.compose.feature.wiget
+package com.laomuji666.compose.feature.hello
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
@@ -42,7 +42,7 @@ private fun WidgetScreenUi(){
 
     WeScaffold(
         topBar = {
-            WeTopBar(title = stringResource(id = R.string.string_widget_screen_title))
+            WeTopBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
         }
     ) {
         ToastWidget()

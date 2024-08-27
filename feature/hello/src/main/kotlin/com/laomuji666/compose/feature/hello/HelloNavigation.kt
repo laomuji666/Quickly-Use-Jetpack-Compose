@@ -7,12 +7,14 @@ const val HELLO_SCREEN = "HELLO_SCREEN"
 
 fun NavGraphBuilder.composeHelloScreen(
     onFirebaseClick: ()->Unit,
-    onHttpClick:()->Unit
+    onHttpClick:()->Unit,
+    onAiChatClick:()->Unit
 ){
     composable(route = HELLO_SCREEN){
         HelloScreen(
             onFirebaseClick = onFirebaseClick,
-            onHttpClick = onHttpClick
+            onHttpClick = onHttpClick,
+            onAiChatClick = onAiChatClick
         )
     }
 }

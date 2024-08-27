@@ -17,8 +17,6 @@ import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
-import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
-import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
@@ -27,9 +25,6 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTopBar
-import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
-import com.laomuji666.compose.core.ui.we.widget.WeTopBarActionSpace
-import com.laomuji666.compose.feature.wiget.WidgetScreen
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -37,7 +32,8 @@ import kotlinx.coroutines.launch
 fun HelloScreen(
     viewModel: HelloViewModel = hiltViewModel(),
     onFirebaseClick: ()->Unit,
-    onHttpClick:()->Unit
+    onHttpClick:()->Unit,
+    onAiChatClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
@@ -57,7 +53,8 @@ fun HelloScreen(
                     //登录失败或取消登录
                 }
             )
-        }
+        },
+        onAiChatClick = onAiChatClick
     )
 }
 
@@ -67,7 +64,8 @@ private fun HelloScreenUi(
     uiState: HelloUiState,
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
-    onGoogleLoginClick:()->Unit
+    onGoogleLoginClick:()->Unit,
+    onAiChatClick:()->Unit
 ){
     val pagerState = rememberPagerState(
         initialPage = HelloSelectEnum.EXAMPLE.ordinal,
@@ -110,7 +108,8 @@ private fun HelloScreenUi(
                     helloText = uiState.helloText,
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
-                    onGoogleLoginClick = onGoogleLoginClick
+                    onGoogleLoginClick = onGoogleLoginClick,
+                    onAiChatClick = onAiChatClick
                 )
             }
             if(it == HelloSelectEnum.WIDGET.ordinal){
@@ -125,21 +124,12 @@ private fun Example(
     helloText: String,
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
-    onGoogleLoginClick:()->Unit
+    onGoogleLoginClick:()->Unit,
+    onAiChatClick:()->Unit
 ){
     WeScaffold(
         topBar = {
-            WeTopBar(
-                actions = {
-                    WeTopBarAction(
-                        imageVector = WeIcons.TopBarSearch
-                    )
-                    WeTopBarActionSpace()
-                    WeTopBarAction(
-                        imageVector = WeIcons.TopBarAdd
-                    )
-                }
-            )
+            WeTopBar(title = stringResource(id = R.string.string_hello_screen_navigation_example))
         }
     ) {
         WeTableClickRow(
@@ -161,6 +151,11 @@ private fun Example(
             onClick = onGoogleLoginClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_ai_chat),
+            onClick = onAiChatClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
     }
 }
 
@@ -172,7 +167,8 @@ fun PreviewHelloScreenUi(){
             uiState = HelloUiState(),
             onFirebaseClick = {},
             onHttpClick = {},
-            onGoogleLoginClick = {}
+            onGoogleLoginClick = {},
+            onAiChatClick = {}
         )
     }
 }

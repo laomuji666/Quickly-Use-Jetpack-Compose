@@ -62,7 +62,7 @@ fun WeButton(
                 WeButtonSizeType.BIG -> WeTheme.weTypography.mediumText
             },
             color = when(weButtonType){
-                WeButtonType.PRIMARY -> WeTheme.weColorScheme.secondary
+                WeButtonType.PRIMARY -> WeTheme.weColorScheme.onPrimary
                 WeButtonType.SECONDARY -> WeTheme.weColorScheme.primary
                 WeButtonType.DISABLE -> WeTheme.weColorScheme.tertiary
                 WeButtonType.WRONG -> WeTheme.weColorScheme.error
