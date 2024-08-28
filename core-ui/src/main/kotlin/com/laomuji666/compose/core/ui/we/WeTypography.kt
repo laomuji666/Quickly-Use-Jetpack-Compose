@@ -5,46 +5,60 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
-/**
- * @param largeTitle 大页面标题,推荐透明0.9f
- * @param mediumTitle 弹窗标题,推荐透明0.9f
- * @param smallTitle 列表内标题,推荐透明0.9f
- * @param groupTitle 分组标题,推荐透明0.5f
- * @param largeText 大页面文字,推荐透明0.9f
- * @param mediumText 弹窗文字,推荐透明0.5f
- * @param smallText 描述文字,推荐透明0.3f
- */
 data class WeTypography(
-    val largeTitle: TextStyle = TextStyle(
-        fontSize = 22.sp,
-        fontWeight = FontWeight.Medium
-    ),
-    val mediumTitle: TextStyle = TextStyle(
-        fontSize = 20.sp,
-        fontWeight = FontWeight.Medium
-    ),
-    val smallTitle: TextStyle = TextStyle(
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Normal
-    ),
-    val groupTitle: TextStyle = TextStyle(
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Normal
-    ),
-    val largeText: TextStyle = TextStyle(
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Medium
-    ),
-    val mediumText: TextStyle = TextStyle(
-        fontSize = 17.sp,
-        fontWeight = FontWeight.Normal
-    ),
-    val smallText: TextStyle = TextStyle(
-        fontSize = 14.sp,
-        fontWeight = FontWeight.Normal
-    ),
+    val heading:TextStyle,
+    val emTitle:TextStyle,
+    val title:TextStyle,
+    val emGroupTitle:TextStyle,
+    val groupTitle:TextStyle,
+    val groupBody:TextStyle,
+    val text:TextStyle,
+    val emDesc:TextStyle,
+    val desc:TextStyle,
+    val footnote:TextStyle,
 )
 
-val defaultTypography = WeTypography()
+val DefaultWeTypography = WeTypography(
+    heading = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 22.sp
+    ),
+    emTitle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 17.sp
+    ),
+    title = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 17.sp
+    ),
+    emGroupTitle = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 15.sp
+    ),
+    groupTitle = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+    ),
+    groupBody = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 17.sp
+    ),
+    text = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 17.sp
+    ),
+    emDesc = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp
+    ),
+    desc = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+    ),
+    footnote = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp
+    )
+)
 
-internal val LocalWeTypography = staticCompositionLocalOf { defaultTypography }
+internal val LocalWeTypography = staticCompositionLocalOf { DefaultWeTypography }

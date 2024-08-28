@@ -5,38 +5,61 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class WeDimens(
-    val topBarHeightDp:Dp,
-    val topBarActionRowWidthDp:Dp,
-    val paddingHorizontalDp:Dp,
-    val rowHeightDp:Dp,
-    val twoRowHeightDp:Dp,
-    val iconHeightDp:Dp,
-    val toastSize:Dp,
-    val toastIconSize:Dp,
-    val roundedCornerDp:Dp,
-    val bigButtonWidthDp:Dp,
-    val bigButtonHeightDp:Dp,
-    val smallButtonWidthDp:Dp,
-    val smallButtonHeightDp:Dp,
-    val buttonRoundedCornerDp:Dp
+    val topNavigationBarHeight:Dp,
+    val topNavigationBarPaddingHorizontal:Dp,
+    val topNavigationBarActionWidth:Dp,
+    val topNavigationBarIconSize:Dp,
+    val topNavigationBarActionPaddingWidth:Dp,
+
+    val bigButtonWidth:Dp,
+    val bigButtonHeight:Dp,
+    val bigButtonRoundedCornerDp:Dp,
+    val smallButtonWidth:Dp,
+    val smallButtonHeight:Dp,
+    val smallButtonRoundedCornerDp:Dp,
+
+    val listSingleRowHeight:Dp,
+    val listDoubleRowHeight:Dp,
+    val listPaddingHorizontal:Dp,
+
+    val actionSheetRoundedCornerDp:Dp,
+
+    val navigationBarIconSize:Dp,
+    val navigationBarHeight:Dp,
+
+    val tableIconSize:Dp,
+
+    val switchIconWidth:Dp,
+    val switchIconHeight:Dp
 )
 
 val DefaultWeDimens = WeDimens(
-    topBarHeightDp = 44.dp,
-    topBarActionRowWidthDp = 90.dp,
-    paddingHorizontalDp = 16.dp,
-    rowHeightDp = 54.dp,
-    twoRowHeightDp = 80.dp,
-    iconHeightDp = 24.dp,
-    toastSize = 136.dp,
-    toastIconSize = 40.dp,
-    roundedCornerDp = 12.dp,
-    bigButtonWidthDp = 184.dp,
-    bigButtonHeightDp = 40.dp,
-    smallButtonWidthDp = 58.dp,
-    smallButtonHeightDp = 32.dp,
-    buttonRoundedCornerDp = 6.dp
-)
+    topNavigationBarHeight = 56.dp,
+    topNavigationBarPaddingHorizontal = 10.dp,
+    topNavigationBarActionWidth = 90.dp,
+    topNavigationBarIconSize = 24.dp,
+    topNavigationBarActionPaddingWidth = 16.dp,
 
+    bigButtonWidth = 320.dp,
+    bigButtonHeight = 40.dp,
+    bigButtonRoundedCornerDp = 4.dp,
+    smallButtonWidth = 120.dp,
+    smallButtonHeight = 40.dp,
+    smallButtonRoundedCornerDp = 4.dp,
+
+    listSingleRowHeight = 56.dp,
+    listDoubleRowHeight = 80.dp,
+    listPaddingHorizontal = 16.dp,
+
+    actionSheetRoundedCornerDp = 12.dp,
+
+    navigationBarIconSize = 28.dp,
+    navigationBarHeight = 56.dp,
+
+    tableIconSize = 24.dp,
+
+    switchIconWidth = 50.dp,
+    switchIconHeight = 30.dp
+)
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

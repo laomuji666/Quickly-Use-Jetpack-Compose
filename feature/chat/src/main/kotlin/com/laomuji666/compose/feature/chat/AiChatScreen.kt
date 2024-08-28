@@ -15,17 +15,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
-import com.laomuji666.compose.core.ui.we.icons.TopBarSearch
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
-import com.laomuji666.compose.core.ui.we.widget.WePopMenu
-import com.laomuji666.compose.core.ui.we.widget.WePopMenuItem
+import com.laomuji666.compose.core.ui.we.icons.Add
+import com.laomuji666.compose.core.ui.we.icons.Search
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBar
-import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBarItem
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBarAction
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBarSpace
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarSpace
 import com.laomuji666.compose.feature.chat.icons.Contact
 import com.laomuji666.compose.feature.chat.icons.Me
 import com.laomuji666.compose.feature.chat.icons.Message
@@ -62,33 +60,7 @@ private fun AiChatScreenUi(){
         },
         topBarActionMenu = {
             if(showTopBarActionMenu){
-                WePopMenu(
-                    onDismissRequest = {
-                        showTopBarActionMenu = false
-                    }
-                ) {
-                    WePopMenuItem(
-                        text = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-                        imageVector = WeIcons.Message,
-                        onClick = {
-                            showTopBarActionMenu = false
-                        }
-                    )
-                    WePopMenuItem(
-                        text = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
-                        imageVector = WeIcons.Contact,
-                        onClick = {
-                            showTopBarActionMenu = false
-                        }
-                    )
-                    WePopMenuItem(
-                        text = stringResource(id = R.string.string_ai_chat_screen_navigation_me),
-                        imageVector = WeIcons.Me,
-                        onClick = {
-                            showTopBarActionMenu = false
-                        }
-                    )
-                }
+
             }
 
         }
@@ -111,11 +83,11 @@ private fun TopBar(
         title = stringResource(id = R.string.string_ai_chat_screen_navigation_title),
         actions = {
             WeTopNavigationBarAction(
-                imageVector = WeIcons.TopBarSearch
+                imageVector = WeIcons.Search
             )
             WeTopNavigationBarSpace()
             WeTopNavigationBarAction(
-                imageVector = WeIcons.TopBarAdd,
+                imageVector = WeIcons.Add,
                 onActionClick = onMenuClick
             )
         }

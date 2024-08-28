@@ -12,18 +12,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.widget.WeActionSheetDialog
+import com.laomuji666.compose.core.ui.we.widget.WeActionSheetRow
+import com.laomuji666.compose.core.ui.we.widget.WeActionSheetType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeToast
-import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetDialog
-import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetRow
-import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetType
-import com.laomuji666.compose.core.ui.we2.widget.WeTableCheckRow
-import com.laomuji666.compose.core.ui.we2.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we2.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we2.widget.WeTableRadioRow
-import com.laomuji666.compose.core.ui.we2.widget.WeTableSwitchRow
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTableCheckRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -59,15 +57,15 @@ private fun ToastWidget(){
 
     var showLoadingDialog by rememberSaveable { mutableStateOf(false) }
     if(showLoadingDialog){
-        WeToast(weToastType = WeToastType.LOADING)
+
     }
     var showDoneDialog by rememberSaveable { mutableStateOf(false) }
     if(showDoneDialog){
-        WeToast(weToastType = WeToastType.DONE)
+
     }
     var showErrorDialog by rememberSaveable { mutableStateOf(false) }
     if(showErrorDialog){
-        WeToast(weToastType = WeToastType.ERROR)
+
     }
     WeTableSwitchRow(
         title = stringResource(id = R.string.string_widget_screen_toast_title),

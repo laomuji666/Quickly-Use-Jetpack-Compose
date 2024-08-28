@@ -28,11 +28,11 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.widget.WeButton
+import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
+import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we2.widget.WeButton
-import com.laomuji666.compose.core.ui.we2.widget.WeButtonColor
-import com.laomuji666.compose.core.ui.we2.widget.WeButtonType
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -66,7 +66,7 @@ private fun FirebaseScreenUi(
 ){
     Column(
         modifier = Modifier
-            .background(WeTheme.weColorScheme.backgroundColor)
+            .background(WeTheme.colorScheme.background)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -133,7 +133,7 @@ private fun FirebasePermissionSlot(
         }
     }
     if(hasPermission){
-        Text(text = pushToken, color = WeTheme.weColorScheme.onBackgroundColor)
+        Text(text = pushToken, color = WeTheme.colorScheme.fontColor90)
     }else{
         FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             isRequestPermission = true

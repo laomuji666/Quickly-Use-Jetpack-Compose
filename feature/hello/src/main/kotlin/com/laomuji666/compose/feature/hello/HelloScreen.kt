@@ -19,12 +19,12 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we2.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBar
-import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBarItem
-import com.laomuji666.compose.core.ui.we2.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
