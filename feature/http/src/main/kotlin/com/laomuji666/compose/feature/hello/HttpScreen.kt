@@ -20,10 +20,10 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we2.WeButton
-import com.laomuji666.compose.core.ui.we2.WeButtonColor
-import com.laomuji666.compose.core.ui.we2.WeButtonType
-import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we2.widget.WeButton
+import com.laomuji666.compose.core.ui.we2.widget.WeButtonColor
+import com.laomuji666.compose.core.ui.we2.widget.WeButtonType
+import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable

@@ -21,6 +21,8 @@ data class WeDimens(
     val listSingleRowHeight:Dp,
     val listDoubleRowHeight:Dp,
     val listPaddingHorizontal:Dp,
+
+    val actionSheetRoundedCornerDp:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -40,6 +42,8 @@ val DefaultWeDimens = WeDimens(
     listSingleRowHeight = 56.dp,
     listDoubleRowHeight = 80.dp,
     listPaddingHorizontal = 16.dp,
+
+    actionSheetRoundedCornerDp = 12.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

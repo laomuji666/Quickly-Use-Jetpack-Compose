@@ -23,9 +23,9 @@ import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WePopMenu
 import com.laomuji666.compose.core.ui.we.widget.WePopMenuItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
-import com.laomuji666.compose.core.ui.we2.WeTopNavigationBarAction
-import com.laomuji666.compose.core.ui.we2.WeTopNavigationBarSpace
+import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBarAction
+import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBarSpace
 import com.laomuji666.compose.feature.chat.icons.Contact
 import com.laomuji666.compose.feature.chat.icons.Me
 import com.laomuji666.compose.feature.chat.icons.Message

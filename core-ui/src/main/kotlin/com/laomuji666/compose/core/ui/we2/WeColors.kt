@@ -74,5 +74,6 @@ object WeColors{
     val FontColorLight50Alpha  = Color(0xFF000000).copy(alpha = 0.5f)
     val FontColorLight30Alpha  = Color(0xFF000000).copy(alpha = 0.3f)
     val FontColorDark90Alpha  = Color(0xFFFFFFFF).copy(alpha = 0.9f)
+    val FontColorDark50Alpha  = Color(0xFFFFFFFF).copy(alpha = 0.5f)
     val FontColorDark15Alpha = Color(0xFFFFFFFF).copy(alpha = 0.15f)
 }

@@ -23,8 +23,8 @@ import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -134,27 +134,27 @@ private fun Example(
     ) {
         WeTableClickRow(
             title = helloText,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_firebase_demo),
             onClick = onFirebaseClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_http_demo),
             onClick = onHttpClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_google_login_demo),
             onClick = onGoogleLoginClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_ai_chat),
             onClick = onAiChatClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
         )
     }
 }
