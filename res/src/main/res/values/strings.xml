@@ -11,11 +11,12 @@
     <string name="string_error_view_refresh">刷新当前页面</string>
 
 <!--  HelloScreen  -->
+    <string name="string_hello_screen_navigation_example">功能示例</string>
+    <string name="string_hello_screen_navigation_widget">UI组件示例</string>
     <string name="string_hello_screen_firebase_demo">Firebase例子</string>
     <string name="string_hello_screen_http_demo">Ktor Http例子</string>
     <string name="string_hello_screen_google_login_demo">谷歌登录例子</string>
-    <string name="string_hello_screen_navigation_example">功能示例</string>
-    <string name="string_hello_screen_navigation_widget">UI组件</string>
+    <string name="string_hello_screen_ai_chat">AI聊天</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>
@@ -27,7 +28,6 @@
     <string name="string_firebase_screen_notification">申请通知权限</string>
 
 <!--  WidgetScreen  -->
-    <string name="string_widget_screen_title">UI组件示例</string>
     <string name="string_widget_screen_toast_title">Toast示例</string>
     <string name="string_widget_screen_show_toast">弹出弹窗</string>
     <string name="string_widget_screen_action_sheet_title">ActionSheet示例</string>
@@ -37,4 +37,10 @@
     <string name="string_widget_screen_action_sheet_item2">操作一</string>
     <string name="string_widget_screen_action_sheet_item3">操作二</string>
     <string name="string_widget_screen_action_sheet_item4">警示操作</string>
+
+<!--  AiChatScreen  -->
+    <string name="string_ai_chat_screen_navigation_title">Ai聊天</string>
+    <string name="string_ai_chat_screen_navigation_message">消息</string>
+    <string name="string_ai_chat_screen_navigation_contact">联系人</string>
+    <string name="string_ai_chat_screen_navigation_me">我</string>
 </resources>

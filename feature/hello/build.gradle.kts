@@ -11,5 +11,4 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic"))
     ksp(libs.hilt.compiler)
-    implementation(project(":feature:widget"))
 }

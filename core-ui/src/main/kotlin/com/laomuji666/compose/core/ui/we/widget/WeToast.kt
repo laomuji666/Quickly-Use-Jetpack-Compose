@@ -31,7 +31,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.window.Popup
 import com.laomuji666.compose.core.ui.R
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Done
 import com.laomuji666.compose.core.ui.we.icons.Error
@@ -56,9 +55,9 @@ fun WeToast(
             Column(
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .clip(RoundedCornerShape(LocalWeDimens.current.roundedCornerDp))
+                    .clip(RoundedCornerShape(WeTheme.weDimens.roundedCornerDp))
                     .background(WeTheme.weColorScheme.tertiary)
-                    .size(LocalWeDimens.current.toastSize),
+                    .size(WeTheme.weDimens.toastSize),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -68,7 +67,7 @@ fun WeToast(
                             imageVector = WeIcons.Done,
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
-                            modifier = Modifier.size(LocalWeDimens.current.toastIconSize)
+                            modifier = Modifier.size(WeTheme.weDimens.toastIconSize)
                         )
                     }
                     WeToastType.LOADING -> {
@@ -95,7 +94,7 @@ fun WeToast(
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
                             modifier = Modifier
-                                .size(LocalWeDimens.current.toastIconSize)
+                                .size(WeTheme.weDimens.toastIconSize)
                                 .rotate(rotateDegree)
                         )
                     }
@@ -104,15 +103,15 @@ fun WeToast(
                             imageVector = WeIcons.Error,
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
-                            modifier = Modifier.size(LocalWeDimens.current.toastIconSize)
+                            modifier = Modifier.size(WeTheme.weDimens.toastIconSize)
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(LocalWeDimens.current.paddingHorizontalDp))
+                Spacer(modifier = Modifier.height(WeTheme.weDimens.paddingHorizontalDp))
                 Text(
                     text = message,
                     style = WeTheme.weTypography.smallTitle,
-                    color = WeTheme.weColorScheme.onToastBackgroundColor
+                    color = WeTheme.weColorScheme.onPopMenuBackgroundColor
                 )
             }
         }

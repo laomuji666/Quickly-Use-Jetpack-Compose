@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flow
 
 class HelloRepository {
     fun requestHelloText() = flow {
-        delay(500)
+        delay(2000)
         emit("Compose")
     }
 }

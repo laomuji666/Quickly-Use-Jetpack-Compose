@@ -30,6 +30,6 @@ dependencies {
     implementation(project(":feature:hello"))
     implementation(project(":feature:firebase"))
     implementation(project(":feature:http"))
-
+    implementation(project(":feature:chat"))
 
 }

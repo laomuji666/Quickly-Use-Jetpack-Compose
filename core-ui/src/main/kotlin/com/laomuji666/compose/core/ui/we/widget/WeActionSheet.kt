@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.animated.AnimatedSlide
 
@@ -101,8 +100,8 @@ fun WeActionSheetDialog(
                             .align(Alignment.BottomCenter)
                             .clip(
                                 RoundedCornerShape(
-                                    topStart = LocalWeDimens.current.roundedCornerDp,
-                                    topEnd = LocalWeDimens.current.roundedCornerDp
+                                    topStart = WeTheme.weDimens.roundedCornerDp,
+                                    topEnd = WeTheme.weDimens.roundedCornerDp
                                 )
                             )
                     ) {

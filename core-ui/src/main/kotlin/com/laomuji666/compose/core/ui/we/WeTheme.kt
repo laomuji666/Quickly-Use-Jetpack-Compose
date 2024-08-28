@@ -63,6 +63,11 @@ object WeTheme{
         @Composable
         @ReadOnlyComposable
         get() = LocalWeTypography.current
+
+    val weDimens: WeDimens
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalWeDimens.current
 }
 
 class WeIndication(

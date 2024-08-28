@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -45,7 +44,7 @@ fun RowScope.WeNavigationBarItem(
             .clickable(
                 interactionSource = remember { MutableInteractionSource() },
                 indication = null,
-                onClick =  onClick
+                onClick = onClick
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
@@ -56,12 +55,12 @@ fun RowScope.WeNavigationBarItem(
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 colorFilter = ColorFilter.tint(color),
-                modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
+                modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
             )
         }
         Text(
             text = title,
-            style = WeTheme.weTypography.groupTitle,
+            style = WeTheme.weTypography.smallText,
             color = color
         )
     }
@@ -75,7 +74,7 @@ fun WeNavigationBar(
         modifier = Modifier
             .fillMaxWidth()
             .background(WeTheme.weColorScheme.rowBackgroundColor)
-            .height(LocalWeDimens.current.rowHeightDp)
+            .height(WeTheme.weDimens.rowHeightDp)
     ) {
         content()
     }

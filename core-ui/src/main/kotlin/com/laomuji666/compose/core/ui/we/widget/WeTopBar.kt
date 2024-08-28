@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ArrowLeft
 import com.laomuji666.compose.core.ui.we.icons.TopBarAdd
@@ -55,13 +54,12 @@ fun WeTopBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
-                .padding(bottom = LocalWeDimens.current.topBarPaddingBottomDp)
-                .height(LocalWeDimens.current.topBarHeightDp)
+                .padding(horizontal = WeTheme.weDimens.paddingHorizontalDp)
+                .height(WeTheme.weDimens.topBarHeightDp)
             ,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Row(modifier = Modifier.width(LocalWeDimens.current.topBarActionRowWidthDp)) {
+            Row(modifier = Modifier.width(WeTheme.weDimens.topBarActionRowWidthDp)) {
                 onBackClick?.let {
                     WeTopBarAction(
                         onActionClick = it,
@@ -76,7 +74,7 @@ fun WeTopBar(
                 color = WeTheme.weColorScheme.onBackgroundColor
             )
             Spacer(modifier = Modifier.weight(1f))
-            Row(modifier = Modifier.width(LocalWeDimens.current.topBarActionRowWidthDp),
+            Row(modifier = Modifier.width(WeTheme.weDimens.topBarActionRowWidthDp),
                 horizontalArrangement = Arrangement.End
             ){
                 actions()
@@ -105,14 +103,14 @@ fun WeTopBarAction(
             colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onBackgroundColor),
             modifier = Modifier
                 .align(Alignment.Center)
-                .height(LocalWeDimens.current.iconHeightDp),
+                .height(WeTheme.weDimens.iconHeightDp),
         )
     }
 }
 
 @Composable
 fun WeTopBarActionSpace(){
-    Spacer(modifier = Modifier.width(LocalWeDimens.current.paddingHorizontalDp))
+    Spacer(modifier = Modifier.width(WeTheme.weDimens.paddingHorizontalDp))
 }
 
 @PreviewLightDark

@@ -13,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -68,10 +67,10 @@ fun WeTableClickRow(
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
+                modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
             )
         },
-        rowHeight = if(summaryInBottom) LocalWeDimens.current.twoRowHeightDp else LocalWeDimens.current.rowHeightDp,
+        rowHeight = if(summaryInBottom) WeTheme.weDimens.twoRowHeightDp else WeTheme.weDimens.rowHeightDp,
         onClick = onClick,
         weTableRowOutlineType = weTableRowOutlineType
     )

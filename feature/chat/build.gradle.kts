@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji666.compose.feature.widget"
+    namespace = "com.laomuji666.compose.feature.chat"
 }
 
 dependencies {
