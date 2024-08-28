@@ -13,16 +13,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableCheckRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetDialog
 import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetRow
 import com.laomuji666.compose.core.ui.we2.widget.WeActionSheetType
-import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeTableCheckRow
+import com.laomuji666.compose.core.ui.we2.widget.WeTableRowOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we2.widget.WeTableRadioRow
+import com.laomuji666.compose.core.ui.we2.widget.WeTableSwitchRow
 import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
@@ -75,7 +75,7 @@ private fun ToastWidget(){
         onClick = {
             isEnable = !isEnable
         },
-        weListOutlineType = if(isEnable) WeListOutlineType.FULL else WeListOutlineType.SPLIT
+        weTableRowOutlineType = if(isEnable) WeTableRowOutlineType.FULL else WeTableRowOutlineType.SPLIT
     )
     if(!isEnable){
         return
@@ -86,14 +86,14 @@ private fun ToastWidget(){
             WeTableRadioRow(
                 title = title,
                 checked = currentItem == index,
-                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
                 onClick = { currentItem = index }
             )
         }
     }
     WeTableClickRow(
         title = stringResource(id = R.string.string_widget_screen_show_toast),
-        weListOutlineType = WeListOutlineType.SPLIT,
+        weTableRowOutlineType = WeTableRowOutlineType.SPLIT,
         onClick = {
             if(currentItem == 0){
                 showLoadingDialog = true
@@ -134,7 +134,7 @@ private fun ActionSheetWidget(){
         onClick = {
             isEnable = !isEnable
         },
-        weListOutlineType = if(isEnable) WeListOutlineType.FULL else WeListOutlineType.SPLIT
+        weTableRowOutlineType = if(isEnable) WeTableRowOutlineType.FULL else WeTableRowOutlineType.SPLIT
     )
     if(!isEnable){
         return
@@ -148,25 +148,25 @@ private fun ActionSheetWidget(){
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item1),
         checked = checked1,
         onClick = { checked1 = !checked1 },
-        weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item2),
         checked = checked2,
         onClick = { checked2 = !checked2 },
-        weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item3),
         checked = checked3,
         onClick = { checked3 = !checked3 },
-        weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item4),
         checked = checked4,
         onClick = { checked4 = !checked4 },
-        weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
 
     WeTableClickRow(title = stringResource(id = R.string.string_widget_screen_show_action_sheet), onClick = {
@@ -181,20 +181,20 @@ private fun ActionSheetWidget(){
             if(checked1){
                 WeActionSheetRow(
                     text = stringResource(id = R.string.string_widget_screen_action_sheet_item1),
-                    weListOutlineType = WeListOutlineType.FULL,
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL,
                     weActionSheetType = WeActionSheetType.SUMMARY
                 )
             }
             if(checked2){
                 WeActionSheetRow(
                     stringResource(id = R.string.string_widget_screen_action_sheet_item2),
-                    weListOutlineType = WeListOutlineType.FULL
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL
                 )
             }
             if(checked3){
                 WeActionSheetRow(
                     stringResource(id = R.string.string_widget_screen_action_sheet_item3),
-                    weListOutlineType = WeListOutlineType.FULL
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL
                 )
             }
             if(checked4){

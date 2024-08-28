@@ -20,10 +20,10 @@ import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBar
 import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBarItem
+import com.laomuji666.compose.core.ui.we2.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
@@ -134,27 +134,27 @@ private fun Example(
     ) {
         WeTableClickRow(
             title = helloText,
-            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_firebase_demo),
             onClick = onFirebaseClick,
-            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_http_demo),
             onClick = onHttpClick,
-            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_google_login_demo),
             onClick = onGoogleLoginClick,
-            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_ai_chat),
             onClick = onAiChatClick,
-            weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
     }
 }

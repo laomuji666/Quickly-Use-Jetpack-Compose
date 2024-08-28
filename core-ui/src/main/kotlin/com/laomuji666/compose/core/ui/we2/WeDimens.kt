@@ -25,7 +25,12 @@ data class WeDimens(
     val actionSheetRoundedCornerDp:Dp,
 
     val navigationBarIconSize:Dp,
-    val navigationBarHeight:Dp
+    val navigationBarHeight:Dp,
+
+    val tableIconSize:Dp,
+
+    val switchIconWidth:Dp,
+    val switchIconHeight:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -49,7 +54,12 @@ val DefaultWeDimens = WeDimens(
     actionSheetRoundedCornerDp = 12.dp,
 
     navigationBarIconSize = 28.dp,
-    navigationBarHeight = 56.dp
+    navigationBarHeight = 56.dp,
+
+    tableIconSize = 24.dp,
+
+    switchIconWidth = 50.dp,
+    switchIconHeight = 30.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

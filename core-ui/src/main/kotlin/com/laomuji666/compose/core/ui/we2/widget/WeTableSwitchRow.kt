@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.we.widget
+package com.laomuji666.compose.core.ui.we2.widget
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
@@ -26,24 +26,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
-import com.laomuji666.compose.core.ui.we2.widget.WeListRow
+import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we2.WeTheme
 
 @Composable
 fun WeTableSwitchRow(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
-    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeListRow(
+    WeTableRowRow(
         start = {
             Text(
                 text = title,
-                style = WeTheme.weTypography.mediumText,
-                color = WeTheme.weColorScheme.onBackgroundColor
+                style = WeTheme.typography.title,
+                color = WeTheme.colorScheme.fontColor90
             )
         },
         end = {
@@ -53,18 +51,21 @@ fun WeTableSwitchRow(
             )
         },
         onClick = onClick,
-        weListOutlineType = weListOutlineType
+        weTableRowOutlineType = weTableRowOutlineType
     )
 }
 
+/**
+ * 开关颜色暂时写死,本来应该是一个图片的,这里用动画实现的.
+ */
 @Composable
 fun WeSwitch(
     checked: Boolean,
     onClick: () -> Unit,
-    width: Dp = 51.dp,
-    height: Dp = 31.dp,
-    thumbSize: Dp = 27.dp,
-    gap: Dp = 2.dp
+    width: Dp = WeTheme.dimens.switchIconWidth,
+    height: Dp = WeTheme.dimens.switchIconHeight,
+    thumbSize: Dp = height - 5.dp,
+    gap: Dp = 3.dp
 ) {
     val animationDuration = 300
     val offsetX by animateDpAsState(
@@ -78,12 +79,12 @@ fun WeSwitch(
             .height(height)
             .clip(CircleShape)
             .clickable { onClick() }
-            .background(if (checked) Color(0xFF07C160) else Color(0xFF000000).copy(alpha = 0.18f))
+            .background(if (checked) Color(0xFF07C160) else Color(0xFFEDEDED))
     ) {
         Spacer(modifier = Modifier
             .size(thumbSize)
             .offset(x = offsetX)
-            .shadow(elevation = 3.dp, shape = CircleShape)
+            .shadow(elevation = gap, shape = CircleShape)
             .background(Color.White, shape = CircleShape)
         )
     }
@@ -94,13 +95,13 @@ fun WeSwitch(
 fun PreviewWeTableSwitchRow(){
     var checked1 by remember { mutableStateOf(false) }
     var checked2 by remember { mutableStateOf(true) }
-    QuicklyTheme {
+    DefaultWeTheme {
         Column {
             WeTableSwitchRow(
                 title = "勿扰模式",
                 checked = checked1,
                 onClick = { checked1 = !checked1 },
-                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
             )
             WeTableSwitchRow(
                 title = "消息推送",

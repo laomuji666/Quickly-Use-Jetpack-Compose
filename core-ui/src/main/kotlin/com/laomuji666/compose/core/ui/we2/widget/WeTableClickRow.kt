@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.we.widget
+package com.laomuji666.compose.core.ui.we2.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -12,13 +12,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
-import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
-import com.laomuji666.compose.core.ui.we2.widget.WeListRow
-import com.laomuji666.compose.core.ui.we2.widget.WeListRowType
+import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we2.WeTheme
+import com.laomuji666.compose.core.ui.we2.icons.Arrow
 
 @Composable
 fun WeTableClickRow(
@@ -26,31 +23,30 @@ fun WeTableClickRow(
     summary:String? = null,
     summaryInBottom:Boolean = false,
     onClick:()->Unit = {},
-    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeListRow(
+    WeTableRowRow(
         start = {
             if(summaryInBottom){
                 Column {
                     Text(
                         text = title,
-                        style = WeTheme.weTypography.mediumText,
-                        color = WeTheme.weColorScheme.onBackgroundColor
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColor90
                     )
                     summary?.let {
-                        Spacer(modifier = Modifier.height(3.dp))
                         Text(
                             text = it,
-                            style = WeTheme.weTypography.smallText,
-                            color = WeTheme.weColorScheme.onRowBackSecondaryColor
+                            style = WeTheme.typography.desc,
+                            color = WeTheme.colorScheme.fontColor50
                         )
                     }
                 }
             }else{
                 Text(
                     text = title,
-                    style = WeTheme.weTypography.mediumText,
-                    color = WeTheme.weColorScheme.onBackgroundColor
+                    style = WeTheme.typography.title,
+                    color = WeTheme.colorScheme.fontColor90
                 )
             }
         },
@@ -59,30 +55,30 @@ fun WeTableClickRow(
                 summary?.let {
                     Text(
                         text = it,
-                        style = WeTheme.weTypography.mediumText,
-                        color = WeTheme.weColorScheme.onRowBackSecondaryColor
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColor50
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                 }
             }
             Image(
-                imageVector = WeIcons.ArrowRight,
+                imageVector = WeIcons.Arrow,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
+                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColor50),
+                modifier = Modifier.height(WeTheme.dimens.tableIconSize)
             )
         },
-        weListRowType = if(summaryInBottom) WeListRowType.DOUBLE else WeListRowType.SINGLE,
+        weTableRowRowType = if(summaryInBottom) WeTableRowRowType.DOUBLE else WeTableRowRowType.SINGLE,
         onClick = onClick,
-        weListOutlineType = weListOutlineType
+        weTableRowOutlineType = weTableRowOutlineType
     )
 }
 
 @PreviewLightDark
 @Composable
 fun PreviewWeTableClickRow1(){
-    QuicklyTheme {
+    DefaultWeTheme {
         WeTableClickRow(
             title = "单行标题",
             summary = "详细信息",
@@ -94,9 +90,9 @@ fun PreviewWeTableClickRow1(){
 @PreviewLightDark
 @Composable
 fun PreviewWeTableClickRow2(){
-    QuicklyTheme {
+    DefaultWeTheme {
         WeTableClickRow(
-            title = "单行标题",
+            title = "双行标题",
             summary = "详细信息"
         )
     }

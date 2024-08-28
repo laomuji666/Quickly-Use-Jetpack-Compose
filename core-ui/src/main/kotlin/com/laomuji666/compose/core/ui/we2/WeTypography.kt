@@ -21,53 +21,43 @@ data class WeTypography(
 val DefaultWeTypography = WeTypography(
     heading = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 22.sp,
-        color = WeColors.FontColorLight90Alpha
+        fontSize = 22.sp
     ),
     emTitle = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 17.sp,
-        color = WeColors.FontColorLight90Alpha
+        fontSize = 17.sp
     ),
     title = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        color = WeColors.FontColorLight90Alpha
+        fontSize = 17.sp
     ),
     emGroupTitle = TextStyle(
         fontWeight = FontWeight.Medium,
-        fontSize = 15.sp,
-        color = WeColors.FontColorLight90Alpha
+        fontSize = 15.sp
     ),
     groupTitle = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        color = WeColors.FontColorLight50Alpha
+        fontSize = 14.sp
     ),
     groupBody = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        color = WeColors.FontColorLight50Alpha
+        fontSize = 17.sp
     ),
     text = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 17.sp,
-        color = WeColors.FontColorLight90Alpha
+        fontSize = 17.sp
     ),
     emDesc = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 14.sp,
-        color = WeColors.FontColorLight50Alpha
+        fontSize = 14.sp
     ),
     desc = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = WeColors.FontColorLight30Alpha
     ),
     footnote = TextStyle(
         fontWeight = FontWeight.Normal,
-        fontSize = 12.sp,
-        color = WeColors.FontColorLight30Alpha
+        fontSize = 12.sp
     )
 )
 

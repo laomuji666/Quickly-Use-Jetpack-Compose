@@ -17,17 +17,17 @@ import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we2.WeTheme
 
 @Composable
-fun WeListRow(
+fun WeTableRowRow(
     start: @Composable RowScope.() -> Unit = {},
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
     onClick: () -> Unit = {},
-    weListRowType: WeListRowType = WeListRowType.SINGLE,
-    weListOutlineType: WeListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
+    weTableRowRowType: WeTableRowRowType = WeTableRowRowType.SINGLE,
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
 ){
-    val rowHeight = when(weListRowType){
-        WeListRowType.SINGLE -> WeTheme.dimens.listSingleRowHeight
-        WeListRowType.DOUBLE -> WeTheme.dimens.listDoubleRowHeight
+    val rowHeight = when(weTableRowRowType){
+        WeTableRowRowType.SINGLE -> WeTheme.dimens.listSingleRowHeight
+        WeTableRowRowType.DOUBLE -> WeTheme.dimens.listDoubleRowHeight
     }
     Column(
         modifier = Modifier
@@ -45,30 +45,30 @@ fun WeListRow(
             center()
             end()
         }
-        WeListOutline(
-            weListOutlineType = weListOutlineType
+        WeTableRowOutline(
+            weTableRowOutlineType = weTableRowOutlineType
         )
     }
 
 }
 
-enum class WeListRowType{
+enum class WeTableRowRowType{
     SINGLE,
     DOUBLE
 }
 
 @PreviewLightDark
 @Composable
-fun PreviewWeListRow(){
+fun PreviewWeTableRowRow(){
     DefaultWeTheme {
         Column {
-            WeListRow()
-            WeListRow()
-            WeListRow(
-                weListOutlineType = WeListOutlineType.SPLIT
+            WeTableRowRow()
+            WeTableRowRow()
+            WeTableRowRow(
+                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
             )
-            WeListRow(
-                weListOutlineType = WeListOutlineType.NONE
+            WeTableRowRow(
+                weTableRowOutlineType = WeTableRowOutlineType.NONE
             )
         }
     }

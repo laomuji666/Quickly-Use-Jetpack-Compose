@@ -11,15 +11,15 @@ import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.we2.WeTheme
 
 @Composable
-fun WeListOutline(
+fun WeTableRowOutline(
     modifier: Modifier = Modifier,
-    weListOutlineType: WeListOutlineType = WeListOutlineType.FULL,
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.FULL,
 ){
-    when(weListOutlineType){
-        WeListOutlineType.NONE -> {
+    when(weTableRowOutlineType){
+        WeTableRowOutlineType.NONE -> {
 
         }
-        WeListOutlineType.FULL -> {
+        WeTableRowOutlineType.FULL -> {
             Spacer(
                 modifier = modifier
                     .height(1.dp)
@@ -27,7 +27,7 @@ fun WeListOutline(
                     .background(WeTheme.colorScheme.outline)
             )
         }
-        WeListOutlineType.PADDING_HORIZONTAL -> {
+        WeTableRowOutlineType.PADDING_HORIZONTAL -> {
             Spacer(
                 modifier = modifier
                     .height(1.dp)
@@ -37,7 +37,7 @@ fun WeListOutline(
             )
         }
 
-        WeListOutlineType.SPLIT -> {
+        WeTableRowOutlineType.SPLIT -> {
             Spacer(
                 modifier = modifier
                     .height(8.dp)
@@ -48,7 +48,7 @@ fun WeListOutline(
     }
 }
 
-enum class WeListOutlineType{
+enum class WeTableRowOutlineType{
     NONE,
     FULL,
     PADDING_HORIZONTAL,

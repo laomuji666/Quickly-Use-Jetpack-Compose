@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.we.widget
+package com.laomuji666.compose.core.ui.we2.widget
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -19,30 +19,28 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.icons.Checked
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
-import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
-import com.laomuji666.compose.core.ui.we2.widget.WeListRow
+import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we2.WeTheme
+import com.laomuji666.compose.core.ui.we2.icons.Checked
 
 @Composable
 fun WeTableRadioRow(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
-    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
+    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeListRow(
+    WeTableRowRow(
         start = {
             Text(
                 text = title,
-                style = WeTheme.weTypography.mediumText,
-                color = WeTheme.weColorScheme.onBackgroundColor
+                style = WeTheme.typography.title,
+                color = WeTheme.colorScheme.fontColor90
             )
         },
         end = {
-            Row(modifier = Modifier.size(WeTheme.weDimens.iconHeightDp)) {
+            Row(modifier = Modifier.size(WeTheme.dimens.tableIconSize)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(
@@ -61,7 +59,7 @@ fun WeTableRadioRow(
             }
         },
         onClick = onClick,
-        weListOutlineType = weListOutlineType
+        weTableRowOutlineType = weTableRowOutlineType
     )
 }
 
@@ -77,7 +75,7 @@ private fun WeTableRadioColumn(
             WeTableRadioRow(
                 title = title,
                 checked = index == currentItem,
-                weListOutlineType = if(index == titleList.lastIndex) WeListOutlineType.NONE else WeListOutlineType.PADDING_HORIZONTAL,
+                weTableRowOutlineType = if(index == titleList.lastIndex) WeTableRowOutlineType.NONE else WeTableRowOutlineType.PADDING_HORIZONTAL,
                 onClick = { onItemClick(index) }
             )
         }
@@ -89,7 +87,7 @@ private fun WeTableRadioColumn(
 @Composable
 fun PreviewWeTableRadioColumn(){
     var currentItem by remember { mutableIntStateOf(0) }
-    QuicklyTheme {
+    DefaultWeTheme {
         WeTableRadioColumn(
             titleList = listOf("item1", "item2", "item3", "item4"),
             currentItem = currentItem,
