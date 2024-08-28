@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.Select
@@ -36,9 +35,9 @@ fun WeTableCheckRow(
                 imageVector = if(checked) WeIcons.Select else WeIcons.Unselect,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
+                modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
             )
-            Spacer(modifier = Modifier.width(LocalWeDimens.current.paddingHorizontalDp))
+            Spacer(modifier = Modifier.width(WeTheme.weDimens.paddingHorizontalDp))
             Text(
                 text = title,
                 style = WeTheme.weTypography.mediumText,
@@ -51,7 +50,7 @@ fun WeTableCheckRow(
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
                 colorFilter = ColorFilter.tint(WeTheme.weColorScheme.onRowBackSecondaryColor),
-                modifier = Modifier.height(LocalWeDimens.current.iconHeightDp)
+                modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
             )
         },
         onClick = onClick,

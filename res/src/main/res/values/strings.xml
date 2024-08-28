@@ -37,4 +37,10 @@
     <string name="string_widget_screen_action_sheet_item2">操作一</string>
     <string name="string_widget_screen_action_sheet_item3">操作二</string>
     <string name="string_widget_screen_action_sheet_item4">警示操作</string>
+
+<!--  AiChatScreen  -->
+    <string name="string_ai_chat_screen_navigation_title">Ai聊天</string>
+    <string name="string_ai_chat_screen_navigation_message">消息</string>
+    <string name="string_ai_chat_screen_navigation_contact">联系人</string>
+    <string name="string_ai_chat_screen_navigation_me">我</string>
 </resources>

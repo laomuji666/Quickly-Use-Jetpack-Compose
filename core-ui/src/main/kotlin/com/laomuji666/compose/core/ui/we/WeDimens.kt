@@ -6,7 +6,6 @@ import androidx.compose.ui.unit.dp
 
 data class WeDimens(
     val topBarHeightDp:Dp,
-    val topBarPaddingBottomDp:Dp,
     val topBarActionRowWidthDp:Dp,
     val paddingHorizontalDp:Dp,
     val rowHeightDp:Dp,
@@ -24,10 +23,9 @@ data class WeDimens(
 
 val DefaultWeDimens = WeDimens(
     topBarHeightDp = 44.dp,
-    topBarPaddingBottomDp = 2.dp,
     topBarActionRowWidthDp = 90.dp,
     paddingHorizontalDp = 16.dp,
-    rowHeightDp = 56.dp,
+    rowHeightDp = 54.dp,
     twoRowHeightDp = 80.dp,
     iconHeightDp = 24.dp,
     toastSize = 136.dp,
@@ -37,7 +35,7 @@ val DefaultWeDimens = WeDimens(
     bigButtonHeightDp = 40.dp,
     smallButtonWidthDp = 58.dp,
     smallButtonHeightDp = 32.dp,
-    buttonRoundedCornerDp = 4.dp
+    buttonRoundedCornerDp = 6.dp
 )
 
 

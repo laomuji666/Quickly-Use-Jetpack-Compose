@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 enum class WeTableRowOutlineType{
@@ -24,7 +23,7 @@ enum class WeTableRowOutlineType{
 @Composable
 fun WeTableRowOutline(
     weTableRowOutlineType: WeTableRowOutlineType,
-    backgroundColor: Color = WeTheme.weColorScheme.rowBackgroundColor
+    backgroundColor: Color = Color.Transparent
 ){
     Box(modifier = Modifier.background(backgroundColor).fillMaxWidth()){
         if(weTableRowOutlineType == WeTableRowOutlineType.FULL){
@@ -39,7 +38,7 @@ fun WeTableRowOutline(
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = LocalWeDimens.current.paddingHorizontalDp)
+                    .padding(start = WeTheme.weDimens.paddingHorizontalDp)
                     .height(1.dp)
                     .background(WeTheme.weColorScheme.outlineColor)
             )
@@ -48,7 +47,7 @@ fun WeTableRowOutline(
             Spacer(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                    .padding(horizontal = WeTheme.weDimens.paddingHorizontalDp)
                     .height(1.dp)
                     .background(WeTheme.weColorScheme.outlineColor)
             )

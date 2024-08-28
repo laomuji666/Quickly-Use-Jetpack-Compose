@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
@@ -23,7 +22,7 @@ fun WeTableRow(
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
     onClick: () -> Unit = {},
-    rowHeight: Dp = LocalWeDimens.current.rowHeightDp,
+    rowHeight: Dp = WeTheme.weDimens.rowHeightDp,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
     Column {
@@ -35,7 +34,7 @@ fun WeTableRow(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = LocalWeDimens.current.paddingHorizontalDp)
+                    .padding(horizontal = WeTheme.weDimens.paddingHorizontalDp)
                     .height(rowHeight),
                 verticalAlignment = Alignment.CenterVertically
             ){
@@ -43,7 +42,14 @@ fun WeTableRow(
                 center()
                 end()
             }
+            if(weTableRowOutlineType != WeTableRowOutlineType.SPLIT){
+                Row(modifier = Modifier.align(Alignment.BottomCenter)) {
+                    WeTableRowOutline(weTableRowOutlineType)
+                }
+            }
         }
-        WeTableRowOutline(weTableRowOutlineType)
+        if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
+            WeTableRowOutline(weTableRowOutlineType)
+        }
     }
 }

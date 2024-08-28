@@ -18,7 +18,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
@@ -30,7 +29,7 @@ fun WeButton(
 ){
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(LocalWeDimens.current.buttonRoundedCornerDp))
+            .clip(RoundedCornerShape(WeTheme.weDimens.buttonRoundedCornerDp))
             .background(
                 if (weButtonType == WeButtonType.PRIMARY) {
                     WeTheme.weColorScheme.primary
@@ -40,14 +39,14 @@ fun WeButton(
             )
             .width(
                 when (weButtonSizeType) {
-                    WeButtonSizeType.SMALL -> LocalWeDimens.current.smallButtonWidthDp
-                    WeButtonSizeType.BIG -> LocalWeDimens.current.bigButtonWidthDp
+                    WeButtonSizeType.SMALL -> WeTheme.weDimens.smallButtonWidthDp
+                    WeButtonSizeType.BIG -> WeTheme.weDimens.bigButtonWidthDp
                 }
             )
             .height(
                 when (weButtonSizeType) {
-                    WeButtonSizeType.SMALL -> LocalWeDimens.current.smallButtonHeightDp
-                    WeButtonSizeType.BIG -> LocalWeDimens.current.bigButtonHeightDp
+                    WeButtonSizeType.SMALL -> WeTheme.weDimens.smallButtonHeightDp
+                    WeButtonSizeType.BIG -> WeTheme.weDimens.bigButtonHeightDp
                 }
             )
             .clickable { onClick() }

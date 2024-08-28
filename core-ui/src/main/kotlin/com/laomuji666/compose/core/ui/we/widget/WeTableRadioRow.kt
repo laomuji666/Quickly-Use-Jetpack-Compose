@@ -20,7 +20,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Checked
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -41,7 +40,7 @@ fun WeTableRadioRow(
             )
         },
         end = {
-            Row(modifier = Modifier.size(LocalWeDimens.current.iconHeightDp)) {
+            Row(modifier = Modifier.size(WeTheme.weDimens.iconHeightDp)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(
