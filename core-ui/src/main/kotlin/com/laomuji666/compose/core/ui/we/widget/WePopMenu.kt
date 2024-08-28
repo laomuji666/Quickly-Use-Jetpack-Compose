@@ -38,6 +38,8 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Done
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutline
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
 
 @Composable
 fun WePopMenu(
@@ -95,9 +97,8 @@ fun WePopMenuItem(
         }
         Row {
             Spacer(modifier = Modifier.width(WeTheme.weDimens.iconHeightDp))
-            WeTableRowOutline(
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
-                backgroundColor = Color.Transparent
+            WeListOutline(
+                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
             )
         }
 

@@ -23,7 +23,7 @@ fun WeTheme(
     val screenOrientation by remember { derivedStateOf { orientation } }
     CompositionLocalProvider(
         LocalDensity provides if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) Density(
-            density = LocalContext.current.resources.displayMetrics.widthPixels / 360f,
+            density = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
             fontScale = LocalDensity.current.fontScale
         ) else LocalDensity.current,
         LocalWeColorScheme provides weColorScheme,

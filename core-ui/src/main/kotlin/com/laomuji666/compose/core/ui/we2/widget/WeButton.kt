@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.we2
+package com.laomuji666.compose.core.ui.we2.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,6 +14,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we2.WeTheme
 
 @Composable
 fun WeButton(
@@ -77,7 +79,7 @@ enum class WeButtonColor{
 fun PreviewWeButton(){
     DefaultWeTheme{
         Column(
-            modifier = Modifier.fillMaxWidth().background(WeTheme.colorScheme.backgroundColor),
+            modifier = Modifier.fillMaxWidth().background(WeTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             WeButton(

@@ -16,6 +16,9 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeListRow
+import com.laomuji666.compose.core.ui.we2.widget.WeListRowType
 
 @Composable
 fun WeTableClickRow(
@@ -23,9 +26,9 @@ fun WeTableClickRow(
     summary:String? = null,
     summaryInBottom:Boolean = false,
     onClick:()->Unit = {},
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
 ){
-    WeTableRow(
+    WeListRow(
         start = {
             if(summaryInBottom){
                 Column {
@@ -70,9 +73,9 @@ fun WeTableClickRow(
                 modifier = Modifier.height(WeTheme.weDimens.iconHeightDp)
             )
         },
-        rowHeight = if(summaryInBottom) WeTheme.weDimens.twoRowHeightDp else WeTheme.weDimens.rowHeightDp,
+        weListRowType = if(summaryInBottom) WeListRowType.DOUBLE else WeListRowType.SINGLE,
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weListOutlineType = weListOutlineType
     )
 }
 

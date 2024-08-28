@@ -28,15 +28,17 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeListRow
 
 @Composable
 fun WeTableSwitchRow(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
 ){
-    WeTableRow(
+    WeListRow(
         start = {
             Text(
                 text = title,
@@ -51,7 +53,7 @@ fun WeTableSwitchRow(
             )
         },
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weListOutlineType = weListOutlineType
     )
 }
 
@@ -98,7 +100,7 @@ fun PreviewWeTableSwitchRow(){
                 title = "勿扰模式",
                 checked = checked1,
                 onClick = { checked1 = !checked1 },
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
             )
             WeTableSwitchRow(
                 title = "消息推送",

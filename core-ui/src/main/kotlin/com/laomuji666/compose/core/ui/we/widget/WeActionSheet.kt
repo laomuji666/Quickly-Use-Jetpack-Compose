@@ -22,6 +22,9 @@ import androidx.compose.ui.window.DialogProperties
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.animated.AnimatedSlide
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutline
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeListRow
 
 enum class WeActionSheetType{
     SUMMARY,
@@ -34,9 +37,9 @@ fun WeActionSheetRow(
     text:String,
     onClick:()->Unit = {},
     weActionSheetType: WeActionSheetType = WeActionSheetType.NORMAL,
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
 ){
-    WeTableRow(
+    WeListRow(
         start = {
             Spacer(modifier = Modifier.weight(1f))
         },
@@ -69,7 +72,7 @@ fun WeActionSheetRow(
             Spacer(modifier = Modifier.weight(1f))
         },
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weListOutlineType = weListOutlineType
     )
 }
 
@@ -107,7 +110,7 @@ fun WeActionSheetDialog(
                     ) {
                         content()
                         dismissText?.let{
-                            WeTableRowOutline(weTableRowOutlineType = WeTableRowOutlineType.SPLIT)
+                            WeListOutline(weListOutlineType = WeListOutlineType.SPLIT)
                             WeActionSheetRow(
                                 text = it,
                                 onClick = dismissRequest
@@ -134,25 +137,25 @@ fun PreviewWeActionSheetRow1(){
             ){
                 WeActionSheetRow(
                     text = "警示操作提示文案",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL,
+                    weListOutlineType = WeListOutlineType.FULL,
                     weActionSheetType = WeActionSheetType.SUMMARY
                 )
                 WeActionSheetRow(
                     "操作一",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weListOutlineType = WeListOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     "操作二",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weListOutlineType = WeListOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     "操作三",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weListOutlineType = WeListOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     text = "警示操作",
                     weActionSheetType = WeActionSheetType.WRONG,
-                    weTableRowOutlineType = WeTableRowOutlineType.SPLIT
+                    weListOutlineType = WeListOutlineType.SPLIT,
                 )
             }
         }

@@ -16,7 +16,11 @@ data class WeDimens(
     val bigButtonRoundedCornerDp:Dp,
     val smallButtonWidth:Dp,
     val smallButtonHeight:Dp,
-    val smallButtonRoundedCornerDp:Dp
+    val smallButtonRoundedCornerDp:Dp,
+
+    val listSingleRowHeight:Dp,
+    val listDoubleRowHeight:Dp,
+    val listPaddingHorizontal:Dp,
 )
 
 val DefaultWeDimens = WeDimens(
@@ -25,12 +29,17 @@ val DefaultWeDimens = WeDimens(
     topNavigationBarActionWidth = 90.dp,
     topNavigationBarIconSize = 24.dp,
     topNavigationBarActionPaddingWidth = 16.dp,
+
     bigButtonWidth = 320.dp,
     bigButtonHeight = 40.dp,
     bigButtonRoundedCornerDp = 4.dp,
     smallButtonWidth = 120.dp,
     smallButtonHeight = 40.dp,
-    smallButtonRoundedCornerDp = 4.dp
+    smallButtonRoundedCornerDp = 4.dp,
+
+    listSingleRowHeight = 56.dp,
+    listDoubleRowHeight = 80.dp,
+    listPaddingHorizontal = 16.dp,
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

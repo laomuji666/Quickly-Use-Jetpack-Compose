@@ -21,15 +21,17 @@ import com.laomuji666.compose.core.ui.we.icons.ArrowRight
 import com.laomuji666.compose.core.ui.we.icons.Select
 import com.laomuji666.compose.core.ui.we.icons.Unselect
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeListRow
 
 @Composable
 fun WeTableCheckRow(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
 ){
-    WeTableRow(
+    WeListRow(
         start = {
             Image(
                 imageVector = if(checked) WeIcons.Select else WeIcons.Unselect,
@@ -54,7 +56,7 @@ fun WeTableCheckRow(
             )
         },
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weListOutlineType = weListOutlineType
     )
 }
 
@@ -72,19 +74,19 @@ fun PreviewWeTableCheckRow(){
                 title = "Item1",
                 checked = checked1,
                 onClick = { checked1 = !checked1 },
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL
             )
             WeTableCheckRow(
                 title = "Item2",
                 checked = checked2,
                 onClick = { checked2 = !checked2 },
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
             )
             WeTableCheckRow(
                 title = "Item3",
                 checked = checked3,
                 onClick = { checked3 = !checked3 },
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+                weListOutlineType = WeListOutlineType.PADDING_HORIZONTAL,
             )
             WeTableCheckRow(
                 title = "Item4",

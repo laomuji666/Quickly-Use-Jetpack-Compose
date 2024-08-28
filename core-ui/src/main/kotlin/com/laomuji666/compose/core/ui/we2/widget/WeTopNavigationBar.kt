@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.we2
+package com.laomuji666.compose.core.ui.we2.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,6 +26,8 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we2.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we2.WeTheme
 import com.laomuji666.compose.core.ui.we2.icons.Add
 import com.laomuji666.compose.core.ui.we2.icons.Back
 import com.laomuji666.compose.core.ui.we2.icons.Search

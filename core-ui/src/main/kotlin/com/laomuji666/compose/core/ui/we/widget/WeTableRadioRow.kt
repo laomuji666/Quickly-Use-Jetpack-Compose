@@ -23,15 +23,17 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Checked
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeListRow
 
 @Composable
 fun WeTableRadioRow(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weListOutlineType: WeListOutlineType = WeListOutlineType.NONE
 ){
-    WeTableRow(
+    WeListRow(
         start = {
             Text(
                 text = title,
@@ -59,7 +61,7 @@ fun WeTableRadioRow(
             }
         },
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weListOutlineType = weListOutlineType
     )
 }
 
@@ -75,7 +77,7 @@ private fun WeTableRadioColumn(
             WeTableRadioRow(
                 title = title,
                 checked = index == currentItem,
-                weTableRowOutlineType = if(index == titleList.lastIndex) WeTableRowOutlineType.NONE else WeTableRowOutlineType.PADDING_HORIZONTAL,
+                weListOutlineType = if(index == titleList.lastIndex) WeListOutlineType.NONE else WeListOutlineType.PADDING_HORIZONTAL,
                 onClick = { onItemClick(index) }
             )
         }
