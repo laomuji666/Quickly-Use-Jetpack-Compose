@@ -15,7 +15,11 @@ data class WeColorScheme (
     val tertiaryButton: Color,
     val onTertiaryButton: Color,
     val outline: Color,
-    val error: Color
+    val error: Color,
+    val navigationBar: Color,
+    val navigationBarSelect: Color,
+    val navigationBarUnSelect: Color,
+
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -30,7 +34,10 @@ val LightWeColorScheme = WeColorScheme(
     tertiaryButton = WeColors.White97,
     onTertiaryButton = WeColors.Brand100,
     outline = WeColors.White97,
-    error = WeColors.Red100
+    error = WeColors.Red100,
+    navigationBar = WeColors.White100,
+    navigationBarSelect = WeColors.Brand100,
+    navigationBarUnSelect = WeColors.FontColorLight90Alpha
 )
 
 val DarkWeColorScheme = WeColorScheme(
@@ -45,7 +52,10 @@ val DarkWeColorScheme = WeColorScheme(
     tertiaryButton = WeColors.FontColorDark15Alpha,
     onTertiaryButton = WeColors.Brand100,
     outline = WeColors.Dark20,
-    error = WeColors.Red100
+    error = WeColors.Red100,
+    navigationBar = WeColors.Dark100,
+    navigationBarSelect = WeColors.Brand100,
+    navigationBarUnSelect = WeColors.FontColorDark90Alpha
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

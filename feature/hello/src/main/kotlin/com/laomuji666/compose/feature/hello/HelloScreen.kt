@@ -19,11 +19,11 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we2.widget.WeListOutlineType
+import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBar
+import com.laomuji666.compose.core.ui.we2.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we2.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
@@ -76,7 +76,7 @@ private fun HelloScreenUi(
         bottomBar = {
             WeNavigationBar {
                 WeNavigationBarItem(
-                    imageVector = WeIcons.Example,
+                    unSelectImageVector = WeIcons.Example,
                     title = stringResource(id = R.string.string_hello_screen_navigation_example),
                     selected = pagerState.currentPage == HelloSelectEnum.EXAMPLE.ordinal,
                     onClick = {
@@ -86,7 +86,7 @@ private fun HelloScreenUi(
                     }
                 )
                 WeNavigationBarItem(
-                    imageVector = WeIcons.Widget,
+                    unSelectImageVector = WeIcons.Widget,
                     title = stringResource(id = R.string.string_hello_screen_navigation_widget),
                     selected = pagerState.currentPage == HelloSelectEnum.WIDGET.ordinal,
                     onClick = {
