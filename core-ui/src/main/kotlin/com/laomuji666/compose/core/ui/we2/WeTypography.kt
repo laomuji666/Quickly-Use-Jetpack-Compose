@@ -22,52 +22,52 @@ val DefaultWeTypography = WeTypography(
     heading = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 22.sp,
-        color = WeColors.FontColorLight90
+        color = WeColors.FontColorLight90Alpha
     ),
     emTitle = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 17.sp,
-        color = WeColors.FontColorLight90
+        color = WeColors.FontColorLight90Alpha
     ),
     title = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 17.sp,
-        color = WeColors.FontColorLight90
+        color = WeColors.FontColorLight90Alpha
     ),
     emGroupTitle = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 15.sp,
-        color = WeColors.FontColorLight90
+        color = WeColors.FontColorLight90Alpha
     ),
     groupTitle = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = WeColors.FontColorLight50
+        color = WeColors.FontColorLight50Alpha
     ),
     groupBody = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 17.sp,
-        color = WeColors.FontColorLight50
+        color = WeColors.FontColorLight50Alpha
     ),
     text = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 17.sp,
-        color = WeColors.FontColorLight90
+        color = WeColors.FontColorLight90Alpha
     ),
     emDesc = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = WeColors.FontColorLight50
+        color = WeColors.FontColorLight50Alpha
     ),
     desc = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 14.sp,
-        color = WeColors.FontColorLight30
+        color = WeColors.FontColorLight30Alpha
     ),
     footnote = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp,
-        color = WeColors.FontColorLight30
+        color = WeColors.FontColorLight30Alpha
     )
 )
 

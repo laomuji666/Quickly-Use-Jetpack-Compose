@@ -76,7 +76,7 @@ fun WeSwitch(
             .height(height)
             .clip(CircleShape)
             .clickable { onClick() }
-            .background(if (checked) WeTheme.weColorScheme.primary else WeTheme.weColorScheme.secondary)
+            .background(if (checked) Color(0xFF07C160) else Color(0xFF000000).copy(alpha = 0.18f))
     ) {
         Spacer(modifier = Modifier
             .size(thumbSize)

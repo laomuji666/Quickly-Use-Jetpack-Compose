@@ -28,10 +28,10 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.widget.WeButton
-import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
-import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
+import com.laomuji666.compose.core.ui.we2.WeButton
+import com.laomuji666.compose.core.ui.we2.WeButtonColor
+import com.laomuji666.compose.core.ui.we2.WeButtonType
 import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
@@ -98,7 +98,7 @@ private fun FirebaseScreenSlot(
     onClick:()->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text, onClick = onClick)
+        WeButton(weButtonType = WeButtonType.BIG, weButtonColor = WeButtonColor.PRIMARY, text = text, onClick = onClick)
     }
 }
 

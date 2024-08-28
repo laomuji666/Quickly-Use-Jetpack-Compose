@@ -36,7 +36,7 @@ fun RowScope.WeNavigationBarItem(
     onClick: () -> Unit,
     imageVector: ImageVector? = null,
 ){
-    val color = if(selected) WeTheme.weColorScheme.primary else WeTheme.weColorScheme.onBackgroundColor
+    val color = if(selected) WeTheme.weColorScheme.onBackgroundColor else WeTheme.weColorScheme.onBackgroundColor
     Column(
         modifier = Modifier
             .weight(1f)

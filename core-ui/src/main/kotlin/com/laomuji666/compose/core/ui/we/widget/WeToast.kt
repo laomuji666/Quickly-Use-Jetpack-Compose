@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -56,7 +57,7 @@ fun WeToast(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .clip(RoundedCornerShape(WeTheme.weDimens.roundedCornerDp))
-                    .background(WeTheme.weColorScheme.tertiary)
+                    .background(Color(0xFF000000).copy(alpha = 0.18f))
                     .size(WeTheme.weDimens.toastSize),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center

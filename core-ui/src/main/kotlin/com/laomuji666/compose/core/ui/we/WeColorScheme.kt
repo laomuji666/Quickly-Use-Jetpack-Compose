@@ -15,10 +15,6 @@ data class WeColorScheme (
     val indicationColor:Color = Color.Black.copy(alpha = 0.3f),
     val indicationBlendMode: BlendMode = DefaultTintBlendMode,
     val error: Color = Color(0xFFFA5151),
-    val primary: Color = Color(0xFF07C160),
-    val secondary: Color = Color(0xFFE5E5E5),
-    val tertiary: Color = Color(0xFF000000).copy(alpha = 0.18f),
-    val onPrimary: Color = Color(0xFFFFFFFF).copy(alpha = 0.9f),
     val popMenuBackgroundColor: Color,
     val onPopMenuBackgroundColor: Color = Color(0xFFFFFFFF).copy(alpha = 0.9f),
 )

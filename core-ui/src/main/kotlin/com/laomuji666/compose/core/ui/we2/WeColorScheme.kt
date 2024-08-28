@@ -4,18 +4,39 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
 data class WeColorScheme (
+    val backgroundColor: Color,
     val topNavigationBarBackgroundColor: Color,
     val fontColor90: Color,
+    val primaryButton: Color,
+    val onPrimaryButton: Color,
+    val secondaryButton: Color,
+    val onSecondaryButton: Color,
+    val tertiaryButton: Color,
+    val onTertiaryButton: Color,
 )
 
 val LightWeColorScheme = WeColorScheme(
+    backgroundColor = WeColors.White100,
     topNavigationBarBackgroundColor = WeColors.White100,
-    fontColor90  = WeColors.FontColorLight90
+    fontColor90  = WeColors.FontColorLight90Alpha,
+    primaryButton = WeColors.Brand100,
+    onPrimaryButton = WeColors.White100,
+    secondaryButton = WeColors.White97,
+    onSecondaryButton = WeColors.Brand100,
+    tertiaryButton = WeColors.White97,
+    onTertiaryButton = WeColors.Brand100
 )
 
 val DarkWeColorScheme = WeColorScheme(
+    backgroundColor = WeColors.Dark100,
     topNavigationBarBackgroundColor = WeColors.Dark20,
-    fontColor90 = WeColors.FontColorDark90
+    fontColor90 = WeColors.FontColorDark90Alpha,
+    primaryButton = WeColors.Brand100,
+    onPrimaryButton = WeColors.Dark100,
+    secondaryButton = WeColors.White97,
+    onSecondaryButton = WeColors.Brand100,
+    tertiaryButton = WeColors.FontColorDark15Alpha,
+    onTertiaryButton = WeColors.Brand100
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

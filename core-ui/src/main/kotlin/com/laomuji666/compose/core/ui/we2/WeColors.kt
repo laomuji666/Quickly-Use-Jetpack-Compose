@@ -5,6 +5,7 @@ import androidx.compose.ui.graphics.Color
 object WeColors{
     val Dark100 = Color(0xFF000000)
     val Dark20 = Color(0xFF333333)
+
     val White93 = Color(0xFFEDEDED)
     val White97 = Color(0xFFF7F7F7)
     val White100 = Color(0xFFFFFFFF)
@@ -69,8 +70,9 @@ object WeColors{
     val Link120 = Color(0xFF7989AA)
     val Link170 = Color(0xFFCCD2DF)
 
-    val FontColorLight90 = Color(0xFF000000).copy(alpha = 0.9f)
-    val FontColorLight50 = Color(0xFF000000).copy(alpha = 0.5f)
-    val FontColorLight30 = Color(0xFF000000).copy(alpha = 0.3f)
-    val FontColorDark90 = Color(0xFFFFFFFF).copy(alpha = 0.9f)
+    val FontColorLight90Alpha = Color(0xFF000000).copy(alpha = 0.9f)
+    val FontColorLight50Alpha  = Color(0xFF000000).copy(alpha = 0.5f)
+    val FontColorLight30Alpha  = Color(0xFF000000).copy(alpha = 0.3f)
+    val FontColorDark90Alpha  = Color(0xFFFFFFFF).copy(alpha = 0.9f)
+    val FontColorDark15Alpha = Color(0xFFFFFFFF).copy(alpha = 0.15f)
 }

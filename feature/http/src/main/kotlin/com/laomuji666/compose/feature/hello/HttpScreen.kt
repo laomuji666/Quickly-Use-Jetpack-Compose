@@ -17,12 +17,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.view.ErrorView
 import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.widget.WeButton
-import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
-import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
+import com.laomuji666.compose.core.ui.we2.WeButton
+import com.laomuji666.compose.core.ui.we2.WeButtonColor
+import com.laomuji666.compose.core.ui.we2.WeButtonType
 import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
@@ -93,7 +93,7 @@ private fun HttpScreenSlot(
     onClick:()->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text) {
+        WeButton(weButtonType = WeButtonType.BIG, weButtonColor = WeButtonColor.PRIMARY, text = text) {
             onClick()
         }
     }
