@@ -23,7 +23,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -68,7 +68,7 @@ private fun HttpScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopBar(
+            WeTopNavigationBar(
                 title = stringResource(id = R.string.string_hello_screen_http_demo),
                 onBackClick = onBackClick
             )

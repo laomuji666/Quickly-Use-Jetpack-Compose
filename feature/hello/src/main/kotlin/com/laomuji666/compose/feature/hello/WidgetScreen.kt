@@ -23,7 +23,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -42,7 +42,7 @@ private fun WidgetScreenUi(){
 
     WeScaffold(
         topBar = {
-            WeTopBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
+            WeTopNavigationBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
         }
     ) {
         ToastWidget()

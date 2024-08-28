@@ -24,7 +24,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -129,7 +129,7 @@ private fun Example(
 ){
     WeScaffold(
         topBar = {
-            WeTopBar(title = stringResource(id = R.string.string_hello_screen_navigation_example))
+            WeTopNavigationBar(title = stringResource(id = R.string.string_hello_screen_navigation_example))
         }
     ) {
         WeTableClickRow(

@@ -23,9 +23,9 @@ import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WePopMenu
 import com.laomuji666.compose.core.ui.we.widget.WePopMenuItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
-import com.laomuji666.compose.core.ui.we.widget.WeTopBarAction
-import com.laomuji666.compose.core.ui.we.widget.WeTopBarActionSpace
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBarAction
+import com.laomuji666.compose.core.ui.we2.WeTopNavigationBarSpace
 import com.laomuji666.compose.feature.chat.icons.Contact
 import com.laomuji666.compose.feature.chat.icons.Me
 import com.laomuji666.compose.feature.chat.icons.Message
@@ -107,14 +107,14 @@ private fun AiChatScreenUi(){
 private fun TopBar(
     onMenuClick:()->Unit
 ){
-    WeTopBar(
+    WeTopNavigationBar(
         title = stringResource(id = R.string.string_ai_chat_screen_navigation_title),
         actions = {
-            WeTopBarAction(
+            WeTopNavigationBarAction(
                 imageVector = WeIcons.TopBarSearch
             )
-            WeTopBarActionSpace()
-            WeTopBarAction(
+            WeTopNavigationBarSpace()
+            WeTopNavigationBarAction(
                 imageVector = WeIcons.TopBarAdd,
                 onActionClick = onMenuClick
             )
