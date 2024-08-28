@@ -9,6 +9,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.IntOffset
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -49,6 +50,10 @@ class AnimatedScopeImpl: AnimatedScope {
 
 @Composable
 fun AnimatedSlide(scope:@Composable AnimatedScope.()->Unit, content:@Composable AnimatedScope.()->Unit){
+    if(LocalView.current.isInEditMode){
+        content(AnimatedScopeImpl())
+        return
+    }
     val animatedScopeImpl = remember { AnimatedScopeImpl() }
     animatedScopeImpl.scope()
     AnimatedVisibility(

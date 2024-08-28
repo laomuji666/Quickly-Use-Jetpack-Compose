@@ -1,49 +1,61 @@
 package com.laomuji666.compose.core.ui.we
 
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.DefaultTintBlendMode
 
 data class WeColorScheme (
-    val backgroundColor: Color,
-    val onBackgroundColor: Color,
-    val rowBackgroundColor: Color,
-    val onRowBackSecondaryColor: Color,
-    val outlineColor: Color,
-    val splitLineColor: Color,
-    val indicationColor:Color = Color.Black.copy(alpha = 0.3f),
-    val indicationBlendMode: BlendMode = DefaultTintBlendMode,
-    val error: Color = Color(0xFFFA5151),
-    val primary: Color = Color(0xFF07C160),
-    val secondary: Color = Color(0xFFE5E5E5),
-    val tertiary: Color = Color(0xFF000000).copy(alpha = 0.18f),
-    val onPrimary: Color = Color(0xFFFFFFFF).copy(alpha = 0.9f),
-    val popMenuBackgroundColor: Color,
-    val onPopMenuBackgroundColor: Color = Color(0xFFFFFFFF).copy(alpha = 0.9f),
-)
-val lightWeColorScheme = WeColorScheme(
-    backgroundColor = Color(0xFFEDEDED).copy(alpha = 0.9f),
-    onBackgroundColor = Color(0xFF000000).copy(alpha = 0.9f),
-    rowBackgroundColor = Color(0xFFFFFFFF),
-    onRowBackSecondaryColor = Color(0xFF000000).copy(alpha = 0.5f),
-    splitLineColor = Color(0xFFF2F2F2),
-    indicationColor = Color(0xFFEDEDED).copy(alpha = 0.9f),
-    indicationBlendMode = BlendMode.DstIn,
-    popMenuBackgroundColor = Color(0xFF4C4C4C),
-    outlineColor = Color(0xFFEDEDED).copy(alpha = 0.3f)
+    val background: Color,
+    val topNavigationBarBackgroundColor: Color,
+    val fontColor90: Color,
+    val fontColor50: Color,
+    val primaryButton: Color,
+    val onPrimaryButton: Color,
+    val secondaryButton: Color,
+    val onSecondaryButton: Color,
+    val tertiaryButton: Color,
+    val onTertiaryButton: Color,
+    val outline: Color,
+    val error: Color,
+    val navigationBar: Color,
+    val navigationBarSelect: Color,
+    val navigationBarUnSelect: Color,
+
 )
 
-val darkWeColorScheme = WeColorScheme(
-    backgroundColor = Color(0xFF111111),
-    onBackgroundColor = Color(0xFFFFFFFF).copy(alpha = 0.9f),
-    rowBackgroundColor = Color(0xFF191919),
-    onRowBackSecondaryColor = Color(0xFFFFFFFF).copy(alpha = 0.5f),
-    splitLineColor = Color(0xFF111111),
-    indicationColor = Color(0xFFEDEDED).copy(alpha = 0.06f),
-    indicationBlendMode = BlendMode.SrcOver,
-    popMenuBackgroundColor = Color(0xFF404040),
-    outlineColor = Color(0xFFEDEDED).copy(alpha = 0.05f)
+val LightWeColorScheme = WeColorScheme(
+    background = WeColors.White100,
+    topNavigationBarBackgroundColor = WeColors.White100,
+    fontColor90  = WeColors.FontColorLight90Alpha,
+    fontColor50 = WeColors.FontColorLight50Alpha,
+    primaryButton = WeColors.Brand100,
+    onPrimaryButton = WeColors.White100,
+    secondaryButton = WeColors.White97,
+    onSecondaryButton = WeColors.Brand100,
+    tertiaryButton = WeColors.White97,
+    onTertiaryButton = WeColors.Brand100,
+    outline = WeColors.White97,
+    error = WeColors.Red100,
+    navigationBar = WeColors.White100,
+    navigationBarSelect = WeColors.Brand100,
+    navigationBarUnSelect = WeColors.FontColorLight90Alpha
 )
 
-internal val LocalWeColorScheme = staticCompositionLocalOf { lightWeColorScheme }
+val DarkWeColorScheme = WeColorScheme(
+    background = WeColors.Dark100,
+    topNavigationBarBackgroundColor = WeColors.Dark20,
+    fontColor90 = WeColors.FontColorDark90Alpha,
+    fontColor50 = WeColors.FontColorDark50Alpha,
+    primaryButton = WeColors.Brand100,
+    onPrimaryButton = WeColors.Dark100,
+    secondaryButton = WeColors.White97,
+    onSecondaryButton = WeColors.Brand100,
+    tertiaryButton = WeColors.FontColorDark15Alpha,
+    onTertiaryButton = WeColors.Brand100,
+    outline = WeColors.Dark20,
+    error = WeColors.Red100,
+    navigationBar = WeColors.Dark100,
+    navigationBarSelect = WeColors.Brand100,
+    navigationBarUnSelect = WeColors.FontColorDark90Alpha
+)
+
+internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

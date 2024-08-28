@@ -19,10 +19,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
+import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Checked
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
 fun WeTableRadioRow(
@@ -31,16 +31,16 @@ fun WeTableRadioRow(
     onClick: ()->Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRow(
+    WeTableRowRow(
         start = {
             Text(
                 text = title,
-                style = WeTheme.weTypography.mediumText,
-                color = WeTheme.weColorScheme.onBackgroundColor
+                style = WeTheme.typography.title,
+                color = WeTheme.colorScheme.fontColor90
             )
         },
         end = {
-            Row(modifier = Modifier.size(WeTheme.weDimens.iconHeightDp)) {
+            Row(modifier = Modifier.size(WeTheme.dimens.tableIconSize)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(
@@ -87,7 +87,7 @@ private fun WeTableRadioColumn(
 @Composable
 fun PreviewWeTableRadioColumn(){
     var currentItem by remember { mutableIntStateOf(0) }
-    QuicklyTheme {
+    DefaultWeTheme {
         WeTableRadioColumn(
             titleList = listOf("item1", "item2", "item3", "item4"),
             currentItem = currentItem,

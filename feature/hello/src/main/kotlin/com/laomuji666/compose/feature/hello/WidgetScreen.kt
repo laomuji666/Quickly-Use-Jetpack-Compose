@@ -17,13 +17,11 @@ import com.laomuji666.compose.core.ui.we.widget.WeActionSheetRow
 import com.laomuji666.compose.core.ui.we.widget.WeActionSheetType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableCheckRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
-import com.laomuji666.compose.core.ui.we.widget.WeToast
-import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
@@ -42,7 +40,7 @@ private fun WidgetScreenUi(){
 
     WeScaffold(
         topBar = {
-            WeTopBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
+            WeTopNavigationBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
         }
     ) {
         ToastWidget()
@@ -59,15 +57,15 @@ private fun ToastWidget(){
 
     var showLoadingDialog by rememberSaveable { mutableStateOf(false) }
     if(showLoadingDialog){
-        WeToast(weToastType = WeToastType.LOADING)
+
     }
     var showDoneDialog by rememberSaveable { mutableStateOf(false) }
     if(showDoneDialog){
-        WeToast(weToastType = WeToastType.DONE)
+
     }
     var showErrorDialog by rememberSaveable { mutableStateOf(false) }
     if(showErrorDialog){
-        WeToast(weToastType = WeToastType.ERROR)
+
     }
     WeTableSwitchRow(
         title = stringResource(id = R.string.string_widget_screen_toast_title),
@@ -86,7 +84,7 @@ private fun ToastWidget(){
             WeTableRadioRow(
                 title = title,
                 checked = currentItem == index,
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
                 onClick = { currentItem = index }
             )
         }
@@ -148,25 +146,25 @@ private fun ActionSheetWidget(){
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item1),
         checked = checked1,
         onClick = { checked1 = !checked1 },
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item2),
         checked = checked2,
         onClick = { checked2 = !checked2 },
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item3),
         checked = checked3,
         onClick = { checked3 = !checked3 },
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
     WeTableCheckRow(
         title = stringResource(id = R.string.string_widget_screen_action_sheet_item4),
         checked = checked4,
         onClick = { checked4 = !checked4 },
-        weTableRowOutlineType = WeTableRowOutlineType.PADDING_START,
+        weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
     )
 
     WeTableClickRow(title = stringResource(id = R.string.string_widget_screen_show_action_sheet), onClick = {

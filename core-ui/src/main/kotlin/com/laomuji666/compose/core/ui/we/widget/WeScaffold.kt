@@ -23,7 +23,7 @@ fun WeScaffold(
     Box(modifier = Modifier.fillMaxSize()){
         Column(
             modifier = Modifier
-                .background(WeTheme.weColorScheme.backgroundColor)
+                .background(WeTheme.colorScheme.background)
                 .fillMaxSize()
         ) {
             topBar()
@@ -39,8 +39,8 @@ fun WeScaffold(
                 .align(Alignment.TopEnd)
                 .statusBarsPadding()
                 .padding(
-                    top = WeTheme.weDimens.topBarHeightDp,
-                    end = WeTheme.weDimens.paddingHorizontalDp / 2
+                    top = WeTheme.dimens.topNavigationBarHeight,
+                    end = WeTheme.dimens.topNavigationBarPaddingHorizontal / 2
                 )
         ) {
             topBarActionMenu()

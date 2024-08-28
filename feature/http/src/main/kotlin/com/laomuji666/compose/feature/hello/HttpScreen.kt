@@ -16,14 +16,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.view.ErrorView
+import com.laomuji666.compose.core.ui.view.LoadingDialog
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
-import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
+import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeToast
-import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -43,9 +42,7 @@ fun HttpScreen(
         return
     }
 
-    if(uiState.isLoading){
-        WeToast(weToastType = WeToastType.LOADING)
-    }
+    LoadingDialog(loading = uiState.isLoading)
 
     HttpScreenUi(
         responseText = uiState.responseText,
@@ -68,7 +65,7 @@ private fun HttpScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopBar(
+            WeTopNavigationBar(
                 title = stringResource(id = R.string.string_hello_screen_http_demo),
                 onBackClick = onBackClick
             )
@@ -83,7 +80,7 @@ private fun HttpScreenUi(
             text = stringResource(id = R.string.string_http_screen_post_demo),
             onClick = onClickSendPost
         )
-        Text(text = responseText, color = WeTheme.weColorScheme.onBackgroundColor)
+        Text(text = responseText, color = WeTheme.colorScheme.fontColor90)
     }
 }
 
@@ -93,7 +90,7 @@ private fun HttpScreenSlot(
     onClick:()->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text) {
+        WeButton(weButtonType = WeButtonType.BIG, weButtonColor = WeButtonColor.PRIMARY, text = text) {
             onClick()
         }
     }

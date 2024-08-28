@@ -19,9 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.animated.AnimatedSlide
+import com.laomuji666.compose.core.ui.we.DefaultWeTheme
+import com.laomuji666.compose.core.ui.we.WeTheme
 
 enum class WeActionSheetType{
     SUMMARY,
@@ -36,7 +36,7 @@ fun WeActionSheetRow(
     weActionSheetType: WeActionSheetType = WeActionSheetType.NORMAL,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRow(
+    WeTableRowRow(
         start = {
             Spacer(modifier = Modifier.weight(1f))
         },
@@ -45,22 +45,22 @@ fun WeActionSheetRow(
                 WeActionSheetType.SUMMARY -> {
                     Text(
                         text = text,
-                        style = WeTheme.weTypography.groupTitle,
-                        color = WeTheme.weColorScheme.onRowBackSecondaryColor
+                        style = WeTheme.typography.groupTitle,
+                        color = WeTheme.colorScheme.fontColor50
                     )
                 }
                 WeActionSheetType.NORMAL -> {
                     Text(
                         text = text,
-                        style = WeTheme.weTypography.mediumText,
-                        color = WeTheme.weColorScheme.onBackgroundColor
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColor90
                     )
                 }
                 WeActionSheetType.WRONG -> {
                     Text(
                         text = text,
-                        style = WeTheme.weTypography.mediumText,
-                        color = WeTheme.weColorScheme.error
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.error
                     )
                 }
             }
@@ -98,12 +98,10 @@ fun WeActionSheetDialog(
                     Column(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .clip(
-                                RoundedCornerShape(
-                                    topStart = WeTheme.weDimens.roundedCornerDp,
-                                    topEnd = WeTheme.weDimens.roundedCornerDp
-                                )
-                            )
+                            .clip(RoundedCornerShape(
+                                topStart = WeTheme.dimens.actionSheetRoundedCornerDp,
+                                topEnd = WeTheme.dimens.actionSheetRoundedCornerDp
+                            ))
                     ) {
                         content()
                         dismissText?.let{
@@ -126,7 +124,7 @@ fun PreviewWeActionSheetRow1(){
     var showDialog by remember {
         mutableStateOf(true)
     }
-    QuicklyTheme {
+    DefaultWeTheme {
         if(showDialog){
             WeActionSheetDialog(
                 onDismissRequest = { showDialog = false },
@@ -139,20 +137,20 @@ fun PreviewWeActionSheetRow1(){
                 )
                 WeActionSheetRow(
                     "操作一",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     "操作二",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     "操作三",
-                    weTableRowOutlineType = WeTableRowOutlineType.FULL
+                    weTableRowOutlineType = WeTableRowOutlineType.FULL,
                 )
                 WeActionSheetRow(
                     text = "警示操作",
                     weActionSheetType = WeActionSheetType.WRONG,
-                    weTableRowOutlineType = WeTableRowOutlineType.SPLIT
+                    weTableRowOutlineType = WeTableRowOutlineType.SPLIT,
                 )
             }
         }

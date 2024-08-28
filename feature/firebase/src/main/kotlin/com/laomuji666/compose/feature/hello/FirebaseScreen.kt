@@ -29,10 +29,10 @@ import com.google.accompanist.permissions.shouldShowRationale
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
-import com.laomuji666.compose.core.ui.we.widget.WeButtonSizeType
+import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -66,13 +66,13 @@ private fun FirebaseScreenUi(
 ){
     Column(
         modifier = Modifier
-            .background(WeTheme.weColorScheme.backgroundColor)
+            .background(WeTheme.colorScheme.background)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         WeScaffold(
             topBar = {
-                WeTopBar(
+                WeTopNavigationBar(
                     title = stringResource(id = R.string.string_hello_screen_firebase_demo),
                     onBackClick = onBackClick
                 )
@@ -98,7 +98,7 @@ private fun FirebaseScreenSlot(
     onClick:()->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.PRIMARY, weButtonSizeType = WeButtonSizeType.BIG, text = text, onClick = onClick)
+        WeButton(weButtonType = WeButtonType.BIG, weButtonColor = WeButtonColor.PRIMARY, text = text, onClick = onClick)
     }
 }
 
@@ -133,7 +133,7 @@ private fun FirebasePermissionSlot(
         }
     }
     if(hasPermission){
-        Text(text = pushToken, color = WeTheme.weColorScheme.onBackgroundColor)
+        Text(text = pushToken, color = WeTheme.colorScheme.fontColor90)
     }else{
         FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             isRequestPermission = true

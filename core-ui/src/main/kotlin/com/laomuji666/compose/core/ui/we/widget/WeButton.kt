@@ -5,10 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,137 +14,110 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeButton(
-    weButtonType: WeButtonType,
-    weButtonSizeType: WeButtonSizeType,
-    text: String,
-    onClick: ()->Unit
+    weButtonType: WeButtonType = WeButtonType.SMALL,
+    weButtonColor: WeButtonColor = WeButtonColor.PRIMARY,
+    text:String,
+    onClick:()->Unit
 ){
+    val buttonWidth = when(weButtonType){
+        WeButtonType.BIG -> WeTheme.dimens.bigButtonWidth
+        WeButtonType.SMALL -> WeTheme.dimens.smallButtonWidth
+    }
+    val buttonHeight = when(weButtonType){
+        WeButtonType.BIG -> WeTheme.dimens.bigButtonHeight
+        WeButtonType.SMALL -> WeTheme.dimens.smallButtonHeight
+    }
+    val buttonRoundedCornerDp = when(weButtonType){
+        WeButtonType.BIG -> WeTheme.dimens.bigButtonRoundedCornerDp
+        WeButtonType.SMALL -> WeTheme.dimens.smallButtonRoundedCornerDp
+    }
+    val buttonColor = when(weButtonColor) {
+        WeButtonColor.PRIMARY -> WeTheme.colorScheme.primaryButton
+        WeButtonColor.SECONDARY -> WeTheme.colorScheme.secondaryButton
+        WeButtonColor.TERTIARY -> WeTheme.colorScheme.tertiaryButton
+    }
+    val textColor = when(weButtonColor){
+        WeButtonColor.PRIMARY -> WeTheme.colorScheme.onPrimaryButton
+        WeButtonColor.SECONDARY -> WeTheme.colorScheme.onSecondaryButton
+        WeButtonColor.TERTIARY -> WeTheme.colorScheme.onTertiaryButton
+    }
     Row(
         modifier = Modifier
-            .clip(RoundedCornerShape(WeTheme.weDimens.buttonRoundedCornerDp))
-            .background(
-                if (weButtonType == WeButtonType.PRIMARY) {
-                    WeTheme.weColorScheme.primary
-                } else {
-                    WeTheme.weColorScheme.secondary
-                }
-            )
-            .width(
-                when (weButtonSizeType) {
-                    WeButtonSizeType.SMALL -> WeTheme.weDimens.smallButtonWidthDp
-                    WeButtonSizeType.BIG -> WeTheme.weDimens.bigButtonWidthDp
-                }
-            )
-            .height(
-                when (weButtonSizeType) {
-                    WeButtonSizeType.SMALL -> WeTheme.weDimens.smallButtonHeightDp
-                    WeButtonSizeType.BIG -> WeTheme.weDimens.bigButtonHeightDp
-                }
-            )
+            .clip(RoundedCornerShape(buttonRoundedCornerDp))
+            .defaultMinSize(minWidth = buttonWidth, minHeight = buttonHeight)
             .clickable { onClick() }
-        ,
-        horizontalArrangement = Arrangement.Center,
+            .background(buttonColor),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ) {
         Text(
             text = text,
-            style = when(weButtonSizeType){
-                WeButtonSizeType.SMALL -> WeTheme.weTypography.smallText
-                WeButtonSizeType.BIG -> WeTheme.weTypography.mediumText
-            },
-            color = when(weButtonType){
-                WeButtonType.PRIMARY -> WeTheme.weColorScheme.onPrimary
-                WeButtonType.SECONDARY -> WeTheme.weColorScheme.primary
-                WeButtonType.DISABLE -> WeTheme.weColorScheme.tertiary
-                WeButtonType.WRONG -> WeTheme.weColorScheme.error
-            }
+            style = WeTheme.typography.emTitle,
+            color = textColor
         )
     }
 }
 
 enum class WeButtonType{
-    PRIMARY,
-    SECONDARY,
-    DISABLE,
-    WRONG
+    BIG,
+    SMALL
 }
 
-enum class WeButtonSizeType{
-    SMALL,
-    BIG
+enum class WeButtonColor{
+    PRIMARY,
+    SECONDARY,
+    TERTIARY
 }
 
 @PreviewLightDark
 @Composable
-fun PreviewWeButton1(){
-    QuicklyTheme {
-        Row(modifier = Modifier.background(WeTheme.weColorScheme.backgroundColor)) {
-            Column(modifier = Modifier.padding(20.dp),horizontalAlignment = Alignment.CenterHorizontally) {
-                WeButton(
-                    weButtonType = WeButtonType.PRIMARY,
-                    weButtonSizeType = WeButtonSizeType.BIG,
-                    text = "强调按钮",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.SECONDARY,
-                    weButtonSizeType = WeButtonSizeType.BIG,
-                    text = "强调按钮",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.DISABLE,
-                    weButtonSizeType = WeButtonSizeType.BIG,
-                    text = "强调按钮",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.WRONG,
-                    weButtonSizeType = WeButtonSizeType.BIG,
-                    text = "强调按钮",
-                    onClick = {}
-                )
-            }
-
-            Column(modifier = Modifier.padding(20.dp),horizontalAlignment = Alignment.CenterHorizontally) {
-                WeButton(
-                    weButtonType = WeButtonType.PRIMARY,
-                    weButtonSizeType = WeButtonSizeType.SMALL,
-                    text = "完成",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.SECONDARY,
-                    weButtonSizeType = WeButtonSizeType.SMALL,
-                    text = "完成",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.DISABLE,
-                    weButtonSizeType = WeButtonSizeType.SMALL,
-                    text = "失效",
-                    onClick = {}
-                )
-                Spacer(modifier = Modifier.height(20.dp))
-                WeButton(
-                    weButtonType = WeButtonType.WRONG,
-                    weButtonSizeType = WeButtonSizeType.SMALL,
-                    text = "警示",
-                    onClick = {}
-                )
-            }
+fun PreviewWeButton(){
+    DefaultWeTheme{
+        Column(
+            modifier = Modifier.fillMaxWidth().background(WeTheme.colorScheme.background),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            WeButton(
+                weButtonType = WeButtonType.BIG,
+                weButtonColor = WeButtonColor.PRIMARY,
+                text = "完成",
+                onClick = {}
+            )
+            WeButton(
+                weButtonType = WeButtonType.BIG,
+                weButtonColor = WeButtonColor.SECONDARY,
+                text = "取消",
+                onClick = {}
+            )
+            WeButton(
+                weButtonType = WeButtonType.BIG,
+                weButtonColor = WeButtonColor.TERTIARY,
+                text = "取消",
+                onClick = {}
+            )
+            WeButton(
+                weButtonType = WeButtonType.SMALL,
+                weButtonColor = WeButtonColor.PRIMARY,
+                text = "完成",
+                onClick = {}
+            )
+            WeButton(
+                weButtonType = WeButtonType.SMALL,
+                weButtonColor = WeButtonColor.SECONDARY,
+                text = "取消",
+                onClick = {}
+            )
+            WeButton(
+                weButtonType = WeButtonType.SMALL,
+                weButtonColor = WeButtonColor.TERTIARY,
+                text = "取消",
+                onClick = {}
+            )
         }
-
     }
 }
