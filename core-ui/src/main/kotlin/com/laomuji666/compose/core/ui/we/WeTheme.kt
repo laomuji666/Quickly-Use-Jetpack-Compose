@@ -52,7 +52,7 @@ fun WeTheme(
             fontScale = LocalDensity.current.fontScale
         ) else LocalDensity.current,
         LocalIndication provides remember {
-            WeIndication()
+            WeIndication(weColorScheme.pressed)
         },
         LocalWeColorScheme provides weColorScheme,
         LocalWeDimens provides weDimens,
@@ -80,12 +80,15 @@ object WeTheme{
         get() = LocalWeTypography.current
 }
 
-class WeIndication : Indication {
+class WeIndication(
+    private val pressedColor: Color
+) : Indication {
     private class DefaultDebugIndicationInstance(
         private val isPressed: State<Boolean>,
         private val isHovered: State<Boolean>,
         private val isFocused: State<Boolean>,
         private val isDragged: State<Boolean>,
+        val pressedColor: Color
     ) : IndicationInstance {
         override fun ContentDrawScope.drawIndication() {
             drawContent()
@@ -94,9 +97,9 @@ class WeIndication : Indication {
                 return
             }
             if (isPressed.value) {
-                drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
+                drawRect(color = pressedColor, size = size)
             } else if (isHovered.value || isFocused.value) {
-                drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
+                drawRect(color = pressedColor, size = size)
             }
         }
     }
@@ -108,7 +111,7 @@ class WeIndication : Indication {
         val isFocused = interactionSource.collectIsFocusedAsState()
         val isDragged = interactionSource.collectIsDraggedAsState()
         return remember(interactionSource) {
-            DefaultDebugIndicationInstance(isPressed, isHovered, isFocused, isDragged)
+            DefaultDebugIndicationInstance(isPressed, isHovered, isFocused, isDragged, pressedColor)
         }
     }
 }

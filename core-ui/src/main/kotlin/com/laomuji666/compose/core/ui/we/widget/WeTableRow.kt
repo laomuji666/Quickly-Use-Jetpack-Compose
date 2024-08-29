@@ -17,7 +17,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -47,6 +46,7 @@ fun WeTableRow(
         }
     }
     var showPress by remember  { mutableStateOf(false) }
+    val pressColor = WeTheme.colorScheme.pressed
     Column(modifier = Modifier.background(WeTheme.colorScheme.tableRowBackground)
         .pointerInput(Unit){
             if(showClickIndication){
@@ -65,7 +65,7 @@ fun WeTableRow(
         .drawWithContent {
             drawContent()
             if (showPress) {
-                drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
+                drawRect(color = pressColor, size = size)
             }
         }
     ){

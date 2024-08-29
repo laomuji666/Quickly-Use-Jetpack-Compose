@@ -1,6 +1,7 @@
 package com.laomuji666.compose.core.ui.we.widget
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -93,16 +94,23 @@ fun WeActionSheetDialog(
                 }
                 Box(
                     modifier = Modifier
-                        .clickable { dismissRequest() }
+                        .clickable(
+                            interactionSource = remember {
+                                MutableInteractionSource()
+                            },
+                            indication = null
+                        ) { dismissRequest() }
                         .fillMaxSize()
                 ){
                     Column(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
-                            .clip(RoundedCornerShape(
-                                topStart = WeTheme.dimens.actionSheetRoundedCornerDp,
-                                topEnd = WeTheme.dimens.actionSheetRoundedCornerDp
-                            ))
+                            .clip(
+                                RoundedCornerShape(
+                                    topStart = WeTheme.dimens.actionSheetRoundedCornerDp,
+                                    topEnd = WeTheme.dimens.actionSheetRoundedCornerDp
+                                )
+                            )
                     ) {
                         content()
                         dismissText?.let{

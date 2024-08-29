@@ -56,7 +56,7 @@ private fun WidgetScreenUi(){
 @Composable
 private fun ToastWidget(){
     val coroutineScope = rememberCoroutineScope()
-    var isEnable by rememberSaveable { mutableStateOf(true) }
+    var isEnable by rememberSaveable { mutableStateOf(false) }
     val titleList = listOf(stringResource(id = R.string.string_toast_loading), stringResource(id = R.string.string_toast_done), stringResource(id = R.string.string_toast_error))
     var currentItem by rememberSaveable { mutableIntStateOf(0) }
 

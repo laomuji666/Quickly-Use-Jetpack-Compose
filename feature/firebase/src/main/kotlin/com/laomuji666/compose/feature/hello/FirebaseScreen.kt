@@ -1,10 +1,8 @@
 package com.laomuji666.compose.feature.hello
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
@@ -64,31 +62,24 @@ private fun FirebaseScreenUi(
     updatePushToken:()->Unit,
     testCrashlytics:()->Unit
 ){
-    Column(
-        modifier = Modifier
-            .background(WeTheme.colorScheme.background)
-            .fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        WeScaffold(
-            topBar = {
-                WeTopNavigationBar(
-                    title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-                    onBackClick = onBackClick
-                )
-            }
-        ){
-            Spacer(modifier = Modifier.height(20.dp))
-            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
-            Spacer(modifier = Modifier.height(20.dp))
-            FirebasePermissionSlot(
-                pushToken = uiState.pushToken,
-                updatePushToken = updatePushToken
+    WeScaffold(
+        topBar = {
+            WeTopNavigationBar(
+                title = stringResource(id = R.string.string_hello_screen_firebase_demo),
+                onBackClick = onBackClick
             )
-            Spacer(modifier = Modifier.height(20.dp))
-            FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
-
         }
+    ){
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_log_event), onClick = logEventClick)
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebasePermissionSlot(
+            pushToken = uiState.pushToken,
+            updatePushToken = updatePushToken
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_crush), onClick = testCrashlytics)
+
     }
 }
 
