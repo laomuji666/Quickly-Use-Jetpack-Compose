@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.util.Toast
+import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
@@ -38,6 +39,15 @@ fun HelloScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
+
+    val selectMobile = selectMobileLauncher(
+        onSuccess = {
+            Toast.showText(context, it)
+        },
+        onFail = {
+            Toast.showText(context, "取消")
+        }
+    )
     HelloScreenUi(
         uiState = uiState,
         onFirebaseClick = onFirebaseClick,
@@ -54,6 +64,9 @@ fun HelloScreen(
                 }
             )
         },
+        onSelectMobileClick = {
+            selectMobile()
+        },
         onAiChatClick = onAiChatClick
     )
 }
@@ -65,6 +78,7 @@ private fun HelloScreenUi(
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit,
+    onSelectMobileClick:()->Unit,
     onAiChatClick:()->Unit
 ){
     val pagerState = rememberPagerState(
@@ -108,6 +122,7 @@ private fun HelloScreenUi(
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
                     onGoogleLoginClick = onGoogleLoginClick,
+                    onSelectMobileClick = onSelectMobileClick,
                     onAiChatClick = onAiChatClick
                 )
             }
@@ -124,6 +139,7 @@ private fun Example(
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit,
+    onSelectMobileClick:()->Unit,
     onAiChatClick:()->Unit
 ){
     WeScaffold(
@@ -151,9 +167,13 @@ private fun Example(
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
         WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_ai_chat),
-            onClick = onAiChatClick,
+            title = stringResource(id = R.string.string_hello_screen_select_mobile_demo),
+            onClick = onSelectMobileClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_ai_chat),
+            onClick = onAiChatClick
         )
     }
 }
@@ -167,6 +187,7 @@ fun PreviewHelloScreenUi(){
             onFirebaseClick = {},
             onHttpClick = {},
             onGoogleLoginClick = {},
+            onSelectMobileClick = {},
             onAiChatClick = {}
         )
     }

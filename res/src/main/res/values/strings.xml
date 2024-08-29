@@ -16,6 +16,7 @@
     <string name="string_hello_screen_firebase_demo">Firebase例子</string>
     <string name="string_hello_screen_http_demo">Ktor Http例子</string>
     <string name="string_hello_screen_google_login_demo">谷歌登录例子</string>
+    <string name="string_hello_screen_select_mobile_demo">选择手机号例子</string>
     <string name="string_hello_screen_ai_chat">AI聊天</string>
 
 <!--  HttpScreen  -->
