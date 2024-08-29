@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -59,6 +60,7 @@ fun RowScope.WeNavigationBarItem(
                     imageVector = it,
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
+                    colorFilter = ColorFilter.tint(color),
                     modifier = Modifier.height(WeTheme.dimens.navigationBarIconSize)
                 )
             }
@@ -68,6 +70,7 @@ fun RowScope.WeNavigationBarItem(
                     imageVector = it,
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
+                    colorFilter = ColorFilter.tint(color),
                     modifier = Modifier.height(WeTheme.dimens.navigationBarIconSize)
                 )
             }
@@ -85,13 +88,19 @@ fun RowScope.WeNavigationBarItem(
 fun WeNavigationBar(
     content: @Composable RowScope.() -> Unit
 ){
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(WeTheme.colorScheme.navigationBar)
-            .height(WeTheme.dimens.navigationBarHeight)
-    ) {
-        content()
+    Column {
+        WeTableRowOutline(
+            color = WeTheme.colorScheme.navigationBarOutline,
+            weTableRowOutlineType = WeTableRowOutlineType.FULL
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(WeTheme.colorScheme.navigationBarBackground)
+                .height(WeTheme.dimens.navigationBarHeight)
+        ) {
+            content()
+        }
     }
 }
 

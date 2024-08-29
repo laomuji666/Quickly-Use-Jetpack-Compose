@@ -1,6 +1,8 @@
 package com.laomuji666.compose.feature.hello
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -9,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
@@ -36,15 +39,41 @@ fun WidgetScreen(){
 
 @Composable
 private fun WidgetScreenUi(){
-
-
     WeScaffold(
         topBar = {
             WeTopNavigationBar(title = stringResource(id = R.string.string_hello_screen_navigation_widget))
         }
     ) {
-        ToastWidget()
-        ActionSheetWidget()
+        Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
+            WeTableClickRow(
+                title = "账号与安全",
+                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
+            )
+            WeTableClickRow(
+                title = "青少年模式",
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+            )
+            WeTableClickRow(
+                title = "关怀模式",
+                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
+            )
+            WeTableClickRow(
+                title = "新消息通知",
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+            )
+            WeTableClickRow(
+                title = "聊天",
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+            )
+            WeTableClickRow(
+                title = "通用",
+                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
+            )
+
+
+            ToastWidget()
+            ActionSheetWidget()
+        }
     }
 }
 

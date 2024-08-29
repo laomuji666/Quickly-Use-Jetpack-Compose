@@ -34,7 +34,7 @@ data class WeDimens(
 )
 
 val DefaultWeDimens = WeDimens(
-    topNavigationBarHeight = 56.dp,
+    topNavigationBarHeight = 44.dp,
     topNavigationBarPaddingHorizontal = 10.dp,
     topNavigationBarActionWidth = 90.dp,
     topNavigationBarIconSize = 24.dp,
@@ -47,14 +47,14 @@ val DefaultWeDimens = WeDimens(
     smallButtonHeight = 40.dp,
     smallButtonRoundedCornerDp = 4.dp,
 
-    listSingleRowHeight = 56.dp,
+    listSingleRowHeight = 54.dp,
     listDoubleRowHeight = 80.dp,
     listPaddingHorizontal = 16.dp,
 
     actionSheetRoundedCornerDp = 12.dp,
 
-    navigationBarIconSize = 28.dp,
-    navigationBarHeight = 56.dp,
+    navigationBarIconSize = 26.dp,
+    navigationBarHeight = 52.dp,
 
     tableIconSize = 24.dp,
 
