@@ -27,7 +27,7 @@ fun WeTableCheckRow(
     onClick: ()->Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRowRow(
+    WeTableRow(
         start = {
             Image(
                 imageVector = if(checked) WeIcons.Select else WeIcons.Unselect,
@@ -43,6 +43,7 @@ fun WeTableCheckRow(
             )
         },
         onClick = onClick,
+        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

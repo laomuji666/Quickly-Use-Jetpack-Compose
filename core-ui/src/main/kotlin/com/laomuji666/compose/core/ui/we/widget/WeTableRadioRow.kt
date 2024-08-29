@@ -31,7 +31,7 @@ fun WeTableRadioRow(
     onClick: ()->Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRowRow(
+    WeTableRow(
         start = {
             Text(
                 text = title,
@@ -59,6 +59,7 @@ fun WeTableRadioRow(
             }
         },
         onClick = onClick,
+        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

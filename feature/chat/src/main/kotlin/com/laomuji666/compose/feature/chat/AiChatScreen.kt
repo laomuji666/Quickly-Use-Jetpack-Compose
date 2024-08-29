@@ -13,20 +13,23 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Add
+import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
+import com.laomuji666.compose.core.ui.we.icons.ChatsUnselect
+import com.laomuji666.compose.core.ui.we.icons.ContactsSelect
+import com.laomuji666.compose.core.ui.we.icons.ContactsUnselect
+import com.laomuji666.compose.core.ui.we.icons.MeSelect
+import com.laomuji666.compose.core.ui.we.icons.MeUnselect
 import com.laomuji666.compose.core.ui.we.icons.Search
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarSpace
-import com.laomuji666.compose.feature.chat.icons.Contact
-import com.laomuji666.compose.feature.chat.icons.Me
-import com.laomuji666.compose.feature.chat.icons.Message
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -67,8 +70,7 @@ private fun AiChatScreenUi(){
     ) {
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize(),
-            userScrollEnabled = false
+            modifier = Modifier.fillMaxSize()
         ) {
 
         }
@@ -109,7 +111,8 @@ private fun BottomBar(
                     pagerState.scrollToPage(AiScreenSelectEnum.MESSAGE.ordinal)
                 }
             },
-            unSelectImageVector = WeIcons.Message
+            unSelectImageVector = WeIcons.ChatsUnselect,
+            selectImageVector = WeIcons.ChatsSelect
         )
         WeNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
@@ -119,7 +122,8 @@ private fun BottomBar(
                     pagerState.scrollToPage(AiScreenSelectEnum.CONTACT.ordinal)
                 }
             },
-            unSelectImageVector = WeIcons.Contact
+            unSelectImageVector = WeIcons.ContactsUnselect,
+            selectImageVector = WeIcons.ContactsSelect
         )
         WeNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_me),
@@ -129,13 +133,14 @@ private fun BottomBar(
                     pagerState.scrollToPage(AiScreenSelectEnum.ME.ordinal)
                 }
             },
-            unSelectImageVector = WeIcons.Me
+            unSelectImageVector = WeIcons.MeUnselect,
+            selectImageVector = WeIcons.MeSelect
         )
     }
 }
 
 
-@Preview
+@PreviewLightDark
 @Composable
 fun PreviewAiChatScreenUi(){
     QuicklyTheme {

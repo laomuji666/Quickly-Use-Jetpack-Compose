@@ -4,12 +4,12 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.laomuji666.compose.core.ui.navOptionsRemoveAll
+import com.laomuji666.compose.core.ui.navOptionsPushBack
 
 
 const val AI_CHAT_SCREEN = "AI_CHAT_SCREEN"
 
-fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsRemoveAll()){
+fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack(this)){
     navigate(AI_CHAT_SCREEN, navOptions)
 }
 

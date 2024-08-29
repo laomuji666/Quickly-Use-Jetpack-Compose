@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.Color
 
 data class WeColorScheme (
     val background: Color,
-    val topNavigationBarBackgroundColor: Color,
+    val topNavigationBarBackground: Color,
     val fontColor90: Color,
     val fontColor50: Color,
     val primaryButton: Color,
@@ -16,46 +16,48 @@ data class WeColorScheme (
     val onTertiaryButton: Color,
     val outline: Color,
     val error: Color,
-    val navigationBar: Color,
+    val navigationBarBackground: Color,
     val navigationBarSelect: Color,
     val navigationBarUnSelect: Color,
-
+    val navigationBarOutline: Color
 )
 
 val LightWeColorScheme = WeColorScheme(
-    background = WeColors.White100,
-    topNavigationBarBackgroundColor = WeColors.White100,
-    fontColor90  = WeColors.FontColorLight90Alpha,
-    fontColor50 = WeColors.FontColorLight50Alpha,
-    primaryButton = WeColors.Brand100,
-    onPrimaryButton = WeColors.White100,
-    secondaryButton = WeColors.White97,
-    onSecondaryButton = WeColors.Brand100,
-    tertiaryButton = WeColors.White97,
-    onTertiaryButton = WeColors.Brand100,
-    outline = WeColors.White97,
-    error = WeColors.Red100,
-    navigationBar = WeColors.White100,
-    navigationBarSelect = WeColors.Brand100,
-    navigationBarUnSelect = WeColors.FontColorLight90Alpha
+    background = WeColors.Color_FFFFFFFF,
+    topNavigationBarBackground = WeColors.Color_FFEDEDED,
+    fontColor90  = WeColors.Color_FF000000_90,
+    fontColor50 = WeColors.Color_FF000000_50,
+    primaryButton = WeColors.Color_FF07C160,
+    onPrimaryButton = WeColors.Color_FFFFFFFF,
+    secondaryButton = WeColors.Color_FFF7F7F7,
+    onSecondaryButton = WeColors.Color_FF07C160,
+    tertiaryButton = WeColors.Color_FFF7F7F7,
+    onTertiaryButton = WeColors.Color_FF07C160,
+    outline = WeColors.Color_FFEDEDED,
+    error = WeColors.Color_FFFA5151,
+    navigationBarBackground = WeColors.Color_FFF7F7F7,
+    navigationBarSelect = WeColors.Color_FF07C160,
+    navigationBarUnSelect = WeColors.Color_FF000000_90,
+    navigationBarOutline = WeColors.Color_FF000000_05
 )
 
 val DarkWeColorScheme = WeColorScheme(
-    background = WeColors.Dark100,
-    topNavigationBarBackgroundColor = WeColors.Dark20,
-    fontColor90 = WeColors.FontColorDark90Alpha,
-    fontColor50 = WeColors.FontColorDark50Alpha,
-    primaryButton = WeColors.Brand100,
-    onPrimaryButton = WeColors.Dark100,
-    secondaryButton = WeColors.White97,
-    onSecondaryButton = WeColors.Brand100,
-    tertiaryButton = WeColors.FontColorDark15Alpha,
-    onTertiaryButton = WeColors.Brand100,
-    outline = WeColors.Dark20,
-    error = WeColors.Red100,
-    navigationBar = WeColors.Dark100,
-    navigationBarSelect = WeColors.Brand100,
-    navigationBarUnSelect = WeColors.FontColorDark90Alpha
+    background = WeColors.Color_FF000000,
+    topNavigationBarBackground = WeColors.Color_FF101010,
+    fontColor90 = WeColors.Color_FFFFFFFF_90,
+    fontColor50 = WeColors.Color_FFFFFFFF_50,
+    primaryButton = WeColors.Color_FF07C160,
+    onPrimaryButton = WeColors.Color_FF000000,
+    secondaryButton = WeColors.Color_FFF7F7F7,
+    onSecondaryButton = WeColors.Color_FF07C160,
+    tertiaryButton = WeColors.Color_FFFFFFFF_15,
+    onTertiaryButton = WeColors.Color_FF07C160,
+    outline = WeColors.Color_FF101010,
+    error = WeColors.Color_FFFA5151,
+    navigationBarBackground = WeColors.Color_FF1E1E1E,
+    navigationBarSelect = WeColors.Color_FF07C160,
+    navigationBarUnSelect = WeColors.Color_FFFFFFFF_90,
+    navigationBarOutline = WeColors.Color_FFFFFFFF_15
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

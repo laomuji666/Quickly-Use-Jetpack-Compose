@@ -25,7 +25,7 @@ fun WeTableClickRow(
     onClick:()->Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRowRow(
+    WeTableRow(
         start = {
             if(summaryInBottom){
                 Column {
@@ -69,7 +69,7 @@ fun WeTableClickRow(
                 modifier = Modifier.height(WeTheme.dimens.tableIconSize)
             )
         },
-        weTableRowRowType = if(summaryInBottom) WeTableRowRowType.DOUBLE else WeTableRowRowType.SINGLE,
+        weTableRowRowType = if(summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
         onClick = onClick,
         weTableRowOutlineType = weTableRowOutlineType
     )

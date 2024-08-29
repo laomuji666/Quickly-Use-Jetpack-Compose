@@ -40,7 +40,7 @@ fun WeTopNavigationBar(
 ){
     Row(
         modifier = Modifier
-            .background(WeTheme.colorScheme.topNavigationBarBackgroundColor)
+            .background(WeTheme.colorScheme.topNavigationBarBackground)
             .statusBarsPadding()
             .fillMaxWidth()
             .height(WeTheme.dimens.topNavigationBarHeight)

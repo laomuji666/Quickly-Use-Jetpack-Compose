@@ -36,7 +36,7 @@ fun WeActionSheetRow(
     weActionSheetType: WeActionSheetType = WeActionSheetType.NORMAL,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRowRow(
+    WeTableRow(
         start = {
             Spacer(modifier = Modifier.weight(1f))
         },
@@ -69,6 +69,7 @@ fun WeActionSheetRow(
             Spacer(modifier = Modifier.weight(1f))
         },
         onClick = onClick,
+        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

@@ -36,7 +36,7 @@ fun WeTableSwitchRow(
     onClick: ()->Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
 ){
-    WeTableRowRow(
+    WeTableRow(
         start = {
             Text(
                 text = title,

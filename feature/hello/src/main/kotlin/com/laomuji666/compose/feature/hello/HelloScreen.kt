@@ -100,8 +100,7 @@ private fun HelloScreenUi(
     ) {
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize(),
-            userScrollEnabled = false
+            modifier = Modifier.fillMaxSize()
         ) {
             if(it == HelloSelectEnum.EXAMPLE.ordinal){
                 Example(
