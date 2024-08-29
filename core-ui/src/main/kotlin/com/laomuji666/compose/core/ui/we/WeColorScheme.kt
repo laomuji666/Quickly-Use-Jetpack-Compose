@@ -28,6 +28,11 @@ data class WeColorScheme (
     val navigationBarOutline: Color,
     val toastBackgroundColor: Color,
     val onToastBackgroundColor: Color,
+
+    val switchSelectBackground: Color,
+    val switchUnSelectBackground: Color,
+
+    val tableRowBackground: Color
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -48,7 +53,7 @@ val LightWeColorScheme = WeColorScheme(
 
 
 
-    outline = WeColors.Color_FFEDEDED,
+    outline = WeColors.Color_FF000000_05,
     error = WeColors.Color_FFFA5151,
 
     navigationBarBackground = WeColors.Color_FFF7F7F7,
@@ -57,11 +62,16 @@ val LightWeColorScheme = WeColorScheme(
     navigationBarOutline = WeColors.Color_FF000000_05,
     toastBackgroundColor = WeColors.Color_FF4C4C4C_90,
     onToastBackgroundColor = WeColors.Color_FFFFFFFF_90,
+
+    switchSelectBackground = WeColors.Color_FF07C160,
+    switchUnSelectBackground = WeColors.Color_FF000000_05,
+
+    tableRowBackground = WeColors.Color_FFFFFFFF
 )
 
 val DarkWeColorScheme = WeColorScheme(
     background = WeColors.Color_FF000000,
-    topNavigationBarBackground = WeColors.Color_FF101010,
+    topNavigationBarBackground = WeColors.Color_FF111111,
 
     fontColor90 = WeColors.Color_FFFFFFFF_90,
     fontColor50 = WeColors.Color_FFFFFFFF_50,
@@ -76,7 +86,7 @@ val DarkWeColorScheme = WeColorScheme(
     onWrongButton = WeColors.Color_FFFA5151,
 
 
-    outline = WeColors.Color_FF101010,
+    outline = WeColors.Color_FFFFFFFF_05,
     error = WeColors.Color_FFFA5151,
 
 
@@ -85,7 +95,12 @@ val DarkWeColorScheme = WeColorScheme(
     navigationBarUnSelect = WeColors.Color_FFFFFFFF_90,
     navigationBarOutline = WeColors.Color_FFFFFFFF_15,
     toastBackgroundColor = WeColors.Color_FF4C4C4C_90,
-    onToastBackgroundColor = WeColors.Color_FFFFFFFF_90
+    onToastBackgroundColor = WeColors.Color_FFFFFFFF_90,
+
+    switchSelectBackground = WeColors.Color_FF07C160,
+    switchUnSelectBackground = WeColors.Color_FFFFFFFF_15,
+
+    tableRowBackground = WeColors.Color_FF191919
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

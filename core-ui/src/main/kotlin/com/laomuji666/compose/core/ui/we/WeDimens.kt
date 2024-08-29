@@ -34,7 +34,10 @@ data class WeDimens(
 
     val toastSize:Dp,
     val toastIconSize:Dp,
-    val toastDividerSize:Dp
+    val toastDividerSize:Dp,
+
+    val outlineHeight:Dp,
+    val outlineSplitHeight:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -67,7 +70,10 @@ val DefaultWeDimens = WeDimens(
 
     toastSize = 136.dp,
     toastIconSize = 40.dp,
-    toastDividerSize = 16.dp
+    toastDividerSize = 16.dp,
+
+    outlineHeight = 1.dp,
+    outlineSplitHeight = 8.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

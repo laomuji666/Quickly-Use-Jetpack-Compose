@@ -106,7 +106,6 @@ fun WeActionSheetDialog(
                     ) {
                         content()
                         dismissText?.let{
-                            WeTableRowOutline(weTableRowOutlineType = WeTableRowOutlineType.SPLIT)
                             WeActionSheetRow(
                                 text = it,
                                 onClick = dismissRequest

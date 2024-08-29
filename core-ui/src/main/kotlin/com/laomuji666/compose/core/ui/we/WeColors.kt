@@ -9,7 +9,8 @@ object WeColors{
     val Color_FF000000_10 = Color(0xFF000000).copy(alpha = 0.1f)
     val Color_FF000000_05 = Color(0xFF000000).copy(alpha = 0.05f)
 
-    val Color_FF101010 = Color(0xFF101010)
+    val Color_FF111111 = Color(0xFF111111)
+    val Color_FF191919 = Color(0xFF191919)
     val Color_FF1E1E1E = Color(0xFF1E1E1E)
 
     val Color_FF07C160 = Color(0xFF07C160)
@@ -22,6 +23,7 @@ object WeColors{
     val Color_FFFFFFFF_90 = Color(0xFFFFFFFF).copy(alpha = 0.9f)
     val Color_FFFFFFFF_50 = Color(0xFFFFFFFF).copy(alpha = 0.5f)
     val Color_FFFFFFFF_15 = Color(0xFFFFFFFF).copy(alpha = 0.15f)
+    val Color_FFFFFFFF_05 = Color(0xFFFFFFFF).copy(alpha = 0.05f)
 
     val Color_FF4C4C4C_90 = Color(0xFF4C4C4C).copy(alpha = 0.9f)
 }

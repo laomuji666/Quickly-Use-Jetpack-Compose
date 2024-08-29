@@ -2,12 +2,10 @@ package com.laomuji666.compose.core.ui.we.widget
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -37,60 +35,56 @@ fun WeTableRow(
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
 ){
     val rowHeight = when(weTableRowRowType){
-        WeTableRowType.SINGLE -> WeTheme.dimens.listSingleRowHeight
-        WeTableRowType.DOUBLE -> WeTheme.dimens.listDoubleRowHeight
+        WeTableRowType.SINGLE -> if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
+            WeTheme.dimens.listSingleRowHeight + WeTheme.dimens.outlineSplitHeight
+        }else{
+            WeTheme.dimens.listSingleRowHeight
+        }
+        WeTableRowType.DOUBLE -> if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
+            WeTheme.dimens.listDoubleRowHeight + WeTheme.dimens.outlineSplitHeight
+        }else{
+            WeTheme.dimens.listDoubleRowHeight
+        }
     }
     var showPress by remember  { mutableStateOf(false) }
-    Column(
-        modifier = Modifier.background(WeTheme.colorScheme.background)
-    ) {
-        Box(modifier = Modifier
-            .clickable {
-                onClick()
-            }
-            .pointerInput(Unit){
-                if(showClickIndication){
-                    detectPress(
-                        onPress = {
-                            showPress = true
-                        },
-                        onRelease = {
-                            showPress = false
-                        }
-                    )
-                }
-            }
-            .fillMaxWidth()
-            .height(rowHeight)
-            .drawWithContent {
-                drawContent()
-                if (showPress) {
-                    drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
-                }
-            }
-        ){
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(horizontal = WeTheme.dimens.listPaddingHorizontal),
-                verticalAlignment = Alignment.CenterVertically
-            ){
-                start()
-                center()
-                end()
-            }
-            if(weTableRowOutlineType != WeTableRowOutlineType.SPLIT){
-                WeTableRowOutline(
-                    modifier = Modifier.align(Alignment.BottomCenter),
-                    weTableRowOutlineType = weTableRowOutlineType
+    Column(modifier = Modifier.background(WeTheme.colorScheme.tableRowBackground)
+        .pointerInput(Unit){
+            if(showClickIndication){
+                detectPress(
+                    onPress = {
+                        showPress = true
+                    },
+                    onRelease = {
+                        showPress = false
+                    }
                 )
             }
         }
-        if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
-            WeTableRowOutline(
-                weTableRowOutlineType = weTableRowOutlineType
-            )
+        .fillMaxWidth()
+        .height(rowHeight)
+        .drawWithContent {
+            drawContent()
+            if (showPress) {
+                drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
+            }
         }
+    ){
+        Row(
+            modifier = Modifier
+                .clickable {
+                    onClick()
+                }
+                .weight(1f)
+                .padding(horizontal = WeTheme.dimens.listPaddingHorizontal),
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            start()
+            center()
+            end()
+        }
+        WeTableRowOutline(
+            weTableRowOutlineType = weTableRowOutlineType
+        )
     }
 
 }

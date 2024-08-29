@@ -47,32 +47,6 @@ private fun WidgetScreenUi(){
         }
     ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            WeTableClickRow(
-                title = "账号与安全",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-            WeTableClickRow(
-                title = "青少年模式",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "关怀模式",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-            WeTableClickRow(
-                title = "新消息通知",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "聊天",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "通用",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-
-
             ToastWidget()
             ActionSheetWidget()
         }
@@ -229,7 +203,8 @@ private fun ActionSheetWidget(){
             if(checked4){
                 WeActionSheetRow(
                     text = stringResource(id = R.string.string_widget_screen_action_sheet_item4),
-                    weActionSheetType = WeActionSheetType.WRONG
+                    weActionSheetType = WeActionSheetType.WRONG,
+                    weTableRowOutlineType = WeTableRowOutlineType.SPLIT
                 )
             }
         }

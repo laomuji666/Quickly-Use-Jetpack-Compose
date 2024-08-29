@@ -24,7 +24,7 @@ fun WeTableRowOutline(
         WeTableRowOutlineType.FULL -> {
             Spacer(
                 modifier = modifier
-                    .height(1.dp)
+                    .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
                     .background(color)
             )
@@ -32,7 +32,7 @@ fun WeTableRowOutline(
         WeTableRowOutlineType.SPLIT -> {
             Spacer(
                 modifier = modifier
-                    .height(8.dp)
+                    .height(WeTheme.dimens.outlineSplitHeight)
                     .fillMaxWidth()
                     .background(color)
             )
@@ -40,7 +40,7 @@ fun WeTableRowOutline(
         WeTableRowOutlineType.PADDING_HORIZONTAL -> {
             Spacer(
                 modifier = modifier
-                    .height(1.dp)
+                    .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
                     .padding(horizontal = WeTheme.dimens.listPaddingHorizontal)
                     .background(color)
@@ -49,7 +49,7 @@ fun WeTableRowOutline(
         WeTableRowOutlineType.PADDING_START -> {
             Spacer(
                 modifier = modifier
-                    .height(1.dp)
+                    .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
                     .padding(start = WeTheme.dimens.listPaddingHorizontal)
                     .background(color)
