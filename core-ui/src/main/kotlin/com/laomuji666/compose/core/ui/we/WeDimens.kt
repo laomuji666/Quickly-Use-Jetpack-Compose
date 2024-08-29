@@ -30,7 +30,11 @@ data class WeDimens(
     val tableIconSize:Dp,
 
     val switchIconWidth:Dp,
-    val switchIconHeight:Dp
+    val switchIconHeight:Dp,
+
+    val toastSize:Dp,
+    val toastIconSize:Dp,
+    val toastDividerSize:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -59,7 +63,11 @@ val DefaultWeDimens = WeDimens(
     tableIconSize = 24.dp,
 
     switchIconWidth = 50.dp,
-    switchIconHeight = 30.dp
+    switchIconHeight = 30.dp,
+
+    toastSize = 136.dp,
+    toastIconSize = 40.dp,
+    toastDividerSize = 16.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

@@ -19,7 +19,9 @@ data class WeColorScheme (
     val navigationBarBackground: Color,
     val navigationBarSelect: Color,
     val navigationBarUnSelect: Color,
-    val navigationBarOutline: Color
+    val navigationBarOutline: Color,
+    val toastBackgroundColor: Color,
+    val onToastBackgroundColor: Color,
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -38,7 +40,9 @@ val LightWeColorScheme = WeColorScheme(
     navigationBarBackground = WeColors.Color_FFF7F7F7,
     navigationBarSelect = WeColors.Color_FF07C160,
     navigationBarUnSelect = WeColors.Color_FF000000_90,
-    navigationBarOutline = WeColors.Color_FF000000_05
+    navigationBarOutline = WeColors.Color_FF000000_05,
+    toastBackgroundColor = WeColors.Color_FF4C4C4C_90,
+    onToastBackgroundColor = WeColors.Color_FFFFFFFF_90
 )
 
 val DarkWeColorScheme = WeColorScheme(
@@ -57,7 +61,9 @@ val DarkWeColorScheme = WeColorScheme(
     navigationBarBackground = WeColors.Color_FF1E1E1E,
     navigationBarSelect = WeColors.Color_FF07C160,
     navigationBarUnSelect = WeColors.Color_FFFFFFFF_90,
-    navigationBarOutline = WeColors.Color_FFFFFFFF_15
+    navigationBarOutline = WeColors.Color_FFFFFFFF_15,
+    toastBackgroundColor = WeColors.Color_FF4C4C4C_90,
+    onToastBackgroundColor = WeColors.Color_FFFFFFFF_90
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

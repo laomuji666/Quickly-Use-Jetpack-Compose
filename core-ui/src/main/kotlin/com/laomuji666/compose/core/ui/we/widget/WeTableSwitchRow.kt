@@ -51,6 +51,7 @@ fun WeTableSwitchRow(
             )
         },
         onClick = onClick,
+        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

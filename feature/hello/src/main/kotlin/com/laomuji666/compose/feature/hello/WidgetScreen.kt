@@ -20,10 +20,12 @@ import com.laomuji666.compose.core.ui.we.widget.WeActionSheetRow
 import com.laomuji666.compose.core.ui.we.widget.WeActionSheetType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableCheckRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.core.ui.we.widget.WeToast
+import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
@@ -86,15 +88,15 @@ private fun ToastWidget(){
 
     var showLoadingDialog by rememberSaveable { mutableStateOf(false) }
     if(showLoadingDialog){
-
+        WeToast(weToastType = WeToastType.LOADING, message = titleList[0])
     }
     var showDoneDialog by rememberSaveable { mutableStateOf(false) }
     if(showDoneDialog){
-
+        WeToast(weToastType = WeToastType.Done, message = titleList[1])
     }
     var showErrorDialog by rememberSaveable { mutableStateOf(false) }
     if(showErrorDialog){
-
+        WeToast(weToastType = WeToastType.ERROR, message = titleList[2])
     }
     WeTableSwitchRow(
         title = stringResource(id = R.string.string_widget_screen_toast_title),
