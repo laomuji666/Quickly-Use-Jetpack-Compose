@@ -20,10 +20,12 @@ import com.laomuji666.compose.core.ui.we.widget.WeActionSheetRow
 import com.laomuji666.compose.core.ui.we.widget.WeActionSheetType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableCheckRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.core.ui.we.widget.WeToast
+import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
@@ -45,32 +47,6 @@ private fun WidgetScreenUi(){
         }
     ) {
         Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
-            WeTableClickRow(
-                title = "账号与安全",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-            WeTableClickRow(
-                title = "青少年模式",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "关怀模式",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-            WeTableClickRow(
-                title = "新消息通知",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "聊天",
-                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-            )
-            WeTableClickRow(
-                title = "通用",
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
-
-
             ToastWidget()
             ActionSheetWidget()
         }
@@ -86,15 +62,15 @@ private fun ToastWidget(){
 
     var showLoadingDialog by rememberSaveable { mutableStateOf(false) }
     if(showLoadingDialog){
-
+        WeToast(weToastType = WeToastType.LOADING, message = titleList[0])
     }
     var showDoneDialog by rememberSaveable { mutableStateOf(false) }
     if(showDoneDialog){
-
+        WeToast(weToastType = WeToastType.Done, message = titleList[1])
     }
     var showErrorDialog by rememberSaveable { mutableStateOf(false) }
     if(showErrorDialog){
-
+        WeToast(weToastType = WeToastType.ERROR, message = titleList[2])
     }
     WeTableSwitchRow(
         title = stringResource(id = R.string.string_widget_screen_toast_title),
@@ -227,7 +203,8 @@ private fun ActionSheetWidget(){
             if(checked4){
                 WeActionSheetRow(
                     text = stringResource(id = R.string.string_widget_screen_action_sheet_item4),
-                    weActionSheetType = WeActionSheetType.WRONG
+                    weActionSheetType = WeActionSheetType.WRONG,
+                    weTableRowOutlineType = WeTableRowOutlineType.SPLIT
                 )
             }
         }

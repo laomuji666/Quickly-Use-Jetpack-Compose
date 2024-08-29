@@ -94,7 +94,7 @@ class WeIndication : Indication {
                 return
             }
             if (isPressed.value) {
-                drawRect(color = Color.Black.copy(alpha = 0.3f), size = size)
+                drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
             } else if (isHovered.value || isFocused.value) {
                 drawRect(color = Color.Black.copy(alpha = 0.1f), size = size)
             }

@@ -5,8 +5,10 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 
@@ -39,12 +42,14 @@ fun WeButton(
     val buttonColor = when(weButtonColor) {
         WeButtonColor.PRIMARY -> WeTheme.colorScheme.primaryButton
         WeButtonColor.SECONDARY -> WeTheme.colorScheme.secondaryButton
-        WeButtonColor.TERTIARY -> WeTheme.colorScheme.tertiaryButton
+        WeButtonColor.DISABLE -> WeTheme.colorScheme.disableButton
+        WeButtonColor.WRONG -> WeTheme.colorScheme.wrongButton
     }
     val textColor = when(weButtonColor){
         WeButtonColor.PRIMARY -> WeTheme.colorScheme.onPrimaryButton
         WeButtonColor.SECONDARY -> WeTheme.colorScheme.onSecondaryButton
-        WeButtonColor.TERTIARY -> WeTheme.colorScheme.onTertiaryButton
+        WeButtonColor.DISABLE -> WeTheme.colorScheme.onDisableButton
+        WeButtonColor.WRONG -> WeTheme.colorScheme.onWrongButton
     }
     Row(
         modifier = Modifier
@@ -71,7 +76,8 @@ enum class WeButtonType{
 enum class WeButtonColor{
     PRIMARY,
     SECONDARY,
-    TERTIARY
+    DISABLE,
+    WRONG
 }
 
 @PreviewLightDark
@@ -79,45 +85,40 @@ enum class WeButtonColor{
 fun PreviewWeButton(){
     DefaultWeTheme{
         Column(
-            modifier = Modifier.fillMaxWidth().background(WeTheme.colorScheme.background),
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(WeTheme.colorScheme.background),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(20.dp))
             WeButton(
                 weButtonType = WeButtonType.BIG,
                 weButtonColor = WeButtonColor.PRIMARY,
-                text = "完成",
+                text = "主操作按钮",
                 onClick = {}
             )
+            Spacer(modifier = Modifier.height(20.dp))
             WeButton(
                 weButtonType = WeButtonType.BIG,
                 weButtonColor = WeButtonColor.SECONDARY,
-                text = "取消",
+                text = "弱化按钮",
                 onClick = {}
             )
+            Spacer(modifier = Modifier.height(20.dp))
             WeButton(
                 weButtonType = WeButtonType.BIG,
-                weButtonColor = WeButtonColor.TERTIARY,
-                text = "取消",
+                weButtonColor = WeButtonColor.DISABLE,
+                text = "失效按钮",
                 onClick = {}
             )
+            Spacer(modifier = Modifier.height(20.dp))
             WeButton(
-                weButtonType = WeButtonType.SMALL,
-                weButtonColor = WeButtonColor.PRIMARY,
-                text = "完成",
+                weButtonType = WeButtonType.BIG,
+                weButtonColor = WeButtonColor.WRONG,
+                text = "警告按钮",
                 onClick = {}
             )
-            WeButton(
-                weButtonType = WeButtonType.SMALL,
-                weButtonColor = WeButtonColor.SECONDARY,
-                text = "取消",
-                onClick = {}
-            )
-            WeButton(
-                weButtonType = WeButtonType.SMALL,
-                weButtonColor = WeButtonColor.TERTIARY,
-                text = "取消",
-                onClick = {}
-            )
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }

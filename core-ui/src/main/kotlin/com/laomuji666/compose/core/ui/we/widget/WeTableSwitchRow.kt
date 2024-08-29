@@ -51,13 +51,11 @@ fun WeTableSwitchRow(
             )
         },
         onClick = onClick,
+        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }
 
-/**
- * 开关颜色暂时写死,本来应该是一个图片的,这里用动画实现的.
- */
 @Composable
 fun WeSwitch(
     checked: Boolean,
@@ -79,7 +77,7 @@ fun WeSwitch(
             .height(height)
             .clip(CircleShape)
             .clickable { onClick() }
-            .background(if (checked) Color(0xFF07C160) else Color(0xFFEDEDED))
+            .background(if (checked) WeTheme.colorScheme.switchSelectBackground else WeTheme.colorScheme.switchUnSelectBackground)
     ) {
         Spacer(modifier = Modifier
             .size(thumbSize)
