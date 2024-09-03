@@ -19,9 +19,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -77,6 +79,8 @@ fun <T>BannerView(
 
     var dragStartX by remember { mutableFloatStateOf(0f) }
 
+    var scrollFinish by remember { mutableStateOf(false) }
+
     HorizontalPager(
         modifier = modifier.pointerInput(Unit){
             detectHorizontalDragGestures(
@@ -84,27 +88,34 @@ fun <T>BannerView(
                     dragStartX = 0f
                 },
                 onDragEnd = {
-                    if(dragStartX > 0){
-                        coroutineScope.launch {
-                            lastPage(
-                                pagerState = pagerState,
-                                looperBanner = looperBanner,
-                                dataListSize = dataList.size,
-                                scrollAnim = scrollAnim
-                            )
-                        }
-                    }else{
-                        if(abs(dragStartX) > dragWidth){
+                    if(!scrollFinish){
+                        if(dragStartX > 0){
                             coroutineScope.launch {
-                                nextPage(
+                                scrollFinish = true
+                                lastPage(
                                     pagerState = pagerState,
                                     looperBanner = looperBanner,
                                     dataListSize = dataList.size,
                                     scrollAnim = scrollAnim
                                 )
+                                scrollFinish = false
+                            }
+                        }else{
+                            if(abs(dragStartX) > dragWidth){
+                                coroutineScope.launch {
+                                    scrollFinish = true
+                                    nextPage(
+                                        pagerState = pagerState,
+                                        looperBanner = looperBanner,
+                                        dataListSize = dataList.size,
+                                        scrollAnim = scrollAnim
+                                    )
+                                    scrollFinish = false
+                                }
                             }
                         }
                     }
+
                 },
                 onHorizontalDrag = { _, dragAmount ->
                     dragStartX += dragAmount
@@ -115,15 +126,19 @@ fun <T>BannerView(
         contentPadding = contentPadding,
         userScrollEnabled = false
     ) {
-        Box(modifier = Modifier
-            .padding(
-                horizontal = if (it == pagerState.currentPage) 0.dp else horizontalPadding,
-                vertical = if (it == pagerState.currentPage) 0.dp else verticalPadding
-            )
-            .animateContentSize(animationSpec = contentSizeAnim)
-        ){
-            content(dataList[it])
+        Box(modifier = Modifier.fillMaxSize()){
+            Box(modifier = Modifier
+                .align(Alignment.Center)
+                .padding(
+                    horizontal = if (it == pagerState.currentPage) 0.dp else horizontalPadding,
+                    vertical = if (it == pagerState.currentPage) 0.dp else verticalPadding
+                )
+                .animateContentSize(animationSpec = contentSizeAnim)
+            ){
+                content(dataList[it])
+            }
         }
+
     }
     LaunchedEffect(dragStartX) {
         while (isActive){
@@ -222,8 +237,7 @@ fun PreviewBannerView(){
             Color.Red,
             Color.Black,
             Color.Blue,
-            Color.Cyan,
-            Color.LightGray
+            Color.Cyan
         )
     ) {
         Box(modifier = Modifier
