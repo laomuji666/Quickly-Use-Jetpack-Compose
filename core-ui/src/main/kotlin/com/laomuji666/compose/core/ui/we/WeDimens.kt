@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.ui.we
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -37,7 +38,10 @@ data class WeDimens(
     val toastDividerSize:Dp,
 
     val outlineHeight:Dp,
-    val outlineSplitHeight:Dp
+    val outlineSplitHeight:Dp,
+
+    val contactIconSize:Dp,
+    val contactIconRoundedCornerDp: Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -73,7 +77,10 @@ val DefaultWeDimens = WeDimens(
     toastDividerSize = 16.dp,
 
     outlineHeight = 1.dp,
-    outlineSplitHeight = 8.dp
+    outlineSplitHeight = 8.dp,
+
+    contactIconSize = 40.dp,
+    contactIconRoundedCornerDp = 4.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

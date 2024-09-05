@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.logic.http
+package com.laomuji666.compose.core.logic.repository.http
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

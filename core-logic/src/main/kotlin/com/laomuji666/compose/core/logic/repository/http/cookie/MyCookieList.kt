@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.logic.http.cookie
+package com.laomuji666.compose.core.logic.repository.http.cookie
 
 import io.ktor.http.Cookie
 import kotlinx.serialization.Serializable

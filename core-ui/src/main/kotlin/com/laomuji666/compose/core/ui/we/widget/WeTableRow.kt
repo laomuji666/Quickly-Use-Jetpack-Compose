@@ -25,15 +25,17 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeTableRow(
+    modifier: Modifier = Modifier,
     start: @Composable RowScope.() -> Unit = {},
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
     onClick: () -> Unit = {},
     showClickIndication: Boolean = true,
-    weTableRowRowType: WeTableRowType = WeTableRowType.SINGLE,
+    weTableRowType: WeTableRowType = WeTableRowType.SINGLE,
+    outlineModifier: Modifier = Modifier,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
 ){
-    val rowHeight = when(weTableRowRowType){
+    val rowHeight = when(weTableRowType){
         WeTableRowType.SINGLE -> if(weTableRowOutlineType == WeTableRowOutlineType.SPLIT){
             WeTheme.dimens.listSingleRowHeight + WeTheme.dimens.outlineSplitHeight
         }else{
@@ -47,7 +49,7 @@ fun WeTableRow(
     }
     var showPress by remember  { mutableStateOf(false) }
     val pressColor = WeTheme.colorScheme.pressed
-    Column(modifier = Modifier.background(WeTheme.colorScheme.tableRowBackground)
+    Column(modifier = modifier.background(WeTheme.colorScheme.tableRowBackground)
         .pointerInput(Unit){
             if(showClickIndication){
                 detectPress(
@@ -83,6 +85,7 @@ fun WeTableRow(
             end()
         }
         WeTableRowOutline(
+            modifier = outlineModifier,
             weTableRowOutlineType = weTableRowOutlineType
         )
     }

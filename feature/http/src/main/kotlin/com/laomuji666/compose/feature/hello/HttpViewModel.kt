@@ -2,9 +2,9 @@ package com.laomuji666.compose.feature.hello
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.laomuji666.compose.core.logic.http.HttpRepository
-import com.laomuji666.compose.core.logic.http.Result
-import com.laomuji666.compose.core.logic.http.request.CreateUserRequest
+import com.laomuji666.compose.core.logic.repository.http.HttpRepository
+import com.laomuji666.compose.core.logic.repository.http.Result
+import com.laomuji666.compose.core.logic.repository.http.request.CreateUserRequest
 import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

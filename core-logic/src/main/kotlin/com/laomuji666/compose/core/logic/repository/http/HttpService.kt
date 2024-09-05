@@ -1,7 +1,7 @@
-package com.laomuji666.compose.core.logic.http
+package com.laomuji666.compose.core.logic.repository.http
 
 import android.annotation.SuppressLint
-import com.laomuji666.compose.core.logic.http.cookie.MyCookiesStorage
+import com.laomuji666.compose.core.logic.repository.http.cookie.MyCookiesStorage
 import com.laomuji666.compose.core.logic.util.Log
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig

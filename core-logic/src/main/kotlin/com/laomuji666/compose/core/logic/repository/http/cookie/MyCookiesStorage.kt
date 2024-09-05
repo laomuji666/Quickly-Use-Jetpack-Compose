@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.logic.http.cookie
+package com.laomuji666.compose.core.logic.repository.http.cookie
 
 import com.laomuji666.compose.core.logic.cache.CacheUtil
 import io.ktor.client.plugins.cookies.CookiesStorage

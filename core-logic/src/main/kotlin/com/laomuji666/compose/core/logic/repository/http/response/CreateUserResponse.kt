@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.logic.http.response
+package com.laomuji666.compose.core.logic.repository.http.response
 
 import kotlinx.serialization.Serializable
 

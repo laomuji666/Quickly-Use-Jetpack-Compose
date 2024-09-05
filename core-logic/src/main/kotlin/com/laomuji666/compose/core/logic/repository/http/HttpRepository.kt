@@ -1,8 +1,8 @@
-package com.laomuji666.compose.core.logic.http
+package com.laomuji666.compose.core.logic.repository.http
 
-import com.laomuji666.compose.core.logic.http.request.CreateUserRequest
-import com.laomuji666.compose.core.logic.http.response.CreateUserResponse
-import com.laomuji666.compose.core.logic.http.response.UserInfoResponse
+import com.laomuji666.compose.core.logic.repository.http.request.CreateUserRequest
+import com.laomuji666.compose.core.logic.repository.http.response.CreateUserResponse
+import com.laomuji666.compose.core.logic.repository.http.response.UserInfoResponse
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -19,11 +19,11 @@ class HttpRepository(
 ) {
     fun delayRequest() = flow {
         val response = client.get("https://reqres.in/api/users?delay=3") {}
-        val body:UserInfoResponse = response.body()
+        val body: UserInfoResponse = response.body()
         emit(Json.Default.encodeToString(body))
     }.asResult()
 
-    fun createUser(request:CreateUserRequest) = flow {
+    fun createUser(request: CreateUserRequest) = flow {
         val response = client.post("https://reqres.in/api/users") {
             setBody(request)
             contentType(ContentType.Application.Json)
