@@ -40,8 +40,31 @@
     <string name="string_widget_screen_action_sheet_item4">警示操作</string>
 
 <!--  AiChatScreen  -->
-    <string name="string_ai_chat_screen_navigation_title">Ai聊天</string>
     <string name="string_ai_chat_screen_navigation_message">消息</string>
     <string name="string_ai_chat_screen_navigation_contact">联系人</string>
     <string name="string_ai_chat_screen_navigation_me">我</string>
+
+<!--  联系人姓名  -->
+    <string name="string_contact_type_animal_pet">宠物</string>
+    <string name="string_contact_type_animal_wild">动物</string>
+    <string name="string_contact_type_insect">昆虫</string>
+
+    <string name="string_contact_name_ragdoll_cat">布偶猫</string>
+    <string name="string_contact_name_golden_dog">金毛狗</string>
+    <string name="string_contact_name_parrot">鹦鹉</string>
+    <string name="string_contact_name_siberian_husky">哈士奇</string>
+    <string name="string_contact_name_british_shorthair">蓝猫</string>
+
+    <string name="string_contact_name_sheep">绵羊</string>
+    <string name="string_contact_name_tiger">老虎</string>
+    <string name="string_contact_name_mouse">老鼠</string>
+    <string name="string_contact_name_giraffe">长颈鹿</string>
+    <string name="string_contact_name_eagle">老鹰</string>
+    <string name="string_contact_name_wolf">狼</string>
+    <string name="string_contact_name_leopard">金钱豹</string>
+
+    <string name="string_contact_name_bee">蜜蜂</string>
+    <string name="string_contact_name_butterfly">蝴蝶</string>
+    <string name="string_contact_name_mantis">螳螂</string>
+
 </resources>

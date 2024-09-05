@@ -6,11 +6,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -30,6 +26,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarSpace
+import com.laomuji666.compose.feature.chat.contacts.ContactsScreen
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -42,47 +39,46 @@ fun AiChatScreen(){
 @Composable
 private fun AiChatScreenUi(){
     val pagerState = rememberPagerState(
-        initialPage = AiScreenSelectEnum.MESSAGE.ordinal,
+        initialPage = AiScreenSelectEnum.CONTACTS.ordinal,
         pageCount = { AiScreenSelectEnum.entries.size }
     )
-    var showTopBarActionMenu by rememberSaveable {
-        mutableStateOf(false)
-    }
     WeScaffold(
         topBar = {
-            if(pagerState.currentPage != AiScreenSelectEnum.ME.ordinal){
+            if(pagerState.currentPage == AiScreenSelectEnum.MESSAGES.ordinal){
                 TopBar(
-                    onMenuClick = {
-                        showTopBarActionMenu = true
-                    }
+                    title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
+                    onMenuClick = {}
+                )
+            }
+            if(pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal){
+                TopBar(
+                    title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
+                    onMenuClick = {}
                 )
             }
         },
         bottomBar = {
             BottomBar(pagerState)
-        },
-        topBarActionMenu = {
-            if(showTopBarActionMenu){
-
-            }
-
         }
     ) {
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) {
-
+            if(it == AiScreenSelectEnum.CONTACTS.ordinal){
+                ContactsScreen()
+            }
         }
     }
 }
 
 @Composable
 private fun TopBar(
+    title:String,
     onMenuClick:()->Unit
 ){
     WeTopNavigationBar(
-        title = stringResource(id = R.string.string_ai_chat_screen_navigation_title),
+        title = title,
         actions = {
             WeTopNavigationBarAction(
                 imageVector = WeIcons.Search
@@ -105,10 +101,10 @@ private fun BottomBar(
     WeNavigationBar {
         WeNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-            selected = pagerState.currentPage == AiScreenSelectEnum.MESSAGE.ordinal,
+            selected = pagerState.currentPage == AiScreenSelectEnum.MESSAGES.ordinal,
             onClick = {
                 coroutineScope.launch {
-                    pagerState.scrollToPage(AiScreenSelectEnum.MESSAGE.ordinal)
+                    pagerState.scrollToPage(AiScreenSelectEnum.MESSAGES.ordinal)
                 }
             },
             unSelectImageVector = WeIcons.ChatsUnselect,
@@ -116,10 +112,10 @@ private fun BottomBar(
         )
         WeNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
-            selected = pagerState.currentPage == AiScreenSelectEnum.CONTACT.ordinal,
+            selected = pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal,
             onClick = {
                 coroutineScope.launch {
-                    pagerState.scrollToPage(AiScreenSelectEnum.CONTACT.ordinal)
+                    pagerState.scrollToPage(AiScreenSelectEnum.CONTACTS.ordinal)
                 }
             },
             unSelectImageVector = WeIcons.ContactsUnselect,

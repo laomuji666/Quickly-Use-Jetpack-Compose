@@ -86,8 +86,7 @@ fun PreviewWeButton(){
     DefaultWeTheme{
         Column(
             modifier = Modifier
-                .fillMaxWidth()
-                .background(WeTheme.colorScheme.background),
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Spacer(modifier = Modifier.height(20.dp))

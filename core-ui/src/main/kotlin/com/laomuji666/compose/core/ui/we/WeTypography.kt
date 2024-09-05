@@ -13,7 +13,6 @@ data class WeTypography(
     val groupTitle:TextStyle,
     val groupBody:TextStyle,
     val text:TextStyle,
-    val emDesc:TextStyle,
     val desc:TextStyle,
     val footnote:TextStyle,
 )
@@ -46,10 +45,6 @@ val DefaultWeTypography = WeTypography(
     text = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 17.sp
-    ),
-    emDesc = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 14.sp
     ),
     desc = TextStyle(
         fontWeight = FontWeight.Normal,

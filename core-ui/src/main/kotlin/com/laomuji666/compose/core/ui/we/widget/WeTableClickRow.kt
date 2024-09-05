@@ -69,7 +69,7 @@ fun WeTableClickRow(
                 modifier = Modifier.height(WeTheme.dimens.tableIconSize)
             )
         },
-        weTableRowRowType = if(summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
+        weTableRowType = if(summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
         onClick = onClick,
         weTableRowOutlineType = weTableRowOutlineType
     )

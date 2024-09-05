@@ -23,7 +23,6 @@ data class WeColorScheme (
     val pressed: Color,
     val error: Color,
 
-    val navigationBarBackground: Color,
     val navigationBarSelect: Color,
     val navigationBarUnSelect: Color,
     val navigationBarOutline: Color,
@@ -37,7 +36,7 @@ data class WeColorScheme (
 )
 
 val LightWeColorScheme = WeColorScheme(
-    background = WeColors.Color_FFFFFFFF,
+    background = WeColors.Color_FFF7F7F7,
     topNavigationBarBackground = WeColors.Color_FFEDEDED,
 
     fontColor90  = WeColors.Color_FF000000_90,
@@ -52,13 +51,10 @@ val LightWeColorScheme = WeColorScheme(
     wrongButton = WeColors.Color_FFF7F7F7,
     onWrongButton = WeColors.Color_FFFA5151,
 
-
-
     outline = WeColors.Color_FF000000_05,
     pressed = WeColors.Color_FF000000_10,
     error = WeColors.Color_FFFA5151,
 
-    navigationBarBackground = WeColors.Color_FFF7F7F7,
     navigationBarSelect = WeColors.Color_FF07C160,
     navigationBarUnSelect = WeColors.Color_FF000000_90,
     navigationBarOutline = WeColors.Color_FF000000_05,
@@ -93,7 +89,6 @@ val DarkWeColorScheme = WeColorScheme(
     error = WeColors.Color_FFFA5151,
 
 
-    navigationBarBackground = WeColors.Color_FF1E1E1E,
     navigationBarSelect = WeColors.Color_FF07C160,
     navigationBarUnSelect = WeColors.Color_FFFFFFFF_90,
     navigationBarOutline = WeColors.Color_FFFFFFFF_15,
