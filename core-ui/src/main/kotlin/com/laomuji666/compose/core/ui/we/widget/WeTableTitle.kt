@@ -12,10 +12,11 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeTableTitle(
+    modifier: Modifier = Modifier,
     title:String
 ){
     Row(
-        modifier = Modifier.background(Color.Transparent).fillMaxWidth().padding(horizontal = WeTheme.dimens.listPaddingHorizontal)
+        modifier = modifier.background(Color.Transparent).fillMaxWidth().padding(horizontal = WeTheme.dimens.listPaddingHorizontal)
     ) {
         Text(
             text = title,

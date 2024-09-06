@@ -5,7 +5,6 @@ import androidx.compose.ui.graphics.Color
 
 data class WeColorScheme (
     val background: Color,
-    val topNavigationBarBackground: Color,
 
     val fontColor90: Color,
     val fontColor50: Color,
@@ -36,8 +35,7 @@ data class WeColorScheme (
 )
 
 val LightWeColorScheme = WeColorScheme(
-    background = WeColors.Color_FFF7F7F7,
-    topNavigationBarBackground = WeColors.Color_FFEDEDED,
+    background = WeColors.Color_FFEDEDED,
 
     fontColor90  = WeColors.Color_FF000000_90,
     fontColor50 = WeColors.Color_FF000000_50,
@@ -69,7 +67,6 @@ val LightWeColorScheme = WeColorScheme(
 
 val DarkWeColorScheme = WeColorScheme(
     background = WeColors.Color_FF000000,
-    topNavigationBarBackground = WeColors.Color_FF111111,
 
     fontColor90 = WeColors.Color_FFFFFFFF_90,
     fontColor50 = WeColors.Color_FFFFFFFF_50,

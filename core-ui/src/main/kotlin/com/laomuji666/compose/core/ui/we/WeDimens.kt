@@ -1,6 +1,5 @@
 package com.laomuji666.compose.core.ui.we
 
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp

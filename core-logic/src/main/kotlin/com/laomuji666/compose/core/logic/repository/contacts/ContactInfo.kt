@@ -21,3 +21,11 @@ interface ContactInfo{
             @Composable get() = painterResource(id = resId)
     }
 }
+
+fun List<ContactInfo>.getTypeList():List<String>{
+    val result:MutableSet<String> = mutableSetOf()
+    forEach {
+        result.add(it.category)
+    }
+    return result.toList()
+}
