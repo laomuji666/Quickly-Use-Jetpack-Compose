@@ -46,7 +46,7 @@ fun WeActionSheetRow(
                 WeActionSheetType.SUMMARY -> {
                     Text(
                         text = text,
-                        style = WeTheme.typography.groupTitle,
+                        style = WeTheme.typography.desc,
                         color = WeTheme.colorScheme.fontColor50
                     )
                 }
