@@ -24,7 +24,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -143,13 +142,12 @@ private fun ContactsScreenUi(
 @PreviewLightDark
 @Composable
 fun PreviewContactsScreen(){
-    val context = LocalContext.current
     var contactList:List<ContactInfo> by remember {
         mutableStateOf(listOf())
     }
     if(contactList.isEmpty()){
         CoroutineScope(Dispatchers.Main).launch {
-            ContactsRepository(context).contactsList().collect{
+            ContactsRepository().contactsList().collect{
                 contactList = it
             }
         }

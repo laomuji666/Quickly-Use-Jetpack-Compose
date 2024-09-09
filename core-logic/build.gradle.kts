@@ -38,6 +38,8 @@ dependencies {
     api(libs.firebase.analytics)
     api(libs.firebase.messaging)
     api(libs.firebase.crashlytics)
+    api(libs.firebase.database)
+    api(libs.firebase.storage)
 
     //权限
     api(libs.accompanist.permissions)
