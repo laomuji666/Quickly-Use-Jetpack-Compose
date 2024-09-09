@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.painter.BitmapPainter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import com.laomuji666.compose.core.logic.util.ImageUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,16 +27,24 @@ interface ContactInfo{
 
     val category: String
 
-    val avatar:String
-
     val avatarPainter: Painter
         @Composable get
+
+    data class InnerContactInfo(
+        override val account: Long,
+        override val nickname: String,
+        override val category: String,
+        val resId: Int
+    ) : ContactInfo{
+        override val avatarPainter: Painter
+            @Composable get() = painterResource(id = resId)
+    }
 
     data class FirebaseContactInfo(
         override val account: Long,
         override val nickname: String,
         override val category: String,
-        override val avatar: String,
+        val avatar: String,
     ) : ContactInfo {
         constructor(map:Map<String,*>) : this(
             account = map["account"] as Long,

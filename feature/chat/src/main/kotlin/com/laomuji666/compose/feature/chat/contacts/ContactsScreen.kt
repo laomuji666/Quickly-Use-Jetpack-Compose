@@ -15,10 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -32,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.repository.contacts.ContactInfo
-import com.laomuji666.compose.core.logic.repository.contacts.ContactsRepository
 import com.laomuji666.compose.core.logic.repository.contacts.getTypeList
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
@@ -42,8 +38,6 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableTitle
 import com.laomuji666.compose.feature.chat.AiChatTopBar
 import com.laomuji666.compose.res.R
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Composable
@@ -142,20 +136,40 @@ private fun ContactsScreenUi(
 @PreviewLightDark
 @Composable
 fun PreviewContactsScreen(){
-    var contactList:List<ContactInfo> by remember {
-        mutableStateOf(listOf())
-    }
-    if(contactList.isEmpty()){
-        CoroutineScope(Dispatchers.Main).launch {
-            ContactsRepository().contactsList().collect{
-                contactList = it
-            }
-        }
-    }
-
     QuicklyTheme {
         ContactsScreenUi(
-            contactList = contactList
+            contactList = listOf(
+                ContactInfo.InnerContactInfo(
+                    account = 1001,
+                    nickname = "A",
+                    category = "字母",
+                    resId = R.mipmap.ic_launcher
+                ),
+                ContactInfo.InnerContactInfo(
+                    account = 1002,
+                    nickname = "B",
+                    category = "字母",
+                    resId = R.mipmap.ic_launcher
+                ),
+                ContactInfo.InnerContactInfo(
+                    account = 1003,
+                    nickname = "C",
+                    category = "字母",
+                    resId = R.mipmap.ic_launcher
+                ),
+                ContactInfo.InnerContactInfo(
+                    account = 1004,
+                    nickname = "111",
+                    category = "数字",
+                    resId = R.mipmap.ic_launcher
+                ),
+                ContactInfo.InnerContactInfo(
+                    account = 1005,
+                    nickname = "222",
+                    category = "数字",
+                    resId = R.mipmap.ic_launcher
+                ),
+            )
         )
     }
 }
