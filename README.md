@@ -53,3 +53,6 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 ## 打包
 bundleRelease打包aab.
 <br/>assembleRelease打包apk.
+
+## Star History
+[![Star History Chart](https://api.star-history.com/svg?repos=laomuji666/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji666/Quickly-Use-Jetpack-Compose&Date)
