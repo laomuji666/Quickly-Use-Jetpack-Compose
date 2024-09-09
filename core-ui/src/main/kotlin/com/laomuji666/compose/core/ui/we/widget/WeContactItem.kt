@@ -26,7 +26,7 @@ import com.laomuji666.compose.core.ui.we.icons.WeIcons
 fun WeContactItem(
     painter: Painter,
     text: String,
-    weTableRowType: WeTableRowType = WeTableRowType.SINGLE
+    onClick:()->Unit = {}
 ){
     WeTableRow(
         start = {
@@ -49,9 +49,10 @@ fun WeContactItem(
                 )
             }
         },
-        weTableRowType = weTableRowType,
+        weTableRowType = WeTableRowType.SINGLE,
         outlineModifier = Modifier.padding(start = WeTheme.dimens.contactIconSize + WeTheme.dimens.listPaddingHorizontal * 2),
-        weTableRowOutlineType = WeTableRowOutlineType.FULL
+        weTableRowOutlineType = WeTableRowOutlineType.FULL,
+        onClick = onClick
     )
 }
 

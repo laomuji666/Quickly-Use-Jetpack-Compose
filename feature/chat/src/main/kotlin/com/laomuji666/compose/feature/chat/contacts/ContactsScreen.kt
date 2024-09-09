@@ -26,6 +26,7 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -38,7 +39,10 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
 import com.laomuji666.compose.core.ui.we.widget.WePullToRefreshContainer
+import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableTitle
+import com.laomuji666.compose.feature.chat.AiChatTopBar
+import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -48,9 +52,18 @@ fun ContactsScreen(
     viewModel: ContactsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    ContactsScreenUi(
-        contactList = uiState.contactList
-    )
+    WeScaffold(
+        topBar = {
+            AiChatTopBar(
+                title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
+                onMenuClick = {}
+            )
+        }
+    ) {
+        ContactsScreenUi(
+            contactList = uiState.contactList
+        )
+    }
 }
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
