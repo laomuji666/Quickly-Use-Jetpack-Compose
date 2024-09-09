@@ -55,15 +55,12 @@ fun WePullToRefreshContainer(
         animationSpec = if(pullToRefreshHeight == 0.dp) spring() else tween(0),
         label = ""
     )
-    LaunchedEffect(state.verticalOffset) {
-        pullToRefreshHeight = (state.verticalOffset / density).dp
-    }
-
     Box(
         modifier = modifier
             .height(if (pullToRefreshHeight == 0.dp) animHeight else pullToRefreshHeight)
             .graphicsLayer {
                 translationY = state.verticalOffset - size.height
+                pullToRefreshHeight = (state.verticalOffset / density).dp
             }
     ) {
         indicator(state)
