@@ -43,20 +43,6 @@ private fun AiChatScreenUi(){
         pageCount = { AiScreenSelectEnum.entries.size }
     )
     WeScaffold(
-        topBar = {
-            if(pagerState.currentPage == AiScreenSelectEnum.MESSAGES.ordinal){
-                TopBar(
-                    title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-                    onMenuClick = {}
-                )
-            }
-            if(pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal){
-                TopBar(
-                    title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
-                    onMenuClick = {}
-                )
-            }
-        },
         bottomBar = {
             BottomBar(pagerState)
         }
@@ -73,7 +59,7 @@ private fun AiChatScreenUi(){
 }
 
 @Composable
-private fun TopBar(
+fun AiChatTopBar(
     title:String,
     onMenuClick:()->Unit
 ){

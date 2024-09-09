@@ -76,6 +76,7 @@ fun WeTableRow(
                 .clickable {
                     onClick()
                 }
+                .fillMaxWidth()
                 .weight(1f)
                 .padding(horizontal = WeTheme.dimens.listPaddingHorizontal),
             verticalAlignment = Alignment.CenterVertically
