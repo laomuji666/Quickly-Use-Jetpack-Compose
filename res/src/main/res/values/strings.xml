@@ -43,5 +43,12 @@
     <string name="string_ai_chat_screen_navigation_message">消息</string>
     <string name="string_ai_chat_screen_navigation_contact">联系人</string>
     <string name="string_ai_chat_screen_navigation_me">我</string>
-
+    <string name="string_ai_chat_me_screen_we_chat_name">老母鸡</string>
+    <string name="string_ai_chat_me_screen_we_chat_number_format">微信号: %1$s</string>
+    <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
+    <string name="string_ai_chat_me_screen_item_service">服务</string>
+    <string name="string_ai_chat_me_screen_item_collection">收藏</string>
+    <string name="string_ai_chat_me_screen_item_friend">朋友圈</string>
+    <string name="string_ai_chat_me_screen_item_card">卡包</string>
+    <string name="string_ai_chat_me_screen_item_setting">设置</string>
 </resources>
