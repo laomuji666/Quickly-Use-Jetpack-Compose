@@ -12,9 +12,6 @@ android {
 }
 
 dependencies {
-    //引入资源文件
-    implementation(project(":res"))
-
     //为Android提供kotlin扩展功能,view,context,collection,和其它扩展
     api(libs.androidx.core.ktx)
     //管理Android生命周期

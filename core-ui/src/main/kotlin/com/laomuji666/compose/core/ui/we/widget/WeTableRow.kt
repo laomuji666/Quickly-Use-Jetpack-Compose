@@ -64,12 +64,6 @@ fun WeTableRow(
         }
         .fillMaxWidth()
         .height(rowHeight)
-        .drawWithContent {
-            drawContent()
-            if (showPress) {
-                drawRect(color = pressColor, size = size)
-            }
-        }
     ){
         Row(
             modifier = Modifier
@@ -78,6 +72,12 @@ fun WeTableRow(
                 }
                 .fillMaxWidth()
                 .weight(1f)
+                .drawWithContent {
+                    drawContent()
+                    if (showPress) {
+                        drawRect(color = pressColor, size = size)
+                    }
+                }
                 .padding(horizontal = WeTheme.dimens.listPaddingHorizontal),
             verticalAlignment = Alignment.CenterVertically
         ){

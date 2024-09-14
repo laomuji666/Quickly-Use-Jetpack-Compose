@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.sp
 data class WeTypography(
     val emTitle:TextStyle,
     val title:TextStyle,
-    val text:TextStyle,
     val desc:TextStyle,
     val footnote:TextStyle,
     val small:TextStyle
@@ -20,10 +19,6 @@ val DefaultWeTypography = WeTypography(
         fontSize = 17.sp
     ),
     title = TextStyle(
-        fontWeight = FontWeight.Normal,
-        fontSize = 17.sp
-    ),
-    text = TextStyle(
         fontWeight = FontWeight.Normal,
         fontSize = 17.sp
     ),

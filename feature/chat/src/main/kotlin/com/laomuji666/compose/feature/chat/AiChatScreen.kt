@@ -27,6 +27,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarSpace
 import com.laomuji666.compose.feature.chat.contacts.ContactsScreen
+import com.laomuji666.compose.feature.chat.me.MeScreen
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -51,8 +52,16 @@ private fun AiChatScreenUi(){
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) {
+            if(it == AiScreenSelectEnum.MESSAGES.ordinal){
+
+            }
+
             if(it == AiScreenSelectEnum.CONTACTS.ordinal){
                 ContactsScreen()
+            }
+
+            if(it == AiScreenSelectEnum.ME.ordinal){
+                MeScreen()
             }
         }
     }

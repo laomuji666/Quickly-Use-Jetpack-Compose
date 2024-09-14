@@ -135,7 +135,7 @@ private fun ContactsScreenUi(
 @SuppressLint("CoroutineCreationDuringComposition")
 @PreviewLightDark
 @Composable
-fun PreviewContactsScreen(){
+fun PreviewContactsScreenUi(){
     QuicklyTheme {
         ContactsScreenUi(
             contactList = listOf(
