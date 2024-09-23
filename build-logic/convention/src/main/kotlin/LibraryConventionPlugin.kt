@@ -14,8 +14,19 @@ class LibraryConventionPlugin : Plugin<Project> {
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.compose")
             }
+
             extensions.configure<LibraryExtension> {
                 libraryDefaultConfig()
+
+                //开启compose支持
+                buildFeatures {
+                    compose = true
+                }
+            }
+
+            //compose = true 必须引入的依赖
+            dependencies {
+                add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose").get())
             }
         }
     }

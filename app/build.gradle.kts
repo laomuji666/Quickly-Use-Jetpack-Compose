@@ -26,10 +26,14 @@ dependencies {
 
     //其它module
     implementation(project(":core-ui"))
-    implementation(project(":core-logic"))
+    implementation(project(":core-logic:common"))
+    implementation(project(":core-logic:notification"))
     implementation(project(":feature:hello"))
     implementation(project(":feature:firebase"))
     implementation(project(":feature:http"))
     implementation(project(":feature:chat"))
 
+    //firebase 崩溃分析
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
 }

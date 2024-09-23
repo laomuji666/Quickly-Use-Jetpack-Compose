@@ -28,8 +28,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji666.compose.core.logic.repository.contacts.ContactInfo
-import com.laomuji666.compose.core.logic.repository.contacts.getTypeList
+import com.laomuji666.compose.core.logic.repository.module.contacts.ContactInfo
+import com.laomuji666.compose.core.logic.repository.module.contacts.getTypeList
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
