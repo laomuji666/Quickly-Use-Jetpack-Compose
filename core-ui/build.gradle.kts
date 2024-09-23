@@ -23,9 +23,6 @@ dependencies {
     api(libs.androidx.compose.ui)
     api(libs.androidx.compose.ui.graphics)
 
-    //compose的lifecycle扩展
-    api(libs.androidx.lifecycle.runtime.compose)
-
     //compose的navigation扩展
     implementation(libs.androidx.navigation.compose)
 

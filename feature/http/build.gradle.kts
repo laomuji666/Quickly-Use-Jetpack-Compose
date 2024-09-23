@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
-    implementation(project(":core-logic"))
+    implementation(project(":core-logic:http"))
+
     ksp(libs.hilt.compiler)
 }

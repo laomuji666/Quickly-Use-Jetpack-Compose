@@ -9,6 +9,7 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
-    implementation(project(":core-logic"))
+    implementation(project(":core-logic:common"))
+    implementation(project(":core-logic:authenticate"))
     ksp(libs.hilt.compiler)
 }

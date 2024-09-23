@@ -31,7 +31,4 @@ fun LibraryExtension.libraryDefaultConfig(){
         minSdk = DefaultConfigConstant.MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
-        compose = true
-    }
 }
