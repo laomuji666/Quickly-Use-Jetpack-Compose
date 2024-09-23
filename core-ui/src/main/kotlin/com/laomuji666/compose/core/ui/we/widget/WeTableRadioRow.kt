@@ -59,7 +59,6 @@ fun WeTableRadioRow(
             }
         },
         onClick = onClick,
-        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

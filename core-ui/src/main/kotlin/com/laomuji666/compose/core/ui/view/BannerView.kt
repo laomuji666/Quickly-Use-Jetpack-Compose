@@ -4,7 +4,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.AnimationSpec
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
@@ -42,7 +41,6 @@ enum class BannerViewScrollType{
     SCROLL_LAST
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T>BannerView(
     modifier: Modifier = Modifier,
@@ -90,8 +88,8 @@ fun <T>BannerView(
                 onDragEnd = {
                     if(!scrollFinish){
                         if(dragStartX > 0){
+                            scrollFinish = true
                             coroutineScope.launch {
-                                scrollFinish = true
                                 lastPage(
                                     pagerState = pagerState,
                                     looperBanner = looperBanner,
@@ -102,8 +100,8 @@ fun <T>BannerView(
                             }
                         }else{
                             if(abs(dragStartX) > dragWidth){
+                                scrollFinish = true
                                 coroutineScope.launch {
-                                    scrollFinish = true
                                     nextPage(
                                         pagerState = pagerState,
                                         looperBanner = looperBanner,
@@ -123,8 +121,7 @@ fun <T>BannerView(
             )
         },
         state = pagerState,
-        contentPadding = contentPadding,
-        userScrollEnabled = false
+        contentPadding = contentPadding
     ) {
         Box(modifier = Modifier.fillMaxSize()){
             Box(modifier = Modifier
@@ -167,7 +164,6 @@ fun <T>BannerView(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 private suspend fun nextPage(
     pagerState: PagerState,
     looperBanner: Boolean,
@@ -197,7 +193,6 @@ private suspend fun nextPage(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 private suspend fun lastPage(
     pagerState: PagerState,
     looperBanner: Boolean,

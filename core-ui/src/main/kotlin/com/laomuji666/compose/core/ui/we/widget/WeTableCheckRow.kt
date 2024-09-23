@@ -43,7 +43,6 @@ fun WeTableCheckRow(
             )
         },
         onClick = onClick,
-        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }
