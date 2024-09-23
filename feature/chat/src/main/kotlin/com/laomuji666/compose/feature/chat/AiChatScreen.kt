@@ -1,10 +1,10 @@
 package com.laomuji666.compose.feature.chat
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -36,7 +36,6 @@ fun AiChatScreen(){
     AiChatScreenUi()
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun AiChatScreenUi(){
     val pagerState = rememberPagerState(
@@ -53,7 +52,7 @@ private fun AiChatScreenUi(){
             modifier = Modifier.fillMaxSize()
         ) {
             if(it == AiScreenSelectEnum.MESSAGES.ordinal){
-
+                Text(text = "TODO")
             }
 
             if(it == AiScreenSelectEnum.CONTACTS.ordinal){
@@ -87,7 +86,6 @@ fun AiChatTopBar(
     )
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 private fun BottomBar(
     pagerState: PagerState

@@ -30,7 +30,7 @@ fun WeTableRow(
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
     onClick: () -> Unit = {},
-    showClickIndication: Boolean = true,
+    showClickIndication: Boolean = false,
     weTableRowType: WeTableRowType = WeTableRowType.SINGLE,
     outlineModifier: Modifier = Modifier,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
@@ -49,7 +49,7 @@ fun WeTableRow(
     }
     var showPress by remember  { mutableStateOf(false) }
     val pressColor = WeTheme.colorScheme.pressed
-    Column(modifier = modifier.background(WeTheme.colorScheme.tableRowBackground)
+    Column(modifier = modifier
         .pointerInput(Unit){
             if(showClickIndication){
                 detectPress(
@@ -62,6 +62,7 @@ fun WeTableRow(
                 )
             }
         }
+        .background(WeTheme.colorScheme.tableRowBackground)
         .fillMaxWidth()
         .height(rowHeight)
     ){
@@ -71,6 +72,7 @@ fun WeTableRow(
                     onClick()
                 }
                 .fillMaxWidth()
+                .weight(1f)
                 .weight(1f)
                 .drawWithContent {
                     drawContent()

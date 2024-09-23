@@ -70,7 +70,6 @@ fun WeActionSheetRow(
             Spacer(modifier = Modifier.weight(1f))
         },
         onClick = onClick,
-        showClickIndication = false,
         weTableRowOutlineType = weTableRowOutlineType
     )
 }

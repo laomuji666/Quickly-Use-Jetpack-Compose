@@ -10,15 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
@@ -33,7 +30,6 @@ import com.laomuji666.compose.core.logic.repository.module.contacts.getTypeList
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
-import com.laomuji666.compose.core.ui.we.widget.WePullToRefreshContainer
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableTitle
 import com.laomuji666.compose.feature.chat.AiChatTopBar
@@ -58,7 +54,7 @@ fun ContactsScreen(
         )
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
 private fun ContactsScreenUi(
     paddingTop: Dp = WeTheme.dimens.topNavigationBarHeight - 1.dp,
@@ -67,7 +63,6 @@ private fun ContactsScreenUi(
     val paddingTopPx = with(LocalDensity.current){
         paddingTop.toPx()
     }
-    val pullToRefreshState = rememberPullToRefreshState()
     val listState = rememberScrollState()
     val typeList = contactList.getTypeList()
     val typeMap = mutableMapOf<String,Float>()
@@ -77,12 +72,8 @@ private fun ContactsScreenUi(
         Column(
             modifier = Modifier
                 .background(WeTheme.colorScheme.background)
-                .nestedScroll(pullToRefreshState.nestedScrollConnection)
                 .fillMaxSize(),
         ) {
-            WePullToRefreshContainer(
-                state = pullToRefreshState
-            )
             Column(
                 modifier = Modifier.verticalScroll(state = listState)
             ){
