@@ -1,6 +1,5 @@
 package com.laomuji666.compose.feature.chat.contacts
 
-import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollBy
@@ -96,7 +95,7 @@ private fun ContactsScreenUi(
                         }
                     }
                     WeContactItem(
-                        painter = item.avatarPainter,
+                        avatar = item.avatar,
                         text = item.nickname
                     )
                 }
@@ -123,43 +122,30 @@ private fun ContactsScreenUi(
     }
 }
 
-@SuppressLint("CoroutineCreationDuringComposition")
 @PreviewLightDark
 @Composable
 fun PreviewContactsScreenUi(){
     QuicklyTheme {
         ContactsScreenUi(
             contactList = listOf(
-                ContactInfo.InnerContactInfo(
-                    account = 1001,
+                ContactInfo(
+                    account = 1,
                     nickname = "A",
-                    category = "字母",
-                    resId = R.mipmap.ic_launcher
+                    category = "A",
+                    avatar = ""
                 ),
-                ContactInfo.InnerContactInfo(
-                    account = 1002,
-                    nickname = "B",
-                    category = "字母",
-                    resId = R.mipmap.ic_launcher
+                ContactInfo(
+                    account = 2,
+                    nickname = "A",
+                    category = "A",
+                    avatar = ""
                 ),
-                ContactInfo.InnerContactInfo(
-                    account = 1003,
-                    nickname = "C",
-                    category = "字母",
-                    resId = R.mipmap.ic_launcher
-                ),
-                ContactInfo.InnerContactInfo(
-                    account = 1004,
-                    nickname = "111",
-                    category = "数字",
-                    resId = R.mipmap.ic_launcher
-                ),
-                ContactInfo.InnerContactInfo(
-                    account = 1005,
-                    nickname = "222",
-                    category = "数字",
-                    resId = R.mipmap.ic_launcher
-                ),
+                ContactInfo(
+                    account = 3,
+                    nickname = "A",
+                    category = "B",
+                    avatar = ""
+                )
             )
         )
     }
