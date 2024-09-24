@@ -2,6 +2,7 @@ package com.laomuji666.compose.core.logic.repository.module.contacts
 
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import kotlinx.coroutines.tasks.await
 
 data class ContactInfo(
@@ -10,6 +11,32 @@ data class ContactInfo(
     val category: String,
     val avatar: String
 )
+
+object ContactInfoConvert{
+    private fun asContactInfoEntity(contactInfo: ContactInfo): ContactInfoEntity {
+        return ContactInfoEntity(contactInfo.account,contactInfo.nickname,contactInfo.category,contactInfo.avatar)
+    }
+
+    private fun ContactInfoEntity.asContactInfo(): ContactInfo {
+        return ContactInfo(account,nickname,category,avatar)
+    }
+
+    fun List<ContactInfoEntity>.asContactInfoList():List<ContactInfo>{
+        val result:MutableList<ContactInfo> = mutableListOf()
+        forEach {
+            result.add(it.asContactInfo())
+        }
+        return result.sortedByDescending { it.category }
+    }
+
+    fun List<ContactInfo>.asContactInfoEntityList():List<ContactInfoEntity>{
+        val result:MutableList<ContactInfoEntity> = mutableListOf()
+        forEach {
+            result.add(asContactInfoEntity(it))
+        }
+        return result
+    }
+}
 
 suspend fun getContactWithFirebase(map:Map<String,*>):ContactInfo{
     val account = map["account"] as Long

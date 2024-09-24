@@ -9,15 +9,21 @@ android {
     buildFeatures {
         buildConfig = true
     }
+    defaultConfig {
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+        }
+    }
 }
 
 dependencies {
     //hilt
     ksp(libs.hilt.compiler)
 
-    //common
+    //project
     implementation(project(":core-logic:common"))
     implementation(project(":core-ui"))
+    api(project(":core-logic:database"))
 
     //firebase
     implementation(platform(libs.firebase.bom))

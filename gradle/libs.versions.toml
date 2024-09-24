@@ -20,6 +20,7 @@ accompanist = "0.34.0"
 googleFirebaseCrashlytics = "3.0.2"
 ktor = "2.3.12"
 playServicesAuth = "21.2.0"
+androidxRoom = "2.6.1"
 
 [libraries]
 # app
@@ -35,7 +36,6 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
-
 # build-logic
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "androidGradlePlugin" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
@@ -55,6 +55,11 @@ firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 firebase-database = { module = "com.google.firebase:firebase-database" }
 firebase-storage = { module = "com.google.firebase:firebase-storage" }
+# database
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
+
 
 # compose permission
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
