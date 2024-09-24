@@ -13,7 +13,7 @@ class ContactsRepository {
         @Suppress("UNCHECKED_CAST")
         val userList = users as List<HashMap<String,*>>
         userList.forEach { user ->
-            result.add(ContactInfo.FirebaseContactInfo(user))
+            result.add(getContactWithFirebase(user))
         }
         emit(result)
     }.catch {

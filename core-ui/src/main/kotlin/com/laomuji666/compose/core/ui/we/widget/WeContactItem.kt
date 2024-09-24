@@ -1,6 +1,5 @@
 package com.laomuji666.compose.core.ui.we.widget
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -11,28 +10,27 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.painter.Painter
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
-import com.laomuji666.compose.core.ui.we.icons.ContactsSelect
-import com.laomuji666.compose.core.ui.we.icons.MeSelect
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
 fun WeContactItem(
-    painter: Painter,
+    avatar: String,
     text: String,
     onClick:()->Unit = {}
 ){
     WeTableRow(
         start = {
-            Image(
-                painter = painter,
+            AsyncImage(
+                model = ImageRequest.Builder(LocalContext.current).data(avatar).diskCacheKey(avatar).build(),
                 contentDescription = null,
+                placeholder = painterResource(id = com.laomuji666.compose.res.R.mipmap.ic_launcher),
                 modifier = Modifier
                     .size(WeTheme.dimens.contactIconSize)
                     .clip(RoundedCornerShape(WeTheme.dimens.contactIconRoundedCornerDp)),
@@ -63,15 +61,15 @@ fun PreviewWeContactItem(){
     DefaultWeTheme {
         Column {
             WeContactItem(
-                painter = rememberVectorPainter(image = WeIcons.ChatsSelect),
+                "",
                 text = "A"
             )
             WeContactItem(
-                painter = rememberVectorPainter(image = WeIcons.ContactsSelect),
+                "",
                 text = "B"
             )
             WeContactItem(
-                painter = rememberVectorPainter(image = WeIcons.MeSelect),
+                "",
                 text = "C"
             )
         }

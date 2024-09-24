@@ -31,4 +31,7 @@ dependencies {
 
     //谷歌认证
     implementation(libs.play.services.auth)
+
+    //coil 图像加载
+    implementation(libs.coil.compose)
 }
