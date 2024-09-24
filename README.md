@@ -32,7 +32,8 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 # 已提供的示例代码
 + firebase: 埋点,崩溃分析,推送.
 + ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
-+ google: 登录最佳实践,CredentialManager添加登录选项.
++ google登录: CredentialManager添加登录选项.
++ 离线可用: 优先从Room数据库获取数据,网络获取数据后更新到数据库.
 
 ## 运行效果
 | 例子     | 截图                                                          |
