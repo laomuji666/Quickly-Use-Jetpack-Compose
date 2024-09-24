@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.logic.repository.module.contacts
 
+import com.laomuji666.compose.core.logic.database.dao.ContactDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,7 +12,9 @@ import javax.inject.Singleton
 class ContactModule {
     @Singleton
     @Provides
-    fun bindContactsRepository(): ContactsRepository {
-        return ContactsRepository()
+    fun bindContactsRepository(
+        contactDao: ContactDao
+    ): ContactRepository {
+        return ContactRepository(contactDao)
     }
 }

@@ -33,5 +33,5 @@ dependencies {
     implementation(libs.play.services.auth)
 
     //coil 图像加载
-    implementation(libs.coil.compose)
+    api(libs.coil.compose)
 }

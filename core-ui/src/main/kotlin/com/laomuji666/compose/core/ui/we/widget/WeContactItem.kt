@@ -25,10 +25,16 @@ fun WeContactItem(
     text: String,
     onClick:()->Unit = {}
 ){
+    val imageRequest = ImageRequest
+        .Builder(LocalContext.current)
+        .data(avatar)
+        .diskCacheKey(avatar)
+        .build()
+
     WeTableRow(
         start = {
             AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current).data(avatar).diskCacheKey(avatar).build(),
+                model = imageRequest,
                 contentDescription = null,
                 placeholder = painterResource(id = com.laomuji666.compose.res.R.mipmap.ic_launcher),
                 modifier = Modifier
