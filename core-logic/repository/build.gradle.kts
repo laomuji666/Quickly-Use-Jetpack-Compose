@@ -9,11 +9,6 @@ android {
     buildFeatures {
         buildConfig = true
     }
-    defaultConfig {
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-    }
 }
 
 dependencies {
