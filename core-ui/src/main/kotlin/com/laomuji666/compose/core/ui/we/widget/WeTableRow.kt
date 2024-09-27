@@ -17,6 +17,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.PointerInputScope
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -29,6 +30,7 @@ fun WeTableRow(
     start: @Composable RowScope.() -> Unit = {},
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
+    backgroundColor: Color = WeTheme.colorScheme.tableRowBackground,
     onClick: () -> Unit = {},
     showClickIndication: Boolean = false,
     weTableRowType: WeTableRowType = WeTableRowType.SINGLE,
@@ -62,7 +64,7 @@ fun WeTableRow(
                 )
             }
         }
-        .background(WeTheme.colorScheme.tableRowBackground)
+        .background(backgroundColor)
         .fillMaxWidth()
         .height(rowHeight)
     ){

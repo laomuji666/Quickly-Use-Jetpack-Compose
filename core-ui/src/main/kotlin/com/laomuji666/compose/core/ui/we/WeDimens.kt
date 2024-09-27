@@ -40,7 +40,9 @@ data class WeDimens(
     val outlineSplitHeight:Dp,
 
     val contactIconSize:Dp,
-    val contactIconRoundedCornerDp: Dp
+    val contactIconRoundedCornerDp: Dp,
+
+    val inputTitleWidth:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -79,7 +81,9 @@ val DefaultWeDimens = WeDimens(
     outlineSplitHeight = 8.dp,
 
     contactIconSize = 40.dp,
-    contactIconRoundedCornerDp = 4.dp
+    contactIconRoundedCornerDp = 4.dp,
+
+    inputTitleWidth = 60.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }
