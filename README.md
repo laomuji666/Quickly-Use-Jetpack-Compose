@@ -9,15 +9,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + 单Activity架构,使用Navigation进行导航.
 + Compose+ViewModel+Flow(MVI),使用协程进行异步操作的反应式ui.
 
-# Module目录简介
-+ app: 程序的入口,把各个module关联起来,组成一个完整的app.
-+ build-logic: 自定义的插件都放在这里,统一管理依赖.
-+ core-logic: 数据处理,与本地数据库或远程服务器交互.
-+ core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的UI组件.
-+ feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
-+ res: 资源文件,统一管理图片,文字等资源文件.
-
-# We设计系统
+# 设计系统
 自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统,有白天和夜间两种颜色模式.
 ## Theme
 + 竖屏以375宽度适配屏幕,横屏不适配正常显示.
@@ -29,11 +21,20 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + WeIcons: 使用ImageVector绘制图标.
 + WeWidget: 实现WX风格的组件,如顶部导航,底部导航,Button,Toast,ActionSheet,单选,多选,开关等组件.
 
+# Module目录简介
++ app: 程序的入口,把各个module关联起来,组成一个完整的app.
++ build-logic: 自定义的插件都放在这里,统一管理依赖.
++ core-logic: 数据处理,与本地数据库或远程服务器交互.
++ core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的UI组件.
++ feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
++ res: 资源文件,统一管理图片,文字等资源文件.
+
 # 已提供的示例代码
 + firebase: 埋点,崩溃分析,推送.
 + ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
 + google登录: CredentialManager添加登录选项.
 + 离线可用: 优先从Room数据库获取数据,网络获取数据后更新到数据库.
++ 焦点控制: 点击焦点,键盘输入焦点控制,简化用户操作.
 
 ## 运行效果
 | 例子     | 截图                                                          |
