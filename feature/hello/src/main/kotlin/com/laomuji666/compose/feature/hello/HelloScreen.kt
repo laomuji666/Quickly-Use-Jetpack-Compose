@@ -22,9 +22,6 @@ import com.laomuji666.compose.core.ui.we.icons.Widget
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
-import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -115,7 +112,7 @@ private fun HelloScreenUi(
             modifier = Modifier.fillMaxSize()
         ) {
             if(it == HelloSelectEnum.EXAMPLE.ordinal){
-                Example(
+                ExampleScreen(
                     helloText = uiState.helloText,
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
@@ -128,51 +125,6 @@ private fun HelloScreenUi(
                 WidgetScreen()
             }
         }
-    }
-}
-
-@Composable
-private fun Example(
-    helloText: String,
-    onFirebaseClick:()->Unit,
-    onHttpClick:()->Unit,
-    onGoogleLoginClick:()->Unit,
-    onSelectMobileClick:()->Unit,
-    onAiChatClick:()->Unit
-){
-    WeScaffold(
-        topBar = {
-            WeTopNavigationBar(title = stringResource(id = R.string.string_hello_screen_navigation_example))
-        }
-    ) {
-        WeTableClickRow(
-            title = helloText,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_firebase_demo),
-            onClick = onFirebaseClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_http_demo),
-            onClick = onHttpClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_google_login_demo),
-            onClick = onGoogleLoginClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_select_mobile_demo),
-            onClick = onSelectMobileClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_hello_screen_ai_chat),
-            onClick = onAiChatClick
-        )
     }
 }
 

@@ -31,7 +31,9 @@ data class WeColorScheme (
     val switchSelectBackground: Color,
     val switchUnSelectBackground: Color,
 
-    val tableRowBackground: Color
+    val tableRowBackground: Color,
+
+    val cursorColor: Color
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -62,7 +64,9 @@ val LightWeColorScheme = WeColorScheme(
     switchSelectBackground = WeColors.Color_FF07C160,
     switchUnSelectBackground = WeColors.Color_FF000000_05,
 
-    tableRowBackground = WeColors.Color_FFFFFFFF
+    tableRowBackground = WeColors.Color_FFFFFFFF,
+
+    cursorColor = WeColors.Color_FF07C160
 )
 
 val DarkWeColorScheme = WeColorScheme(
@@ -95,7 +99,9 @@ val DarkWeColorScheme = WeColorScheme(
     switchSelectBackground = WeColors.Color_FF07C160,
     switchUnSelectBackground = WeColors.Color_FFFFFFFF_15,
 
-    tableRowBackground = WeColors.Color_FF191919
+    tableRowBackground = WeColors.Color_FF191919,
+
+    cursorColor = WeColors.Color_FF07C160
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

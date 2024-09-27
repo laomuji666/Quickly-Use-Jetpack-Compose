@@ -211,10 +211,9 @@ private fun ActionSheetWidget(){
     }
 }
 
-
 @Preview
 @Composable
-fun PreviewHttpScreen(){
+fun PreviewWidgetScreen(){
     QuicklyTheme {
         WidgetScreenUi()
     }
