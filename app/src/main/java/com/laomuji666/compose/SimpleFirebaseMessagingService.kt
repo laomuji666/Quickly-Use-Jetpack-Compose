@@ -21,6 +21,9 @@ import java.net.HttpURLConnection
 import java.net.MalformedURLException
 import java.net.URL
 
+/**
+ * 推送例子
+ */
 class SimpleFirebaseMessagingService : FirebaseMessagingService(){
     companion object {
         const val TAG = "tag_firebase_messaging"
@@ -56,12 +59,10 @@ class SimpleFirebaseMessagingService : FirebaseMessagingService(){
 
     /**
      * 推送token发生变动时触发
-     * 首次打开app 会自动生成,也会触发
+     * 不推荐在这里处理,可以在每次打开app时检测
      */
     override fun onNewToken(token: String) {
         Log.debug(TAG, "token 发生变化 : $token")
-        //可以发送一个请求,把新的token提交给后端 , 也可以不在这里发,每次打开app发送也可以
-        //甚至不处理也可以,只有卸载,清除缓存,新设备恢复旧设备 才会更新token
     }
 
     /**

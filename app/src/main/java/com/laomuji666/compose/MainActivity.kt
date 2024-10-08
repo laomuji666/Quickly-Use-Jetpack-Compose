@@ -19,16 +19,30 @@ import com.laomuji666.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+/**
+ * [AndroidEntryPoint] hilt依赖注入入口
+ */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    /**
+     * 注入ViewModel
+     */
     private val viewModel: MainViewModel by viewModels()
 
+    /**
+     * 设置Activity的一些参数
+     * 启动屏幕 保持到初始化完毕
+     * Compose边缘到边缘 沉浸式状态栏导航栏
+     * Compose的入口
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         val splashScreen = installSplashScreen()
         super.onCreate(savedInstanceState)
         checkKeepOnScreenCondition(splashScreen = splashScreen)
 
         enableEdgeToEdge()
+
         setContent {
             val navHostController = rememberNavController()
             QuicklyTheme {
@@ -46,18 +60,16 @@ class MainActivity : ComponentActivity() {
      */
     private fun checkKeepOnScreenCondition(splashScreen: SplashScreen){
         var uiState: MainUiState by mutableStateOf(MainUiState.Loading)
+        lifecycleScope.launch {
+            lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState
+                    .collect{
+                        uiState = it
+                    }
+            }
+        }
         splashScreen.setKeepOnScreenCondition {
             uiState == MainUiState.Loading
-        }
-        if(uiState == MainUiState.Loading){
-            lifecycleScope.launch {
-                lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.uiState
-                        .collect{
-                            uiState = it
-                        }
-                }
-            }
         }
     }
 }

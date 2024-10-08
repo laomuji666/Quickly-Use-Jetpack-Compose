@@ -15,9 +15,6 @@ fun ApplicationExtension.applicationDefaultConfig(){
         targetSdk = DefaultConfigConstant.TARGET_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
 }
 
