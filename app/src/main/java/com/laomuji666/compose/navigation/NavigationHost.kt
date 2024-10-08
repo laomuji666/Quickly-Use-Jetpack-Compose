@@ -15,6 +15,10 @@ import com.laomuji666.compose.feature.hello.composeHttpScreen
 import com.laomuji666.compose.feature.hello.navigateToFirebaseScreen
 import com.laomuji666.compose.feature.hello.navigateToHttpScreen
 
+/**
+ * 导航控制器
+ * 不同的feature之间的跳转
+ */
 @Composable
 fun NavigationHost(
     navHostController: NavHostController,
