@@ -10,6 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.laomuji666.compose.core.logic.repository.module.contacts.ContactInfo
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Add
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
@@ -20,8 +21,8 @@ import com.laomuji666.compose.core.ui.we.icons.MeSelect
 import com.laomuji666.compose.core.ui.we.icons.MeUnselect
 import com.laomuji666.compose.core.ui.we.icons.Search
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
+import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
@@ -32,12 +33,18 @@ import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
 @Composable
-fun AiChatScreen(){
-    AiChatScreenUi()
+fun AiChatScreen(
+    onContactClick: (ContactInfo)->Unit
+){
+    AiChatScreenUi(
+        onContactClick = onContactClick
+    )
 }
 
 @Composable
-private fun AiChatScreenUi(){
+private fun AiChatScreenUi(
+    onContactClick: (ContactInfo)->Unit
+){
     val pagerState = rememberPagerState(
         initialPage = AiScreenSelectEnum.CONTACTS.ordinal,
         pageCount = { AiScreenSelectEnum.entries.size }
@@ -56,7 +63,9 @@ private fun AiChatScreenUi(){
             }
 
             if(it == AiScreenSelectEnum.CONTACTS.ordinal){
-                ContactsScreen()
+                ContactsScreen(
+                    onContactClick = onContactClick
+                )
             }
 
             if(it == AiScreenSelectEnum.ME.ordinal){
@@ -91,8 +100,8 @@ private fun BottomBar(
     pagerState: PagerState
 ){
     val coroutineScope = rememberCoroutineScope()
-    WeNavigationBar {
-        WeNavigationBarItem(
+    WeBottomNavigationBar {
+        WeBottomNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
             selected = pagerState.currentPage == AiScreenSelectEnum.MESSAGES.ordinal,
             onClick = {
@@ -103,7 +112,7 @@ private fun BottomBar(
             unSelectImageVector = WeIcons.ChatsUnselect,
             selectImageVector = WeIcons.ChatsSelect
         )
-        WeNavigationBarItem(
+        WeBottomNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
             selected = pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal,
             onClick = {
@@ -114,7 +123,7 @@ private fun BottomBar(
             unSelectImageVector = WeIcons.ContactsUnselect,
             selectImageVector = WeIcons.ContactsSelect
         )
-        WeNavigationBarItem(
+        WeBottomNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_me),
             selected = pagerState.currentPage == AiScreenSelectEnum.ME.ordinal,
             onClick = {
@@ -133,6 +142,8 @@ private fun BottomBar(
 @Composable
 fun PreviewAiChatScreenUi(){
     QuicklyTheme {
-        AiChatScreenUi()
+        AiChatScreenUi(
+            onContactClick = {}
+        )
     }
 }

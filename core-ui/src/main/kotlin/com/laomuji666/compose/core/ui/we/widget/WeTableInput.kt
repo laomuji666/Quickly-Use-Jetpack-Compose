@@ -44,7 +44,7 @@ fun WeTableInput(
                     text = title,
                     style = WeTheme.typography.title,
                     color = WeTheme.colorScheme.fontColor90,
-                    modifier = Modifier.width(WeTheme.dimens.inputTitleWidth)
+                    modifier = Modifier.width(WeTheme.dimens.tableLabelWidth)
                 )
                 Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal / 2))
                 BasicTextField(

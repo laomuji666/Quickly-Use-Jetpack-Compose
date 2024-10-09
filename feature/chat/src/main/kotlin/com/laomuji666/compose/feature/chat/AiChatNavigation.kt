@@ -13,8 +13,17 @@ fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptions
     navigate(AI_CHAT_SCREEN, navOptions)
 }
 
-fun NavGraphBuilder.composeAiChatScreen(){
+fun NavGraphBuilder.composeAiChatScreen(
+    onContactClick: (account:Long, nickname:String)->Unit
+){
     composable(route = AI_CHAT_SCREEN){
-        AiChatScreen()
+        AiChatScreen(
+            onContactClick = {
+                onContactClick(
+                    it.account,
+                    it.nickname
+                )
+            }
+        )
     }
 }

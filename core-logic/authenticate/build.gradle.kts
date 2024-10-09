@@ -6,9 +6,6 @@ plugins {
 
 android {
     namespace = "com.laomuji666.compose.core.logic.authenticate"
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {

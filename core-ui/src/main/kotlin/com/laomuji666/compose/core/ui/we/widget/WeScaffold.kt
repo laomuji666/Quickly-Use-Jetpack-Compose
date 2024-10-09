@@ -15,9 +15,9 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeScaffold(
-    topBar: @Composable ()->Unit = {},
-    topBarActionMenu: @Composable ()->Unit = {},
-    bottomBar: @Composable ()->Unit = {},
+    topBar: @Composable ColumnScope.()->Unit = {},
+    topBarActionMenu: @Composable ColumnScope.()->Unit = {},
+    bottomBar: @Composable ColumnScope.()->Unit = {},
     content: @Composable ColumnScope.()->Unit
 ){
     Box(modifier = Modifier.fillMaxSize()){
@@ -39,8 +39,8 @@ fun WeScaffold(
                 .align(Alignment.TopEnd)
                 .statusBarsPadding()
                 .padding(
-                    top = WeTheme.dimens.topNavigationBarHeight,
-                    end = WeTheme.dimens.topNavigationBarPaddingHorizontal / 2
+                    top = WeTheme.dimens.navigationBarHeight,
+                    end = WeTheme.dimens.navigationBarPaddingHorizontal / 2
                 )
         ) {
             topBarActionMenu()

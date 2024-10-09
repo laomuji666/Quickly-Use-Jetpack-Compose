@@ -27,4 +27,8 @@ internal object DatabaseModule {
     @Provides
     @Singleton
     fun provideContactDao(database: Database) = database.contactDao()
+
+    @Provides
+    @Singleton
+    fun provideMessageDao(database: Database) = database.messageDao()
 }

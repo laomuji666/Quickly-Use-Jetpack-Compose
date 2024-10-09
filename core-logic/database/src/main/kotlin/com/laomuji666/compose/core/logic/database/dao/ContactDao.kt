@@ -8,7 +8,7 @@ import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 
 @Dao
 interface ContactDao {
-    @Query("SELECT * FROM ContactInfoEntity")
+    @Query("SELECT * FROM ContactInfoEntity ORDER BY category DESC")
     fun getAll(): List<ContactInfoEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
