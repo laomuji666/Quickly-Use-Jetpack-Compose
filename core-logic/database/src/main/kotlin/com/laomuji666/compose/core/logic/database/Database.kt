@@ -12,7 +12,7 @@ import com.laomuji666.compose.core.logic.database.entity.MessageInfoEntity
         ContactInfoEntity::class,
         MessageInfoEntity::class
     ],
-    version = 1
+    version = 2
 )
 abstract class Database : RoomDatabase() {
     abstract fun contactDao(): ContactDao

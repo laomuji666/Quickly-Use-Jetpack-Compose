@@ -29,7 +29,8 @@ fun WeScaffold(
             topBar()
             Column(modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)) {
+                .weight(1f)
+            ) {
                 content()
             }
             bottomBar()

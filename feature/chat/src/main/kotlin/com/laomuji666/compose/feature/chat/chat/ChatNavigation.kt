@@ -8,11 +8,10 @@ import com.laomuji666.compose.core.ui.navOptionsPushBack
 
 private const val CHAT_SCREEN = "CHAT_SCREEN"
 internal const val ACCOUNT = "ACCOUNT"
-internal const val NICKNAME = "NICKNAME"
-private const val CHAT_SCREEN_ROUTE = "$CHAT_SCREEN/{$ACCOUNT}/{$NICKNAME}"
+private const val CHAT_SCREEN_ROUTE = "$CHAT_SCREEN/{$ACCOUNT}"
 
-fun NavHostController.navigateToChatScreen(account: Long, nickname: String, navOptions: NavOptions? = navOptionsPushBack(this)){
-    return navigate("$CHAT_SCREEN/$account/$nickname", navOptions)
+fun NavHostController.navigateToChatScreen(account: Long, navOptions: NavOptions? = navOptionsPushBack(this)){
+    return navigate("$CHAT_SCREEN/$account", navOptions)
 }
 
 fun NavGraphBuilder.composeChatScreen(

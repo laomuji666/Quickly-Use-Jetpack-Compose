@@ -14,6 +14,9 @@ object WeColors{
     val Color_FF07C160 = Color(0xFF07C160)
     val Color_FFFA5151 = Color(0xFFFA5151)
 
+    val Color_FF95EC6A = Color(0xFF95EC6A)
+    val Color_FF3EB477 = Color(0xFF3EB477)
+
     val Color_FFEDEDED = Color(0xFFEDEDED)
     val Color_FFF7F7F7 = Color(0xFFF7F7F7)
 

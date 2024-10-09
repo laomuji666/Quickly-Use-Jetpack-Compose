@@ -42,7 +42,11 @@ data class WeColorScheme (
     val tableRowBackground: Color,
 
 
-    val chatInputBackground: Color
+    val chatInputBackground: Color,
+    val chatMessageBackgroundSend: Color,
+    val chatMessageBackgroundReceive: Color,
+    val chatMessageTextSend: Color,
+    val chatMessageTextReceive: Color,
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -84,7 +88,11 @@ val LightWeColorScheme = WeColorScheme(
     tableRowBackground = WeColors.Color_FFFFFFFF,
 
 
-    chatInputBackground = WeColors.Color_FFEDEDED
+    chatInputBackground = WeColors.Color_FFEDEDED,
+    chatMessageBackgroundSend = WeColors.Color_FF95EC6A,
+    chatMessageBackgroundReceive = WeColors.Color_FFFFFFFF,
+    chatMessageTextSend = WeColors.Color_FF000000_90,
+    chatMessageTextReceive = WeColors.Color_FF000000_90,
 )
 
 val DarkWeColorScheme = WeColorScheme(
@@ -126,7 +134,11 @@ val DarkWeColorScheme = WeColorScheme(
     tableRowBackground = WeColors.Color_FF191919,
 
 
-    chatInputBackground = WeColors.Color_FF191919
+    chatInputBackground = WeColors.Color_FF191919,
+    chatMessageBackgroundSend = WeColors.Color_FF3EB477,
+    chatMessageBackgroundReceive = WeColors.Color_FF191919,
+    chatMessageTextSend = WeColors.Color_FF000000_90,
+    chatMessageTextReceive = WeColors.Color_FFFFFFFF_90,
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

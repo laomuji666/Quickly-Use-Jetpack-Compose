@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,14 +31,17 @@ fun WeButton(
     val buttonWidth = when(weButtonType){
         WeButtonType.BIG -> WeTheme.dimens.bigButtonWidth
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonWidth
+        WeButtonType.WARP -> 0.dp
     }
     val buttonHeight = when(weButtonType){
         WeButtonType.BIG -> WeTheme.dimens.bigButtonHeight
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonHeight
+        WeButtonType.WARP ->  WeTheme.dimens.smallButtonHeight
     }
     val buttonRoundedCornerDp = when(weButtonType){
         WeButtonType.BIG -> WeTheme.dimens.bigButtonRoundedCornerDp
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonRoundedCornerDp
+        WeButtonType.WARP ->  WeTheme.dimens.smallButtonRoundedCornerDp
     }
     val buttonColor = when(weButtonColor) {
         WeButtonColor.PRIMARY -> WeTheme.colorScheme.primaryButton
@@ -63,14 +67,16 @@ fun WeButton(
         Text(
             text = text,
             style = WeTheme.typography.emTitle,
-            color = textColor
+            color = textColor,
+            modifier = Modifier.padding(horizontal = if(weButtonType != WeButtonType.WARP) 0.dp else WeTheme.dimens.navigationBarPaddingHorizontal)
         )
     }
 }
 
 enum class WeButtonType{
     BIG,
-    SMALL
+    SMALL,
+    WARP
 }
 
 enum class WeButtonColor{

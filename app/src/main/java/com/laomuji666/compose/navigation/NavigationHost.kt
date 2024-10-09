@@ -80,10 +80,9 @@ fun NavigationHost(
         )
 
         composeAiChatScreen(
-            onContactClick = { account, nickname ->
+            onContactClick = { account ->
                 navHostController.navigateToChatScreen(
-                    account = account,
-                    nickname = nickname,
+                    account = account
                 )
             }
         )

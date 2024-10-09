@@ -45,6 +45,9 @@ data class WeDimens(
     val tableLabelWidth:Dp,
 
     val chatInputHeight:Dp,
+    val chatPaddingHorizontal:Dp,
+    val chatAvatarSize:Dp,
+    val chatAvatarRoundedCornerDp:Dp
 )
 
 val DefaultWeDimens = WeDimens(
@@ -87,7 +90,10 @@ val DefaultWeDimens = WeDimens(
 
     tableLabelWidth = 60.dp,
 
-    chatInputHeight = 56.dp
+    chatInputHeight = 56.dp,
+    chatPaddingHorizontal = 10.dp,
+    chatAvatarSize = 40.dp,
+    chatAvatarRoundedCornerDp = 4.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }
