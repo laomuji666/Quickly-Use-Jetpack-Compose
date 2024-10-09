@@ -21,6 +21,7 @@ googleFirebaseCrashlytics = "3.0.2"
 ktor = "2.3.12"
 playServicesAuth = "21.2.0"
 androidxRoom = "2.6.1"
+generativeai = "0.9.0"
 
 [libraries]
 # app
@@ -59,6 +60,8 @@ firebase-storage = { module = "com.google.firebase:firebase-storage" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
+# google ai
+generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai"}
 
 
 # compose permission

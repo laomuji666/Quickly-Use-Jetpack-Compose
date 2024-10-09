@@ -37,7 +37,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun ContactsScreen(
-    viewModel: ContactsViewModel = hiltViewModel()
+    viewModel: ContactsViewModel = hiltViewModel(),
+    onContactClick: (ContactInfo)->Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     WeScaffold(
@@ -49,15 +50,17 @@ fun ContactsScreen(
         }
     ) {
         ContactsScreenUi(
-            contactList = uiState.contactList
+            contactList = uiState.contactList,
+            onContactClick = onContactClick
         )
     }
 }
 
 @Composable
 private fun ContactsScreenUi(
-    paddingTop: Dp = WeTheme.dimens.topNavigationBarHeight - 1.dp,
-    contactList:List<ContactInfo>
+    paddingTop: Dp = WeTheme.dimens.navigationBarHeight - 1.dp,
+    contactList:List<ContactInfo>,
+    onContactClick: (ContactInfo)->Unit
 ){
     val paddingTopPx = with(LocalDensity.current){
         paddingTop.toPx()
@@ -77,26 +80,20 @@ private fun ContactsScreenUi(
                 modifier = Modifier.verticalScroll(state = listState)
             ){
                 contactList.forEachIndexed { index,item ->
-                    if(index == 0){
+                    if(index == 0 || item.category != contactList[index - 1].category){
                         WeTableTitle(
                             modifier = Modifier.onGloballyPositioned {
                                 typeMap[item.category] = it.positionInRoot().y - it.size.height
                             },
                             title = item.category
                         )
-                    }else{
-                        if(item.category != contactList[index - 1].category){
-                            WeTableTitle(
-                                modifier = Modifier.onGloballyPositioned {
-                                    typeMap[item.category] = it.positionInRoot().y - it.size.height
-                                },
-                                title = item.category
-                            )
-                        }
                     }
                     WeContactItem(
                         avatar = item.avatar,
-                        text = item.nickname
+                        text = item.nickname,
+                        onClick = {
+                            onContactClick(item)
+                        }
                     )
                 }
             }
@@ -146,7 +143,8 @@ fun PreviewContactsScreenUi(){
                     category = "B",
                     avatar = ""
                 )
-            )
+            ),
+            onContactClick = {}
         )
     }
 }

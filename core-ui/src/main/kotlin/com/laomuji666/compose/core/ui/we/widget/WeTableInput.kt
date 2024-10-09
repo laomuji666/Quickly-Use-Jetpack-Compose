@@ -30,7 +30,8 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeTableInput(
-    title:String = "",
+    modifier: Modifier = Modifier,
+    title:String? = null,
     value:String = "",
     tip:String = "",
     onValueChange:(String) -> Unit = {},
@@ -38,15 +39,18 @@ fun WeTableInput(
 ){
     val focusRequester = remember { FocusRequester() }
     WeTableRow(
+        modifier = modifier,
         center = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text(
-                    text = title,
-                    style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColor90,
-                    modifier = Modifier.width(WeTheme.dimens.inputTitleWidth)
-                )
-                Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal / 2))
+                title?.let {
+                    Text(
+                        text = it,
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColor90,
+                        modifier = Modifier.width(WeTheme.dimens.tableLabelWidth)
+                    )
+                    Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal / 2))
+                }
                 BasicTextField(
                     value = value,
                     onValueChange = onValueChange,

@@ -7,6 +7,7 @@ import androidx.credentials.GetCredentialRequest
 import androidx.credentials.GetCredentialResponse
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.laomuji666.compose.core.logic.common.BuildConfig
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
  */
 class GoogleAuthenticate {
     companion object{
-        private const val WEB_CLIENT_ID = "905105202439-5v3lh96r8pgo1ubuv2qme1h6vahn4imi.apps.googleusercontent.com"
+        private const val WEB_CLIENT_ID = BuildConfig.WEB_CLIENT_ID
     }
 
     fun requestLogin(coroutineScope: CoroutineScope, activityContext:Context, onSuccess:(email:String,idToken:String)->Unit, onFail:()->Unit){

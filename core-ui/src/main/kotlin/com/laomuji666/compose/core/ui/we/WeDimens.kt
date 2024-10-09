@@ -5,11 +5,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 data class WeDimens(
-    val topNavigationBarHeight:Dp,
-    val topNavigationBarPaddingHorizontal:Dp,
-    val topNavigationBarActionWidth:Dp,
-    val topNavigationBarIconSize:Dp,
-    val topNavigationBarActionPaddingWidth:Dp,
+    val navigationBarHeight:Dp,
+    val navigationBarPaddingHorizontal:Dp,
+    val navigationBarActionWidth:Dp,
+    val navigationBarIconSize:Dp,
+    val navigationBarActionPaddingWidth:Dp,
 
     val bigButtonWidth:Dp,
     val bigButtonHeight:Dp,
@@ -24,8 +24,8 @@ data class WeDimens(
 
     val actionSheetRoundedCornerDp:Dp,
 
-    val navigationBarIconSize:Dp,
-    val navigationBarHeight:Dp,
+    val bottomNavigationBarIconSize:Dp,
+    val bottomNavigationBarHeight:Dp,
 
     val tableIconSize:Dp,
 
@@ -42,15 +42,20 @@ data class WeDimens(
     val contactIconSize:Dp,
     val contactIconRoundedCornerDp: Dp,
 
-    val inputTitleWidth:Dp
+    val tableLabelWidth:Dp,
+
+    val chatInputHeight:Dp,
+    val chatPaddingHorizontal:Dp,
+    val chatAvatarSize:Dp,
+    val chatAvatarRoundedCornerDp:Dp
 )
 
 val DefaultWeDimens = WeDimens(
-    topNavigationBarHeight = 44.dp,
-    topNavigationBarPaddingHorizontal = 10.dp,
-    topNavigationBarActionWidth = 90.dp,
-    topNavigationBarIconSize = 24.dp,
-    topNavigationBarActionPaddingWidth = 16.dp,
+    navigationBarHeight = 44.dp,
+    navigationBarPaddingHorizontal = 10.dp,
+    navigationBarActionWidth = 90.dp,
+    navigationBarIconSize = 24.dp,
+    navigationBarActionPaddingWidth = 16.dp,
 
     bigButtonWidth = 320.dp,
     bigButtonHeight = 40.dp,
@@ -65,8 +70,8 @@ val DefaultWeDimens = WeDimens(
 
     actionSheetRoundedCornerDp = 12.dp,
 
-    navigationBarIconSize = 26.dp,
-    navigationBarHeight = 52.dp,
+    bottomNavigationBarIconSize = 26.dp,
+    bottomNavigationBarHeight = 52.dp,
 
     tableIconSize = 24.dp,
 
@@ -83,7 +88,12 @@ val DefaultWeDimens = WeDimens(
     contactIconSize = 40.dp,
     contactIconRoundedCornerDp = 4.dp,
 
-    inputTitleWidth = 60.dp
+    tableLabelWidth = 60.dp,
+
+    chatInputHeight = 56.dp,
+    chatPaddingHorizontal = 10.dp,
+    chatAvatarSize = 40.dp,
+    chatAvatarRoundedCornerDp = 4.dp
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

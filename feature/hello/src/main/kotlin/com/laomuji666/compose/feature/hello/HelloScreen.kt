@@ -19,8 +19,8 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBar
-import com.laomuji666.compose.core.ui.we.widget.WeNavigationBarItem
+import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
@@ -83,8 +83,8 @@ private fun HelloScreenUi(
     val coroutineScope = rememberCoroutineScope()
     WeScaffold(
         bottomBar = {
-            WeNavigationBar {
-                WeNavigationBarItem(
+            WeBottomNavigationBar {
+                WeBottomNavigationBarItem(
                     unSelectImageVector = WeIcons.Example,
                     title = stringResource(id = R.string.string_hello_screen_navigation_example),
                     selected = pagerState.currentPage == HelloSelectEnum.EXAMPLE.ordinal,
@@ -94,7 +94,7 @@ private fun HelloScreenUi(
                         }
                     }
                 )
-                WeNavigationBarItem(
+                WeBottomNavigationBarItem(
                     unSelectImageVector = WeIcons.Widget,
                     title = stringResource(id = R.string.string_hello_screen_navigation_widget),
                     selected = pagerState.currentPage == HelloSelectEnum.WIDGET.ordinal,

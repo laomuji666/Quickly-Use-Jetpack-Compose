@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.laomuji666.compose.core.ui.safePopBackStack
+import com.laomuji666.compose.feature.chat.chat.composeChatScreen
+import com.laomuji666.compose.feature.chat.chat.navigateToChatScreen
 import com.laomuji666.compose.feature.chat.composeAiChatScreen
 import com.laomuji666.compose.feature.chat.navigateToAiChatScreen
 import com.laomuji666.compose.feature.hello.HELLO_SCREEN
@@ -77,6 +79,18 @@ fun NavigationHost(
             }
         )
 
-        composeAiChatScreen()
+        composeAiChatScreen(
+            onContactClick = { account ->
+                navHostController.navigateToChatScreen(
+                    account = account
+                )
+            }
+        )
+
+        composeChatScreen(
+            onBackClick = {
+                navHostController.safePopBackStack()
+            }
+        )
     }
 }

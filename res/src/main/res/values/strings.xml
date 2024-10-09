@@ -51,4 +51,7 @@
     <string name="string_ai_chat_me_screen_item_friend">朋友圈</string>
     <string name="string_ai_chat_me_screen_item_card">卡包</string>
     <string name="string_ai_chat_me_screen_item_setting">设置</string>
+
+<!--  ChatScreen  -->
+    <string name="string_chat_screen_send_text">发送</string>
 </resources>

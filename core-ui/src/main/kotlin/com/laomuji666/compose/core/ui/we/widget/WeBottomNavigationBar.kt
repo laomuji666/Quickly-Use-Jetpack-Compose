@@ -24,7 +24,6 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
 import com.laomuji666.compose.core.ui.we.icons.ChatsUnselect
@@ -32,9 +31,10 @@ import com.laomuji666.compose.core.ui.we.icons.ContactsSelect
 import com.laomuji666.compose.core.ui.we.icons.ContactsUnselect
 import com.laomuji666.compose.core.ui.we.icons.MeSelect
 import com.laomuji666.compose.core.ui.we.icons.MeUnselect
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
-fun RowScope.WeNavigationBarItem(
+fun RowScope.WeBottomNavigationBarItem(
     title: String,
     selected: Boolean,
     unSelectImageVector: ImageVector? = null,
@@ -61,7 +61,7 @@ fun RowScope.WeNavigationBarItem(
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                     colorFilter = ColorFilter.tint(color),
-                    modifier = Modifier.height(WeTheme.dimens.navigationBarIconSize)
+                    modifier = Modifier.height(WeTheme.dimens.bottomNavigationBarIconSize)
                 )
             }
         }else{
@@ -71,7 +71,7 @@ fun RowScope.WeNavigationBarItem(
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                     colorFilter = ColorFilter.tint(color),
-                    modifier = Modifier.height(WeTheme.dimens.navigationBarIconSize)
+                    modifier = Modifier.height(WeTheme.dimens.bottomNavigationBarIconSize)
                 )
             }
         }
@@ -85,7 +85,7 @@ fun RowScope.WeNavigationBarItem(
 }
 
 @Composable
-fun WeNavigationBar(
+fun WeBottomNavigationBar(
     content: @Composable RowScope.() -> Unit
 ){
     Column {
@@ -96,8 +96,8 @@ fun WeNavigationBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(WeTheme.colorScheme.background)
-                .height(WeTheme.dimens.navigationBarHeight)
+                .background(WeTheme.colorScheme.navigationBarBackground)
+                .height(WeTheme.dimens.bottomNavigationBarHeight)
         ) {
             content()
         }
@@ -106,32 +106,32 @@ fun WeNavigationBar(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeNavigationBar(){
+fun PreviewWeBottomNavigationBar(){
     var selected by remember { mutableIntStateOf(0) }
     QuicklyTheme {
-        WeNavigationBar{
-            WeNavigationBarItem(
+        WeBottomNavigationBar{
+            WeBottomNavigationBarItem(
                 title = "微信",
                 selected = selected == 0,
                 onClick = { selected = 0 },
                 unSelectImageVector = WeIcons.ChatsUnselect,
                 selectImageVector = WeIcons.ChatsSelect
             )
-            WeNavigationBarItem(
+            WeBottomNavigationBarItem(
                 title = "通讯录",
                 selected = selected == 1,
                 onClick = { selected = 1 },
                 unSelectImageVector = WeIcons.ContactsUnselect,
                 selectImageVector = WeIcons.ContactsSelect
             )
-            WeNavigationBarItem(
+            WeBottomNavigationBarItem(
                 title = "发现",
                 selected = selected == 2,
                 onClick = { selected = 2 },
                 unSelectImageVector = WeIcons.ChatsUnselect,
                 selectImageVector = WeIcons.ChatsSelect
             )
-            WeNavigationBarItem(
+            WeBottomNavigationBarItem(
                 title = "我",
                 selected = selected == 3,
                 onClick = { selected = 3 },

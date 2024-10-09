@@ -43,12 +43,12 @@ fun WeTopNavigationBar(
             .background(WeTheme.colorScheme.background)
             .statusBarsPadding()
             .fillMaxWidth()
-            .height(WeTheme.dimens.topNavigationBarHeight)
-            .padding(horizontal = WeTheme.dimens.topNavigationBarPaddingHorizontal)
+            .height(WeTheme.dimens.navigationBarHeight)
+            .padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal)
         ,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(modifier = Modifier.width(WeTheme.dimens.topNavigationBarActionWidth)) {
+        Row(modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth)) {
             onBackClick?.let {
                 WeTopNavigationBarAction(
                     imageVector = WeIcons.Back,
@@ -64,7 +64,7 @@ fun WeTopNavigationBar(
         )
         Spacer(modifier = Modifier.weight(1f))
         Row(
-            modifier = Modifier.width(WeTheme.dimens.topNavigationBarActionWidth),
+            modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth),
             horizontalArrangement = Arrangement.End
         ) {
             actions()
@@ -92,14 +92,14 @@ fun WeTopNavigationBarAction(
             colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColor90),
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(WeTheme.dimens.topNavigationBarIconSize),
+                .size(WeTheme.dimens.navigationBarIconSize),
         )
     }
 }
 
 @Composable
 fun WeTopNavigationBarSpace(){
-    Spacer(modifier = Modifier.width(WeTheme.dimens.topNavigationBarActionPaddingWidth))
+    Spacer(modifier = Modifier.width(WeTheme.dimens.navigationBarActionPaddingWidth))
 }
 
 @PreviewLightDark

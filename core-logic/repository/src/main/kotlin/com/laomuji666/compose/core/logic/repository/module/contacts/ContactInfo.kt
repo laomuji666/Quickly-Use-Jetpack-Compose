@@ -6,7 +6,7 @@ import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import kotlinx.coroutines.tasks.await
 
 data class ContactInfo(
-    val account:Long,
+    val account: Long,
     val nickname: String,
     val category: String,
     val avatar: String
@@ -26,7 +26,7 @@ object ContactInfoConvert{
         forEach {
             result.add(it.asContactInfo())
         }
-        return result.sortedByDescending { it.category }
+        return result
     }
 
     fun List<ContactInfo>.asContactInfoEntityList():List<ContactInfoEntity>{

@@ -5,9 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
@@ -46,9 +50,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navHostController = rememberNavController()
             QuicklyTheme {
-                NavigationHost(
-                    navHostController = navHostController
-                )
+                Box(modifier = Modifier.fillMaxSize().navigationBarsPadding()){
+                    NavigationHost(
+                        navHostController = navHostController
+                    )
+                }
             }
         }
     }
