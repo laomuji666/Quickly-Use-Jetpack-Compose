@@ -35,13 +35,15 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + google登录: CredentialManager添加登录选项.
 + 离线可用: 优先从Room数据库获取数据,网络获取数据后更新到数据库.
 + 焦点控制: 点击焦点,键盘输入焦点控制,简化用户操作.
++ 动态切换logo: 比如双十一活动需要修改logo,但是又不想更新包.
 
 ## 运行效果
-| 例子     | 截图                                                          |
-|--------|-------------------------------------------------------------|
-| 网络异常处理 | <img src="docs/images/HttpScreen.gif" width="320"/></img>   |
-| 组件示例   | <img src="docs/images/WidgetScreen.gif" width="320"/></img> |
-| 轮播图    | <img src="docs/images/BannerView.gif" width="320"/></img>   |
+| 例子       | 截图                                                           |
+|----------|--------------------------------------------------------------|
+| 动态切换logo | <img src="docs/images/SwitchAppLogo.gif" width="320"/></img> |
+| 网络异常处理   | <img src="docs/images/HttpScreen.gif" width="320"/></img>    |
+| 组件示例     | <img src="docs/images/WidgetScreen.gif" width="320"/></img>  |
+| 轮播图      | <img src="docs/images/BannerView.gif" width="320"/></img>    |
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
