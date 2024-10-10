@@ -63,7 +63,10 @@ fun HelloScreen(
         onSelectMobileClick = {
             selectMobile()
         },
-        onAiChatClick = onAiChatClick
+        onAiChatClick = onAiChatClick,
+        onSwitchAppLogoClick = {
+            viewModel.switchAppLogo(context)
+        }
     )
 }
 
@@ -74,7 +77,8 @@ private fun HelloScreenUi(
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit,
     onSelectMobileClick:()->Unit,
-    onAiChatClick:()->Unit
+    onAiChatClick:()->Unit,
+    onSwitchAppLogoClick:()->Unit,
 ){
     val pagerState = rememberPagerState(
         initialPage = HelloSelectEnum.EXAMPLE.ordinal,
@@ -114,6 +118,8 @@ private fun HelloScreenUi(
             if(it == HelloSelectEnum.EXAMPLE.ordinal){
                 ExampleScreen(
                     helloText = uiState.helloText,
+                    enableSwitchAppLogo = uiState.enableSwitchAppLogo,
+                    onSwitchAppLogoClick = onSwitchAppLogoClick,
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
                     onGoogleLoginClick = onGoogleLoginClick,
@@ -138,7 +144,8 @@ fun PreviewHelloScreenUi(){
             onHttpClick = {},
             onGoogleLoginClick = {},
             onSelectMobileClick = {},
-            onAiChatClick = {}
+            onAiChatClick = {},
+            onSwitchAppLogoClick = {}
         )
     }
 }

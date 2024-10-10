@@ -7,12 +7,15 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
 @Composable
 fun ExampleScreen(
     helloText: String,
+    enableSwitchAppLogo: Boolean,
+    onSwitchAppLogoClick:()->Unit,
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit,
@@ -50,7 +53,13 @@ fun ExampleScreen(
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_hello_screen_ai_chat),
-            onClick = onAiChatClick
+            onClick = onAiChatClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableSwitchRow(
+            title = stringResource(id = R.string.string_hello_screen_switch_app_logo),
+            checked = enableSwitchAppLogo,
+            onClick = onSwitchAppLogoClick
         )
     }
 }
@@ -65,7 +74,9 @@ fun PreviewExampleScreen(){
             onHttpClick = {},
             onGoogleLoginClick = {},
             onSelectMobileClick = {},
-            onAiChatClick = {}
+            onAiChatClick = {},
+            enableSwitchAppLogo = false,
+            onSwitchAppLogoClick = {}
         )
     }
 }
