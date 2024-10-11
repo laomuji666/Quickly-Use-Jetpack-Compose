@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.ui.we.widget
 
+import android.net.Uri
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
@@ -21,14 +23,14 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
 fun WeContactItem(
-    avatar: String,
+    avatar: Uri,
     text: String,
     onClick:()->Unit = {}
 ){
     val imageRequest = ImageRequest
         .Builder(LocalContext.current)
         .data(avatar)
-        .diskCacheKey(avatar)
+        .diskCacheKey(avatar.toString())
         .build()
 
     WeTableRow(
@@ -67,15 +69,15 @@ fun PreviewWeContactItem(){
     DefaultWeTheme {
         Column {
             WeContactItem(
-                "",
+                "".toUri(),
                 text = "A"
             )
             WeContactItem(
-                "",
+                "".toUri(),
                 text = "B"
             )
             WeContactItem(
-                "",
+                "".toUri(),
                 text = "C"
             )
         }

@@ -10,7 +10,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.laomuji666.compose.core.logic.repository.module.contacts.ContactInfo
+import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Add
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
@@ -34,7 +34,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun AiChatScreen(
-    onContactClick: (ContactInfo)->Unit
+    onContactClick: (ContactInfoEntity)->Unit
 ){
     AiChatScreenUi(
         messageContent = {

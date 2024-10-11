@@ -1,6 +1,7 @@
 package com.laomuji666.compose.core.logic.notification.di
 
 import android.content.Context
+import com.laomuji666.compose.core.logic.common.cache.CacheUtil
 import com.laomuji666.compose.core.logic.notification.NotificationHelper
 import com.laomuji666.compose.core.logic.notification.FirebaseNotification
 import dagger.Module
@@ -22,9 +23,10 @@ class NotificationModule {
     @Provides
     @Singleton
     fun provideNotificationHelper(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        cacheUtil: CacheUtil
     ): NotificationHelper {
-        return NotificationHelper(context)
+        return NotificationHelper(context, cacheUtil)
     }
 
 }

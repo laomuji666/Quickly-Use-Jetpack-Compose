@@ -14,4 +14,17 @@ data class ContactInfoEntity(
 ){
     val contentUri: Uri
         get() = "https://compose.laomuji666.com/CHAT_SCREEN/$account".toUri()
+
+    val avatarUri: Uri
+        get() = avatar.toUri()
+}
+
+fun List<ContactInfoEntity>.getTypeList():List<String> {
+    val typeList = mutableListOf<String>()
+    forEach {
+        if(!typeList.contains(it.category)){
+            typeList.add(it.category)
+        }
+    }
+    return typeList
 }

@@ -6,27 +6,31 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
+import com.laomuji666.compose.core.logic.common.cache.CacheUtil
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.logic.database.entity.MessageInfoEntity
 import javax.inject.Singleton
 
 @Singleton
 class NotificationHelper(
-    context: Context
+    context: Context,
+    cacheUtil: CacheUtil
 ) {
     companion object{
+        const val ENABLE_NOTIFICATION = "ENABLE_NOTIFICATION"
+
         private const val CHANNEL_NAME_NEW_MESSAGES = "new_messages"
         private const val REQUEST_NEW_MESSAGES = 1
     }
 
     private val appContext = context
     private val notificationManager: NotificationManager = context.getSystemService()!!
+    private val enableNotification by cacheUtil.cacheable(ENABLE_NOTIFICATION,false)
 
     init {
         setUpNotificationChannels()
@@ -55,8 +59,12 @@ class NotificationHelper(
         contactInfoEntity: ContactInfoEntity,
         messageInfoEntity: MessageInfoEntity
     ) {
+        if(!enableNotification){
+            return
+        }
+
         //设置对话信息
-        val icon = IconCompat.createWithAdaptiveBitmapContentUri(Uri.parse(contactInfoEntity.avatar))
+        val icon = IconCompat.createWithAdaptiveBitmapContentUri(contactInfoEntity.avatarUri)
 
         val person = Person.Builder()
             .setName(contactInfoEntity.nickname)
