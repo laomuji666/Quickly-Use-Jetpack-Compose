@@ -15,10 +15,16 @@ dependencies {
     //hilt
     ksp(libs.hilt.compiler)
 
+    //res
+    implementation(project(":res"))
+
     //common
     implementation(project(":core-logic:common"))
 
+    //database
+    implementation(project(":core-logic:database"))
+
     //firebase
     implementation(platform(libs.firebase.bom))
-    api(libs.firebase.messaging)
+    implementation(libs.firebase.messaging)
 }

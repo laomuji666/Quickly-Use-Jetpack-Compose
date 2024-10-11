@@ -6,8 +6,10 @@ import com.google.ai.client.generativeai.type.HarmCategory
 import com.google.ai.client.generativeai.type.SafetySetting
 import com.google.ai.client.generativeai.type.content
 import com.laomuji666.compose.core.logic.common.BuildConfig
+import com.laomuji666.compose.core.logic.database.dao.ContactDao
 import com.laomuji666.compose.core.logic.database.dao.MessageDao
 import com.laomuji666.compose.core.logic.database.entity.MessageInfoEntity
+import com.laomuji666.compose.core.logic.notification.NotificationHelper
 import com.laomuji666.compose.core.logic.repository.module.chat.ChatRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.asCoroutineDispatcher
@@ -19,7 +21,9 @@ import javax.inject.Singleton
 
 @Singleton
 internal class GoogleAiChat(
-    private val messageDao: MessageDao
+    private val contactDao: ContactDao,
+    private val messageDao: MessageDao,
+    private val notificationHelper: NotificationHelper
 ) : ChatRepository {
 
     private val coroutineScope = CoroutineScope(Executors.newSingleThreadExecutor().asCoroutineDispatcher())
@@ -44,7 +48,7 @@ internal class GoogleAiChat(
         )
         val generativeModel = GenerativeModel(
             modelName = "gemini-1.5-pro-latest",
-            apiKey = BuildConfig.API_KEY,
+            apiKey = BuildConfig.GEMINI_API_KEY,
             systemInstruction = content {
                 text("请像友好的${nickname}一样回复此聊天对话")
             },
@@ -66,12 +70,15 @@ internal class GoogleAiChat(
                 }else{
                     it
                 }
-                messageDao.insert(
-                    MessageInfoEntity(
-                        account = account,
-                        text = filterText,
-                        isSend = false
-                    )
+                val messageInfoEntity = MessageInfoEntity(
+                    account = account,
+                    text = filterText,
+                    isSend = false
+                )
+                messageDao.insert(messageInfoEntity)
+                notificationHelper.showNotification(
+                    contactInfoEntity = contactDao.getByAccount(account),
+                    messageInfoEntity = messageInfoEntity
                 )
             }
         }

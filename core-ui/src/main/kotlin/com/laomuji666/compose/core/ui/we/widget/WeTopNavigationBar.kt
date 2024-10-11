@@ -25,12 +25,12 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Add
 import com.laomuji666.compose.core.ui.we.icons.Back
 import com.laomuji666.compose.core.ui.we.icons.Search
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
 fun WeTopNavigationBar(
@@ -40,7 +40,7 @@ fun WeTopNavigationBar(
 ){
     Row(
         modifier = Modifier
-            .background(WeTheme.colorScheme.background)
+            .background(WeTheme.colorScheme.topNavigationBarBackground)
             .statusBarsPadding()
             .fillMaxWidth()
             .height(WeTheme.dimens.navigationBarHeight)

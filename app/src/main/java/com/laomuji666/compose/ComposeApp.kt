@@ -5,6 +5,7 @@ import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.request.CachePolicy
+import coil.util.DebugLogger
 import dagger.hilt.android.HiltAndroidApp
 
 /**
@@ -28,6 +29,7 @@ class ComposeApp : Application(), ImageLoaderFactory {
                     .build()
             }
             .respectCacheHeaders(false)
+            .logger(DebugLogger())
             .build()
     }
 }

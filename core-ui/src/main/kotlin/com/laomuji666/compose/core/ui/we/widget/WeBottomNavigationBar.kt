@@ -96,7 +96,7 @@ fun WeBottomNavigationBar(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .background(WeTheme.colorScheme.navigationBarBackground)
+                .background(WeTheme.colorScheme.bottomNavigationBarBackground)
                 .height(WeTheme.dimens.bottomNavigationBarHeight)
         ) {
             content()

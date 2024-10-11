@@ -15,12 +15,24 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="33">
 
         <activity
             android:name="com.laomuji666.compose.MainActivity"
+            android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="compose.laomuji666.com"
+                    android:pathPattern="/chat/*"
+                    android:scheme="https" />
+            </intent-filter>
         </activity>
         
         <activity-alias
@@ -47,12 +59,18 @@
         </activity-alias>
 
         <service
-            android:name=".SimpleFirebaseMessagingService"
+            android:name=".core.logic.notification.service.SimpleFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <provider
+            android:name=".AssetFileProvider"
+            android:authorities="compose.laomuji666.assert"
+            android:exported="true"
+            tools:ignore="ExportedContentProvider" />
     </application>
 
 </manifest>

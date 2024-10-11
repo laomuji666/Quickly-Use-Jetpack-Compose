@@ -47,12 +47,13 @@
     <string name="string_ai_chat_me_screen_we_chat_name">老母鸡</string>
     <string name="string_ai_chat_me_screen_we_chat_number_format">微信号: %1$s</string>
     <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
-    <string name="string_ai_chat_me_screen_item_service">服务</string>
-    <string name="string_ai_chat_me_screen_item_collection">收藏</string>
-    <string name="string_ai_chat_me_screen_item_friend">朋友圈</string>
-    <string name="string_ai_chat_me_screen_item_card">卡包</string>
-    <string name="string_ai_chat_me_screen_item_setting">设置</string>
+    <string name="string_ai_chat_me_screen_enable_notification">消息通知</string>
 
 <!--  ChatScreen  -->
     <string name="string_chat_screen_send_text">发送</string>
+
+<!--  Notification  -->
+    <string name="string_notification_new_messages_name">聊天消息</string>
+    <string name="string_notification_new_messages_description">收到的未读读聊天消息</string>
+
 </resources>

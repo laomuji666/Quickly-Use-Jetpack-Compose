@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji666.compose.core.logic.repository.module.contacts.ContactInfo
-import com.laomuji666.compose.core.logic.repository.module.contacts.getTypeList
+import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
+import com.laomuji666.compose.core.logic.database.entity.getTypeList
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ContactsScreen(
     viewModel: ContactsViewModel = hiltViewModel(),
-    onContactClick: (ContactInfo)->Unit
+    onContactClick: (ContactInfoEntity)->Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     WeScaffold(
@@ -59,8 +59,8 @@ fun ContactsScreen(
 @Composable
 private fun ContactsScreenUi(
     paddingTop: Dp = WeTheme.dimens.navigationBarHeight - 1.dp,
-    contactList:List<ContactInfo>,
-    onContactClick: (ContactInfo)->Unit
+    contactList:List<ContactInfoEntity>,
+    onContactClick: (ContactInfoEntity)->Unit
 ){
     val paddingTopPx = with(LocalDensity.current){
         paddingTop.toPx()
@@ -89,7 +89,7 @@ private fun ContactsScreenUi(
                         )
                     }
                     WeContactItem(
-                        avatar = item.avatar,
+                        avatar = item.avatarUri,
                         text = item.nickname,
                         onClick = {
                             onContactClick(item)
@@ -125,19 +125,19 @@ fun PreviewContactsScreenUi(){
     QuicklyTheme {
         ContactsScreenUi(
             contactList = listOf(
-                ContactInfo(
+                ContactInfoEntity(
                     account = 1,
                     nickname = "A",
                     category = "A",
                     avatar = ""
                 ),
-                ContactInfo(
+                ContactInfoEntity(
                     account = 2,
                     nickname = "A",
                     category = "A",
                     avatar = ""
                 ),
-                ContactInfo(
+                ContactInfoEntity(
                     account = 3,
                     nickname = "A",
                     category = "B",

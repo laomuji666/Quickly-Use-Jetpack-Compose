@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -11,8 +12,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
+import com.laomuji666.compose.core.logic.common.Log
 import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
@@ -33,7 +38,6 @@ fun HelloScreen(
     onAiChatClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val coroutineScope = rememberCoroutineScope()
     val context = LocalContext.current
 
     val selectMobile = selectMobileLauncher(
@@ -41,7 +45,7 @@ fun HelloScreen(
             Toast.showText(context, it)
         },
         onFail = {
-            Toast.showText(context, "取消")
+            Toast.showText(context, "...")
         }
     )
     HelloScreenUi(
@@ -50,13 +54,12 @@ fun HelloScreen(
         onHttpClick = onHttpClick,
         onGoogleLoginClick = {
             GoogleAuthenticate().requestLogin(
-                coroutineScope = coroutineScope,
                 activityContext = context,
                 onSuccess = { email, idToken ->
                     Toast.showText(context, "$email $idToken")
                 },
                 onFail = {
-                    //登录失败或取消登录
+                    Toast.showText(context, "...")
                 }
             )
         },
@@ -68,6 +71,26 @@ fun HelloScreen(
             viewModel.switchAppLogo(context)
         }
     )
+
+    //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val lifecycleObserver = LifecycleEventObserver { _,event->
+            when(event){
+                Lifecycle.Event.ON_START -> {
+                    Log.debug("tag_hello_screen", "ON_START")
+                }
+                Lifecycle.Event.ON_STOP -> {
+                    Log.debug("tag_hello_screen", "ON_STOP")
+                }
+                else -> {}
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(lifecycleObserver)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(lifecycleObserver)
+        }
+    }
 }
 
 @Composable

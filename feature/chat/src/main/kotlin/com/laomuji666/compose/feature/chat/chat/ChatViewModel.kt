@@ -4,19 +4,20 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.database.dao.ContactDao
+import com.laomuji666.compose.core.logic.notification.NotificationHelper
 import com.laomuji666.compose.core.logic.repository.module.chat.ChatRepository
+import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
 class ChatViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     contactDao: ContactDao,
-    private val chatRepository: ChatRepository
+    private val chatRepository: ChatRepository,
+    notificationHelper: NotificationHelper
 ):ViewModel() {
     private val contactInfo = contactDao.getByAccount((savedStateHandle.get<String>(ACCOUNT)!!).toLong())
 
@@ -30,9 +31,11 @@ class ChatViewModel @Inject constructor(
             messageList = messageList,
             inputText = inputText
         )
-    }.stateIn(
-        viewModelScope, SharingStarted.WhileSubscribed(5000), ChatScreenUiState()
-    )
+    }.stateInTimeout(viewModelScope, ChatScreenUiState())
+
+    init {
+        notificationHelper.dismissNotification(contactInfo)
+    }
 
     fun setInputText(text: String) {
         _inputText.value = text

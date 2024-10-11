@@ -54,8 +54,6 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
-firebase-database = { module = "com.google.firebase:firebase-database" }
-firebase-storage = { module = "com.google.firebase:firebase-storage" }
 # database
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
