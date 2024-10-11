@@ -51,4 +51,9 @@
 
 <!--  ChatScreen  -->
     <string name="string_chat_screen_send_text">发送</string>
+
+<!--  Notification  -->
+    <string name="string_notification_new_messages_name">聊天消息</string>
+    <string name="string_notification_new_messages_description">收到的未读读聊天消息</string>
+
 </resources>

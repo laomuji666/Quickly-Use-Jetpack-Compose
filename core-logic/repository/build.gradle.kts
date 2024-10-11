@@ -19,6 +19,7 @@ dependencies {
     implementation(project(":core-logic:common"))
     implementation(project(":core-ui"))
     api(project(":core-logic:database"))
+    implementation(project(":core-logic:notification"))
 
     //firebase
     implementation(platform(libs.firebase.bom))

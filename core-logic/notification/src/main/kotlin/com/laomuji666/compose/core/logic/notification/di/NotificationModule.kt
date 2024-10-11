@@ -1,10 +1,12 @@
 package com.laomuji666.compose.core.logic.notification.di
 
-import com.laomuji666.compose.core.logic.notification.impl.FirebaseNotification
-import com.laomuji666.compose.core.logic.notification.Notification
+import android.content.Context
+import com.laomuji666.compose.core.logic.notification.NotificationHelper
+import com.laomuji666.compose.core.logic.notification.FirebaseNotification
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -13,7 +15,16 @@ import javax.inject.Singleton
 class NotificationModule {
     @Provides
     @Singleton
-    fun provideNotification(): Notification {
+    fun provideFirebaseNotification(): FirebaseNotification {
         return FirebaseNotification()
     }
+
+    @Provides
+    @Singleton
+    fun provideNotificationHelper(
+        @ApplicationContext context: Context
+    ): NotificationHelper {
+        return NotificationHelper(context)
+    }
+
 }

@@ -1,6 +1,8 @@
 package com.laomuji666.compose.core.logic.repository.module.chat.di
 
+import com.laomuji666.compose.core.logic.database.dao.ContactDao
 import com.laomuji666.compose.core.logic.database.dao.MessageDao
+import com.laomuji666.compose.core.logic.notification.NotificationHelper
 import com.laomuji666.compose.core.logic.repository.module.chat.ChatRepository
 import com.laomuji666.compose.core.logic.repository.module.chat.impl.GoogleAiChat
 import dagger.Module
@@ -15,8 +17,14 @@ class ChatModule {
     @Provides
     @Singleton
     fun provideChat(
-        messageDao: MessageDao
+        contactDao: ContactDao,
+        messageDao: MessageDao,
+        notificationHelper: NotificationHelper
     ): ChatRepository {
-        return GoogleAiChat(messageDao)
+        return GoogleAiChat(
+            contactDao = contactDao,
+            messageDao = messageDao,
+            notificationHelper = notificationHelper
+        )
     }
 }
