@@ -44,7 +44,7 @@ internal class GoogleAiChat(
         )
         val generativeModel = GenerativeModel(
             modelName = "gemini-1.5-pro-latest",
-            apiKey = BuildConfig.API_KEY,
+            apiKey = BuildConfig.GEMINI_API_KEY,
             systemInstruction = content {
                 text("请像友好的${nickname}一样回复此聊天对话")
             },

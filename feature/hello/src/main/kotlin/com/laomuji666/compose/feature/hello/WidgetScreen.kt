@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -29,6 +28,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -55,7 +55,6 @@ private fun WidgetScreenUi(){
 
 @Composable
 private fun ToastWidget(){
-    val coroutineScope = rememberCoroutineScope()
     var isEnable by rememberSaveable { mutableStateOf(false) }
     val titleList = listOf(stringResource(id = R.string.string_toast_loading), stringResource(id = R.string.string_toast_done), stringResource(id = R.string.string_toast_error))
     var currentItem by rememberSaveable { mutableIntStateOf(0) }
@@ -100,19 +99,19 @@ private fun ToastWidget(){
         onClick = {
             if(currentItem == 0){
                 showLoadingDialog = true
-                delayRun(coroutineScope){
+                delayRun{
                     showLoadingDialog = false
                 }
             }
             if(currentItem == 1){
                 showDoneDialog = true
-                delayRun(coroutineScope){
+                delayRun{
                     showDoneDialog = false
                 }
             }
             if(currentItem == 2) {
                 showErrorDialog = true
-                delayRun(coroutineScope) {
+                delayRun {
                     showErrorDialog = false
                 }
             }
@@ -120,8 +119,8 @@ private fun ToastWidget(){
 
 }
 
-private fun delayRun(coroutineScope: CoroutineScope, delay:Long = 2000, block:()->Unit){
-    coroutineScope.launch {
+private fun delayRun(delay:Long = 2000, block:()->Unit){
+    CoroutineScope(Dispatchers.IO).launch {
         delay(delay)
         block()
     }

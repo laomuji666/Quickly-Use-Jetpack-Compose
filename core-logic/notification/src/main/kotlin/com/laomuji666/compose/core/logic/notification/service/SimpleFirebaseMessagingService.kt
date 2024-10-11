@@ -1,4 +1,4 @@
-package com.laomuji666.compose
+package com.laomuji666.compose.core.logic.notification.service
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -70,7 +70,8 @@ class SimpleFirebaseMessagingService : FirebaseMessagingService(){
      */
     private fun sendNotification(title:String, messageBody: String, imageUrl: Uri?) {
         val requestCode = (System.currentTimeMillis() % 1000).toInt()
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent()
+        intent.setClassName(this, "com.laomuji666.compose.MainActivity")
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(
             this,
@@ -95,8 +96,7 @@ class SimpleFirebaseMessagingService : FirebaseMessagingService(){
             .setPriority(NotificationCompat.PRIORITY_HIGH)
 
         //显示图片,在前台就是小图,在后台就是大图
-        val loadBitmap = loadBitmap(imageUrl)
-        loadBitmap?.let {
+        loadBitmap(imageUrl)?.let{
             notificationBuilder.setLargeIcon(it)
         }
 

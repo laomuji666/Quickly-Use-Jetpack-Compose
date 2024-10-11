@@ -9,6 +9,7 @@ import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.laomuji666.compose.core.logic.common.BuildConfig
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 /**
@@ -20,8 +21,8 @@ class GoogleAuthenticate {
         private const val WEB_CLIENT_ID = BuildConfig.WEB_CLIENT_ID
     }
 
-    fun requestLogin(coroutineScope: CoroutineScope, activityContext:Context, onSuccess:(email:String,idToken:String)->Unit, onFail:()->Unit){
-        coroutineScope.launch {
+    fun requestLogin(activityContext:Context, onSuccess:(email:String,idToken:String)->Unit, onFail:()->Unit){
+        CoroutineScope(Dispatchers.IO).launch {
             try {
                 val request: GetCredentialRequest = GetCredentialRequest.Builder()
                     .addCredentialOption(GetSignInWithGoogleOption.Builder(WEB_CLIENT_ID).build())

@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.ui.we
 
+import android.app.Activity
 import android.content.res.Configuration
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.LocalIndication
@@ -12,18 +13,21 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.ContentDrawScope
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.node.DelegatableNode
 import androidx.compose.ui.node.DrawModifierNode
 import androidx.compose.ui.node.invalidateDraw
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
 import kotlinx.coroutines.launch
 
@@ -36,7 +40,21 @@ internal fun DefaultWeTheme(
     WeTheme(
         weColorScheme = weColorScheme
     ){
+        SetSystemBarsColor()
         content()
+    }
+}
+
+@Composable
+private fun SetSystemBarsColor(){
+    val view = LocalView.current
+    val bottomNavigationBarBackground = WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
+    if(!view.isInEditMode){
+        //每次成功重组时,设置底部导航栏颜色
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.navigationBarColor = bottomNavigationBarBackground
+        }
     }
 }
 

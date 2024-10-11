@@ -37,13 +37,25 @@ fun AiChatScreen(
     onContactClick: (ContactInfo)->Unit
 ){
     AiChatScreenUi(
-        onContactClick = onContactClick
+        messageContent = {
+            Text(text = "TODO")
+        },
+        contactsContent = {
+            ContactsScreen(
+                onContactClick = onContactClick
+            )
+        },
+        meContent = {
+            MeScreen()
+        }
     )
 }
 
 @Composable
 private fun AiChatScreenUi(
-    onContactClick: (ContactInfo)->Unit
+    messageContent:@Composable ()->Unit,
+    contactsContent:@Composable ()->Unit,
+    meContent:@Composable ()->Unit
 ){
     val pagerState = rememberPagerState(
         initialPage = AiScreenSelectEnum.CONTACTS.ordinal,
@@ -58,18 +70,10 @@ private fun AiChatScreenUi(
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) {
-            if(it == AiScreenSelectEnum.MESSAGES.ordinal){
-                Text(text = "TODO")
-            }
-
-            if(it == AiScreenSelectEnum.CONTACTS.ordinal){
-                ContactsScreen(
-                    onContactClick = onContactClick
-                )
-            }
-
-            if(it == AiScreenSelectEnum.ME.ordinal){
-                MeScreen()
+            when(it){
+                AiScreenSelectEnum.MESSAGES.ordinal-> messageContent()
+                AiScreenSelectEnum.CONTACTS.ordinal-> contactsContent()
+                AiScreenSelectEnum.ME.ordinal-> meContent()
             }
         }
     }
@@ -143,7 +147,9 @@ private fun BottomBar(
 fun PreviewAiChatScreenUi(){
     QuicklyTheme {
         AiChatScreenUi(
-            onContactClick = {}
+            messageContent = {},
+            contactsContent = {},
+            meContent = {}
         )
     }
 }

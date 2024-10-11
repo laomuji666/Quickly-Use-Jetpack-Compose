@@ -15,26 +15,40 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
 import com.laomuji666.compose.res.R
 
 @Composable
-fun MeScreen(){
-    MeScreenUi()
+fun MeScreen(
+    viewModel: MeScreenViewModel = hiltViewModel()
+){
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    MeScreenUi(
+        enableNotification = uiState.enableNotification,
+        onEnableNotificationClick = {
+            viewModel.switchEnableNotification()
+        }
+    )
 }
 
 @Composable
-fun MeScreenUi(){
+fun MeScreenUi(
+    enableNotification:Boolean,
+    onEnableNotificationClick:()->Unit
+){
     Column(
         modifier = Modifier
             .background(WeTheme.colorScheme.background)
@@ -62,8 +76,7 @@ fun MeScreenUi(){
                     .padding(vertical = WeTheme.dimens.listPaddingHorizontal / 4)) {
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_name),
-                        style = WeTheme.typography.emTitle
-                        ,
+                        style = WeTheme.typography.emTitle,
                         color = WeTheme.colorScheme.fontColor90
                     )
                     Spacer(modifier = Modifier.weight(1f))
@@ -78,26 +91,10 @@ fun MeScreenUi(){
                 weTableRowOutlineType = WeTableRowOutlineType.SPLIT
             )
         }
-
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_ai_chat_me_screen_item_service),
-            weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_ai_chat_me_screen_item_collection),
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_ai_chat_me_screen_item_friend),
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_ai_chat_me_screen_item_card),
-            weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-        )
-        WeTableClickRow(
-            title = stringResource(id = R.string.string_ai_chat_me_screen_item_setting),
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+        WeTableSwitchRow(
+            title = stringResource(id = R.string.string_ai_chat_me_screen_enable_notification),
+            checked = enableNotification,
+            onClick = onEnableNotificationClick
         )
     }
 }
@@ -107,6 +104,9 @@ fun MeScreenUi(){
 @Composable
 fun PreviewMeScreenUi(){
     QuicklyTheme {
-        MeScreenUi()
+        MeScreenUi(
+            enableNotification = true,
+            onEnableNotificationClick = {}
+        )
     }
 }

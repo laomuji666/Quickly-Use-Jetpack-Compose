@@ -15,6 +15,9 @@ dependencies {
     //hilt
     ksp(libs.hilt.compiler)
 
+    //res
+    implementation(project(":res"))
+
     //common
     implementation(project(":core-logic:common"))
 

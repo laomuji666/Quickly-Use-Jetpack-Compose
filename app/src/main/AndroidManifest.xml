@@ -15,7 +15,8 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="33">
 
         <activity
             android:name="com.laomuji666.compose.MainActivity"
@@ -47,7 +48,7 @@
         </activity-alias>
 
         <service
-            android:name=".SimpleFirebaseMessagingService"
+            android:name=".core.logic.notification.service.SimpleFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

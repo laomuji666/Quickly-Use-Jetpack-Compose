@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic:repository"))
+    implementation(project(":core-logic:common"))
 
     ksp(libs.hilt.compiler)
 }
