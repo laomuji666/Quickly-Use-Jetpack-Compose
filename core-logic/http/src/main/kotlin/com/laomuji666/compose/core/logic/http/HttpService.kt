@@ -6,6 +6,7 @@ import com.laomuji666.compose.core.logic.http.cookie.MyCookiesStorage
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.okhttp.OkHttpConfig
+import io.ktor.client.plugins.HttpRequestRetry
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.cookies.HttpCookies
@@ -30,6 +31,7 @@ class HttpService @Inject constructor(
         enableJsonConvert()
         enableTimeOut()
         keepCookies()
+        enableRetry()
     }
 
     /**
@@ -107,6 +109,19 @@ class HttpService @Inject constructor(
     private fun HttpClientConfig<*>.keepCookies(){
         install(HttpCookies){
             storage = myCookiesStorage
+        }
+    }
+
+    /**
+     * 开启超时重试
+     */
+    private fun HttpClientConfig<*>.enableRetry(){
+        install(HttpRequestRetry){
+            maxRetries = 3
+            retryOnExceptionIf { _, _ ->
+                true
+            }
+            exponentialDelay()
         }
     }
 }
