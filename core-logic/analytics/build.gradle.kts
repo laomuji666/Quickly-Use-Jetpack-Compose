@@ -1,7 +1,6 @@
 plugins {
     alias(libs.plugins.laomuji666.compose.library)
     alias(libs.plugins.laomuji666.compose.hilt)
-    alias(libs.plugins.kotlin.serialization)
 }
 
 android {

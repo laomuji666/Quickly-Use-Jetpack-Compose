@@ -27,10 +27,11 @@
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="compose.laomuji666.com"
                     android:pathPattern="/chat/*"
+                    android:host="compose.laomuji666.com"
                     android:scheme="https" />
             </intent-filter>
         </activity>

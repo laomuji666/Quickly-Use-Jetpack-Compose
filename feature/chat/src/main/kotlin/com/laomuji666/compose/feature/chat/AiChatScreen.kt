@@ -58,7 +58,7 @@ private fun AiChatScreenUi(
     meContent:@Composable ()->Unit
 ){
     val pagerState = rememberPagerState(
-        initialPage = AiScreenSelectEnum.CONTACTS.ordinal,
+        initialPage = AiScreenSelectEnum.MESSAGES.ordinal,
         pageCount = { AiScreenSelectEnum.entries.size }
     )
     WeScaffold(
@@ -68,7 +68,8 @@ private fun AiChatScreenUi(
     ) {
         HorizontalPager(
             state = pagerState,
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier.fillMaxSize(),
+            beyondViewportPageCount = 3
         ) {
             when(it){
                 AiScreenSelectEnum.MESSAGES.ordinal-> messageContent()

@@ -1,6 +1,5 @@
 package com.laomuji666.compose.core.ui.we.widget
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -66,10 +65,6 @@ fun WeToast(
                         )
                     }
                     WeToastType.LOADING -> {
-                        BackHandler(
-                            enabled = true,
-                            onBack = onDismissRequest
-                        )
                         var targetDegree by remember { mutableFloatStateOf(0f) }
                         LaunchedEffect(Unit) {
                             while (isActive){

@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.ui.we.widget
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -50,6 +51,9 @@ fun WeTopNavigationBar(
     ) {
         Row(modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth)) {
             onBackClick?.let {
+                BackHandler {
+                    it()
+                }
                 WeTopNavigationBarAction(
                     imageVector = WeIcons.Back,
                     onActionClick = it

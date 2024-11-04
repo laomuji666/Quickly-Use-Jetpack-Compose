@@ -10,7 +10,7 @@ import com.laomuji666.compose.feature.chat.chat.composeChatScreen
 import com.laomuji666.compose.feature.chat.chat.navigateToChatScreen
 import com.laomuji666.compose.feature.chat.composeAiChatScreen
 import com.laomuji666.compose.feature.chat.navigateToAiChatScreen
-import com.laomuji666.compose.feature.hello.HELLO_SCREEN
+import com.laomuji666.compose.feature.hello.RouteHelloScreen
 import com.laomuji666.compose.feature.hello.composeFirebaseScreen
 import com.laomuji666.compose.feature.hello.composeHelloScreen
 import com.laomuji666.compose.feature.hello.composeHttpScreen
@@ -24,7 +24,7 @@ import com.laomuji666.compose.feature.hello.navigateToHttpScreen
 @Composable
 fun NavigationHost(
     navHostController: NavHostController,
-    startDestination:String = HELLO_SCREEN,
+    startDestination:Any = RouteHelloScreen,
     animTime:Int = 300
 ){
     NavHost(

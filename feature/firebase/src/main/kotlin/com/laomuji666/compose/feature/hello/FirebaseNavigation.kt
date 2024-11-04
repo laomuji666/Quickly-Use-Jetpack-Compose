@@ -5,17 +5,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.laomuji666.compose.core.ui.navOptionsPushBack
+import kotlinx.serialization.Serializable
 
-const val FIREBASE_SCREEN = "FIREBASE_SCREEN"
+@Serializable
+data object RouteFirebaseScreen
 
 fun NavHostController.navigateToFirebaseScreen(navOptions: NavOptions = navOptionsPushBack(this)){
-    navigate(FIREBASE_SCREEN, navOptions)
+    navigate(RouteFirebaseScreen, navOptions)
 }
 
 fun NavGraphBuilder.composeFirebaseScreen(
     onBackClick: ()->Unit
 ){
-    composable(route = FIREBASE_SCREEN){
+    composable<RouteFirebaseScreen>{
         FirebaseScreen(
             onBackClick = onBackClick
         )

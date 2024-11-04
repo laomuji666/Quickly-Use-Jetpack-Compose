@@ -2,11 +2,10 @@ package com.laomuji666.compose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,9 +19,8 @@ class MainViewModel @Inject constructor() : ViewModel() {
      * 默认[MainUiState.Loading]
      */
     private val _mainUiState = MutableStateFlow<MainUiState>(MainUiState.Loading)
-    val uiState = _mainUiState.stateIn(
+    val uiState = _mainUiState.stateInTimeout(
         viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
         MainUiState.Loading
     )
 

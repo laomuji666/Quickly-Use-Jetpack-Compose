@@ -2,15 +2,17 @@ package com.laomuji666.compose.feature.hello
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import kotlinx.serialization.Serializable
 
-const val HELLO_SCREEN = "HELLO_SCREEN"
+@Serializable
+data object RouteHelloScreen
 
 fun NavGraphBuilder.composeHelloScreen(
     onFirebaseClick: ()->Unit,
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit
 ){
-    composable(route = HELLO_SCREEN){
+    composable<RouteHelloScreen>{
         HelloScreen(
             onFirebaseClick = onFirebaseClick,
             onHttpClick = onHttpClick,

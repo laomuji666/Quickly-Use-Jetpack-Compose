@@ -5,18 +5,19 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.laomuji666.compose.core.ui.navOptionsPushBack
+import kotlinx.serialization.Serializable
 
-
-const val AI_CHAT_SCREEN = "AI_CHAT_SCREEN"
+@Serializable
+data object RouteAiChatScreen
 
 fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack(this)){
-    navigate(AI_CHAT_SCREEN, navOptions)
+    navigate(RouteAiChatScreen, navOptions)
 }
 
 fun NavGraphBuilder.composeAiChatScreen(
     onContactClick: (account:Long)->Unit
 ){
-    composable(route = AI_CHAT_SCREEN){
+    composable<RouteAiChatScreen>{
         AiChatScreen(
             onContactClick = {
                 onContactClick(
