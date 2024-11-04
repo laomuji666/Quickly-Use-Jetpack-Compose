@@ -13,6 +13,7 @@ class LibraryConventionPlugin : Plugin<Project> {
                 apply("com.android.library")
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.compose")
+                apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
             extensions.configure<LibraryExtension> {
@@ -27,6 +28,7 @@ class LibraryConventionPlugin : Plugin<Project> {
             //compose = true 必须引入的依赖
             dependencies {
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose").get())
+                add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
             }
         }
     }

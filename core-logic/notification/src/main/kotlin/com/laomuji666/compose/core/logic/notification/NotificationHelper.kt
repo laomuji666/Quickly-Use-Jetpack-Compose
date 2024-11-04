@@ -11,6 +11,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.Person
 import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
+import com.laomuji666.compose.core.logic.common.Log
 import com.laomuji666.compose.core.logic.common.cache.CacheUtil
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.logic.database.entity.MessageInfoEntity
@@ -84,6 +85,7 @@ class NotificationHelper(
         intent.setClassName(appContext, "com.laomuji666.compose.MainActivity")
         intent.setAction(Intent.ACTION_VIEW)
         intent.setData(contactInfoEntity.contentUri)
+        Log.debug("tag_uri", "${contactInfoEntity.contentUri}")
         val pendingIntent = PendingIntent.getActivity(
             appContext,
             REQUEST_NEW_MESSAGES,

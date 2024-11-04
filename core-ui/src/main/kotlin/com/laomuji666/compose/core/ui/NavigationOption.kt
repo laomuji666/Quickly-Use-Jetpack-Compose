@@ -51,8 +51,8 @@ fun NavHostController.safePopBackStack(){
         return
     }
     lastPopBackJob?.cancel()
+    popBackStack()
     lastPopBackJob = coroutineScope.launch {
-        popBackStack()
         delay(1000)
         lastPopBackJob = null
     }

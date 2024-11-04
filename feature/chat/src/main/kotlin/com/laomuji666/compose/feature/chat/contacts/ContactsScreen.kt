@@ -29,7 +29,6 @@ import com.laomuji666.compose.core.logic.database.entity.getTypeList
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
-import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableTitle
 import com.laomuji666.compose.feature.chat.AiChatTopBar
 import com.laomuji666.compose.res.R
@@ -41,14 +40,11 @@ fun ContactsScreen(
     onContactClick: (ContactInfoEntity)->Unit
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    WeScaffold(
-        topBar = {
-            AiChatTopBar(
-                title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-                onMenuClick = {}
-            )
-        }
-    ) {
+    Column(modifier = Modifier.fillMaxSize()) {
+        AiChatTopBar(
+            title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
+            onMenuClick = {}
+        )
         ContactsScreenUi(
             contactList = uiState.contactList,
             onContactClick = onContactClick

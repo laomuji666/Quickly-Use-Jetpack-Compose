@@ -5,6 +5,7 @@ credentials = "1.2.2"
 googleid = "1.1.1"
 kotlin = "2.0.20"
 coreKtx = "1.13.1"
+kotlinxSerializationJson = "1.7.3"
 lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
 composeBom = "2024.09.02"
@@ -60,7 +61,8 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
 # google ai
 generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai"}
-
+# serialization
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 
 # compose permission
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
@@ -84,11 +86,12 @@ composePlugin = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kot
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
+google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 # build-logic
 laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecified" }
 laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
 laomuji666-compose-library = { id = "laomuji666.compose.library", version = "unspecified" }
-google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
-google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
+
 
 
