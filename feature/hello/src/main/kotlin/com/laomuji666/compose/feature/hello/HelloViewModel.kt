@@ -6,17 +6,19 @@ import android.content.pm.PackageManager
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.common.cache.CacheUtil
+import com.laomuji666.compose.core.logic.location.Locator
 import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class HelloViewModel @Inject constructor(
-    cacheUtil: CacheUtil
+    cacheUtil: CacheUtil,
+    private val locator: Locator
 ) : ViewModel() {
     private val _helloText = flow {
         emit("Compose")
@@ -24,14 +26,17 @@ class HelloViewModel @Inject constructor(
 
     private var enableSwitchAppLogo by cacheUtil.cacheable("enableSwitchAppLogo",false)
     private val _enableSwitchAppLogo = MutableStateFlow(enableSwitchAppLogo)
+    private val _location = MutableStateFlow("")
 
     val uiState = combine(
         _helloText,
-        _enableSwitchAppLogo
-    ){ helloText,enableSwitchAppLogo ->
+        _enableSwitchAppLogo,
+        _location
+    ){ helloText,enableSwitchAppLogo, location ->
         HelloUiState(
             helloText = helloText,
-            enableSwitchAppLogo = enableSwitchAppLogo
+            enableSwitchAppLogo = enableSwitchAppLogo,
+            location = location
         )
     }.stateInTimeout(viewModelScope, HelloUiState())
 
@@ -51,5 +56,20 @@ class HelloViewModel @Inject constructor(
 
         val disableAliasActivity = ComponentName(context, if(isDynamicAlias) defaultAliasCls else dynamicAliasCls)
         context.packageManager.setComponentEnabledSetting(disableAliasActivity, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
+    }
+
+    fun getLocation(activityContext: Context){
+        if(!locator.isEnableGps()){
+            locator.openGpsSetting(activityContext)
+            return
+        }
+        viewModelScope.launch {
+            val currentLocation = locator.getCurrentLocation()
+            if(currentLocation == null){
+                _location.value = ""
+            }else{
+                _location.value = "${currentLocation.latitude}\n${currentLocation.longitude}"
+            }
+        }
     }
 }
