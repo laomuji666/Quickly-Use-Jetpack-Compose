@@ -20,7 +20,9 @@ fun ExampleScreen(
     onHttpClick:()->Unit,
     onGoogleLoginClick:()->Unit,
     onSelectMobileClick:()->Unit,
-    onAiChatClick:()->Unit
+    onAiChatClick:()->Unit,
+    locationText: String,
+    onLocationClick:()->Unit
 ){
     WeScaffold(
         topBar = {
@@ -59,7 +61,13 @@ fun ExampleScreen(
         WeTableSwitchRow(
             title = stringResource(id = R.string.string_hello_screen_switch_app_logo),
             checked = enableSwitchAppLogo,
-            onClick = onSwitchAppLogoClick
+            onClick = onSwitchAppLogoClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_hello_screen_get_location),
+            summary = locationText,
+            onClick = onLocationClick
         )
     }
 }
@@ -76,7 +84,9 @@ fun PreviewExampleScreen(){
             onSelectMobileClick = {},
             onAiChatClick = {},
             enableSwitchAppLogo = false,
-            onSwitchAppLogoClick = {}
+            onSwitchAppLogoClick = {},
+            onLocationClick = {},
+            locationText = ""
         )
     }
 }

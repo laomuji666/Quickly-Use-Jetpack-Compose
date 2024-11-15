@@ -33,6 +33,7 @@ include(":core-logic:notification")
 include(":core-logic:http")
 include(":core-logic:database")
 include(":core-logic:repository")
+include(":core-logic:location")
 
 include(":feature:hello")
 include(":feature:firebase")

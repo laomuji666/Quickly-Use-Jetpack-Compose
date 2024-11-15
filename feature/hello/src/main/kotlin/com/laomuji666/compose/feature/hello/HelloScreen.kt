@@ -1,5 +1,6 @@
 package com.laomuji666.compose.feature.hello
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
@@ -16,9 +17,13 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.isGranted
+import com.google.accompanist.permissions.rememberPermissionState
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.common.Log
 import com.laomuji666.compose.core.logic.common.Toast
+import com.laomuji666.compose.core.ui.extension.isForeverDenied
 import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Example
@@ -30,6 +35,8 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
+@SuppressLint("MissingPermission")
+@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HelloScreen(
     viewModel: HelloViewModel = hiltViewModel(),
@@ -48,6 +55,9 @@ fun HelloScreen(
             Toast.showText(context, "...")
         }
     )
+
+    val locationPermissionState = rememberPermissionState(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+
     HelloScreenUi(
         uiState = uiState,
         onFirebaseClick = onFirebaseClick,
@@ -69,6 +79,17 @@ fun HelloScreen(
         onAiChatClick = onAiChatClick,
         onSwitchAppLogoClick = {
             viewModel.switchAppLogo(context)
+        },
+        onLocationClick = {
+            if(locationPermissionState.status.isGranted){
+                viewModel.getLocation(context)
+            }else{
+                if(locationPermissionState.status.isForeverDenied()){
+                    //永久拒绝了权限,需要打开设置页面手动授权
+                }else{
+                    locationPermissionState.launchPermissionRequest()
+                }
+            }
         }
     )
 
@@ -102,6 +123,7 @@ private fun HelloScreenUi(
     onSelectMobileClick:()->Unit,
     onAiChatClick:()->Unit,
     onSwitchAppLogoClick:()->Unit,
+    onLocationClick: ()->Unit
 ){
     val pagerState = rememberPagerState(
         initialPage = HelloSelectEnum.EXAMPLE.ordinal,
@@ -148,7 +170,9 @@ private fun HelloScreenUi(
                     onHttpClick = onHttpClick,
                     onGoogleLoginClick = onGoogleLoginClick,
                     onSelectMobileClick = onSelectMobileClick,
-                    onAiChatClick = onAiChatClick
+                    onAiChatClick = onAiChatClick,
+                    onLocationClick = onLocationClick,
+                    locationText = uiState.location
                 )
             }
             if(it == HelloSelectEnum.WIDGET.ordinal){
@@ -169,7 +193,8 @@ fun PreviewHelloScreenUi(){
             onGoogleLoginClick = {},
             onSelectMobileClick = {},
             onAiChatClick = {},
-            onSwitchAppLogoClick = {}
+            onSwitchAppLogoClick = {},
+            onLocationClick = {}
         )
     }
 }

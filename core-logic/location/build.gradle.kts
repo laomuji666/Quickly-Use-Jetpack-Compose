@@ -4,14 +4,19 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji666.compose.feature.hello"
+    namespace = "com.laomuji666.compose.core.logic.location"
+    buildFeatures {
+        buildConfig = true
+    }
 }
 
 dependencies {
+    //hilt
     ksp(libs.hilt.compiler)
 
-    implementation(project(":core-ui"))
+    //common
     implementation(project(":core-logic:common"))
-    implementation(project(":core-logic:authenticate"))
-    implementation(project(":core-logic:location"))
+
+    //location
+    implementation(libs.play.services.location)
 }

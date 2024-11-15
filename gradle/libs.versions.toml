@@ -23,6 +23,7 @@ ktor = "2.3.12"
 playServicesAuth = "21.2.0"
 androidxRoom = "2.6.1"
 generativeai = "0.9.0"
+playServicesLocation = "21.3.0"
 
 [libraries]
 # app
@@ -77,6 +78,7 @@ androidx-credentials = { module = "androidx.credentials:credentials", version.re
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "credentials" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
+play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 
 [plugins]
