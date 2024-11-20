@@ -21,6 +21,5 @@ android {
 }
 
 dependencies {
-    //hilt
-    ksp(libs.hilt.compiler)
+
 }

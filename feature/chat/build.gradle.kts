@@ -12,6 +12,4 @@ dependencies {
     implementation(project(":core-logic:repository"))
     implementation(project(":core-logic:common"))
     implementation(project(":core-logic:notification"))
-
-    ksp(libs.hilt.compiler)
 }

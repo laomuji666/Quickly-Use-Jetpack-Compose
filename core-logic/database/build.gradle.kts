@@ -16,8 +16,6 @@ android {
 }
 
 dependencies {
-    //hilt
-    ksp(libs.hilt.compiler)
 
     //database
     implementation(libs.androidx.room.runtime)
