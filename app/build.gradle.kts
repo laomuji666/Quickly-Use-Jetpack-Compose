@@ -21,8 +21,6 @@ android {
 dependencies {
     //关联view和compose
     implementation(libs.androidx.activity.compose)
-    //hilt
-    ksp(libs.hilt.compiler)
 
     //其它module
     implementation(project(":core-ui"))

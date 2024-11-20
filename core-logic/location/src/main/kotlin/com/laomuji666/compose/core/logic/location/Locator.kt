@@ -5,6 +5,6 @@ import android.location.Location
 
 interface Locator {
     fun isEnableGps(): Boolean
-    fun openGpsSetting(activityContext: Context)
+    fun openGpsSetting(context: Context)
     suspend fun getCurrentLocation(): Location?
 }

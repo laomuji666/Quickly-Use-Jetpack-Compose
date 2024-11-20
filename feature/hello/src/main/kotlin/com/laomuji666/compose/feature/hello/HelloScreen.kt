@@ -32,6 +32,8 @@ import com.laomuji666.compose.core.ui.we.icons.Widget
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
+import com.laomuji666.compose.core.ui.we.widget.WeToast
+import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -45,6 +47,11 @@ fun HelloScreen(
     onAiChatClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+
+    if(uiState.isLoading){
+        WeToast(weToastType = WeToastType.LOADING, message = stringResource(id = R.string.string_toast_loading))
+    }
+
     val context = LocalContext.current
 
     val selectMobile = selectMobileLauncher(
@@ -56,7 +63,8 @@ fun HelloScreen(
         }
     )
 
-    val locationPermissionState = rememberPermissionState(android.Manifest.permission.ACCESS_COARSE_LOCATION)
+    val fineLocation = rememberPermissionState(android.Manifest.permission.ACCESS_FINE_LOCATION)
+    val coarseLocation = rememberPermissionState(android.Manifest.permission.ACCESS_COARSE_LOCATION)
 
     HelloScreenUi(
         uiState = uiState,
@@ -81,13 +89,13 @@ fun HelloScreen(
             viewModel.switchAppLogo(context)
         },
         onLocationClick = {
-            if(locationPermissionState.status.isGranted){
+            if(fineLocation.status.isGranted || coarseLocation.status.isGranted){
                 viewModel.getLocation(context)
             }else{
-                if(locationPermissionState.status.isForeverDenied()){
-                    //永久拒绝了权限,需要打开设置页面手动授权
+                if(fineLocation.status.isForeverDenied()){
+                    coarseLocation.launchPermissionRequest()
                 }else{
-                    locationPermissionState.launchPermissionRequest()
+                    fineLocation.launchPermissionRequest()
                 }
             }
         }

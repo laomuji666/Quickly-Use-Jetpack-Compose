@@ -24,16 +24,19 @@ class HelloViewModel @Inject constructor(
         emit("Compose")
     }
 
+    private val _isLoading = MutableStateFlow(false)
     private var enableSwitchAppLogo by cacheUtil.cacheable("enableSwitchAppLogo",false)
     private val _enableSwitchAppLogo = MutableStateFlow(enableSwitchAppLogo)
     private val _location = MutableStateFlow("")
 
     val uiState = combine(
+        _isLoading,
         _helloText,
         _enableSwitchAppLogo,
         _location
-    ){ helloText,enableSwitchAppLogo, location ->
+    ){ isLoading, helloText,enableSwitchAppLogo, location ->
         HelloUiState(
+            isLoading = isLoading,
             helloText = helloText,
             enableSwitchAppLogo = enableSwitchAppLogo,
             location = location
@@ -58,18 +61,20 @@ class HelloViewModel @Inject constructor(
         context.packageManager.setComponentEnabledSetting(disableAliasActivity, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
     }
 
-    fun getLocation(activityContext: Context){
+    fun getLocation(context: Context){
         if(!locator.isEnableGps()){
-            locator.openGpsSetting(activityContext)
+            locator.openGpsSetting(context)
             return
         }
         viewModelScope.launch {
+            _isLoading.value = true
             val currentLocation = locator.getCurrentLocation()
             if(currentLocation == null){
-                _location.value = ""
+                _location.value = "error"
             }else{
                 _location.value = "${currentLocation.latitude}\n${currentLocation.longitude}"
             }
+            _isLoading.value = false
         }
     }
 }

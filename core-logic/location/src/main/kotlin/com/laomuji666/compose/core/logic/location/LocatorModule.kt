@@ -9,7 +9,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class LocatorModule {
-
     @Binds
     @Singleton
     abstract fun bindLocator(defaultLocator: DefaultLocator): Locator

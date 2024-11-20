@@ -8,8 +8,6 @@ android {
 }
 
 dependencies {
-    //hilt
-    ksp(libs.hilt.compiler)
 
     //common
     implementation(project(":core-logic:common"))
