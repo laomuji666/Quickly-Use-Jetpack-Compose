@@ -8,11 +8,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Looper
 import android.provider.Settings
 import androidx.core.content.ContextCompat
+import androidx.core.location.LocationListenerCompat
 import com.google.android.gms.location.CurrentLocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.CancellationTokenSource
 import com.laomuji666.compose.core.logic.common.Log
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 import kotlin.coroutines.resume
 
@@ -78,46 +79,60 @@ class DefaultLocator @Inject constructor(
             Log.debug(TAG, "use PRIORITY_BALANCED_POWER_ACCURACY")
             Priority.PRIORITY_BALANCED_POWER_ACCURACY
         }
-        return suspendCancellableCoroutine { cont ->
-            fusedLocationProviderClient.getCurrentLocation(CurrentLocationRequest.Builder().apply {
-                setPriority(priority)
-                setDurationMillis(10 * 1000)
-                setMaxUpdateAgeMillis(0)
-            }.build(), CancellationTokenSource().token).apply {
-                fusedLocationProviderClient.locationAvailability.addOnSuccessListener {
-                    if(it.isLocationAvailable){
-                        Log.debug(TAG,"isLocationAvailable is true, use fusedLocationProviderClient")
-                    }else{
-                        Log.debug(TAG,"isLocationAvailable is false, use locationManager")
-                        requestNetworkLocation{ location ->
-                            cont.safeResume(location)
+        return try {
+            withTimeout(30 * 1000){
+                suspendCancellableCoroutine { cont ->
+                    fusedLocationProviderClient.getCurrentLocation(CurrentLocationRequest.Builder().apply {
+                        setPriority(priority)
+                        setDurationMillis(15 * 1000)
+                        setMaxUpdateAgeMillis(0)
+                    }.build(), CancellationTokenSource().token).apply {
+                        fusedLocationProviderClient.locationAvailability.addOnSuccessListener {
+                            if(it.isLocationAvailable){
+                                Log.debug(TAG,"isLocationAvailable is true, use fusedLocationProviderClient")
+                            }else{
+                                Log.debug(TAG,"isLocationAvailable is false, use locationManager")
+                                requestNetworkLocation{ location ->
+                                    cont.safeResume(location)
+                                }
+                            }
+                        }
+                        Log.debug(TAG,"isComplete $isComplete")
+                        if(isComplete){
+                            if(isSuccessful){
+                                Log.debug(TAG,"successful")
+                                cont.safeResume(result)
+                            }else{
+                                Log.debug(TAG,"unsuccessful")
+                                cont.safeResume(null)
+                            }
+                        }else{
+                            addOnSuccessListener {
+                                if(it != null){
+                                    Log.debug(TAG,"onSuccess $it")
+                                    cont.safeResume(it)
+                                }else{
+                                    Log.debug(TAG,"onSuccess null, use locationManager")
+                                    requestNetworkLocation{ location ->
+                                        cont.safeResume(location)
+                                    }
+                                }
+                            }
+                            addOnFailureListener {
+                                Log.debug(TAG,"onFailure")
+                                cont.safeResume(null)
+                            }
+                            addOnCanceledListener {
+                                Log.debug(TAG,"onCancel")
+                                cont.cancel()
+                            }
                         }
                     }
                 }
-                Log.debug(TAG,"isComplete $isComplete")
-                if(isComplete){
-                    if(isSuccessful){
-                        Log.debug(TAG,"successful")
-                        cont.safeResume(result)
-                    }else{
-                        Log.debug(TAG,"unsuccessful")
-                        cont.safeResume(null)
-                    }
-                }else{
-                    addOnSuccessListener {
-                        Log.debug(TAG,"onSuccess $it")
-                        cont.safeResume(it)
-                    }
-                    addOnFailureListener {
-                        Log.debug(TAG,"onFailure")
-                        cont.safeResume(null)
-                    }
-                    addOnCanceledListener {
-                        Log.debug(TAG,"onCancel")
-                        cont.cancel()
-                    }
-                }
             }
+        }catch (e:Exception){
+            Log.debug(TAG, "${e.message}")
+            null
         }
     }
 
@@ -138,14 +153,12 @@ class DefaultLocator @Inject constructor(
     private fun requestNetworkLocation(
         callback:(Location)->Unit
     ){
-        val locationListener = object : LocationListener {
+        val locationListener = object : LocationListenerCompat {
             override fun onLocationChanged(location: Location) {
                 Log.debug(TAG, "requestNetworkLocation $location")
                 callback(location)
                 locationManager.removeUpdates(this)
             }
-            override fun onProviderEnabled(provider: String) {}
-            override fun onProviderDisabled(provider: String) {}
         }
         if(hasNetworkProvider()){
             locationManager.requestLocationUpdates(
