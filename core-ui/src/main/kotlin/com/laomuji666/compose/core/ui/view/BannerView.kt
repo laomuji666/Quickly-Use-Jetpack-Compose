@@ -86,8 +86,14 @@ fun <T>BannerView(
                     dragStartX = 0f
                 },
                 onDragEnd = {
-                    if(!scrollFinish){
-                        if(dragStartX > 0){
+                    if(scrollFinish){
+                        return@detectHorizontalDragGestures
+                    }
+
+
+                    if(dragStartX > 0){
+                        //last page
+                        if(dragStartX > dragWidth){
                             scrollFinish = true
                             coroutineScope.launch {
                                 lastPage(
@@ -98,22 +104,22 @@ fun <T>BannerView(
                                 )
                                 scrollFinish = false
                             }
-                        }else{
-                            if(abs(dragStartX) > dragWidth){
-                                scrollFinish = true
-                                coroutineScope.launch {
-                                    nextPage(
-                                        pagerState = pagerState,
-                                        looperBanner = looperBanner,
-                                        dataListSize = dataList.size,
-                                        scrollAnim = scrollAnim
-                                    )
-                                    scrollFinish = false
-                                }
+                        }
+                    }else{
+                        //next page
+                        if(abs(dragStartX) > dragWidth){
+                            scrollFinish = true
+                            coroutineScope.launch {
+                                nextPage(
+                                    pagerState = pagerState,
+                                    looperBanner = looperBanner,
+                                    dataListSize = dataList.size,
+                                    scrollAnim = scrollAnim
+                                )
+                                scrollFinish = false
                             }
                         }
                     }
-
                 },
                 onHorizontalDrag = { _, dragAmount ->
                     dragStartX += dragAmount
@@ -121,7 +127,8 @@ fun <T>BannerView(
             )
         },
         state = pagerState,
-        contentPadding = contentPadding
+        contentPadding = contentPadding,
+        userScrollEnabled = false
     ) {
         Box(modifier = Modifier.fillMaxSize()){
             Box(modifier = Modifier
