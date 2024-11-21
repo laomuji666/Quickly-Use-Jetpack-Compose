@@ -1,14 +1,17 @@
 package com.laomuji666.compose.feature.hello
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -26,6 +29,7 @@ import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.extension.isForeverDenied
 import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.WeIndication
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
@@ -169,22 +173,26 @@ private fun HelloScreenUi(
             modifier = Modifier.fillMaxSize(),
             beyondViewportPageCount = 3
         ) {
-            if(it == HelloSelectEnum.EXAMPLE.ordinal){
-                ExampleScreen(
-                    helloText = uiState.helloText,
-                    enableSwitchAppLogo = uiState.enableSwitchAppLogo,
-                    onSwitchAppLogoClick = onSwitchAppLogoClick,
-                    onFirebaseClick = onFirebaseClick,
-                    onHttpClick = onHttpClick,
-                    onGoogleLoginClick = onGoogleLoginClick,
-                    onSelectMobileClick = onSelectMobileClick,
-                    onAiChatClick = onAiChatClick,
-                    onLocationClick = onLocationClick,
-                    locationText = uiState.location
-                )
-            }
-            if(it == HelloSelectEnum.WIDGET.ordinal){
-                WidgetScreen()
+            CompositionLocalProvider(
+                LocalIndication provides WeIndication(Color.Transparent)
+            ) {
+                if(it == HelloSelectEnum.EXAMPLE.ordinal){
+                    ExampleScreen(
+                        helloText = uiState.helloText,
+                        enableSwitchAppLogo = uiState.enableSwitchAppLogo,
+                        onSwitchAppLogoClick = onSwitchAppLogoClick,
+                        onFirebaseClick = onFirebaseClick,
+                        onHttpClick = onHttpClick,
+                        onGoogleLoginClick = onGoogleLoginClick,
+                        onSelectMobileClick = onSelectMobileClick,
+                        onAiChatClick = onAiChatClick,
+                        onLocationClick = onLocationClick,
+                        locationText = uiState.location
+                    )
+                }
+                if(it == HelloSelectEnum.WIDGET.ordinal){
+                    WidgetScreen()
+                }
             }
         }
     }
