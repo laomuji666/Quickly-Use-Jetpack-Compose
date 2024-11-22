@@ -20,6 +20,9 @@
     <string name="string_hello_screen_ai_chat">AI聊天</string>
     <string name="string_hello_screen_switch_app_logo">动态切换图标</string>
     <string name="string_hello_screen_get_location">获取定位</string>
+    <string name="string_hello_screen_open_album">相册选择照片</string>
+    <string name="string_hello_screen_open_camera">相机拍摄照片</string>
+    <string name="string_hello_screen_open_contact">选择联系人</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>

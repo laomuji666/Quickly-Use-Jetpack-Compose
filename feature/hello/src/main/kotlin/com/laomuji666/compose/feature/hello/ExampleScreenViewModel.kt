@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HelloViewModel @Inject constructor(
+class ExampleScreenViewModel @Inject constructor(
     cacheUtil: CacheUtil,
     private val locator: Locator
 ) : ViewModel() {
@@ -35,13 +35,13 @@ class HelloViewModel @Inject constructor(
         _enableSwitchAppLogo,
         _location
     ){ isLoading, helloText,enableSwitchAppLogo, location ->
-        HelloUiState(
+        ExampleScreenUiState(
             isLoading = isLoading,
             helloText = helloText,
             enableSwitchAppLogo = enableSwitchAppLogo,
             location = location
         )
-    }.stateInTimeout(viewModelScope, HelloUiState())
+    }.stateInTimeout(viewModelScope, ExampleScreenUiState())
 
     fun switchAppLogo(context: Context){
         val targetValue = !_enableSwitchAppLogo.value
