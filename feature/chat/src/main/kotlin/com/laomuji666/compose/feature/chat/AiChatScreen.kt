@@ -1,21 +1,17 @@
 package com.laomuji666.compose.feature.chat
 
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeIndication
 import com.laomuji666.compose.core.ui.we.icons.Add
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
 import com.laomuji666.compose.core.ui.we.icons.ChatsUnselect
@@ -73,16 +69,13 @@ private fun AiChatScreenUi(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = 3
+            beyondViewportPageCount = 3,
+            userScrollEnabled = false
         ) {
-            CompositionLocalProvider(
-                LocalIndication provides WeIndication(Color.Transparent)
-            ) {
-                when(it){
-                    AiScreenSelectEnum.MESSAGES.ordinal-> messageContent()
-                    AiScreenSelectEnum.CONTACTS.ordinal-> contactsContent()
-                    AiScreenSelectEnum.ME.ordinal-> meContent()
-                }
+            when (it) {
+                AiScreenSelectEnum.MESSAGES.ordinal -> messageContent()
+                AiScreenSelectEnum.CONTACTS.ordinal -> contactsContent()
+                AiScreenSelectEnum.ME.ordinal -> meContent()
             }
         }
     }

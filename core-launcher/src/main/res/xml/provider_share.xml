@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <root-path name="root_path" path="."/>
+    <files-path name="shared_files" path="."/>
+    <external-path name="external_files" path="."/>
+    <external-files-path name="share_files" path="." />
+</resources>

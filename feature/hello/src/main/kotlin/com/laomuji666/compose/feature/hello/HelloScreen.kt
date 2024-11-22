@@ -1,108 +1,40 @@
 package com.laomuji666.compose.feature.hello
 
 import android.annotation.SuppressLint
-import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
-import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.common.Log
-import com.laomuji666.compose.core.logic.common.Toast
-import com.laomuji666.compose.core.ui.extension.isForeverDenied
-import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.WeIndication
 import com.laomuji666.compose.core.ui.we.icons.Example
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.icons.Widget
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeToast
-import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
 
 @SuppressLint("MissingPermission")
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun HelloScreen(
-    viewModel: HelloViewModel = hiltViewModel(),
     onFirebaseClick: ()->Unit,
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit
 ){
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    if(uiState.isLoading){
-        WeToast(weToastType = WeToastType.LOADING, message = stringResource(id = R.string.string_toast_loading))
-    }
-
-    val context = LocalContext.current
-
-    val selectMobile = selectMobileLauncher(
-        onSuccess = {
-            Toast.showText(context, it)
-        },
-        onFail = {
-            Toast.showText(context, "...")
-        }
-    )
-
-    val fineLocation = rememberPermissionState(android.Manifest.permission.ACCESS_FINE_LOCATION)
-    val coarseLocation = rememberPermissionState(android.Manifest.permission.ACCESS_COARSE_LOCATION)
-
     HelloScreenUi(
-        uiState = uiState,
         onFirebaseClick = onFirebaseClick,
         onHttpClick = onHttpClick,
-        onGoogleLoginClick = {
-            GoogleAuthenticate().requestLogin(
-                activityContext = context,
-                onSuccess = { email, idToken ->
-                    Toast.showText(context, "$email $idToken")
-                },
-                onFail = {
-                    Toast.showText(context, "...")
-                }
-            )
-        },
-        onSelectMobileClick = {
-            selectMobile()
-        },
         onAiChatClick = onAiChatClick,
-        onSwitchAppLogoClick = {
-            viewModel.switchAppLogo(context)
-        },
-        onLocationClick = {
-            if(fineLocation.status.isGranted || coarseLocation.status.isGranted){
-                viewModel.getLocation(context)
-            }else{
-                if(fineLocation.status.isForeverDenied()){
-                    coarseLocation.launchPermissionRequest()
-                }else{
-                    fineLocation.launchPermissionRequest()
-                }
-            }
-        }
     )
 
     //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
@@ -128,17 +60,13 @@ fun HelloScreen(
 
 @Composable
 private fun HelloScreenUi(
-    uiState: HelloUiState,
+    initialPage:Int = HelloSelectEnum.EXAMPLE.ordinal,
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
-    onGoogleLoginClick:()->Unit,
-    onSelectMobileClick:()->Unit,
     onAiChatClick:()->Unit,
-    onSwitchAppLogoClick:()->Unit,
-    onLocationClick: ()->Unit
 ){
     val pagerState = rememberPagerState(
-        initialPage = HelloSelectEnum.EXAMPLE.ordinal,
+        initialPage = initialPage,
         pageCount = { HelloSelectEnum.entries.size }
     )
     val coroutineScope = rememberCoroutineScope()
@@ -171,28 +99,18 @@ private fun HelloScreenUi(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = 3
+            beyondViewportPageCount = 3,
+            userScrollEnabled = false
         ) {
-            CompositionLocalProvider(
-                LocalIndication provides WeIndication(Color.Transparent)
-            ) {
-                if(it == HelloSelectEnum.EXAMPLE.ordinal){
-                    ExampleScreen(
-                        helloText = uiState.helloText,
-                        enableSwitchAppLogo = uiState.enableSwitchAppLogo,
-                        onSwitchAppLogoClick = onSwitchAppLogoClick,
-                        onFirebaseClick = onFirebaseClick,
-                        onHttpClick = onHttpClick,
-                        onGoogleLoginClick = onGoogleLoginClick,
-                        onSelectMobileClick = onSelectMobileClick,
-                        onAiChatClick = onAiChatClick,
-                        onLocationClick = onLocationClick,
-                        locationText = uiState.location
-                    )
-                }
-                if(it == HelloSelectEnum.WIDGET.ordinal){
-                    WidgetScreen()
-                }
+            if(it == HelloSelectEnum.EXAMPLE.ordinal){
+                ExampleScreen(
+                    onFirebaseClick = onFirebaseClick,
+                    onHttpClick = onHttpClick,
+                    onAiChatClick = onAiChatClick
+                )
+            }
+            if(it == HelloSelectEnum.WIDGET.ordinal){
+                WidgetScreen()
             }
         }
     }
@@ -203,14 +121,10 @@ private fun HelloScreenUi(
 fun PreviewHelloScreenUi(){
     QuicklyTheme {
         HelloScreenUi(
-            uiState = HelloUiState(),
+            initialPage = HelloSelectEnum.WIDGET.ordinal,
             onFirebaseClick = {},
             onHttpClick = {},
-            onGoogleLoginClick = {},
-            onSelectMobileClick = {},
             onAiChatClick = {},
-            onSwitchAppLogoClick = {},
-            onLocationClick = {}
         )
     }
 }
