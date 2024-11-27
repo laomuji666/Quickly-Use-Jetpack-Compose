@@ -37,7 +37,8 @@ fun ExampleScreen(
     viewModel: ExampleScreenViewModel = hiltViewModel(),
     onFirebaseClick: ()->Unit,
     onHttpClick:()->Unit,
-    onAiChatClick:()->Unit
+    onAiChatClick:()->Unit,
+    onDateClick:()->Unit,
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -114,7 +115,8 @@ fun ExampleScreen(
         },
         onOpenContactClick = {
             openContact()
-        }
+        },
+        onDateClick = onDateClick
     )
 }
 
@@ -132,7 +134,8 @@ fun ExampleScreenUi(
     onLocationClick:()->Unit,
     onOpenAlbumClick:()->Unit,
     onOpenCameraClick:()->Unit,
-    onOpenContactClick:()->Unit
+    onOpenContactClick:()->Unit,
+    onDateClick:()->Unit,
 ){
     WeScaffold(
         topBar = {
@@ -196,7 +199,12 @@ fun ExampleScreenUi(
             WeTableClickRow(
                 title = stringResource(id = R.string.string_hello_screen_open_contact),
                 summary = "",
-                onClick = onOpenContactClick
+                onClick = onOpenContactClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
+            WeTableClickRow(
+                title = stringResource(id = R.string.string_hello_screen_date),
+                onClick = onDateClick
             )
         }
     }
@@ -219,7 +227,8 @@ fun PreviewExampleScreen(){
             locationText = "",
             onOpenAlbumClick = {},
             onOpenCameraClick = {},
-            onOpenContactClick = {}
+            onOpenContactClick = {},
+            onDateClick = {}
         )
     }
 }

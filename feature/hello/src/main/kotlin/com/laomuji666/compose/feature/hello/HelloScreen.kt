@@ -29,12 +29,15 @@ import kotlinx.coroutines.launch
 fun HelloScreen(
     onFirebaseClick: ()->Unit,
     onHttpClick:()->Unit,
-    onAiChatClick:()->Unit
+    onAiChatClick:()->Unit,
+    onDateClick:()->Unit,
 ){
     HelloScreenUi(
         onFirebaseClick = onFirebaseClick,
         onHttpClick = onHttpClick,
         onAiChatClick = onAiChatClick,
+        onDateClick = onDateClick,
+        initialPage = HelloSelectEnum.EXAMPLE.ordinal
     )
 
     //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
@@ -60,10 +63,11 @@ fun HelloScreen(
 
 @Composable
 private fun HelloScreenUi(
-    initialPage:Int = HelloSelectEnum.EXAMPLE.ordinal,
+    initialPage:Int,
     onFirebaseClick:()->Unit,
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit,
+    onDateClick:()->Unit,
 ){
     val pagerState = rememberPagerState(
         initialPage = initialPage,
@@ -106,7 +110,8 @@ private fun HelloScreenUi(
                 ExampleScreen(
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
-                    onAiChatClick = onAiChatClick
+                    onAiChatClick = onAiChatClick,
+                    onDateClick = onDateClick
                 )
             }
             if(it == HelloSelectEnum.WIDGET.ordinal){
@@ -125,6 +130,7 @@ fun PreviewHelloScreenUi(){
             onFirebaseClick = {},
             onHttpClick = {},
             onAiChatClick = {},
+            onDateClick = {}
         )
     }
 }

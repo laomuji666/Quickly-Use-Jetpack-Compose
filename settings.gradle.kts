@@ -39,5 +39,6 @@ include(":feature:hello")
 include(":feature:firebase")
 include(":feature:http")
 include(":feature:chat")
+include(":feature:date")
 
 include(":core-launcher")
