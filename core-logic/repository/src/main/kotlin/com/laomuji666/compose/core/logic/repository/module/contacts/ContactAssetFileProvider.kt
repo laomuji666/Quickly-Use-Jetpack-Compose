@@ -1,4 +1,4 @@
-package com.laomuji666.compose
+package com.laomuji666.compose.core.logic.repository.module.contacts
 
 import android.content.ContentProvider
 import android.content.ContentValues
@@ -7,7 +7,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.webkit.MimeTypeMap
 
-class AssetFileProvider : ContentProvider() {
+class ContactAssetFileProvider : ContentProvider() {
     override fun onCreate(): Boolean {
         return true
     }
