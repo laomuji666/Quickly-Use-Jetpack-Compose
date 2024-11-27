@@ -10,13 +10,15 @@ data object RouteHelloScreen
 fun NavGraphBuilder.composeHelloScreen(
     onFirebaseClick: ()->Unit,
     onHttpClick:()->Unit,
-    onAiChatClick:()->Unit
+    onAiChatClick:()->Unit,
+    onDateClick:()->Unit,
 ){
     composable<RouteHelloScreen>{
         HelloScreen(
             onFirebaseClick = onFirebaseClick,
             onHttpClick = onHttpClick,
-            onAiChatClick = onAiChatClick
+            onAiChatClick = onAiChatClick,
+            onDateClick = onDateClick,
         )
     }
 }

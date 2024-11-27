@@ -23,6 +23,7 @@
     <string name="string_hello_screen_open_album">相册选择照片</string>
     <string name="string_hello_screen_open_camera">相机拍摄照片</string>
     <string name="string_hello_screen_open_contact">选择联系人</string>
+    <string name="string_hello_screen_date">自定义日历</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>
@@ -60,4 +61,14 @@
     <string name="string_notification_new_messages_name">聊天消息</string>
     <string name="string_notification_new_messages_description">收到的未读读聊天消息</string>
 
+<!--  DateScreen  -->
+    <string-array name="string_date_screen_week_day">
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>日</item>
+    </string-array>
 </resources>

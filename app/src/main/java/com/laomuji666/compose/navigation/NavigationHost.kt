@@ -10,6 +10,8 @@ import com.laomuji666.compose.feature.chat.chat.composeChatScreen
 import com.laomuji666.compose.feature.chat.chat.navigateToChatScreen
 import com.laomuji666.compose.feature.chat.composeAiChatScreen
 import com.laomuji666.compose.feature.chat.navigateToAiChatScreen
+import com.laomuji666.compose.feature.date.composeDateScreen
+import com.laomuji666.compose.feature.date.navigateToDateScreen
 import com.laomuji666.compose.feature.hello.RouteHelloScreen
 import com.laomuji666.compose.feature.hello.composeFirebaseScreen
 import com.laomuji666.compose.feature.hello.composeHelloScreen
@@ -64,6 +66,9 @@ fun NavigationHost(
             },
             onAiChatClick = {
                 navHostController.navigateToAiChatScreen()
+            },
+            onDateClick = {
+                navHostController.navigateToDateScreen()
             }
         )
 
@@ -92,5 +97,7 @@ fun NavigationHost(
                 navHostController.safePopBackStack()
             }
         )
+
+        composeDateScreen()
     }
 }
