@@ -1,7 +1,8 @@
 package com.laomuji666.compose.feature.hello
 
-data class HttpUiState(
+data class HttpScreenUiState(
     val isError:Boolean = false,
     val isLoading:Boolean = false,
-    val responseText:String = ""
+    val isConnect:Boolean = false,
+    val responseText:String = "",
 )
