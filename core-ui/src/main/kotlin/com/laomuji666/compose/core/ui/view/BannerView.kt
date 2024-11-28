@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
@@ -57,6 +58,9 @@ fun <T>BannerView(
     dragWidth:Float = 20.dp.value,
     content: @Composable (T)->Unit
 ){
+    val dragWidthPx = with(LocalDensity.current){
+        dragWidth.dp.toPx()
+    }
     val dataList = ArrayList<T>()
     if(looperBanner && bannerList.size > 1){
         dataList.add(bannerList[bannerList.size - 2])
@@ -93,7 +97,7 @@ fun <T>BannerView(
 
                     if(dragStartX > 0){
                         //last page
-                        if(dragStartX > dragWidth){
+                        if(dragStartX > dragWidthPx){
                             scrollFinish = true
                             coroutineScope.launch {
                                 lastPage(
@@ -107,7 +111,7 @@ fun <T>BannerView(
                         }
                     }else{
                         //next page
-                        if(abs(dragStartX) > dragWidth){
+                        if(abs(dragStartX) > dragWidthPx){
                             scrollFinish = true
                             coroutineScope.launch {
                                 nextPage(

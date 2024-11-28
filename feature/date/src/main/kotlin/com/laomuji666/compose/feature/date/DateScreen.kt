@@ -2,6 +2,7 @@ package com.laomuji666.compose.feature.date
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,13 +22,16 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -38,6 +42,7 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
+import kotlin.math.abs
 
 @Composable
 fun DateScreen(
@@ -99,6 +104,7 @@ private fun DateScreenUi(
     ) {
         MonthDayUi(
             uiState = uiState,
+            onYearClick = onYearClick,
             onMonthClick = onMonthClick,
             onDayClick = onDayClick
         )
@@ -157,11 +163,34 @@ private fun SelectYearUi(
 @Composable
 private fun MonthDayUi(
     uiState: DateScreenUiState,
+    dragWidth: Dp = 30.dp,
+    onYearClick:(year:Int)->Unit,
     onMonthClick:(month:Int)->Unit,
     onDayClick:(day:Int)->Unit
 ){
+    val dragWidthPx = with(LocalDensity.current){
+        dragWidth.toPx()
+    }
+    var dragStartX by remember { mutableFloatStateOf(0f) }
     Column(
-        modifier = Modifier.verticalScroll(rememberScrollState())
+        modifier = Modifier
+            .pointerInput(uiState.currentYear){
+                detectHorizontalDragGestures(
+                    onDragStart = {
+                        dragStartX = 0f
+                    },
+                    onDragEnd = {
+                        if(abs(dragStartX) > dragWidthPx){
+                            onYearClick(uiState.currentYear + if(dragStartX < 0) 1 else -1)
+                        }
+                    },
+                    onHorizontalDrag = { _, dragAmount ->
+                        dragStartX += dragAmount
+                    }
+                )
+
+            }
+            .verticalScroll(rememberScrollState())
     ) {
         for (i in 0 until uiState.dateDetailList.size) {
             Row(
