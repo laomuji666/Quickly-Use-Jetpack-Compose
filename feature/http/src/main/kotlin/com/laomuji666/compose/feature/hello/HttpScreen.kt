@@ -10,6 +10,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,7 +28,7 @@ import com.laomuji666.compose.res.R
 
 @Composable
 fun HttpScreen(
-    viewModel: HttpViewModel = hiltViewModel(),
+    viewModel: HttpScreenViewModel = hiltViewModel(),
     onBackClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -45,7 +46,7 @@ fun HttpScreen(
     LoadingDialog(loading = uiState.isLoading)
 
     HttpScreenUi(
-        responseText = uiState.responseText,
+        uiState = uiState,
         onBackClick = onBackClick,
         onClickSendGet = {
             viewModel.getListUsers()
@@ -58,7 +59,7 @@ fun HttpScreen(
 
 @Composable
 private fun HttpScreenUi(
-    responseText:String,
+    uiState:HttpScreenUiState,
     onBackClick:()->Unit,
     onClickSendGet:()->Unit,
     onClickSendPost:()->Unit
@@ -72,6 +73,14 @@ private fun HttpScreenUi(
         }
     ) {
         Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            text = stringResource(id = R.string.string_http_screen_is_online, uiState.isConnect),
+            style = WeTheme.typography.emTitle,
+            color = WeTheme.colorScheme.fontColor90,
+            modifier = Modifier.fillMaxWidth(),
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(20.dp))
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_get_demo),
             onClick = onClickSendGet
@@ -80,7 +89,7 @@ private fun HttpScreenUi(
             text = stringResource(id = R.string.string_http_screen_post_demo),
             onClick = onClickSendPost
         )
-        Text(text = responseText, color = WeTheme.colorScheme.fontColor90)
+        Text(text = uiState.responseText, color = WeTheme.colorScheme.fontColor90)
     }
 }
 
@@ -106,7 +115,7 @@ fun PreviewHttpScreen(){
             onBackClick = {},
             onClickSendGet = {},
             onClickSendPost = {},
-            responseText = ""
+            uiState = HttpScreenUiState()
         )
     }
 }
