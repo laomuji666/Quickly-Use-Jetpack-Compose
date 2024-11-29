@@ -5,9 +5,6 @@ plugins {
 
 android {
     namespace = "com.laomuji666.compose.core.logic.common"
-    buildFeatures {
-        buildConfig = true
-    }
     buildTypes {
         debug {
             buildConfigField("String","WEB_CLIENT_ID","\"905105202439-5v3lh96r8pgo1ubuv2qme1h6vahn4imi.apps.googleusercontent.com\"")

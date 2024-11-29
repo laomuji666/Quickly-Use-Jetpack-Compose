@@ -19,9 +19,12 @@ class LibraryConventionPlugin : Plugin<Project> {
             extensions.configure<LibraryExtension> {
                 libraryDefaultConfig()
 
-                //开启compose支持
+                //构建功能
                 buildFeatures {
+                    //开启compose支持
                     compose = true
+                    //开启buildConfig支持
+                    buildConfig = true
                 }
             }
 

@@ -5,9 +5,6 @@ plugins {
 
 android {
     namespace = "com.laomuji666.compose.core.logic.database"
-    buildFeatures {
-        buildConfig = true
-    }
     defaultConfig {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")
