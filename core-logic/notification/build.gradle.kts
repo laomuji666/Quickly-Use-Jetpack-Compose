@@ -5,9 +5,6 @@ plugins {
 
 android {
     namespace = "com.laomuji666.compose.core.logic.notification"
-    buildFeatures {
-        buildConfig = true
-    }
 }
 
 dependencies {

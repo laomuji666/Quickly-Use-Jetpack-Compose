@@ -5,6 +5,14 @@ plugins {
     alias(libs.plugins.google.firebase.crashlytics)
 }
 
+//自定义 Gradle Plugin, 在运行app的 build.gradle.kts 文件时,会被调用
+apply<AppHelloWorldPlugin>()
+class AppHelloWorldPlugin : Plugin<Project> {
+    override fun apply(target: Project) {
+        println("AppHelloWorldPlugin apply")
+    }
+}
+
 //其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
 android {
     //命名空间,尽量和applicationId一致,涉及到一些文件的路径.
@@ -15,6 +23,26 @@ android {
         applicationId = "com.laomuji666.compose"
         versionCode = 1
         versionName = "1.0"
+    }
+
+    //使用不同的 build variant
+    flavorDimensions += listOf("channel", "style")
+    productFlavors {
+        create("gp"){
+            dimension = "channel"
+            //这里也可以对包名后缀进行进一步区分
+            // applicationIdSuffix = ".gp"
+        }
+        create("sam"){
+            dimension = "channel"
+        }
+
+        create("green"){
+            dimension = "style"
+        }
+        create("blue"){
+            dimension = "style"
+        }
     }
 }
 

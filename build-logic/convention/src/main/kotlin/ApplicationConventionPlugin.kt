@@ -63,10 +63,19 @@ class ApplicationConventionPlugin : Plugin<Project> {
         }
         //打包配置
         buildTypes {
+            //测试配置
             debug {
                 signingConfig = signingConfigs.getByName("debug")
                 isMinifyEnabled = false
             }
+
+            //发布配置,不混淆代码
+            create("staging") {
+                signingConfig = signingConfigs.getByName("release")
+                isMinifyEnabled = false
+            }
+
+            //发布配置,混淆代码
             release {
                 signingConfig = signingConfigs.getByName("release")
                 isMinifyEnabled = true

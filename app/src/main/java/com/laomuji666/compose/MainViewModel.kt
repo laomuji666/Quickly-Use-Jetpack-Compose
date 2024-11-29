@@ -2,6 +2,7 @@ package com.laomuji666.compose
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.laomuji666.compose.core.logic.common.Log
 import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -28,6 +29,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
      * 初始化三方SDK
      */
     init {
+        Log.debug("tag_flavor",FlavorDemo().getFlavor())
         viewModelScope.launch {
             //假设在这里初始化一些三方SDK
             delay(500)
