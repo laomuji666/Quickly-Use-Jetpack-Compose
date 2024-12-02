@@ -12,6 +12,8 @@ fun NavGraphBuilder.composeHelloScreen(
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit,
     onDateClick:()->Unit,
+    onNestedScrollConnectionScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit,
 ){
     composable<RouteHelloScreen>{
         HelloScreen(
@@ -19,6 +21,8 @@ fun NavGraphBuilder.composeHelloScreen(
             onHttpClick = onHttpClick,
             onAiChatClick = onAiChatClick,
             onDateClick = onDateClick,
+            onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
+            onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick
         )
     }
 }
