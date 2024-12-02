@@ -31,13 +31,17 @@ fun HelloScreen(
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit,
     onDateClick:()->Unit,
+    onNestedScrollConnectionScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit,
 ){
     HelloScreenUi(
         onFirebaseClick = onFirebaseClick,
         onHttpClick = onHttpClick,
         onAiChatClick = onAiChatClick,
         onDateClick = onDateClick,
-        initialPage = HelloSelectEnum.EXAMPLE.ordinal
+        initialPage = HelloSelectEnum.EXAMPLE.ordinal,
+        onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
+        onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick
     )
 
     //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
@@ -68,6 +72,8 @@ private fun HelloScreenUi(
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit,
     onDateClick:()->Unit,
+    onNestedScrollConnectionScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit,
 ){
     val pagerState = rememberPagerState(
         initialPage = initialPage,
@@ -111,7 +117,9 @@ private fun HelloScreenUi(
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
                     onAiChatClick = onAiChatClick,
-                    onDateClick = onDateClick
+                    onDateClick = onDateClick,
+                    onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
+                    onNestedScrollDispatcherScreenClick =onNestedScrollDispatcherScreenClick
                 )
             }
             if(it == HelloSelectEnum.WIDGET.ordinal){
@@ -130,7 +138,9 @@ fun PreviewHelloScreenUi(){
             onFirebaseClick = {},
             onHttpClick = {},
             onAiChatClick = {},
-            onDateClick = {}
+            onDateClick = {},
+            onNestedScrollConnectionScreenClick = {},
+            onNestedScrollDispatcherScreenClick = {}
         )
     }
 }

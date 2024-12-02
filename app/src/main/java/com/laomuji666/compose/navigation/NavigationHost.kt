@@ -18,6 +18,10 @@ import com.laomuji666.compose.feature.hello.composeHelloScreen
 import com.laomuji666.compose.feature.hello.composeHttpScreen
 import com.laomuji666.compose.feature.hello.navigateToFirebaseScreen
 import com.laomuji666.compose.feature.hello.navigateToHttpScreen
+import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
+import com.laomuji666.compose.feature.scroll.composeNestedScrollDispatcherScreen
+import com.laomuji666.compose.feature.scroll.navigateToNestedScrollConnectionScreen
+import com.laomuji666.compose.feature.scroll.navigateToNestedScrollDispatcherScreen
 
 /**
  * 导航控制器
@@ -69,6 +73,12 @@ fun NavigationHost(
             },
             onDateClick = {
                 navHostController.navigateToDateScreen()
+            },
+            onNestedScrollConnectionScreenClick = {
+                navHostController.navigateToNestedScrollConnectionScreen()
+            },
+            onNestedScrollDispatcherScreenClick = {
+                navHostController.navigateToNestedScrollDispatcherScreen()
             }
         )
 
@@ -99,5 +109,8 @@ fun NavigationHost(
         )
 
         composeDateScreen()
+
+        composeNestedScrollConnectionScreen()
+        composeNestedScrollDispatcherScreen()
     }
 }

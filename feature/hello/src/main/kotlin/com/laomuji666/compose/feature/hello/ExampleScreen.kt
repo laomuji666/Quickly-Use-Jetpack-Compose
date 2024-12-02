@@ -39,6 +39,8 @@ fun ExampleScreen(
     onHttpClick:()->Unit,
     onAiChatClick:()->Unit,
     onDateClick:()->Unit,
+    onNestedScrollConnectionScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit,
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -116,7 +118,9 @@ fun ExampleScreen(
         onOpenContactClick = {
             openContact()
         },
-        onDateClick = onDateClick
+        onDateClick = onDateClick,
+        onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
+        onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick
     )
 }
 
@@ -136,6 +140,8 @@ fun ExampleScreenUi(
     onOpenCameraClick:()->Unit,
     onOpenContactClick:()->Unit,
     onDateClick:()->Unit,
+    onNestedScrollConnectionScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit,
 ){
     WeScaffold(
         topBar = {
@@ -204,7 +210,18 @@ fun ExampleScreenUi(
             )
             WeTableClickRow(
                 title = stringResource(id = R.string.string_hello_screen_date),
-                onClick = onDateClick
+                onClick = onDateClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
+            WeTableClickRow(
+                title = stringResource(id = R.string.string_hello_screen_scroll_connect),
+                onClick = onNestedScrollConnectionScreenClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
+            WeTableClickRow(
+                title = stringResource(id = R.string.string_hello_screen_scroll_dispatcher),
+                onClick = onNestedScrollDispatcherScreenClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
             )
         }
     }
@@ -228,7 +245,9 @@ fun PreviewExampleScreen(){
             onOpenAlbumClick = {},
             onOpenCameraClick = {},
             onOpenContactClick = {},
-            onDateClick = {}
+            onDateClick = {},
+            onNestedScrollConnectionScreenClick = {},
+            onNestedScrollDispatcherScreenClick = {}
         )
     }
 }
