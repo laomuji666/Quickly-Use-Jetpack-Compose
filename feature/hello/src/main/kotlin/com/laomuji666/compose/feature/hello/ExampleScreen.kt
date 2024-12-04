@@ -1,14 +1,29 @@
 package com.laomuji666.compose.feature.hello
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
@@ -19,6 +34,8 @@ import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.extension.isForeverDenied
 import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.view.DragList
+import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
@@ -40,7 +57,7 @@ fun ExampleScreen(
     onAiChatClick:()->Unit,
     onDateClick:()->Unit,
     onNestedScrollConnectionScreenClick:()->Unit,
-    onNestedScrollDispatcherScreenClick:()->Unit,
+    onNestedScrollDispatcherScreenClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -72,6 +89,20 @@ fun ExampleScreen(
 
     val openContact = openContact {
         Toast.showText(context, "${it.name} : ${it.mobile}")
+    }
+
+    var showDragListDialog by rememberSaveable {
+        mutableStateOf(false)
+    }
+    if(showDragListDialog){
+        Dialog(onDismissRequest = {
+            showDragListDialog = false
+        }, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+            DragListDemo(
+                dragList = uiState.dragList,
+                onSwap = viewModel::swapDragList
+            )
+        }
     }
 
     ExampleScreenUi(
@@ -120,7 +151,10 @@ fun ExampleScreen(
         },
         onDateClick = onDateClick,
         onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
-        onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick
+        onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick,
+        onLongClickSortClick = {
+            showDragListDialog = true
+        }
     )
 }
 
@@ -142,6 +176,7 @@ fun ExampleScreenUi(
     onDateClick:()->Unit,
     onNestedScrollConnectionScreenClick:()->Unit,
     onNestedScrollDispatcherScreenClick:()->Unit,
+    onLongClickSortClick:()->Unit
 ){
     WeScaffold(
         topBar = {
@@ -223,7 +258,41 @@ fun ExampleScreenUi(
                 onClick = onNestedScrollDispatcherScreenClick,
                 weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
             )
+            WeTableClickRow(
+                title = stringResource(id = R.string.string_hello_screen_long_click_sort),
+                onClick = onLongClickSortClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
         }
+    }
+}
+
+@Composable
+private fun DragListDemo(
+    dragList:List<String>,
+    onSwap:(a:Int,b:Int)->Unit
+){
+    Column {
+        DragList(
+            modifier = Modifier.background(WeTheme.colorScheme.background).fillMaxSize(),
+            list = dragList,
+            itemContent = {item, isDrag->
+                Row(
+                    modifier = Modifier.fillMaxWidth().border(1.dp, WeTheme.colorScheme.outline).height(WeTheme.dimens.navigationBarHeight).background(
+                        if(isDrag){
+                            WeTheme.colorScheme.primaryButton
+                        }else{
+                            WeTheme.colorScheme.secondaryButton
+                        }
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(item)
+                }
+            },
+            onSwap = onSwap
+        )
     }
 }
 
@@ -247,7 +316,8 @@ fun PreviewExampleScreen(){
             onOpenContactClick = {},
             onDateClick = {},
             onNestedScrollConnectionScreenClick = {},
-            onNestedScrollDispatcherScreenClick = {}
+            onNestedScrollDispatcherScreenClick = {},
+            onLongClickSortClick = {}
         )
     }
 }

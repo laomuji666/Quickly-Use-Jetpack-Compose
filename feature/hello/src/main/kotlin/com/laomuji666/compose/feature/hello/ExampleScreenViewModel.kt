@@ -28,18 +28,21 @@ class ExampleScreenViewModel @Inject constructor(
     private var enableSwitchAppLogo by cacheUtil.cacheable("enableSwitchAppLogo",false)
     private val _enableSwitchAppLogo = MutableStateFlow(enableSwitchAppLogo)
     private val _location = MutableStateFlow("")
+    private val _dragList = MutableStateFlow(listOf("1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"))
 
     val uiState = combine(
         _isLoading,
         _helloText,
         _enableSwitchAppLogo,
-        _location
-    ){ isLoading, helloText,enableSwitchAppLogo, location ->
+        _location,
+        _dragList
+    ){ isLoading, helloText,enableSwitchAppLogo, location, dragList ->
         ExampleScreenUiState(
             isLoading = isLoading,
             helloText = helloText,
             enableSwitchAppLogo = enableSwitchAppLogo,
-            location = location
+            location = location,
+            dragList = dragList
         )
     }.stateInTimeout(viewModelScope, ExampleScreenUiState())
 
@@ -76,5 +79,15 @@ class ExampleScreenViewModel @Inject constructor(
             }
             _isLoading.value = false
         }
+    }
+
+    fun swapDragList(a:Int,b:Int){
+        val oldList = _dragList.value
+        val newList = oldList.toMutableList()
+        val oldA = oldList[a]
+        val oldB = oldList[b]
+        newList[a] = oldB
+        newList[b] = oldA
+        _dragList.value = newList
     }
 }
