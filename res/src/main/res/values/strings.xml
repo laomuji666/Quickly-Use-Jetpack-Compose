@@ -26,6 +26,7 @@
     <string name="string_hello_screen_date">自定义日历</string>
     <string name="string_hello_screen_scroll_connect">滑动嵌套 NestedScrollConnection</string>
     <string name="string_hello_screen_scroll_dispatcher">滑动嵌套 NestedScrollDispatcher</string>
+    <string name="string_hello_screen_long_click_sort">长按拖动列表排序</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
