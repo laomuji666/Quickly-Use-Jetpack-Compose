@@ -1,5 +1,7 @@
 package com.laomuji666.compose.feature.biometric
 
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -16,6 +18,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.authenticate.biometric.BiometricAuthenticate
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
+import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableInput
@@ -28,10 +31,21 @@ fun BiometricScreen(
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
+
+    val biometricLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {}
+    )
+
     BiometricScreenUi(
         uiState = uiState,
         onHandleClick = {
             viewModel.handleBiometric(context)
+        },
+        onSettingClick = {
+            viewModel.getBiometricSettingIntent()?.let {
+                biometricLauncher.launch(it)
+            }
         },
         onTitleChange = viewModel::setTitle,
         onDescriptionChange = viewModel::setDescription
@@ -42,6 +56,7 @@ fun BiometricScreen(
 private fun BiometricScreenUi(
     uiState: BiometricScreenUiState,
     onHandleClick: () -> Unit,
+    onSettingClick: () -> Unit,
     onTitleChange: (String) -> Unit,
     onDescriptionChange: (String) -> Unit,
 ){
@@ -77,10 +92,20 @@ private fun BiometricScreenUi(
             Spacer(modifier = Modifier.height(20.dp))
 
             WeButton(
-                text = stringResource(id = string.string_biometric_screen_button_title),
+                text = stringResource(id = string.string_biometric_screen_handle_title),
                 onClick = onHandleClick,
                 weButtonType = WeButtonType.BIG
             )
+
+            if(uiState.biometricResult is BiometricAuthenticate.BiometricAuthenticateResult.NotSetBiometric){
+                Spacer(modifier = Modifier.height(20.dp))
+                WeButton(
+                    text = stringResource(id = string.string_biometric_screen_setting_title),
+                    onClick = onSettingClick,
+                    weButtonType = WeButtonType.BIG,
+                    weButtonColor = WeButtonColor.SECONDARY
+                )
+            }
         }
 
     }
@@ -93,6 +118,7 @@ private fun PreviewBiometricScreen() {
         BiometricScreenUi(
             uiState = BiometricScreenUiState(),
             onHandleClick = {},
+            onSettingClick = {},
             onTitleChange = {},
             onDescriptionChange = {}
         )

@@ -37,6 +37,8 @@ class BiometricScreenViewModel @Inject constructor(
         biometricAuthenticate.handleBiometric(context, _title.value, _description.value)
     }
 
+    fun getBiometricSettingIntent() = biometricAuthenticate.getBiometricSettingIntent()
+
     fun setTitle(title: String){
         _title.value = title
     }

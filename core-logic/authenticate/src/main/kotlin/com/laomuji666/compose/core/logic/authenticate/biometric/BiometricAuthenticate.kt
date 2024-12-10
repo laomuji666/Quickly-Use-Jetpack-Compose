@@ -1,6 +1,7 @@
 package com.laomuji666.compose.core.logic.authenticate.biometric
 
 import android.content.Context
+import android.content.Intent
 import kotlinx.coroutines.flow.Flow
 
 interface BiometricAuthenticate{
@@ -23,4 +24,7 @@ interface BiometricAuthenticate{
 
     //context 必须是 FragmentActivity
     fun handleBiometric(context: Context, title: String, description: String)
+
+    //获取生物认证设置的意图
+    fun getBiometricSettingIntent(): Intent?
 }

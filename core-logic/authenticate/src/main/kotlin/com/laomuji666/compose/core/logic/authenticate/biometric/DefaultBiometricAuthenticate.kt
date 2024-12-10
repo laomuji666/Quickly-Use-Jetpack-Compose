@@ -1,7 +1,9 @@
 package com.laomuji666.compose.core.logic.authenticate.biometric
 
 import android.content.Context
+import android.content.Intent
 import android.os.Build
+import android.provider.Settings
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators.BIOMETRIC_STRONG
 import androidx.biometric.BiometricManager.Authenticators.DEVICE_CREDENTIAL
@@ -74,5 +76,12 @@ class DefaultBiometricAuthenticate @Inject constructor() : BiometricAuthenticate
         prompt.authenticate(promptInfo.build())
     }
 
-
+    override fun getBiometricSettingIntent(): Intent? {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            return Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+            }
+        }
+        return null
+    }
 }

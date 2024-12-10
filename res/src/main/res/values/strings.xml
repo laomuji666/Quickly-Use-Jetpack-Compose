@@ -82,7 +82,8 @@
     <string name="string_biometric_screen_title_tip">生物认证时的标题</string>
     <string name="string_biometric_screen_description_title">描述</string>
     <string name="string_biometric_screen_description_tip">生物认证时的描述</string>
-    <string name="string_biometric_screen_button_title">调用生物认证</string>
+    <string name="string_biometric_screen_handle_title">调用生物认证</string>
+    <string name="string_biometric_screen_setting_title">设置生物认证</string>
     <string name="string_biometric_screen_status_hardware_not_found">硬件未找到</string>
     <string name="string_biometric_screen_status_hardware_unavailable">硬件不可用</string>
     <string name="string_biometric_screen_status_hardware_not_set">用户未设置生物认证</string>
