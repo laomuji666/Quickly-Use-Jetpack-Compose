@@ -6,6 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.laomuji666.compose.core.ui.safePopBackStack
+import com.laomuji666.compose.feature.biometric.composeBiometricScreen
+import com.laomuji666.compose.feature.biometric.navigateToBiometricScreen
 import com.laomuji666.compose.feature.chat.chat.composeChatScreen
 import com.laomuji666.compose.feature.chat.chat.navigateToChatScreen
 import com.laomuji666.compose.feature.chat.composeAiChatScreen
@@ -79,6 +81,9 @@ fun NavigationHost(
             },
             onNestedScrollDispatcherScreenClick = {
                 navHostController.navigateToNestedScrollDispatcherScreen()
+            },
+            onBiometricScreenClick = {
+                navHostController.navigateToBiometricScreen()
             }
         )
 
@@ -112,5 +117,7 @@ fun NavigationHost(
 
         composeNestedScrollConnectionScreen()
         composeNestedScrollDispatcherScreen()
+
+        composeBiometricScreen()
     }
 }
