@@ -60,6 +60,7 @@ dependencies {
     implementation(project(":feature:chat"))
     implementation(project(":feature:date"))
     implementation(project(":feature:scroll"))
+    implementation(project(":feature:biometric"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

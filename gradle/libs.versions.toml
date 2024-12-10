@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+biometric = "1.1.0"
 coilCompose = "2.7.0"
 credentials = "1.2.2"
 googleid = "1.1.1"
@@ -25,9 +26,11 @@ playServicesAuth = "21.2.0"
 androidxRoom = "2.6.1"
 generativeai = "0.9.0"
 playServicesLocation = "20.0.0"
+appcompat = "1.7.0"
 
 [libraries]
 # app
+androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-runtime-compose = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycleRuntimeKtx" }
@@ -80,6 +83,7 @@ androidx-credentials-play-services-auth = { module = "androidx.credentials:crede
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 
 
 [plugins]

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppTheme.Quickly" parent="android:Theme.Material.NoActionBar" />
+    <style name="AppTheme.Quickly" parent="Theme.AppCompat.NoActionBar" />
 
     <style name="AppTheme.SplashScreen" parent="Theme.SplashScreen">
         <!--  启动页style  -->

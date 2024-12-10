@@ -9,4 +9,7 @@ android {
 dependencies {
     //启动屏幕
     api(libs.androidx.core.splashscreen)
+
+    //app compat
+    api(libs.androidx.appcompat)
 }
