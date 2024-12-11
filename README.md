@@ -58,13 +58,17 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 <br/>bundleRelease打包aab.
 <br/>assembleRelease打包apk.
 
-## 运行效果
-| 例子       | 截图                                                           |
-|----------|--------------------------------------------------------------|
-| 动态切换logo | <img src="docs/images/SwitchAppLogo.gif" width="320"/></img> |
-| 网络异常处理   | <img src="docs/images/HttpScreen.gif" width="320"/></img>    |
-| 组件示例     | <img src="docs/images/WidgetScreen.gif" width="320"/></img>  |
-| 轮播图      | <img src="docs/images/BannerView.gif" width="320"/></img>    |
+## 运行效果(gif比较模糊)
+| 例子        | 截图                                                                   |
+|-----------|----------------------------------------------------------------------|
+| 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/></img> |
+| Lazy列表排序  | <img src="docs/images/LazySort.gif" width="320"/></img>              |
+| 自定义日历     | <img src="docs/images/CustomizeCalendar.gif" width="320"/></img>     |
+| 动态切换logo  | <img src="docs/images/SwitchAppLogo.gif" width="320"/></img>         |
+| Ai聊天,推送   | <img src="docs/images/AiChat.gif" width="320"/></img>                | 
+| 网络异常处理    | <img src="docs/images/HttpScreen.gif" width="320"/></img>            |
+| 轮播图       | <img src="docs/images/BannerView.gif" width="320"/></img>            |
+| 组件示例      | <img src="docs/images/WidgetScreen.gif" width="320"/></img>          |
 
 ## Star History
 [![Star History Chart](https://api.star-history.com/svg?repos=laomuji666/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji666/Quickly-Use-Jetpack-Compose&Date)
