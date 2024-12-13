@@ -135,31 +135,32 @@ fun NestedScrollConnectionScreen(){
             }
         }
     }
-
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .nestedScroll(
-                connection = nestedScrollConnection
-            )
-    ) {
-        Image(
-            painter = painterResource(id = R.mipmap.ic_launcher),
-            contentDescription = null,
-            contentScale = ContentScale.FillBounds,
+    WeScaffold {
+        Column(
             modifier = Modifier
-                .verticalScroll(rememberScrollState()) // 使图片本身也可以被滑动
-                .height(with(density){
-                    animHeight.toDp()
-                })
                 .fillMaxWidth()
-        )
-
-        LazyColumn(
-            modifier = Modifier.fillMaxSize()
+                .nestedScroll(
+                    connection = nestedScrollConnection
+                )
         ) {
-            items(300) {
-                Text("$it")
+            Image(
+                painter = painterResource(id = R.mipmap.ic_launcher),
+                contentDescription = null,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState()) // 使图片本身也可以被滑动
+                    .height(with(density){
+                        animHeight.toDp()
+                    })
+                    .fillMaxWidth()
+            )
+
+            LazyColumn(
+                modifier = Modifier.fillMaxSize()
+            ) {
+                items(300) {
+                    Text("$it")
+                }
             }
         }
     }

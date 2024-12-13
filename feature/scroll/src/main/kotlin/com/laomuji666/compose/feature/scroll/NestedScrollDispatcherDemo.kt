@@ -53,59 +53,60 @@ fun NestedScrollDispatcherScreen(){
     val nestedScrollDispatcher = remember {
         NestedScrollDispatcher()
     }
-
-    LazyColumn(modifier = Modifier.fillMaxSize()) {
-        items(50){
-            Text("$it")
-        }
-        item {
-            Image(
-                painter = painterResource(id = R.mipmap.ic_launcher),
-                contentDescription = null,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .height(with(density){
-                        imageHeight.toDp()
-                    })
-                    .fillMaxWidth()
-                    .draggable(
-                        orientation = Orientation.Vertical,
-                        state = rememberDraggableState { onDelta ->
-                            //处理图片本身的滑动,在收缩或者展开后不再使用滑动
-                            val consumedY = if(onDelta < 0){
-                                val remainHeight = imageHeightMin - imageHeight
-                                if(remainHeight < onDelta){
-                                    onDelta
-                                }else {
-                                    remainHeight
-                                }
-                            }else{
-                                val remainHeight = imageHeightMax - imageHeight
-                                if(remainHeight > onDelta) {
-                                    onDelta
+    WeScaffold {
+        LazyColumn(modifier = Modifier.fillMaxSize()) {
+            items(50){
+                Text("$it")
+            }
+            item {
+                Image(
+                    painter = painterResource(id = R.mipmap.ic_launcher),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier
+                        .height(with(density){
+                            imageHeight.toDp()
+                        })
+                        .fillMaxWidth()
+                        .draggable(
+                            orientation = Orientation.Vertical,
+                            state = rememberDraggableState { onDelta ->
+                                //处理图片本身的滑动,在收缩或者展开后不再使用滑动
+                                val consumedY = if(onDelta < 0){
+                                    val remainHeight = imageHeightMin - imageHeight
+                                    if(remainHeight < onDelta){
+                                        onDelta
+                                    }else {
+                                        remainHeight
+                                    }
                                 }else{
-                                    remainHeight
+                                    val remainHeight = imageHeightMax - imageHeight
+                                    if(remainHeight > onDelta) {
+                                        onDelta
+                                    }else{
+                                        remainHeight
+                                    }
                                 }
+                                imageHeight+=consumedY
+
+
+                                //把多余的滑动交给父节点,去掉后不会把滑动传给父节点
+                                nestedScrollDispatcher.dispatchPostScroll(
+                                    consumed = Offset(0f, consumedY),
+                                    available = Offset(0f, onDelta - consumedY),
+                                    source = NestedScrollSource.UserInput
+                                )
                             }
-                            imageHeight+=consumedY
-
-
-                            //把多余的滑动交给父节点,去掉后不会把滑动传给父节点
-                            nestedScrollDispatcher.dispatchPostScroll(
-                                consumed = Offset(0f, consumedY),
-                                available = Offset(0f, onDelta - consumedY),
-                                source = NestedScrollSource.UserInput
-                            )
-                        }
-                    )
-                    .nestedScroll(
-                        connection = remember { object : NestedScrollConnection {} },
-                        dispatcher = nestedScrollDispatcher
-                    )
-            )
-        }
-        items(50){
-            Text("$it")
+                        )
+                        .nestedScroll(
+                            connection = remember { object : NestedScrollConnection {} },
+                            dispatcher = nestedScrollDispatcher
+                        )
+                )
+            }
+            items(50){
+                Text("$it")
+            }
         }
     }
 }
