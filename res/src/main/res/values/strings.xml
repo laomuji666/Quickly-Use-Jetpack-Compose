@@ -91,4 +91,7 @@
     <string name="string_biometric_screen_status_hardware_other_error">终止原因: %1$s</string>
     <string name="string_biometric_screen_status_hardware_success">生物认证成功</string>
     <string name="string_biometric_screen_status_hardware_fail">生物认证失败</string>
+
+<!--  PainterScreen  -->
+    <string name="string_painter_screen_clear">清空画板</string>
 </resources>
