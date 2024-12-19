@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -200,7 +201,7 @@ private fun PainterScreenUi(
             WeButton(
                 weButtonType = WeButtonType.BIG,
                 weButtonColor = WeButtonColor.PRIMARY,
-                text = "清空画板",
+                text = stringResource(id = com.laomuji666.compose.res.R.string.string_painter_screen_clear),
                 onClick = onClearCanvasClick
             )
         }

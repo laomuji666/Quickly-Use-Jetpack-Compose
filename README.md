@@ -62,6 +62,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 | 例子        | 截图                                                                   |
 |-----------|----------------------------------------------------------------------|
 | 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/></img> |
+| 绘画画板 | <img src="docs/images/PainterScreen.png" width="320"/></img>         |
 | Lazy列表排序  | <img src="docs/images/LazySort.gif" width="320"/></img>              |
 | 自定义日历     | <img src="docs/images/CustomizeCalendar.gif" width="320"/></img>     |
 | 动态切换logo  | <img src="docs/images/SwitchAppLogo.gif" width="320"/></img>         |
