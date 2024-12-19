@@ -61,6 +61,7 @@ dependencies {
     implementation(project(":feature:date"))
     implementation(project(":feature:scroll"))
     implementation(project(":feature:biometric"))
+    implementation(project(":feature:painter"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

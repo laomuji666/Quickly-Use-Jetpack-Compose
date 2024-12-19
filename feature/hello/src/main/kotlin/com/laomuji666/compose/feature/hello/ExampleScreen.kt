@@ -59,6 +59,7 @@ fun ExampleScreen(
     onNestedScrollConnectionScreenClick:()->Unit,
     onNestedScrollDispatcherScreenClick:()->Unit,
     onBiometricScreenClick:()->Unit,
+    onPainterScreenClick:()->Unit,
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -156,7 +157,8 @@ fun ExampleScreen(
         onLongClickSortClick = {
             showDragListDialog = true
         },
-        onBiometricScreenClick = onBiometricScreenClick
+        onBiometricScreenClick = onBiometricScreenClick,
+        onPainterScreenClick = onPainterScreenClick
     )
 }
 
@@ -180,6 +182,7 @@ fun ExampleScreenUi(
     onNestedScrollDispatcherScreenClick:()->Unit,
     onLongClickSortClick:()->Unit,
     onBiometricScreenClick:()->Unit,
+    onPainterScreenClick:()->Unit,
 ){
     WeScaffold(
         topBar = {
@@ -271,6 +274,11 @@ fun ExampleScreenUi(
                 onClick = onBiometricScreenClick,
                 weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
             )
+            WeTableClickRow(
+                title = stringResource(id = R.string.string_hello_screen_painter),
+                onClick = onPainterScreenClick,
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
         }
     }
 }
@@ -326,7 +334,8 @@ fun PreviewExampleScreen(){
             onNestedScrollConnectionScreenClick = {},
             onNestedScrollDispatcherScreenClick = {},
             onLongClickSortClick = {},
-            onBiometricScreenClick = {}
+            onBiometricScreenClick = {},
+            onPainterScreenClick = {}
         )
     }
 }

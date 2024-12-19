@@ -20,6 +20,8 @@ import com.laomuji666.compose.feature.hello.composeHelloScreen
 import com.laomuji666.compose.feature.hello.composeHttpScreen
 import com.laomuji666.compose.feature.hello.navigateToFirebaseScreen
 import com.laomuji666.compose.feature.hello.navigateToHttpScreen
+import com.laomuji666.compose.feature.painter.composePainterScreen
+import com.laomuji666.compose.feature.painter.navigateToPainterScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollDispatcherScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollConnectionScreen
@@ -84,6 +86,9 @@ fun NavigationHost(
             },
             onBiometricScreenClick = {
                 navHostController.navigateToBiometricScreen()
+            },
+            onPainterScreenClick = {
+                navHostController.navigateToPainterScreen()
             }
         )
 
@@ -119,5 +124,7 @@ fun NavigationHost(
         composeNestedScrollDispatcherScreen()
 
         composeBiometricScreen()
+
+        composePainterScreen()
     }
 }
