@@ -42,6 +42,6 @@ include(":feature:chat")
 include(":feature:date")
 include(":feature:scroll")
 include(":feature:biometric")
-
+include(":feature:painter")
 
 include(":core-launcher")

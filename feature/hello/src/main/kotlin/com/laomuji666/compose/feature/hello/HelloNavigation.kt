@@ -15,6 +15,7 @@ fun NavGraphBuilder.composeHelloScreen(
     onNestedScrollConnectionScreenClick:()->Unit,
     onNestedScrollDispatcherScreenClick:()->Unit,
     onBiometricScreenClick:()->Unit,
+    onPainterScreenClick:()->Unit,
 ){
     composable<RouteHelloScreen>{
         HelloScreen(
@@ -24,7 +25,8 @@ fun NavGraphBuilder.composeHelloScreen(
             onDateClick = onDateClick,
             onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
             onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick,
-            onBiometricScreenClick = onBiometricScreenClick
+            onBiometricScreenClick = onBiometricScreenClick,
+            onPainterScreenClick = onPainterScreenClick,
         )
     }
 }
