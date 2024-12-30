@@ -32,7 +32,6 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.extension.isForeverDenied
-import com.laomuji666.compose.core.ui.launcher.selectMobileLauncher
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.view.DragList
 import com.laomuji666.compose.core.ui.we.WeTheme
@@ -46,6 +45,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.launcher.openAlbum
 import com.laomuji666.compose.launcher.openCamera
 import com.laomuji666.compose.launcher.openContact
+import com.laomuji666.compose.launcher.selectMobileLauncher
 import com.laomuji666.compose.res.R
 
 @OptIn(ExperimentalPermissionsApi::class)

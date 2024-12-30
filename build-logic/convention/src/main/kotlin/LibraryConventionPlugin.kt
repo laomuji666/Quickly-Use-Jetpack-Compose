@@ -10,9 +10,14 @@ class LibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target){
             with(pluginManager) {
+                //library需要的插件
                 apply("com.android.library")
+
+                //基础插件
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.compose")
+
+                //序列化插件
                 apply("org.jetbrains.kotlin.plugin.serialization")
             }
 
@@ -28,9 +33,10 @@ class LibraryConventionPlugin : Plugin<Project> {
                 }
             }
 
-            //compose = true 必须引入的依赖
             dependencies {
+                //compose依赖
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose").get())
+                //序列化
                 add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
             }
         }

@@ -29,9 +29,6 @@ dependencies {
     //hilt的navigation扩展
     api(libs.androidx.hilt.navigation.compose)
 
-    //谷歌认证
-    implementation(libs.play.services.auth)
-
     //coil 图像加载
     api(libs.coil.compose)
 

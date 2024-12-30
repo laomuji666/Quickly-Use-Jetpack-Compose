@@ -1,4 +1,4 @@
-package com.laomuji666.compose.core.ui.launcher
+package com.laomuji666.compose.launcher
 
 import android.app.Activity
 import android.app.PendingIntent

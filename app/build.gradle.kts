@@ -47,6 +47,8 @@ android {
 }
 
 dependencies {
+    //compose必须的依赖
+    implementation(libs.androidx.lifecycle.runtime.compose)
     //关联view和compose
     implementation(libs.androidx.activity.compose)
 

@@ -92,9 +92,6 @@ class DefaultLocator @Inject constructor(
                                 Log.debug(TAG,"isLocationAvailable is true, use fusedLocationProviderClient")
                             }else{
                                 Log.debug(TAG,"isLocationAvailable is false, use locationManager")
-                                requestNetworkLocation{ location ->
-                                    cont.safeResume(location)
-                                }
                             }
                         }
                         Log.debug(TAG,"isComplete $isComplete")
@@ -104,7 +101,9 @@ class DefaultLocator @Inject constructor(
                                 cont.safeResume(result)
                             }else{
                                 Log.debug(TAG,"unsuccessful")
-                                cont.safeResume(null)
+                                requestSingleLocation{ location ->
+                                    cont.safeResume(location)
+                                }
                             }
                         }else{
                             addOnSuccessListener {
@@ -113,18 +112,20 @@ class DefaultLocator @Inject constructor(
                                     cont.safeResume(it)
                                 }else{
                                     Log.debug(TAG,"onSuccess null, use locationManager")
-                                    requestNetworkLocation{ location ->
+                                    requestSingleLocation{ location ->
                                         cont.safeResume(location)
                                     }
                                 }
                             }
                             addOnFailureListener {
                                 Log.debug(TAG,"onFailure")
-                                cont.safeResume(null)
+                                requestSingleLocation{ location ->
+                                    cont.safeResume(location)
+                                }
                             }
                             addOnCanceledListener {
                                 Log.debug(TAG,"onCancel")
-                                cont.cancel()
+                                cont.safeResume(null)
                             }
                         }
                     }
@@ -150,17 +151,26 @@ class DefaultLocator @Inject constructor(
         }
     }
 
-    private fun requestNetworkLocation(
+    private fun requestSingleLocation(
         callback:(Location)->Unit
     ){
         val locationListener = object : LocationListenerCompat {
             override fun onLocationChanged(location: Location) {
-                Log.debug(TAG, "requestNetworkLocation $location")
+                Log.debug(TAG, "requestSingleLocation $location")
                 callback(location)
                 locationManager.removeUpdates(this)
             }
         }
-        if(hasNetworkProvider()){
+        if(hasGpsProvider()){
+            locationManager.requestLocationUpdates(
+                LocationManager.GPS_PROVIDER,
+                0,
+                0f,
+                locationListener,
+                Looper.getMainLooper()
+            )
+        }
+        else if(hasNetworkProvider()){
             locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0,

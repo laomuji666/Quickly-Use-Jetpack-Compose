@@ -9,4 +9,7 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic:common"))
+
+    //谷歌认证
+    implementation(libs.play.services.auth)
 }
