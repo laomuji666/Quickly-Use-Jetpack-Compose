@@ -10,18 +10,26 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @HiltViewModel
-class FirebaseViewModel @Inject constructor(
+class FirebaseScreenViewModel @Inject constructor(
     private val analytics: com.laomuji666.compose.core.logic.analytics.Analytics,
     private val notification: FirebaseNotification
 ) : ViewModel() {
     private val _pushToken = MutableStateFlow("")
     val uiState = _pushToken.map {
-        FirebaseUiState(
+        FirebaseScreenUiState(
             pushToken = it
         )
-    }.stateInTimeout(viewModelScope, FirebaseUiState())
+    }.stateInTimeout(viewModelScope, FirebaseScreenUiState())
 
-    fun logEventClick(){
+    fun onAction(action: FirebaseScreenAction){
+        when(action){
+            FirebaseScreenAction.OnClickLogEvent -> logEventClick()
+            FirebaseScreenAction.UpdatePushToken -> updatePushToken()
+            FirebaseScreenAction.TestCrashlytics -> testCrashlytics()
+        }
+    }
+
+    private fun logEventClick(){
         analytics.logEvent("HelloScreen_logEventClick")
     }
 
@@ -31,7 +39,7 @@ class FirebaseViewModel @Inject constructor(
         }
     }
 
-    fun testCrashlytics() {
+    private fun testCrashlytics() {
         throw RuntimeException("Test Crash")
     }
 }

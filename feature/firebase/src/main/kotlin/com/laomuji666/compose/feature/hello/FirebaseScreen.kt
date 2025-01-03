@@ -32,7 +32,7 @@ import com.laomuji666.compose.res.R
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun FirebaseScreen(
-    viewModel: FirebaseViewModel = hiltViewModel(),
+    viewModel: FirebaseScreenViewModel = hiltViewModel(),
     onBackClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -45,12 +45,12 @@ fun FirebaseScreen(
         uiState = uiState,
         onBackClick = onBackClick,
         logEventClick = {
-            viewModel.logEventClick()
+            viewModel.onAction(FirebaseScreenAction.OnClickLogEvent)
         },
         updatePushToken = {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
                 if(postNotificationPermissionState.status.isGranted){
-                    viewModel.updatePushToken()
+                    viewModel.onAction(FirebaseScreenAction.UpdatePushToken)
                 }else{
                     if (postNotificationPermissionState.status.isForeverDenied()) {
                         //永久拒绝了权限,需要打开设置页面手动授权
@@ -59,18 +59,18 @@ fun FirebaseScreen(
                     }
                 }
             }else{
-                viewModel.updatePushToken()
+                viewModel.onAction(FirebaseScreenAction.UpdatePushToken)
             }
         },
         testCrashlytics = {
-            viewModel.testCrashlytics()
+            viewModel.onAction(FirebaseScreenAction.TestCrashlytics)
         }
     )
 }
 
 @Composable
 private fun FirebaseScreenUi(
-    uiState: FirebaseUiState,
+    uiState: FirebaseScreenUiState,
     onBackClick: ()->Unit,
     logEventClick: () -> Unit,
     updatePushToken:()->Unit,
@@ -127,7 +127,7 @@ private fun FirebasePermissionSlot(
 fun PreviewFirebaseScreen(){
     QuicklyTheme {
         FirebaseScreenUi(
-            uiState = FirebaseUiState(),
+            uiState = FirebaseScreenUiState(),
             onBackClick = {},
             logEventClick = {},
             updatePushToken = {},

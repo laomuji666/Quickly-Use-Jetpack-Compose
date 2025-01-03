@@ -18,6 +18,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -47,19 +48,24 @@ import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 
 @Composable
 fun ChatScreen(
-    viewModel: ChatViewModel = hiltViewModel(),
+    viewModel: ChatScreenViewModel = hiltViewModel(),
     onBackClick: ()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
+
+    LaunchedEffect(Unit) {
+        viewModel.onAction(ChatScreenAction.DismissNotification)
+    }
+
     ChatScreenUi(
         uiState = uiState,
         onBackClick = onBackClick,
         onInputTextChanged = {
-            viewModel.setInputText(it)
+            viewModel.onAction(ChatScreenAction.SetInputText(it))
         },
         onSendInputTextClick = {
-            viewModel.sendInputText()
+            viewModel.onAction(ChatScreenAction.SendInputText)
             softwareKeyboardController?.hide()
         }
     )
