@@ -14,15 +14,17 @@ import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 @HiltViewModel
-class ChatViewModel @Inject constructor(
+class ChatScreenViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
     contactDao: ContactDao,
     private val chatRepository: ChatRepository,
-    notificationHelper: NotificationHelper
+    private val notificationHelper: NotificationHelper
 ):ViewModel() {
+    //获取联系人的信息
     private val contactInfo = contactDao.getByAccount((savedStateHandle.toRoute<RouteChatScreen>()).account)
-
+    //获取聊天列表,flow,实际上返回的是数据库的,在数据库更新时自动emit,所以一直都是最新的值.
     private val _messageList = chatRepository.getMessageList(contactInfo.account)
+
     private val _inputText = MutableStateFlow("")
 
     val uiState = combine(_messageList, _inputText) { messageList, inputText ->
@@ -34,19 +36,27 @@ class ChatViewModel @Inject constructor(
         )
     }.stateInTimeout(viewModelScope, ChatScreenUiState())
 
-    init {
-        notificationHelper.dismissNotification(contactInfo)
+    fun onAction(action: ChatScreenAction) {
+        when(action) {
+            is ChatScreenAction.SetInputText -> setInputText(action.text)
+            ChatScreenAction.SendInputText -> sendInputText()
+            ChatScreenAction.DismissNotification -> dismissNotification()
+        }
     }
 
-    fun setInputText(text: String) {
+    private fun setInputText(text: String) {
         _inputText.value = text
     }
 
-    fun sendInputText() {
+    private fun sendInputText() {
         if(_inputText.value.isEmpty()) {
             return
         }
         chatRepository.sendMessage(contactInfo.account, _inputText.value, contactInfo.nickname)
         _inputText.value = ""
+    }
+
+    private fun dismissNotification(){
+        notificationHelper.dismissNotification(contactInfo)
     }
 }

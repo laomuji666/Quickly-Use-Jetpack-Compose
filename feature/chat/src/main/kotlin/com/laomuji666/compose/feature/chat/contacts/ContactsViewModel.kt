@@ -9,25 +9,34 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
-    contactsRepository: ContactRepository
+    private val contactsRepository: ContactRepository
 ) : ViewModel(){
     private val _contactList: MutableStateFlow<List<ContactInfoEntity>> = MutableStateFlow(emptyList())
 
     val uiState = _contactList
         .asStateFlow()
-        .onStart {
-            contactsRepository.contactsList().collect{
-                _contactList.value = it
-            }
-        }
         .map {
             ContactsScreenUiState(
                 contactList = it
             )
         }.stateInTimeout(viewModelScope, ContactsScreenUiState())
+
+    fun onAction(action: ContactsScreenAction){
+        when(action){
+            is ContactsScreenAction.UpdateContactList -> updateContactList()
+        }
+    }
+
+    private fun updateContactList(){
+        viewModelScope.launch {
+            contactsRepository.contactsList().collect{
+                _contactList.value = it
+            }
+        }
+    }
 }

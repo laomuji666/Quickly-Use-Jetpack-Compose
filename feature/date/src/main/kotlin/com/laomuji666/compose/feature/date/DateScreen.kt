@@ -51,24 +51,14 @@ fun DateScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     DateScreenUi(
         uiState = uiState,
-        onYearClick = {
-            viewModel.onYearClick(it)
-        },
-        onMonthClick = {
-            viewModel.onMonthClick(it)
-        },
-        onDayClick = {
-            viewModel.onDayClick(it)
-        }
+        onAction = viewModel::onAction
     )
 }
 
 @Composable
 private fun DateScreenUi(
     uiState: DateScreenUiState,
-    onYearClick:(year:Int)->Unit,
-    onMonthClick:(month:Int)->Unit,
-    onDayClick:(day:Int)->Unit
+    onAction:(DateScreenAction)->Unit
 ){
     WeScaffold(
         topBar = {
@@ -76,7 +66,7 @@ private fun DateScreenUi(
             SelectYearUi(
                 currentYear = uiState.currentYear,
                 yearList = uiState.yearList,
-                onYearClick = onYearClick
+                onYearClick = { onAction(DateScreenAction.OnYearClick(it)) }
             )
             WeTableRowOutline(
                 modifier = Modifier.fillMaxWidth()
@@ -104,9 +94,9 @@ private fun DateScreenUi(
     ) {
         MonthDayUi(
             uiState = uiState,
-            onYearClick = onYearClick,
-            onMonthClick = onMonthClick,
-            onDayClick = onDayClick
+            onYearClick = { onAction(DateScreenAction.OnYearClick(it)) },
+            onMonthClick = { onAction(DateScreenAction.OnMonthClick(it)) },
+            onDayClick = { onAction(DateScreenAction.OnDayClick(it)) }
         )
     }
 }
@@ -278,13 +268,13 @@ private fun MonthDetailUi(
 @Preview
 @Composable
 private fun PreviewDateScreen() {
-    var currentYear by rememberSaveable {
+    val currentYear by rememberSaveable {
         mutableIntStateOf(DateUtil.getCurrentYear())
     }
-    var currentMonth by rememberSaveable {
+    val currentMonth by rememberSaveable {
         mutableIntStateOf(DateUtil.getCurrentMonth())
     }
-    var currentDay by rememberSaveable {
+    val currentDay by rememberSaveable {
         mutableIntStateOf(DateUtil.getCurrentDay())
     }
     QuicklyTheme{
@@ -295,26 +285,8 @@ private fun PreviewDateScreen() {
                 currentYear = currentYear,
                 currentMonth = currentMonth,
                 currentDay = currentDay
-
             ),
-            onYearClick = {
-                currentYear = it
-                if (!DateUtil.hasDay(currentYear, currentMonth, currentDay)) {
-                    currentDay = 1
-                }
-            },
-            onMonthClick = {
-                currentMonth = it
-                if (!DateUtil.hasDay(currentYear, currentMonth, currentDay)) {
-                    currentDay = 1
-                }
-            },
-            onDayClick = {
-                currentDay = it
-                if (!DateUtil.hasDay(currentYear, currentMonth, currentDay)) {
-                    currentDay = 1
-                }
-            }
+            onAction = {}
         )
     }
 }

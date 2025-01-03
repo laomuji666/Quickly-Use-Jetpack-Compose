@@ -1,6 +1,10 @@
 package com.laomuji666.compose.feature.biometric
 
+import android.content.Context
+import android.content.Intent
+import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -30,7 +34,6 @@ fun BiometricScreen(
     viewModel: BiometricScreenViewModel = hiltViewModel()
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val context = LocalContext.current
 
     val biometricLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult(),
@@ -39,26 +42,17 @@ fun BiometricScreen(
 
     BiometricScreenUi(
         uiState = uiState,
-        onHandleClick = {
-            viewModel.handleBiometric(context)
-        },
-        onSettingClick = {
-            viewModel.getBiometricSettingIntent()?.let {
-                biometricLauncher.launch(it)
-            }
-        },
-        onTitleChange = viewModel::setTitle,
-        onDescriptionChange = viewModel::setDescription
+        onAction = viewModel::onAction,
+        biometricLauncher = biometricLauncher
     )
 }
 
 @Composable
 private fun BiometricScreenUi(
     uiState: BiometricScreenUiState,
-    onHandleClick: () -> Unit,
-    onSettingClick: () -> Unit,
-    onTitleChange: (String) -> Unit,
-    onDescriptionChange: (String) -> Unit,
+    onAction: (BiometricScreenAction) -> Unit,
+    context: Context = LocalContext.current,
+    biometricLauncher: ManagedActivityResultLauncher<Intent, ActivityResult>?=null
 ){
     val text = when(uiState.biometricResult){
         BiometricAuthenticate.BiometricAuthenticateResult.HardwareNotFound -> stringResource(id = string.string_biometric_screen_status_hardware_not_found)
@@ -80,20 +74,20 @@ private fun BiometricScreenUi(
                 title = stringResource(id = string.string_biometric_screen_title_title),
                 tip = stringResource(id = string.string_biometric_screen_title_tip),
                 value = uiState.title,
-                onValueChange = onTitleChange
+                onValueChange = {onAction(BiometricScreenAction.OnTitleChange(it))}
             )
             Spacer(modifier = Modifier.height(10.dp))
             WeTableInput(
                 title = stringResource(id = string.string_biometric_screen_description_title),
                 tip = stringResource(id = string.string_biometric_screen_description_tip),
                 value = uiState.description,
-                onValueChange = onDescriptionChange
+                onValueChange = {onAction(BiometricScreenAction.OnDescriptionChange(it))}
             )
             Spacer(modifier = Modifier.height(20.dp))
 
             WeButton(
                 text = stringResource(id = string.string_biometric_screen_handle_title),
-                onClick = onHandleClick,
+                onClick = { onAction(BiometricScreenAction.HandleBiometric(context)) },
                 weButtonType = WeButtonType.BIG
             )
 
@@ -101,7 +95,7 @@ private fun BiometricScreenUi(
                 Spacer(modifier = Modifier.height(20.dp))
                 WeButton(
                     text = stringResource(id = string.string_biometric_screen_setting_title),
-                    onClick = onSettingClick,
+                    onClick = { onAction(BiometricScreenAction.OnSettingClick(biometricLauncher!!)) },
                     weButtonType = WeButtonType.BIG,
                     weButtonColor = WeButtonColor.SECONDARY
                 )
@@ -117,10 +111,7 @@ private fun PreviewBiometricScreen() {
     QuicklyTheme {
         BiometricScreenUi(
             uiState = BiometricScreenUiState(),
-            onHandleClick = {},
-            onSettingClick = {},
-            onTitleChange = {},
-            onDescriptionChange = {}
+            onAction = {}
         )
     }
 }

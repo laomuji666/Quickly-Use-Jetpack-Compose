@@ -23,7 +23,13 @@ class MeScreenViewModel @Inject constructor(
         )
     }.stateInTimeout(viewModelScope, MeScreenUiState())
 
-    fun switchEnableNotification(){
+    fun onAction(action: MeScreenAction){
+        when(action){
+            is MeScreenAction.SwitchEnableNotification -> switchEnableNotification()
+        }
+    }
+
+    private fun switchEnableNotification(){
         val targetValue = !_enableNotification.value
         _enableNotification.value = targetValue
         enableNotification = targetValue

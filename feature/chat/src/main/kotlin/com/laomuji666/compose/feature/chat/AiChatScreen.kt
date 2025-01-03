@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -13,8 +12,6 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Add
-import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
-import com.laomuji666.compose.core.ui.we.icons.ChatsUnselect
 import com.laomuji666.compose.core.ui.we.icons.ContactsSelect
 import com.laomuji666.compose.core.ui.we.icons.ContactsUnselect
 import com.laomuji666.compose.core.ui.we.icons.MeSelect
@@ -37,9 +34,6 @@ fun AiChatScreen(
     onContactClick: (ContactInfoEntity)->Unit
 ){
     AiChatScreenUi(
-        messageContent = {
-            Text(text = "TODO")
-        },
         contactsContent = {
             ContactsScreen(
                 onContactClick = onContactClick
@@ -53,12 +47,11 @@ fun AiChatScreen(
 
 @Composable
 private fun AiChatScreenUi(
-    messageContent:@Composable ()->Unit,
     contactsContent:@Composable ()->Unit,
     meContent:@Composable ()->Unit
 ){
     val pagerState = rememberPagerState(
-        initialPage = AiScreenSelectEnum.MESSAGES.ordinal,
+        initialPage = AiScreenSelectEnum.CONTACTS.ordinal,
         pageCount = { AiScreenSelectEnum.entries.size }
     )
     WeScaffold(
@@ -73,7 +66,6 @@ private fun AiChatScreenUi(
             userScrollEnabled = false
         ) {
             when (it) {
-                AiScreenSelectEnum.MESSAGES.ordinal -> messageContent()
                 AiScreenSelectEnum.CONTACTS.ordinal -> contactsContent()
                 AiScreenSelectEnum.ME.ordinal -> meContent()
             }
@@ -108,17 +100,6 @@ private fun BottomBar(
     val coroutineScope = rememberCoroutineScope()
     WeBottomNavigationBar {
         WeBottomNavigationBarItem(
-            title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-            selected = pagerState.currentPage == AiScreenSelectEnum.MESSAGES.ordinal,
-            onClick = {
-                coroutineScope.launch {
-                    pagerState.scrollToPage(AiScreenSelectEnum.MESSAGES.ordinal)
-                }
-            },
-            unSelectImageVector = WeIcons.ChatsUnselect,
-            selectImageVector = WeIcons.ChatsSelect
-        )
-        WeBottomNavigationBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
             selected = pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal,
             onClick = {
@@ -149,7 +130,6 @@ private fun BottomBar(
 fun PreviewAiChatScreenUi(){
     QuicklyTheme {
         AiChatScreenUi(
-            messageContent = {},
             contactsContent = {},
             meContent = {}
         )

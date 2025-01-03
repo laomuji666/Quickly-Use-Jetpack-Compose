@@ -48,12 +48,7 @@ fun HttpScreen(
     HttpScreenUi(
         uiState = uiState,
         onBackClick = onBackClick,
-        onClickSendGet = {
-            viewModel.getListUsers()
-        },
-        onClickSendPost = {
-            viewModel.createUser()
-        }
+        onAction = viewModel::onAction
     )
 }
 
@@ -61,8 +56,7 @@ fun HttpScreen(
 private fun HttpScreenUi(
     uiState:HttpScreenUiState,
     onBackClick:()->Unit,
-    onClickSendGet:()->Unit,
-    onClickSendPost:()->Unit
+    onAction: (HttpScreenAction) -> Unit,
 ){
     WeScaffold(
         topBar = {
@@ -83,11 +77,11 @@ private fun HttpScreenUi(
         Spacer(modifier = Modifier.height(20.dp))
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_get_demo),
-            onClick = onClickSendGet
+            onClick = { onAction(HttpScreenAction.GetListUsers) }
         )
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_post_demo),
-            onClick = onClickSendPost
+            onClick = { onAction(HttpScreenAction.CreateUser) }
         )
         Text(text = uiState.responseText, color = WeTheme.colorScheme.fontColor90)
     }
@@ -113,9 +107,8 @@ fun PreviewHttpScreen(){
     QuicklyTheme {
         HttpScreenUi(
             onBackClick = {},
-            onClickSendGet = {},
-            onClickSendPost = {},
-            uiState = HttpScreenUiState()
+            uiState = HttpScreenUiState(),
+            onAction = {}
         )
     }
 }

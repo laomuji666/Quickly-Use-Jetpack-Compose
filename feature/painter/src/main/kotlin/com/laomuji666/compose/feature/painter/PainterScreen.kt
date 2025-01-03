@@ -65,22 +65,22 @@ fun PainterScreen(
         pathList = uiState.pathList,
         currentPath = uiState.currentPath,
         onCurrentColorIndexChange = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnCurrentColorIndexChange(it))
+            viewModel.onAction(PainterScreenAction.OnCurrentColorIndexChange(it))
         },
         onCurrentWidthIndexChange = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnCurrentWidthIndexChange(it))
+            viewModel.onAction(PainterScreenAction.OnCurrentWidthIndexChange(it))
         },
         onClearCanvasClick = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnClearCanvas)
+            viewModel.onAction(PainterScreenAction.OnClearCanvas)
         },
         onDragStart = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnDragStart(it))
+            viewModel.onAction(PainterScreenAction.OnDragStart(it))
         },
         onDragEnd = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnDragEnd)
+            viewModel.onAction(PainterScreenAction.OnDragEnd)
         },
         onDrag = {
-            viewModel.onAction(PainterScreenViewModel.PainterScreenAction.OnDrag(it))
+            viewModel.onAction(PainterScreenAction.OnDrag(it))
         }
     )
 }

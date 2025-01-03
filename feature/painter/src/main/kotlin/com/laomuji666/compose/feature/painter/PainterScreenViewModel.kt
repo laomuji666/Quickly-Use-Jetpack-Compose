@@ -1,6 +1,5 @@
 package com.laomuji666.compose.feature.painter
 
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -14,15 +13,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PainterScreenViewModel @Inject constructor() : ViewModel() {
-    sealed interface PainterScreenAction{
-        data object OnClearCanvas:PainterScreenAction
-        data class OnCurrentColorIndexChange(val index:Int):PainterScreenAction
-        data class OnCurrentWidthIndexChange(val index:Int):PainterScreenAction
-        data class OnDragStart(val offset: Offset):PainterScreenAction
-        data object OnDragEnd:PainterScreenAction
-        data class OnDrag(val offset: Offset):PainterScreenAction
-    }
-
     private val _colorList = listOf(
         Color(0xFFFF0000),
         Color(0xFFFFA500),

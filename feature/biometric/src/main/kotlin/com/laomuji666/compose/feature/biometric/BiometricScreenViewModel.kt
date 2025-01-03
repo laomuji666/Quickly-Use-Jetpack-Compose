@@ -29,7 +29,18 @@ class BiometricScreenViewModel @Inject constructor(
         )
     }.stateInTimeout(viewModelScope, BiometricScreenUiState())
 
-    fun handleBiometric(context: Context){
+    fun onAction(action: BiometricScreenAction){
+        when(action){
+            is BiometricScreenAction.HandleBiometric -> handleBiometric(action.activityContext)
+            is BiometricScreenAction.OnSettingClick -> getBiometricSettingIntent()?.let {
+                action.biometricLauncher.launch(it)
+            }
+            is BiometricScreenAction.OnTitleChange -> setTitle(action.title)
+            is BiometricScreenAction.OnDescriptionChange -> setDescription(action.description)
+        }
+    }
+
+    private fun handleBiometric(context: Context){
         if(_title.value.isEmpty()){
             //标题不能为空
             return
@@ -37,13 +48,13 @@ class BiometricScreenViewModel @Inject constructor(
         biometricAuthenticate.handleBiometric(context, _title.value, _description.value)
     }
 
-    fun getBiometricSettingIntent() = biometricAuthenticate.getBiometricSettingIntent()
+    private fun getBiometricSettingIntent() = biometricAuthenticate.getBiometricSettingIntent()
 
-    fun setTitle(title: String){
+    private fun setTitle(title: String){
         _title.value = title
     }
 
-    fun setDescription(description: String){
+    private fun setDescription(description: String){
         _description.value = description
     }
 }

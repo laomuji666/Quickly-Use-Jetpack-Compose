@@ -53,7 +53,7 @@ fun MeScreen(
         onEnableNotificationClick = {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
                 if(postNotificationPermissionState.status.isGranted){
-                    viewModel.switchEnableNotification()
+                    viewModel.onAction(MeScreenAction.SwitchEnableNotification)
                 }else{
                     if(postNotificationPermissionState.status.isForeverDenied()){
                         //永久拒绝了权限,需要打开设置页面手动授权
@@ -62,7 +62,7 @@ fun MeScreen(
                     }
                 }
             }else {
-                viewModel.switchEnableNotification()
+                viewModel.onAction(MeScreenAction.SwitchEnableNotification)
             }
         }
     )

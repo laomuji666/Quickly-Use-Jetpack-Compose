@@ -37,7 +37,14 @@ class HttpScreenViewModel @Inject constructor(
         )
     }.stateInTimeout(viewModelScope, HttpScreenUiState())
 
-    fun getListUsers(){
+    fun onAction(action: HttpScreenAction){
+        when(action){
+            HttpScreenAction.GetListUsers -> getListUsers()
+            HttpScreenAction.CreateUser -> createUser()
+        }
+    }
+
+    private fun getListUsers(){
         if(_isLoading.value){
             return
         }
@@ -61,7 +68,7 @@ class HttpScreenViewModel @Inject constructor(
         }
     }
 
-    fun createUser(){
+    private fun createUser(){
         if(_isLoading.value){
             return
         }
