@@ -35,7 +35,7 @@ include(":core-logic:database")
 include(":core-logic:repository")
 include(":core-logic:location")
 
-include(":feature:hello")
+include(":feature:demo")
 include(":feature:firebase")
 include(":feature:http")
 include(":feature:chat")

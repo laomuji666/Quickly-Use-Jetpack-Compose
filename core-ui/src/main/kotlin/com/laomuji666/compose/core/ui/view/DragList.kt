@@ -118,6 +118,37 @@ fun <T>DragList(
     }
 }
 
+@Composable
+fun DragListDemo(
+    dragList:List<String>,
+    onSwap:(a:Int,b:Int)->Unit
+){
+    Column {
+        DragList(
+            modifier = Modifier.background(WeTheme.colorScheme.background).fillMaxSize(),
+            list = dragList,
+            itemContent = {item, isDrag->
+                Row(
+                    modifier = Modifier.fillMaxWidth().border(1.dp, WeTheme.colorScheme.outline).height(
+                        WeTheme.dimens.navigationBarHeight).background(
+                        if(isDrag){
+                            WeTheme.colorScheme.primaryButton
+                        }else{
+                            WeTheme.colorScheme.secondaryButton
+                        }
+                    ),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(item)
+                }
+            },
+            onSwap = onSwap
+        )
+    }
+}
+
+
 /**
  * 需要记录原始的下标,LazyColumn不会保留所有的信息,只会保留可展示的item信息.
  */

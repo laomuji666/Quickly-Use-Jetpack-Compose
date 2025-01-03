@@ -75,7 +75,6 @@ fun RowScope.WeBottomNavigationBarItem(
                 )
             }
         }
-
         Text(
             text = title,
             style = WeTheme.typography.footnote,
@@ -123,13 +122,6 @@ fun PreviewWeBottomNavigationBar(){
                 onClick = { selected = 1 },
                 unSelectImageVector = WeIcons.ContactsUnselect,
                 selectImageVector = WeIcons.ContactsSelect
-            )
-            WeBottomNavigationBarItem(
-                title = "发现",
-                selected = selected == 2,
-                onClick = { selected = 2 },
-                unSelectImageVector = WeIcons.ChatsUnselect,
-                selectImageVector = WeIcons.ChatsSelect
             )
             WeBottomNavigationBarItem(
                 title = "我",

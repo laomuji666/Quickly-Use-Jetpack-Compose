@@ -56,7 +56,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic:common"))
     implementation(project(":core-logic:notification"))
-    implementation(project(":feature:hello"))
+    implementation(project(":feature:demo"))
     implementation(project(":feature:firebase"))
     implementation(project(":feature:http"))
     implementation(project(":feature:chat"))
