@@ -18,7 +18,6 @@ androidxHiltNavigationCompose = "1.2.0"
 navigationCompose = "2.8.5"
 googleGmsGoogleServices = "4.4.2"
 firebaseBom = "33.7.0"
-accompanist = "0.34.0"
 googleFirebaseCrashlytics = "3.0.2"
 ktor = "2.3.12"
 playServicesAuth = "21.3.0"
@@ -68,8 +67,6 @@ hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hi
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
-# compose permission
-accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
 # ktor
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-logging = { module = "io.ktor:ktor-client-logging", version.ref = "ktor" }

@@ -31,7 +31,4 @@ dependencies {
 
     //coil 图像加载
     api(libs.coil.compose)
-
-    //compose permission
-    api(libs.accompanist.permissions)
 }

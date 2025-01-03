@@ -1,7 +1,11 @@
 package com.laomuji666.compose.feature.firebase
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,15 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.accompanist.permissions.ExperimentalPermissionsApi
-import com.google.accompanist.permissions.isGranted
-import com.google.accompanist.permissions.rememberPermissionState
-import com.laomuji666.compose.core.ui.extension.isForeverDenied
+import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
@@ -29,17 +32,24 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
 import com.laomuji666.compose.res.R
 
-@OptIn(ExperimentalPermissionsApi::class)
 @Composable
 fun FirebaseScreen(
     viewModel: FirebaseScreenViewModel = hiltViewModel(),
     onBackClick:()->Unit
 ){
+    val context = LocalContext.current
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-
-    @SuppressLint("InlinedApi")
-    val postNotificationPermissionState = rememberPermissionState(
-        android.Manifest.permission.POST_NOTIFICATIONS
+    val permissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted ->
+            if(isGranted){
+                viewModel.onAction(FirebaseScreenAction.UpdatePushToken)
+            }else{
+                if(!ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.POST_NOTIFICATIONS)){
+                    Toast.showText(context = context, resId = R.string.string_permission_notification_forever_denied)
+                }
+            }
+        }
     )
     FirebaseScreenUi(
         uiState = uiState,
@@ -49,15 +59,7 @@ fun FirebaseScreen(
         },
         updatePushToken = {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                if(postNotificationPermissionState.status.isGranted){
-                    viewModel.onAction(FirebaseScreenAction.UpdatePushToken)
-                }else{
-                    if (postNotificationPermissionState.status.isForeverDenied()) {
-                        //永久拒绝了权限,需要打开设置页面手动授权
-                    } else {
-                        postNotificationPermissionState.launchPermissionRequest()
-                    }
-                }
+                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }else{
                 viewModel.onAction(FirebaseScreenAction.UpdatePushToken)
             }
