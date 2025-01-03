@@ -56,7 +56,7 @@ fun WeToast(
                 verticalArrangement = Arrangement.Center
             ) {
                 when(weToastType){
-                    WeToastType.Done -> {
+                    WeToastType.DONE -> {
                         Image(
                             imageVector = WeIcons.Done,
                             contentDescription = null,
@@ -109,7 +109,7 @@ fun WeToast(
 }
 
 enum class WeToastType{
-    Done,
+    DONE,
     LOADING,
     ERROR
 }
@@ -118,7 +118,7 @@ enum class WeToastType{
 @Composable
 fun PreviewWeToast1(){
     QuicklyTheme {
-        WeToast(WeToastType.Done,"已发送")
+        WeToast(WeToastType.DONE,"已发送")
     }
 }
 

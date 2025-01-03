@@ -14,12 +14,12 @@ import com.laomuji666.compose.feature.chat.composeAiChatScreen
 import com.laomuji666.compose.feature.chat.navigateToAiChatScreen
 import com.laomuji666.compose.feature.date.composeDateScreen
 import com.laomuji666.compose.feature.date.navigateToDateScreen
-import com.laomuji666.compose.feature.hello.RouteHelloScreen
-import com.laomuji666.compose.feature.hello.composeFirebaseScreen
-import com.laomuji666.compose.feature.hello.composeHelloScreen
-import com.laomuji666.compose.feature.hello.composeHttpScreen
-import com.laomuji666.compose.feature.hello.navigateToFirebaseScreen
-import com.laomuji666.compose.feature.hello.navigateToHttpScreen
+import com.laomuji666.compose.feature.demo.RouteDemoScreen
+import com.laomuji666.compose.feature.demo.composeDemoScreen
+import com.laomuji666.compose.feature.firebase.composeFirebaseScreen
+import com.laomuji666.compose.feature.firebase.navigateToFirebaseScreen
+import com.laomuji666.compose.feature.http.composeHttpScreen
+import com.laomuji666.compose.feature.http.navigateToHttpScreen
 import com.laomuji666.compose.feature.painter.composePainterScreen
 import com.laomuji666.compose.feature.painter.navigateToPainterScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
@@ -34,7 +34,7 @@ import com.laomuji666.compose.feature.scroll.navigateToNestedScrollDispatcherScr
 @Composable
 fun NavigationHost(
     navHostController: NavHostController,
-    startDestination:Any = RouteHelloScreen,
+    startDestination:Any = RouteDemoScreen,
     animTime:Int = 300
 ){
     NavHost(
@@ -65,7 +65,7 @@ fun NavigationHost(
             )
         }
     ){
-        composeHelloScreen(
+        composeDemoScreen(
             onFirebaseClick = {
                 navHostController.navigateToFirebaseScreen()
             },

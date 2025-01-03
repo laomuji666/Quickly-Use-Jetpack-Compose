@@ -10,25 +10,29 @@
     <string name="string_error_view_content">请检查网络或稍后重试</string>
     <string name="string_error_view_refresh">刷新当前页面</string>
 
-<!--  HelloScreen  -->
-    <string name="string_hello_screen_navigation_example">功能示例</string>
-    <string name="string_hello_screen_navigation_widget">UI组件示例</string>
-    <string name="string_hello_screen_firebase_demo">Firebase例子</string>
-    <string name="string_hello_screen_http_demo">Ktor Http例子</string>
-    <string name="string_hello_screen_google_login_demo">谷歌登录例子</string>
-    <string name="string_hello_screen_select_mobile_demo">选择手机号例子</string>
-    <string name="string_hello_screen_ai_chat">AI聊天</string>
-    <string name="string_hello_screen_switch_app_logo">动态切换图标</string>
-    <string name="string_hello_screen_get_location">获取定位</string>
-    <string name="string_hello_screen_open_album">相册选择照片</string>
-    <string name="string_hello_screen_open_camera">相机拍摄照片</string>
-    <string name="string_hello_screen_open_contact">选择联系人</string>
-    <string name="string_hello_screen_date">自定义日历</string>
-    <string name="string_hello_screen_scroll_connect">滑动嵌套 NestedScrollConnection</string>
-    <string name="string_hello_screen_scroll_dispatcher">滑动嵌套 NestedScrollDispatcher</string>
-    <string name="string_hello_screen_long_click_sort">长按拖动列表排序</string>
-    <string name="string_hello_screen_biometric">生物认证</string>
-    <string name="string_hello_screen_painter">绘画画板</string>
+<!--  DemoScreen  -->
+    <string name="string_demo_screen_navigation_feature">功能</string>
+    <string name="string_demo_screen_navigation_device">设备</string>
+    <string name="string_demo_screen_navigation_ui">UI</string>
+<!--  UiDemoScreen  -->
+    <string name="string_demo_screen_painter">绘画画板</string>
+    <string name="string_demo_screen_date">自定义日历</string>
+    <string name="string_demo_screen_scroll_connect">滑动嵌套 NestedScrollConnection</string>
+    <string name="string_demo_screen_scroll_dispatcher">滑动嵌套 NestedScrollDispatcher</string>
+    <string name="string_demo_screen_long_click_sort">长按拖动列表排序</string>
+<!--  DeviceDemoScreen  -->
+    <string name="string_demo_screen_select_mobile_demo">选择手机号例子</string>
+    <string name="string_demo_screen_get_location">获取定位</string>
+    <string name="string_demo_screen_open_album">相册选择照片</string>
+    <string name="string_demo_screen_open_camera">相机拍摄照片</string>
+    <string name="string_demo_screen_open_contact">选择联系人</string>
+    <string name="string_demo_screen_switch_app_logo">动态切换图标</string>
+<!--  FeatureDemoScreen  -->
+    <string name="string_demo_screen_biometric">生物认证</string>
+    <string name="string_demo_screen_google_login_demo">谷歌登录例子</string>
+    <string name="string_demo_screen_ai_chat">AI聊天</string>
+    <string name="string_demo_screen_firebase_demo">Firebase例子</string>
+    <string name="string_demo_screen_http_demo">Ktor Http例子</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
