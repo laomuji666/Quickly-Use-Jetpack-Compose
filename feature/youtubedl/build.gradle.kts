@@ -1,0 +1,16 @@
+plugins {
+    alias(libs.plugins.laomuji666.compose.library)
+    alias(libs.plugins.laomuji666.compose.hilt)
+}
+
+android {
+    namespace = "com.laomuji666.compose.feature.youtubedl"
+}
+
+dependencies {
+    implementation(project(":core-ui"))
+
+    implementation(libs.youtubedl.android.library)
+    implementation(libs.youtubedl.android.ffmpeg)
+    implementation(libs.youtubedl.android.aria2c)
+}

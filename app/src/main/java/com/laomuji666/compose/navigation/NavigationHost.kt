@@ -26,6 +26,8 @@ import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollDispatcherScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollDispatcherScreen
+import com.laomuji666.compose.feature.youtubedl.composeYoutubeDLScreen
+import com.laomuji666.compose.feature.youtubedl.navigateToYoutubeDLScreen
 
 /**
  * 导航控制器
@@ -89,6 +91,9 @@ fun NavigationHost(
             },
             onPainterScreenClick = {
                 navHostController.navigateToPainterScreen()
+            },
+            onYoutubeDLClick = {
+                navHostController.navigateToYoutubeDLScreen()
             }
         )
 
@@ -126,5 +131,7 @@ fun NavigationHost(
         composeBiometricScreen()
 
         composePainterScreen()
+
+        composeYoutubeDLScreen()
     }
 }

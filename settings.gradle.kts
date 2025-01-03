@@ -43,5 +43,6 @@ include(":feature:date")
 include(":feature:scroll")
 include(":feature:biometric")
 include(":feature:painter")
+include(":feature:youtubedl")
 
 include(":core-launcher")
