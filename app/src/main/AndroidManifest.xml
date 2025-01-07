@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
         android:enableOnBackInvokedCallback="true"
+        android:extractNativeLibs="true"
         tools:targetApi="33">
 
         <activity

@@ -15,6 +15,11 @@ fun ApplicationExtension.applicationDefaultConfig(){
         targetSdk = DefaultConfigConstant.TARGET_SDK
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.add("armeabi-v7a")
+            abiFilters.add("arm64-v8a")
+        }
     }
 }
 

@@ -9,8 +9,10 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
+    implementation(project(":res"))
 
     implementation(libs.youtubedl.android.library)
     implementation(libs.youtubedl.android.ffmpeg)
     implementation(libs.youtubedl.android.aria2c)
+    implementation(libs.androidx.documentfile)
 }

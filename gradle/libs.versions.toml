@@ -26,6 +26,7 @@ generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
 appcompat = "1.7.0"
 youtubedlAndroid = "0.17.1"
+documentfile = "1.0.1"
 
 [libraries]
 # app
@@ -85,6 +86,7 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 youtubedl-android-library = { group = "io.github.junkfood02.youtubedl-android", name = "library", version.ref = "youtubedlAndroid" }
 youtubedl-android-ffmpeg = { group = "io.github.junkfood02.youtubedl-android", name = "ffmpeg", version.ref = "youtubedlAndroid" }
 youtubedl-android-aria2c = { group = "io.github.junkfood02.youtubedl-android", name = "aria2c", version.ref = "youtubedlAndroid" }
+androidx-documentfile = { group = "androidx.documentfile", name = "documentfile", version.ref = "documentfile" }
 
 
 [plugins]
