@@ -1,6 +1,9 @@
 package com.laomuji666.compose.feature.youtubedl.model
 
 import android.content.Context
+import com.laomuji666.compose.core.logic.database.dao.YoutubeDLDao
+import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo.Companion.toDownloadInfoList
+import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo.Companion.toYoutubeDLInfoEntity
 import com.laomuji666.compose.feature.youtubedl.model.entity.VideoInfo
 import com.yausername.aria2c.Aria2c
 import com.yausername.ffmpeg.FFmpeg
@@ -11,7 +14,8 @@ import com.yausername.youtubedl_android.YoutubeDLResponse
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -20,7 +24,8 @@ import javax.inject.Singleton
 
 @Singleton
 class YoutubeDLServiceImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context,
+    private val dao: YoutubeDLDao
 ) : YoutubeDLService {
 
     private val json = Json {
@@ -92,11 +97,9 @@ class YoutubeDLServiceImpl @Inject constructor(
     }
 
 
-    private val downloadInfoList = MutableStateFlow<List<DownloadInfo>>(emptyList())
-    private val downloadInfoMap = mutableMapOf<String, DownloadInfo>()
-    private fun setDownloadInfo(id: String, downloadInfo: DownloadInfo){
-        downloadInfoMap[id] = downloadInfo
-        downloadInfoList.value = downloadInfoMap.values.toList()
+    private val downloadInfoList = dao.getYoutubeDLInfoList()
+    private fun setDownloadInfo(downloadInfo: DownloadInfo){
+        dao.insert(downloadInfo.toYoutubeDLInfoEntity())
     }
 
     override fun downloadVideo(
@@ -117,32 +120,32 @@ class YoutubeDLServiceImpl @Inject constructor(
                         fileSize = it.fileSize ?: it.fileSizeApprox ?: .0,
                         filename = it.getFileName()
                     )
-                    setDownloadInfo(downloadInfo.id, downloadInfo)
+                    setDownloadInfo(downloadInfo)
 
                     onGetInfoCallback()
                     downloadVideo(videoInfo = it){ progress,_,_ ->
                         downloadInfo = downloadInfo.copy(
                             progress = progress
                         )
-                        setDownloadInfo(downloadInfo.id, downloadInfo)
+                        setDownloadInfo(downloadInfo)
                     }
 
                     downloadInfo = downloadInfo.copy(
                         progress = 100f,
                         isDone = true
                     )
-                    setDownloadInfo(downloadInfo.id, downloadInfo)
+                    setDownloadInfo(downloadInfo)
                 }
                 .onFailure {
                     downloadInfo = downloadInfo.copy(
                         isError = true
                     )
-                    setDownloadInfo(downloadInfo.id, downloadInfo)
+                    setDownloadInfo(downloadInfo)
                 }
         }
     }
 
-    override fun getDownloadInfoList(): MutableStateFlow<List<DownloadInfo>> {
-        return downloadInfoList
+    override fun getDownloadInfoList(): Flow<List<DownloadInfo>> {
+        return downloadInfoList.map { it.toDownloadInfoList() }
     }
 }

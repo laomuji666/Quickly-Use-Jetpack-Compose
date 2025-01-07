@@ -10,6 +10,7 @@ android {
 dependencies {
     implementation(project(":core-ui"))
     implementation(project(":res"))
+    implementation(project(":core-logic:database"))
 
     implementation(libs.youtubedl.android.library)
     implementation(libs.youtubedl.android.ffmpeg)

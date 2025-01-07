@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.core.content.FileProvider
 import androidx.documentfile.provider.DocumentFile
+import com.laomuji666.compose.core.logic.database.entity.YoutubeDLInfoEntity
 import java.io.File
 
 /**
@@ -32,6 +33,33 @@ data class DownloadInfo(
     companion object{
         private const val GB = 1024 * 1024 * 1024
         private const val MB = 1024 * 1024
+        fun DownloadInfo.toYoutubeDLInfoEntity(): YoutubeDLInfoEntity{
+            return YoutubeDLInfoEntity(
+                title = title,
+                isError = isError,
+                isDone = isDone,
+                duration = duration,
+                fileSize = fileSize,
+                progress = progress,
+                filename = filename
+            ).apply {
+                primaryId = id.toLong()
+            }
+        }
+        fun List<YoutubeDLInfoEntity>.toDownloadInfoList(): List<DownloadInfo>{
+            return map {
+                DownloadInfo(
+                    id = it.primaryId.toString(),
+                    title = it.title,
+                    isError = it.isError,
+                    isDone = it.isDone,
+                    duration = it.duration,
+                    fileSize = it.fileSize,
+                    progress = it.progress,
+                    filename = it.filename
+                )
+            }
+        }
     }
     @Composable
     fun getDurationText(): String{
