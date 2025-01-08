@@ -6,7 +6,7 @@ import com.laomuji666.compose.core.logic.database.entity.YoutubeDLInfoEntity
 import com.laomuji666.compose.res.R
 
 /**
- * @param id 下载的唯一标识
+ * @param url 下载的链接
  * @param title 下载的标题
  * @param thumbnail 缩略图
  * @param isError 是否有错误
@@ -14,10 +14,11 @@ import com.laomuji666.compose.res.R
  * @param duration 时长,秒
  * @param fileSize 文件大小, 使用[getFileSizeText]获取
  * @param progress 进度, 百分比
- * @param filename 文件名
+ * @param filename 文件名, 唯一
+ * @param isDownloading 是否正在下载
  */
 data class DownloadInfo(
-    val id: String,
+    val url: String,
     val title: String,
     val thumbnail: String? = null,
     val isError: Boolean = false,
@@ -25,13 +26,15 @@ data class DownloadInfo(
     val duration: Double = 0.0,
     val fileSize: Double = 0.0,
     val progress: Float = 0.0f,
-    val filename: String = ""
+    val filename: String = "",
+    val isDownloading: Boolean = false
 ){
     companion object{
         private const val GB = 1024 * 1024 * 1024
         private const val MB = 1024 * 1024
         fun DownloadInfo.toYoutubeDLInfoEntity(): YoutubeDLInfoEntity{
             return YoutubeDLInfoEntity(
+                url = url,
                 title = title,
                 thumbnail = thumbnail,
                 isError = isError,
@@ -39,7 +42,7 @@ data class DownloadInfo(
                 duration = duration,
                 fileSize = fileSize,
                 progress = progress,
-                id = id.toLong()
+                isDownloading = isDownloading
             ).apply {
                 filename = this@toYoutubeDLInfoEntity.filename
             }
@@ -47,7 +50,7 @@ data class DownloadInfo(
         fun List<YoutubeDLInfoEntity>.toDownloadInfoList(): List<DownloadInfo>{
             return map {
                 DownloadInfo(
-                    id = it.id.toString(),
+                    url = it.url,
                     title = it.title,
                     thumbnail = it.thumbnail,
                     isError = it.isError,
@@ -55,7 +58,8 @@ data class DownloadInfo(
                     duration = it.duration,
                     fileSize = it.fileSize,
                     progress = it.progress,
-                    filename = it.filename
+                    filename = it.filename,
+                    isDownloading = it.isDownloading
                 )
             }
         }

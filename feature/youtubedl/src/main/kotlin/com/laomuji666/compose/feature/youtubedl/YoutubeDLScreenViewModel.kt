@@ -3,6 +3,7 @@ package com.laomuji666.compose.feature.youtubedl
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.ui.stateInTimeout
+import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo
 import com.laomuji666.compose.feature.youtubedl.model.YoutubeDLService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,6 +34,7 @@ class YoutubeDLScreenViewModel @Inject constructor(
         when(action){
             is YoutubeDLScreenAction.SetUrl -> _url.value = action.url
             YoutubeDLScreenAction.OnDownloadVideoClick -> downloadVideo()
+            is YoutubeDLScreenAction.SwitchDownloadVideo -> switchDownloadVideo(action.downloadInfo)
         }
     }
 
@@ -41,6 +43,13 @@ class YoutubeDLScreenViewModel @Inject constructor(
         youtubeDLService.downloadVideo(url = _url.value){
             _isLoading.value = false
             _url.value = ""
+        }
+    }
+
+    private fun switchDownloadVideo(downloadInfo: DownloadInfo){
+        _isLoading.value = true
+        youtubeDLService.switchDownloadVideo(downloadInfo){
+            _isLoading.value = false
         }
     }
 }

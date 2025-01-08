@@ -72,6 +72,7 @@ private fun YoutubeDLScreenUi(
     uiState: YoutubeDLScreenUiState,
     onAction: (YoutubeDLScreenAction) -> Unit
 ){
+    val context = LocalContext.current
     var showAddDownloadDialog by rememberSaveable { mutableStateOf(false) }
     if(showAddDownloadDialog){
         AddDownloadDialog(
@@ -112,7 +113,13 @@ private fun YoutubeDLScreenUi(
         ) {
             LazyColumn {
                 items(uiState.downloadInfo){ item ->
-                    DownloadInfoItemView(item)
+                    DownloadInfoItemView(item){ downloadInfo ->
+                        if(downloadInfo.isDone){
+                            VideoPlayActivity.open(context, downloadInfo.filename)
+                        }else{
+                            onAction(YoutubeDLScreenAction.SwitchDownloadVideo(downloadInfo))
+                        }
+                    }
                 }
             }
         }
@@ -123,9 +130,9 @@ private fun YoutubeDLScreenUi(
 
 @Composable
 private fun DownloadInfoItemView(
-    downloadInfo: DownloadInfo
+    downloadInfo: DownloadInfo,
+    onClick:(DownloadInfo)->Unit
 ){
-    val context = LocalContext.current
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -148,14 +155,7 @@ private fun DownloadInfoItemView(
                 contentScale = ContentScale.Crop
             )
         }
-        Box(modifier = Modifier.fillMaxSize()
-            .clickable {
-                if(downloadInfo.isDone){
-                    VideoPlayActivity.open(context, downloadInfo.filename)
-                }
-            }
-            .padding(12.dp)
-        ){
+        Box(modifier = Modifier.fillMaxSize().padding(12.dp)){
             Box(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
@@ -206,6 +206,8 @@ private fun DownloadInfoItemView(
                 stringResource(R.string.string_youtubedl_screen_download_error)
             }else if(downloadInfo.isDone){
                 stringResource(R.string.string_youtubedl_screen_download_done)
+            }else if(!downloadInfo.isDownloading){
+                stringResource(R.string.string_youtubedl_screen_download_stop)
             }else{
                 downloadInfo.getProgressText()
             }
@@ -215,6 +217,9 @@ private fun DownloadInfoItemView(
                     .clip(CircleShape)
                     .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
                     .size(80.dp)
+                    .clickable {
+                        onClick(downloadInfo)
+                    }
             ){
                 Text(
                     modifier = Modifier.align(Alignment.Center),
@@ -235,7 +240,7 @@ private fun PreviewYoutubeDLScreen() {
             uiState = YoutubeDLScreenUiState(
                 downloadInfo = listOf(
                     DownloadInfo(
-                        id = System.currentTimeMillis().toString(),
+                        url = "",
                         title = "标题1",
                         isError = false,
                         isDone = false,
@@ -245,7 +250,7 @@ private fun PreviewYoutubeDLScreen() {
                         filename = "下载中"
                     ),
                     DownloadInfo(
-                        id = System.currentTimeMillis().toString(),
+                        url = "",
                         title = "标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2",
                         isError = true,
                         isDone = false,
@@ -255,7 +260,7 @@ private fun PreviewYoutubeDLScreen() {
                         filename = "下载失败"
                     ),
                     DownloadInfo(
-                        id = System.currentTimeMillis().toString(),
+                        url = "",
                         title = "标题3",
                         isError = false,
                         isDone = true,

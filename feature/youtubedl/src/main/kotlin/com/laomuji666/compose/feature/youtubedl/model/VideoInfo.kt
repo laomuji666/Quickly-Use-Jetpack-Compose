@@ -6,7 +6,6 @@ import java.io.File
 
 @Serializable
 data class VideoInfo(
-    val id: String = "",
     val title: String = "",
     val thumbnail: String? = null,
     val duration: Double? = null,

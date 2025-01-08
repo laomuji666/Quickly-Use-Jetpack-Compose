@@ -12,6 +12,11 @@ interface YoutubeDLService {
     fun downloadVideo(url: String, onGetInfoCallback: () -> Unit)
 
     /**
+     * 开始/停止下载视频
+     */
+    fun switchDownloadVideo(downloadInfo: DownloadInfo, callback: () -> Unit)
+
+    /**
      * 获取下载信息列表
      */
     fun getDownloadInfoList(): Flow<List<DownloadInfo>>

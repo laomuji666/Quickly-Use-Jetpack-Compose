@@ -78,13 +78,12 @@ class YoutubeDLServiceImpl @Inject constructor(
             val request = YoutubeDLRequest(url)
             request.apply {
                 addOption("--no-mtime")
-                addOption("--downloader", "libaria2c.so")
                 addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best");
                 addOption("-o", videoInfo.getFilename(getCachePath()))
             }
             YoutubeDL.execute(
                 request = request,
-                processId = videoInfo.id,
+                processId = videoInfo.getFilename(getCachePath()),
                 callback = callback
             )
         }
@@ -97,13 +96,23 @@ class YoutubeDLServiceImpl @Inject constructor(
         dao.insert(downloadInfo.toYoutubeDLInfoEntity())
     }
 
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            dao.getYoutubeDLInfoListOnce().toDownloadInfoList().forEach { downloadInfo->
+                if(!downloadInfo.isDone && downloadInfo.isDownloading){
+                    setDownloadInfo(downloadInfo.copy(isDownloading = false))
+                }
+            }
+        }
+    }
+
     override fun downloadVideo(
         url: String,
         onGetInfoCallback:()->Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             var downloadInfo = DownloadInfo(
-                id = System.currentTimeMillis().toString(),
+                url = url,
                 title = url
             )
 
@@ -115,7 +124,8 @@ class YoutubeDLServiceImpl @Inject constructor(
                         thumbnail = it.thumbnail,
                         duration = it.getDuration(),
                         fileSize = it.getFileSize(),
-                        filename = it.getFilename(getCachePath())
+                        filename = it.getFilename(getCachePath()),
+                        isDownloading = true
                     )
                     setDownloadInfo(downloadInfo)
 
@@ -126,19 +136,46 @@ class YoutubeDLServiceImpl @Inject constructor(
                         setDownloadInfo(downloadInfo)
                     }
 
-                    downloadInfo = downloadInfo.copy(
-                        progress = 100f,
-                        isDone = true
-                    )
-                    setDownloadInfo(downloadInfo)
+                    if(File(downloadInfo.filename).exists()){
+                        downloadInfo = downloadInfo.copy(
+                            progress = 100f,
+                            isDone = true
+                        )
+                        setDownloadInfo(downloadInfo)
+                    }else{
+                        downloadInfo = downloadInfo.copy(
+                            isDownloading = false
+                        )
+                        setDownloadInfo(downloadInfo)
+                    }
                 }
                 .onFailure {
                     onGetInfoCallback()
                     downloadInfo = downloadInfo.copy(
-                        isError = true
+                        isError = true,
+                        isDownloading = false
                     )
                     setDownloadInfo(downloadInfo)
                 }
+        }
+    }
+
+    private fun stopDownload(filename: String, callback: () -> Unit){
+        CoroutineScope(Dispatchers.IO).launch {
+            YoutubeDL.destroyProcessById(filename)
+            callback()
+        }
+    }
+
+    override fun switchDownloadVideo(downloadInfo: DownloadInfo, callback: () -> Unit) {
+        if(downloadInfo.isDone){
+            return
+        }
+        if(downloadInfo.isDownloading){
+            stopDownload(downloadInfo.filename, callback)
+            setDownloadInfo(downloadInfo.copy(isDownloading = false))
+        }else{
+            downloadVideo(url = downloadInfo.url, onGetInfoCallback = callback)
         }
     }
 
