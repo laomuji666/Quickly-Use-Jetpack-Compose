@@ -62,7 +62,6 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 ## 运行效果(gif比较模糊)
 | 例子                   | 截图                                                             |
 |----------------------|----------------------------------------------------------------|
-| 万能视频下载(录屏问题,播放实际是横屏) | <video src="docs/vodeos/VideoDownload.mp4"></video>            |
 | 定位、图片、联系人            | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
 | 绘画画板                 | <img src="docs/images/PainterScreen.png" width="320"/>         |
 | Lazy列表排序             | <img src="docs/images/LazySort.gif" width="320"/>              |
