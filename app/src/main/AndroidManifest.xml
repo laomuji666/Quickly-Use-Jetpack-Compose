@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
         android:enableOnBackInvokedCallback="true"
+        android:extractNativeLibs="true"
         tools:targetApi="33">
 
         <activity
@@ -59,6 +60,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
+
+        <activity
+            android:name=".feature.video.VideoPlayActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

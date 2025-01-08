@@ -4,6 +4,8 @@
     <string name="string_toast_done">成功</string>
     <string name="string_toast_loading">加载中</string>
     <string name="string_toast_error">失败</string>
+    <string name="string_permission_notification_forever_denied">通知权限被永久拒绝,需要手动授权.</string>
+    <string name="string_permission_location_forever_denied">定位权限被永久拒绝,请手动打开.</string>
 
 <!--  ErrorView  -->
     <string name="string_error_view_title">出错了</string>
@@ -33,6 +35,7 @@
     <string name="string_demo_screen_ai_chat">AI聊天</string>
     <string name="string_demo_screen_firebase_demo">Firebase例子</string>
     <string name="string_demo_screen_http_demo">Ktor Http例子</string>
+    <string name="string_demo_screen_youtubedl_demo">万能视频下载例子</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
@@ -98,4 +101,14 @@
 
 <!--  PainterScreen  -->
     <string name="string_painter_screen_clear">清空画板</string>
+
+<!--  YoutubeDLScreen  -->
+    <string name="string_youtubedl_screen_duration_format">%1$d分%2$d秒</string>
+    <string name="string_youtubedl_screen_loading">获取视频信息</string>
+    <string name="string_youtubedl_screen_url_title">Url</string>
+    <string name="string_youtubedl_screen_url_tip">请输入视频链接</string>
+    <string name="string_youtubedl_screen_download">下载视频</string>
+    <string name="string_youtubedl_screen_download_error">下载失败</string>
+    <string name="string_youtubedl_screen_download_done">下载成功</string>
+    <string name="string_youtubedl_screen_download_stop">暂停下载</string>
 </resources>
