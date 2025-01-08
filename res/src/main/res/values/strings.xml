@@ -103,6 +103,11 @@
     <string name="string_painter_screen_clear">清空画板</string>
 
 <!--  YoutubeDLScreen  -->
-    <string name="string_youtubedl_screen_minute">分</string>
-    <string name="string_youtubedl_screen_second">秒</string>
+    <string name="string_youtubedl_screen_duration_format">%1$d分%2$d秒</string>
+    <string name="string_youtubedl_screen_loading">获取视频信息</string>
+    <string name="string_youtubedl_screen_url_title">Url</string>
+    <string name="string_youtubedl_screen_url_tip">请输入视频链接</string>
+    <string name="string_youtubedl_screen_download">下载视频</string>
+    <string name="string_youtubedl_screen_download_error">下载失败</string>
+    <string name="string_youtubedl_screen_download_done">下载成功</string>
 </resources>

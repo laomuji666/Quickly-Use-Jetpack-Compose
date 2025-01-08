@@ -5,14 +5,15 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class YoutubeDLInfoEntity(
+    val id: Long,
     val title: String,
+    val thumbnail: String?,
     val isError: Boolean = false,
     val isDone: Boolean = false,
     val duration: Double = 0.0,
     val fileSize: Double = 0.0,
     val progress: Float = 0.0f,
-    val filename: String = ""
 ){
     @PrimaryKey
-    var primaryId:Long = 0
+    var filename:String = ""
 }

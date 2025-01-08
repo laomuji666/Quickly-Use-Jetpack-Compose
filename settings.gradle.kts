@@ -44,5 +44,6 @@ include(":feature:scroll")
 include(":feature:biometric")
 include(":feature:painter")
 include(":feature:youtubedl")
+include(":feature:video")
 
 include(":core-launcher")

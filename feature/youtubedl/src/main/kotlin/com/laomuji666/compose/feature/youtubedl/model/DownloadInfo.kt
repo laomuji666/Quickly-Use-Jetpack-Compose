@@ -1,18 +1,14 @@
 package com.laomuji666.compose.feature.youtubedl.model
 
-import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import androidx.core.content.FileProvider
-import androidx.documentfile.provider.DocumentFile
 import com.laomuji666.compose.core.logic.database.entity.YoutubeDLInfoEntity
-import java.io.File
+import com.laomuji666.compose.res.R
 
 /**
  * @param id 下载的唯一标识
  * @param title 下载的标题
+ * @param thumbnail 缩略图
  * @param isError 是否有错误
  * @param isDone 是否已经完成
  * @param duration 时长,秒
@@ -23,6 +19,7 @@ import java.io.File
 data class DownloadInfo(
     val id: String,
     val title: String,
+    val thumbnail: String? = null,
     val isError: Boolean = false,
     val isDone: Boolean = false,
     val duration: Double = 0.0,
@@ -36,21 +33,23 @@ data class DownloadInfo(
         fun DownloadInfo.toYoutubeDLInfoEntity(): YoutubeDLInfoEntity{
             return YoutubeDLInfoEntity(
                 title = title,
+                thumbnail = thumbnail,
                 isError = isError,
                 isDone = isDone,
                 duration = duration,
                 fileSize = fileSize,
                 progress = progress,
-                filename = filename
+                id = id.toLong()
             ).apply {
-                primaryId = id.toLong()
+                filename = this@toYoutubeDLInfoEntity.filename
             }
         }
         fun List<YoutubeDLInfoEntity>.toDownloadInfoList(): List<DownloadInfo>{
             return map {
                 DownloadInfo(
-                    id = it.primaryId.toString(),
+                    id = it.id.toString(),
                     title = it.title,
+                    thumbnail = it.thumbnail,
                     isError = it.isError,
                     isDone = it.isDone,
                     duration = it.duration,
@@ -65,7 +64,7 @@ data class DownloadInfo(
     fun getDurationText(): String{
         val minute = duration / 60
         val second = duration % 60
-        return "${minute.toInt()} ${stringResource(com.laomuji666.compose.res.R.string.string_youtubedl_screen_minute)} ${second.toInt()} ${stringResource(com.laomuji666.compose.res.R.string.string_youtubedl_screen_second)}"
+        return stringResource(R.string.string_youtubedl_screen_duration_format, minute.toInt(), second.toInt())
     }
     fun getFileSizeText(): String{
         return if (fileSize > GB) "%.2f GB".format(fileSize / GB)
@@ -77,35 +76,5 @@ data class DownloadInfo(
         }
         return "${progress.toInt()}%"
     }
-
-    fun openVideo(context: Context){
-        val uri = filename.runCatching {
-                    DocumentFile.fromSingleUri(context, Uri.parse(filename)).run {
-                        if (this?.exists() == true) {
-                            this.uri
-                        } else if (File(this@runCatching).exists()) {
-                            FileProvider.getUriForFile(
-                                context,
-                                "${context.packageName}.provider",
-                                File(this@runCatching),
-                            )
-                        } else null
-                    }
-                }
-                .getOrNull() ?: return
-
-        val intent = Intent().apply {
-            action = Intent.ACTION_VIEW
-            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-
-            data = uri
-            setDataAndType(this.data, data?.let { context.contentResolver.getType(it) } ?: "media/*")
-
-            putExtra(Intent.EXTRA_STREAM, data)
-        }
-        context.startActivity(intent)
-    }
-
 }
 

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface YoutubeDLDao {
-    @Query("SELECT * FROM YoutubeDLInfoEntity ORDER BY primaryId DESC")
+    @Query("SELECT * FROM YoutubeDLInfoEntity ORDER BY id DESC")
     fun getYoutubeDLInfoList(): Flow<List<YoutubeDLInfoEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

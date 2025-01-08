@@ -4,7 +4,6 @@ import android.content.Context
 import com.laomuji666.compose.core.logic.database.dao.YoutubeDLDao
 import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo.Companion.toDownloadInfoList
 import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo.Companion.toYoutubeDLInfoEntity
-import com.laomuji666.compose.feature.youtubedl.model.entity.VideoInfo
 import com.yausername.aria2c.Aria2c
 import com.yausername.ffmpeg.FFmpeg
 import com.yausername.youtubedl_android.YoutubeDL
@@ -53,10 +52,6 @@ class YoutubeDLServiceImpl @Inject constructor(
         return downloadPath
     }
 
-    private fun VideoInfo.getFileName(): String{
-        return getCachePath().absolutePath + "/" + title + "." + ext
-    }
-
     private fun getVideoInfoFromUrl(
         url: String
     ): Result<VideoInfo> {
@@ -85,7 +80,7 @@ class YoutubeDLServiceImpl @Inject constructor(
                 addOption("--no-mtime")
                 addOption("--downloader", "libaria2c.so")
                 addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best");
-                addOption("-o", videoInfo.getFileName())
+                addOption("-o", videoInfo.getFilename(getCachePath()))
             }
             YoutubeDL.execute(
                 request = request,
@@ -114,15 +109,16 @@ class YoutubeDLServiceImpl @Inject constructor(
 
             getVideoInfoFromUrl(url)
                 .onSuccess {
+                    onGetInfoCallback()
                     downloadInfo = downloadInfo.copy(
                         title = it.title,
-                        duration = it.duration?:0.0,
-                        fileSize = it.fileSize ?: it.fileSizeApprox ?: .0,
-                        filename = it.getFileName()
+                        thumbnail = it.thumbnail,
+                        duration = it.getDuration(),
+                        fileSize = it.getFileSize(),
+                        filename = it.getFilename(getCachePath())
                     )
                     setDownloadInfo(downloadInfo)
 
-                    onGetInfoCallback()
                     downloadVideo(videoInfo = it){ progress,_,_ ->
                         downloadInfo = downloadInfo.copy(
                             progress = progress
@@ -137,6 +133,7 @@ class YoutubeDLServiceImpl @Inject constructor(
                     setDownloadInfo(downloadInfo)
                 }
                 .onFailure {
+                    onGetInfoCallback()
                     downloadInfo = downloadInfo.copy(
                         isError = true
                     )

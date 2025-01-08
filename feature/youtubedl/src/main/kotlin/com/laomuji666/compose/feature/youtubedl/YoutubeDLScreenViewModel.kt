@@ -40,6 +40,7 @@ class YoutubeDLScreenViewModel @Inject constructor(
         _isLoading.value = true
         youtubeDLService.downloadVideo(url = _url.value){
             _isLoading.value = false
+            _url.value = ""
         }
     }
 }

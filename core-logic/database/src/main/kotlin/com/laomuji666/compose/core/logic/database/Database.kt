@@ -15,7 +15,7 @@ import com.laomuji666.compose.core.logic.database.entity.YoutubeDLInfoEntity
         MessageInfoEntity::class,
         YoutubeDLInfoEntity::class
     ],
-    version = 2
+    version = 4
 )
 abstract class Database : RoomDatabase() {
     abstract fun contactDao(): ContactDao

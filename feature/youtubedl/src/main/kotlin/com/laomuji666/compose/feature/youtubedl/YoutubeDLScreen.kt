@@ -1,34 +1,53 @@
 package com.laomuji666.compose.feature.youtubedl
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Card
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
-import com.laomuji666.compose.core.ui.we.widget.WeButton
-import com.laomuji666.compose.core.ui.we.widget.WeButtonType
+import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.icons.Add
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableInput
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
+import com.laomuji666.compose.feature.video.VideoPlayActivity
+import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo
+import com.laomuji666.compose.res.R
 
 @Composable
 fun YoutubeDLScreen(
@@ -43,7 +62,7 @@ fun YoutubeDLScreen(
     if(uiState.isLoading){
         WeToast(
             weToastType = WeToastType.LOADING,
-            message = "加载中"
+            message = stringResource(R.string.string_youtubedl_screen_loading)
         )
     }
 }
@@ -53,11 +72,34 @@ private fun YoutubeDLScreenUi(
     uiState: YoutubeDLScreenUiState,
     onAction: (YoutubeDLScreenAction) -> Unit
 ){
-    val context = LocalContext.current
+    var showAddDownloadDialog by rememberSaveable { mutableStateOf(false) }
+    if(showAddDownloadDialog){
+        AddDownloadDialog(
+            onDismissRequest = {
+                showAddDownloadDialog = false
+            },
+            url = uiState.url,
+            onValueChange = {
+                onAction(YoutubeDLScreenAction.SetUrl(it))
+            },
+            onDownloadVideoClick = {
+                showAddDownloadDialog = false
+                onAction(YoutubeDLScreenAction.OnDownloadVideoClick)
+            }
+        )
+    }
     WeScaffold(
         topBar = {
             WeTopNavigationBar(
-                title = stringResource(com.laomuji666.compose.res.R.string.string_demo_screen_youtubedl_demo)
+                title = stringResource(R.string.string_demo_screen_youtubedl_demo),
+                actions = {
+                    WeTopNavigationBarAction(
+                        imageVector = WeIcons.Add,
+                        onActionClick = {
+                            showAddDownloadDialog = true
+                        }
+                    )
+                }
             )
             WeTableRowOutline(
                 weTableRowOutlineType = WeTableRowOutlineType.FULL
@@ -68,41 +110,118 @@ private fun YoutubeDLScreenUi(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            WeTableInput(
-                title = "URL",
-                value = uiState.url,
-                tip = "请输入视频链接",
-                onValueChange = {
-                    onAction(YoutubeDLScreenAction.SetUrl(it))
-                },
-                onImeNext = {}
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            WeButton(
-                text = "下载视频",
-                weButtonType = WeButtonType.BIG
-            ) {
-                onAction(YoutubeDLScreenAction.OnDownloadVideoClick)
-            }
-            Spacer(modifier = Modifier.height(30.dp))
             LazyColumn {
-                items(uiState.downloadInfo.size){ index ->
-                    val downloadInfo = uiState.downloadInfo[index]
-                    Card(modifier = Modifier.fillMaxWidth().padding(8.dp).clickable {
-                        downloadInfo.openVideo(context = context)
-                    }) {
-                        Column(modifier = Modifier.fillMaxWidth().padding(8.dp)) {
-                            Text(text = "id: ${downloadInfo.id}")
-                            Text(text = "标题: ${downloadInfo.title}")
-                            Text(text = "错误: ${downloadInfo.isError}")
-                            Text(text = "下载完成: ${downloadInfo.isDone}")
-                            Text(text = "时长: ${downloadInfo.getDurationText()}")
-                            Text(text = "文件大小: ${downloadInfo.getFileSizeText()}")
-                            Text(text = "进度: ${downloadInfo.getProgressText()}")
-                            Text(text = "文件名: ${downloadInfo.filename}")
-                        }
-                    }
+                items(uiState.downloadInfo){ item ->
+                    DownloadInfoItemView(item)
                 }
+            }
+        }
+    }
+
+
+}
+
+@Composable
+private fun DownloadInfoItemView(
+    downloadInfo: DownloadInfo
+){
+    val context = LocalContext.current
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp, vertical = 6.dp)
+            .aspectRatio(1.77f)
+            .clip(RoundedCornerShape(12.dp))
+            .background(WeTheme.colorScheme.tableRowBackground)
+    ) {
+        downloadInfo.thumbnail?.let {
+            val imageUrl = it.replace("http://", "https://")
+            val imageRequest = ImageRequest
+                .Builder(LocalContext.current)
+                .data(imageUrl)
+                .diskCacheKey(imageUrl)
+                .build()
+            AsyncImage(
+                model = imageRequest,
+                contentDescription = null,
+                modifier = Modifier.align(Alignment.CenterEnd).fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+        Box(modifier = Modifier.fillMaxSize()
+            .clickable {
+                if(downloadInfo.isDone){
+                    VideoPlayActivity.open(context, downloadInfo.filename)
+                }
+            }
+            .padding(12.dp)
+        ){
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .clip(RoundedCornerShape(4.dp))
+                    .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                    .padding(horizontal = 8.dp, vertical = 4.dp)
+            ){
+                Text(
+                    text = downloadInfo.title,
+                    style = WeTheme.typography.desc,
+                    color = WeTheme.colorScheme.background,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+
+            Row(
+                modifier = Modifier.align(Alignment.BottomEnd),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ){
+                    Text(
+                        text = downloadInfo.getFileSizeText(),
+                        style = WeTheme.typography.footnote,
+                        color = WeTheme.colorScheme.background,
+                    )
+                }
+                Spacer(modifier = Modifier.weight(1f))
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(4.dp))
+                        .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ){
+                    Text(
+                        text = downloadInfo.getDurationText(),
+                        style = WeTheme.typography.footnote,
+                        color = WeTheme.colorScheme.background,
+                    )
+                }
+            }
+            val centerText = if(downloadInfo.isError){
+                stringResource(R.string.string_youtubedl_screen_download_error)
+            }else if(downloadInfo.isDone){
+                stringResource(R.string.string_youtubedl_screen_download_done)
+            }else{
+                downloadInfo.getProgressText()
+            }
+            Box(
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .clip(CircleShape)
+                    .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                    .size(80.dp)
+            ){
+                Text(
+                    modifier = Modifier.align(Alignment.Center),
+                    text = centerText,
+                    style = WeTheme.typography.emTitle,
+                    color = WeTheme.colorScheme.background,
+                )
             }
         }
     }
@@ -114,7 +233,38 @@ private fun PreviewYoutubeDLScreen() {
     QuicklyTheme {
         YoutubeDLScreenUi(
             uiState = YoutubeDLScreenUiState(
-                isLoading = true
+                downloadInfo = listOf(
+                    DownloadInfo(
+                        id = System.currentTimeMillis().toString(),
+                        title = "标题1",
+                        isError = false,
+                        isDone = false,
+                        duration = 100.5,
+                        fileSize = 1024242411.5,
+                        progress = 50f,
+                        filename = "下载中"
+                    ),
+                    DownloadInfo(
+                        id = System.currentTimeMillis().toString(),
+                        title = "标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2标题2",
+                        isError = true,
+                        isDone = false,
+                        duration = 205.5,
+                        fileSize = 2310242424.5,
+                        progress = 0f,
+                        filename = "下载失败"
+                    ),
+                    DownloadInfo(
+                        id = System.currentTimeMillis().toString(),
+                        title = "标题3",
+                        isError = false,
+                        isDone = true,
+                        duration = 520.5,
+                        fileSize = 110242424.5,
+                        progress = 100f,
+                        filename = "下载成功"
+                    ),
+                )
             ),
             onAction = {}
         )
