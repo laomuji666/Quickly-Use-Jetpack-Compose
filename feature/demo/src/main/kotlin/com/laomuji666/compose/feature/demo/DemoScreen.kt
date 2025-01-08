@@ -60,7 +60,7 @@ fun DemoScreen(
         }
     }
     val pagerState = rememberPagerState(
-        initialPage = DemoSelectEnum.UI.ordinal,
+        initialPage = DemoSelectEnum.FEATURE.ordinal,
         pageCount = { DemoSelectEnum.entries.size }
     )
     val coroutineScope = rememberCoroutineScope()
