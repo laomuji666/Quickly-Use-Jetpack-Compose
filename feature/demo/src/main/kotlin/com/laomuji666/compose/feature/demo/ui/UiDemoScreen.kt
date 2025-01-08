@@ -70,10 +70,6 @@ private fun UiDemoScreenUi(
 ){
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
         WeTableClickRow(
-            title = "Core-Ui 示例",
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
-        )
-        WeTableClickRow(
             title = stringResource(id = R.string.string_demo_screen_date),
             onClick = onDateClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL

@@ -35,12 +35,19 @@ class YoutubeDLServiceImpl @Inject constructor(
     }
 
     init {
-        try {
-            YoutubeDL.init(context)
-            FFmpeg.init(context)
-            Aria2c.init(context)
-        }catch (e: YoutubeDLException){
-            e.printStackTrace()
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                YoutubeDL.init(context)
+                FFmpeg.init(context)
+                Aria2c.init(context)
+            }catch (e: YoutubeDLException){
+                e.printStackTrace()
+            }
+            dao.getYoutubeDLInfoListOnce().toDownloadInfoList().forEach { downloadInfo->
+                if(!downloadInfo.isDone && downloadInfo.isDownloading){
+                    setDownloadInfo(downloadInfo.copy(isDownloading = false))
+                }
+            }
         }
     }
 
@@ -62,6 +69,7 @@ class YoutubeDLServiceImpl @Inject constructor(
                 addOption("-R", "1")
                 addOption("--no-playlist")
                 addOption("--socket-timeout", "5")
+                addOption("--downloader", "libaria2c.so")
             }
             val processId = System.currentTimeMillis()
             val response: YoutubeDLResponse = YoutubeDL.getInstance().execute(request, processId.toString(), null)
@@ -80,6 +88,7 @@ class YoutubeDLServiceImpl @Inject constructor(
                 addOption("--no-mtime")
                 addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best");
                 addOption("-o", videoInfo.getFilename(getCachePath()))
+                addOption("--downloader", "libaria2c.so")
             }
             YoutubeDL.execute(
                 request = request,
@@ -94,16 +103,6 @@ class YoutubeDLServiceImpl @Inject constructor(
     private val downloadInfoList = dao.getYoutubeDLInfoList()
     private fun setDownloadInfo(downloadInfo: DownloadInfo){
         dao.insert(downloadInfo.toYoutubeDLInfoEntity())
-    }
-
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            dao.getYoutubeDLInfoListOnce().toDownloadInfoList().forEach { downloadInfo->
-                if(!downloadInfo.isDone && downloadInfo.isDownloading){
-                    setDownloadInfo(downloadInfo.copy(isDownloading = false))
-                }
-            }
-        }
     }
 
     override fun downloadVideo(
