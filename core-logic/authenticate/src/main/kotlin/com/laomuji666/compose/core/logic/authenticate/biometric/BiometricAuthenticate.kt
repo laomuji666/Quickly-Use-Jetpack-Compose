@@ -26,5 +26,5 @@ interface BiometricAuthenticate{
     fun handleBiometric(context: Context, title: String, description: String)
 
     //获取生物认证设置的意图
-    fun getBiometricSettingIntent(): Intent?
+    fun getBiometricSettingIntent(): Intent
 }

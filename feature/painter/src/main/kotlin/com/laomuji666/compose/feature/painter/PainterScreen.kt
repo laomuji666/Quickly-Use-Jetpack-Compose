@@ -14,8 +14,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -23,9 +23,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,7 +47,6 @@ import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
-import kotlin.math.abs
 
 @Composable
 fun PainterScreen(
@@ -144,7 +140,7 @@ private fun PainterScreenUi(
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceBetween,
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(horizontal = 12.dp)
         ) {
             itemsIndexed(widthList){ index, width ->
@@ -155,10 +151,10 @@ private fun PainterScreenUi(
                             scaleX = if(isSelected) 1.25f else 1f
                             scaleY = if(isSelected) 1.25f else 1f
                         }
-                        .width(60.dp)
                         .height(30.dp)
                         .clip(RoundedCornerShape(4.dp))
                         .border(1.dp, if(isSelected) Color.Black else Color.Transparent, RoundedCornerShape(4.dp))
+                        .padding(horizontal = 12.dp)
                         .clickable { onCurrentWidthIndexChange(index) }
                 ){
                     Text(
@@ -214,23 +210,18 @@ private fun DrawScope.drawPathData(
     strokeWidth: Float,
     cap: StrokeCap = StrokeCap.Round
 ){
-    val smoothness = 5
     val smoothedPath = Path().apply {
         if(pathData.path.isEmpty())return@apply
         moveTo(pathData.path.first().x, pathData.path.first().y)
         for(i in 1 until pathData.path.size){
             val from = pathData.path[i - 1]
             val to = pathData.path[i]
-            val dx = abs(from.x - to.x)
-            val dy = abs(from.y - to.y)
-            if(dx > smoothness || dy > smoothness){
-                quadraticTo(
-                    x1 = (from.x + to.x) / 2,
-                    y1 = (from.y + to.y) / 2,
-                    x2 = to.x,
-                    y2 = to.y
-                )
-            }
+            quadraticTo(
+                x1 = (from.x + to.x) / 2,
+                y1 = (from.y + to.y) / 2,
+                x2 = to.x,
+                y2 = to.y
+            )
         }
     }
     drawPath(
@@ -246,38 +237,7 @@ private fun DrawScope.drawPathData(
 @Preview
 @Composable
 private fun PreviewPainterScreen() {
-    var currentColorIndex by remember {
-        mutableIntStateOf(0)
-    }
-    var currentWidthIndex by remember {
-        mutableIntStateOf(0)
-    }
     QuicklyTheme {
-        PainterScreenUi(
-            colorList = listOf(
-                Color(0xFFFF0000),
-                Color(0xFFFFA500),
-                Color(0xFFFFFF00),
-                Color(0xFF00FF00),
-                Color(0xFF00FFFF),
-                Color(0xFF0000FF),
-                Color(0xFF800080)
-            ),
-            currentColorIndex = currentColorIndex,
-            widthList = listOf(1.dp, 2.dp, 3.dp, 4.dp, 5.dp),
-            currentWidthIndex = currentWidthIndex,
-            pathList = emptyList(),
-            currentPath = null,
-            onCurrentColorIndexChange = {
-                currentColorIndex = it
-            },
-            onCurrentWidthIndexChange = {
-                currentWidthIndex = it
-            },
-            onClearCanvasClick = {},
-            onDragStart = {},
-            onDragEnd = {},
-            onDrag = {}
-        )
+        PainterScreen(viewModel = PainterScreenViewModel())
     }
 }

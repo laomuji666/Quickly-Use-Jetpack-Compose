@@ -27,7 +27,10 @@ class PainterScreenViewModel @Inject constructor() : ViewModel() {
         2.5.dp,
         4.dp,
         5.5.dp,
-        8.dp
+        8.dp,
+        12.dp,
+        15.5.dp,
+        20.dp
     )
     private val _currentColorIndex = MutableStateFlow(0)
     private val _currentWidthIndex = MutableStateFlow(0)

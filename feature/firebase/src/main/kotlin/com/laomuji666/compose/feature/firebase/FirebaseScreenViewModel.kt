@@ -33,7 +33,7 @@ class FirebaseScreenViewModel @Inject constructor(
         analytics.logEvent("HelloScreen_logEventClick")
     }
 
-    fun updatePushToken() {
+    private fun updatePushToken() {
         notification.updatePushToken {
             _pushToken.value = it
         }

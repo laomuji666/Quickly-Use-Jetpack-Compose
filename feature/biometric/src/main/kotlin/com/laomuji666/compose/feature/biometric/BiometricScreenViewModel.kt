@@ -32,7 +32,7 @@ class BiometricScreenViewModel @Inject constructor(
     fun onAction(action: BiometricScreenAction){
         when(action){
             is BiometricScreenAction.HandleBiometric -> handleBiometric(action.activityContext)
-            is BiometricScreenAction.OnSettingClick -> getBiometricSettingIntent()?.let {
+            is BiometricScreenAction.OnSettingClick -> getBiometricSettingIntent().let {
                 action.biometricLauncher.launch(it)
             }
             is BiometricScreenAction.OnTitleChange -> setTitle(action.title)

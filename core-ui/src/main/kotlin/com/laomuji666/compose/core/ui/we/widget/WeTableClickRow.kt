@@ -81,7 +81,7 @@ fun WeTableClickRow(
 fun PreviewWeTableClickRow1(){
     DefaultWeTheme {
         WeTableClickRow(
-            title = "单行标题",
+            title = "双行标题",
             summary = "详细信息",
             summaryInBottom = true
         )
@@ -93,7 +93,7 @@ fun PreviewWeTableClickRow1(){
 fun PreviewWeTableClickRow2(){
     DefaultWeTheme {
         WeTableClickRow(
-            title = "双行标题",
+            title = "单行标题",
             summary = "详细信息"
         )
     }

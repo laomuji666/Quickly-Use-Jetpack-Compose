@@ -25,7 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
 import com.laomuji666.compose.core.ui.R
@@ -114,7 +114,7 @@ enum class WeToastType{
     ERROR
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 fun PreviewWeToast1(){
     QuicklyTheme {
@@ -122,7 +122,7 @@ fun PreviewWeToast1(){
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 fun PreviewWeToast2(){
     QuicklyTheme {
@@ -130,7 +130,7 @@ fun PreviewWeToast2(){
     }
 }
 
-@PreviewLightDark
+@Preview
 @Composable
 fun PreviewWeToast3(){
     QuicklyTheme {

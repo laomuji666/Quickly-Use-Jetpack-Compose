@@ -25,7 +25,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -268,26 +267,8 @@ private fun MonthDetailUi(
 @Preview
 @Composable
 private fun PreviewDateScreen() {
-    val currentYear by rememberSaveable {
-        mutableIntStateOf(DateUtil.getCurrentYear())
-    }
-    val currentMonth by rememberSaveable {
-        mutableIntStateOf(DateUtil.getCurrentMonth())
-    }
-    val currentDay by rememberSaveable {
-        mutableIntStateOf(DateUtil.getCurrentDay())
-    }
     QuicklyTheme{
-        DateScreenUi(
-            uiState = DateScreenUiState(
-                yearList = DateUtil.getYearList(DateUtil.getCurrentYear() - 20, DateUtil.getCurrentYear() + 20),
-                dateDetailList = DateUtil.getDateDetailList(currentYear),
-                currentYear = currentYear,
-                currentMonth = currentMonth,
-                currentDay = currentDay
-            ),
-            onAction = {}
-        )
+        DateScreen(viewModel = DateScreenViewModel())
     }
 }
 
