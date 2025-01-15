@@ -26,8 +26,10 @@ class DefaultBiometricAuthenticate @Inject constructor() : BiometricAuthenticate
     override fun handleBiometric(context: Context, title: String, description: String) {
         val biometricManager = BiometricManager.from(context)
         val authenticators = if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
+            //生物认证 或 设备认证(PIN,图案,密码等)
             BIOMETRIC_STRONG or DEVICE_CREDENTIAL
         }else{
+            //生物认证
             BIOMETRIC_STRONG
         }
         when(biometricManager.canAuthenticate(authenticators)){
@@ -76,12 +78,23 @@ class DefaultBiometricAuthenticate @Inject constructor() : BiometricAuthenticate
         prompt.authenticate(promptInfo.build())
     }
 
-    override fun getBiometricSettingIntent(): Intent? {
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.R){
-            return Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
-                putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+    override fun getBiometricSettingIntent(): Intent {
+        val intent: Intent = when{
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.R -> {
+                //从API30开始的生物认证
+                Intent(Settings.ACTION_BIOMETRIC_ENROLL).apply {
+                    putExtra(Settings.EXTRA_BIOMETRIC_AUTHENTICATORS_ALLOWED, BIOMETRIC_STRONG or DEVICE_CREDENTIAL)
+                }
+            }
+            Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> {
+                //从API28开始的生物认证
+                Intent(Settings.ACTION_FINGERPRINT_ENROLL)
+            }
+            else -> {
+                //跳转到安全设置页面
+                Intent(Settings.ACTION_SECURITY_SETTINGS)
             }
         }
-        return null
+        return intent
     }
 }

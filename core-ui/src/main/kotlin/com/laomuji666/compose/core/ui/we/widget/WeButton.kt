@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.laomuji666.compose.core.ui.ifCondition
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 
@@ -68,7 +69,11 @@ fun WeButton(
             text = text,
             style = WeTheme.typography.emTitle,
             color = textColor,
-            modifier = Modifier.padding(horizontal = if(weButtonType != WeButtonType.WARP) 0.dp else WeTheme.dimens.navigationBarPaddingHorizontal)
+            modifier = Modifier.ifCondition(
+                condition = weButtonType != WeButtonType.WARP,
+                onTrue = { padding(horizontal = 0.dp) },
+                onFalse =  { padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal) }
+            )
         )
     }
 }

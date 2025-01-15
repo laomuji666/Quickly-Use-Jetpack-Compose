@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.laomuji666.compose.core.logic.common.Log
+import com.laomuji666.compose.core.ui.isPreview
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.icons.Device
 import com.laomuji666.compose.core.ui.we.icons.Feature
@@ -88,7 +89,7 @@ fun DemoScreen(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = 3,
+            beyondViewportPageCount = if(isPreview()) 0 else DemoSelectEnum.entries.size,
             userScrollEnabled = false
         ) {
             when(DemoSelectEnum.entries[it]){

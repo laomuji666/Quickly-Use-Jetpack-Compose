@@ -102,11 +102,11 @@ private fun UiDemoScreenUi(
 private fun PreviewUiDemoScreen() {
     QuicklyTheme {
         WeScaffold {
-            UiDemoScreenUi(
+            UiDemoScreen(
+                viewModel = UiDemoScreenViewModel(),
                 onDateClick = {},
                 onNestedScrollConnectionScreenClick = {},
                 onNestedScrollDispatcherScreenClick = {},
-                onLongClickSortClick = {},
                 onPainterScreenClick = {}
             )
         }
