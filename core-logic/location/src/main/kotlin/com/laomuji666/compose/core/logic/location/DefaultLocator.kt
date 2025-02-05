@@ -90,42 +90,45 @@ class DefaultLocator @Inject constructor(
                         fusedLocationProviderClient.locationAvailability.addOnSuccessListener {
                             if(it.isLocationAvailable){
                                 Log.debug(TAG,"isLocationAvailable is true, use fusedLocationProviderClient")
-                            }else{
-                                Log.debug(TAG,"isLocationAvailable is false, use locationManager")
-                            }
-                        }
-                        Log.debug(TAG,"isComplete $isComplete")
-                        if(isComplete){
-                            if(isSuccessful){
-                                Log.debug(TAG,"successful")
-                                cont.safeResume(result)
-                            }else{
-                                Log.debug(TAG,"unsuccessful")
-                                requestSingleLocation{ location ->
-                                    cont.safeResume(location)
-                                }
-                            }
-                        }else{
-                            addOnSuccessListener {
-                                if(it != null){
-                                    Log.debug(TAG,"onSuccess $it")
-                                    cont.safeResume(it)
+                                Log.debug(TAG,"isComplete $isComplete")
+                                if(isComplete){
+                                    if(isSuccessful){
+                                        Log.debug(TAG,"successful")
+                                        cont.safeResume(result)
+                                    }else{
+                                        Log.debug(TAG,"unsuccessful")
+                                        requestSingleLocation{ location ->
+                                            cont.safeResume(location)
+                                        }
+                                    }
                                 }else{
-                                    Log.debug(TAG,"onSuccess null, use locationManager")
-                                    requestSingleLocation{ location ->
-                                        cont.safeResume(location)
+                                    addOnSuccessListener { result ->
+                                        if(result != null){
+                                            Log.debug(TAG,"onSuccess $result")
+                                            cont.safeResume(result)
+                                        }else{
+                                            Log.debug(TAG,"onSuccess null, use locationManager")
+                                            requestSingleLocation{ location ->
+                                                cont.safeResume(location)
+                                            }
+                                        }
+                                    }
+                                    addOnFailureListener {
+                                        Log.debug(TAG,"onFailure")
+                                        requestSingleLocation{ location ->
+                                            cont.safeResume(location)
+                                        }
+                                    }
+                                    addOnCanceledListener {
+                                        Log.debug(TAG,"onCancel")
+                                        cont.safeResume(null)
                                     }
                                 }
-                            }
-                            addOnFailureListener {
-                                Log.debug(TAG,"onFailure")
+                            }else{
+                                Log.debug(TAG,"isLocationAvailable is false, use locationManager")
                                 requestSingleLocation{ location ->
                                     cont.safeResume(location)
                                 }
-                            }
-                            addOnCanceledListener {
-                                Log.debug(TAG,"onCancel")
-                                cont.safeResume(null)
                             }
                         }
                     }
@@ -170,7 +173,7 @@ class DefaultLocator @Inject constructor(
                 Looper.getMainLooper()
             )
         }
-        else if(hasNetworkProvider()){
+        if(hasNetworkProvider()){
             locationManager.requestLocationUpdates(
                 LocationManager.NETWORK_PROVIDER,
                 0,
