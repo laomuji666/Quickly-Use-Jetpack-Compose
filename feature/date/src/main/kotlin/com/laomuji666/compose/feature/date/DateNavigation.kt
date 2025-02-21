@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 data object RouteDateScreen
 
 
-fun NavHostController.navigateToDateScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToDateScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteDateScreen, navOptions)
 }
 

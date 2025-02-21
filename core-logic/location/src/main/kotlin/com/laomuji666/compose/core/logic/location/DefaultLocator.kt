@@ -19,6 +19,10 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.laomuji666.compose.core.logic.common.Log
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
@@ -90,42 +94,45 @@ class DefaultLocator @Inject constructor(
                         fusedLocationProviderClient.locationAvailability.addOnSuccessListener {
                             if(it.isLocationAvailable){
                                 Log.debug(TAG,"isLocationAvailable is true, use fusedLocationProviderClient")
-                            }else{
-                                Log.debug(TAG,"isLocationAvailable is false, use locationManager")
-                            }
-                        }
-                        Log.debug(TAG,"isComplete $isComplete")
-                        if(isComplete){
-                            if(isSuccessful){
-                                Log.debug(TAG,"successful")
-                                cont.safeResume(result)
-                            }else{
-                                Log.debug(TAG,"unsuccessful")
-                                requestSingleLocation{ location ->
-                                    cont.safeResume(location)
-                                }
-                            }
-                        }else{
-                            addOnSuccessListener {
-                                if(it != null){
-                                    Log.debug(TAG,"onSuccess $it")
-                                    cont.safeResume(it)
+                                Log.debug(TAG,"isComplete $isComplete")
+                                if(isComplete){
+                                    if(isSuccessful){
+                                        Log.debug(TAG,"successful")
+                                        cont.safeResume(result)
+                                    }else{
+                                        Log.debug(TAG,"unsuccessful")
+                                        requestSingleLocation{ location ->
+                                            cont.safeResume(location)
+                                        }
+                                    }
                                 }else{
-                                    Log.debug(TAG,"onSuccess null, use locationManager")
-                                    requestSingleLocation{ location ->
-                                        cont.safeResume(location)
+                                    addOnSuccessListener { result ->
+                                        if(result != null){
+                                            Log.debug(TAG,"onSuccess $result")
+                                            cont.safeResume(result)
+                                        }else{
+                                            Log.debug(TAG,"onSuccess null, use locationManager")
+                                            requestSingleLocation{ location ->
+                                                cont.safeResume(location)
+                                            }
+                                        }
+                                    }
+                                    addOnFailureListener {
+                                        Log.debug(TAG,"onFailure")
+                                        requestSingleLocation{ location ->
+                                            cont.safeResume(location)
+                                        }
+                                    }
+                                    addOnCanceledListener {
+                                        Log.debug(TAG,"onCancel")
+                                        cont.safeResume(null)
                                     }
                                 }
-                            }
-                            addOnFailureListener {
-                                Log.debug(TAG,"onFailure")
+                            }else{
+                                Log.debug(TAG,"isLocationAvailable is false, use locationManager")
                                 requestSingleLocation{ location ->
                                     cont.safeResume(location)
                                 }
-                            }
-                            addOnCanceledListener {
-                                Log.debug(TAG,"onCancel")
-                                cont.safeResume(null)
                             }
                         }
                     }
@@ -154,30 +161,33 @@ class DefaultLocator @Inject constructor(
     private fun requestSingleLocation(
         callback:(Location)->Unit
     ){
-        val locationListener = object : LocationListenerCompat {
-            override fun onLocationChanged(location: Location) {
-                Log.debug(TAG, "requestSingleLocation $location")
-                callback(location)
-                locationManager.removeUpdates(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            val locationListener = object : LocationListenerCompat {
+                override fun onLocationChanged(location: Location) {
+                    Log.debug(TAG, "requestSingleLocation $location")
+                    callback(location)
+                    locationManager.removeUpdates(this)
+                }
             }
-        }
-        if(hasGpsProvider()){
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                0,
-                0f,
-                locationListener,
-                Looper.getMainLooper()
-            )
-        }
-        else if(hasNetworkProvider()){
-            locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                0,
-                0f,
-                locationListener,
-                Looper.getMainLooper()
-            )
+            if(hasGpsProvider()){
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    0,
+                    0f,
+                    locationListener,
+                    Looper.getMainLooper()
+                )
+            }
+            delay(3000)
+            if(hasNetworkProvider()){
+                locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    0,
+                    0f,
+                    locationListener,
+                    Looper.getMainLooper()
+                )
+            }
         }
     }
 }

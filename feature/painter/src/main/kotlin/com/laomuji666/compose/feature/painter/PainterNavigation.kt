@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RoutePainterScreen
 
-fun NavHostController.navigateToPainterScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToPainterScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RoutePainterScreen, navOptions)
 }
 

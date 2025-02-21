@@ -13,20 +13,14 @@ import kotlinx.coroutines.launch
  * 增加一个屏幕
  * 新的屏幕会在添加在当前屏幕后
  */
-fun navOptionsPushBack(navHostController: NavHostController): NavOptions {
+fun NavHostController.navOptionsPushBack(): NavOptions {
     return navOptions{
-        //如果 当前有页面,那么就保存数据
-        if(navHostController.currentDestination!=null){
-            //导航页面返回时,返回当前页面
-            popUpTo(navHostController.currentDestination!!.route!!){
-                //保存当前页面的状态
+        if(currentDestination!=null){
+            popUpTo(currentDestination!!.route!!){
                 this.saveState = true
             }
         }
-        //不允许重复打开同一个页面
         launchSingleTop = true
-        //开启恢复状态
-        restoreState = true
     }
 }
 

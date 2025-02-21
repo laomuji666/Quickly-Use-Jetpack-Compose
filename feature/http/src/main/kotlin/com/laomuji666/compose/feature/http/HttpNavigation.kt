@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 private data object RouteHttpScreen
 
-fun NavHostController.navigateToHttpScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToHttpScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteHttpScreen, navOptions)
 }
 

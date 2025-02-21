@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RouteAiChatScreen
 
-fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteAiChatScreen, navOptions)
 }
 

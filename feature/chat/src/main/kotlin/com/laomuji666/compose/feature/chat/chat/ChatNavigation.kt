@@ -15,7 +15,7 @@ data class RouteChatScreen(
     val account: Long
 )
 
-fun NavHostController.navigateToChatScreen(account: Long, navOptions: NavOptions? = navOptionsPushBack(this)){
+fun NavHostController.navigateToChatScreen(account: Long, navOptions: NavOptions? = navOptionsPushBack()){
     return navigate(RouteChatScreen(account), navOptions)
 }
 

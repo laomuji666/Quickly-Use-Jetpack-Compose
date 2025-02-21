@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RouteNestedScrollConnectionScreen
 
-fun NavHostController.navigateToNestedScrollConnectionScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToNestedScrollConnectionScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteNestedScrollConnectionScreen, navOptions)
 }
 
@@ -23,7 +23,7 @@ fun NavGraphBuilder.composeNestedScrollConnectionScreen(){
 @Serializable
 data object RouteNestedScrollDispatcherScreen
 
-fun NavHostController.navigateToNestedScrollDispatcherScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToNestedScrollDispatcherScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteNestedScrollDispatcherScreen, navOptions)
 }
 

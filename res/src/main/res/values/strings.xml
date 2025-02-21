@@ -109,6 +109,6 @@
     <string name="string_youtubedl_screen_url_tip">请输入视频链接</string>
     <string name="string_youtubedl_screen_download">下载视频</string>
     <string name="string_youtubedl_screen_download_error">下载失败</string>
-    <string name="string_youtubedl_screen_download_done">下载成功</string>
+    <string name="string_youtubedl_screen_download_done">下载成功\n点击播放</string>
     <string name="string_youtubedl_screen_download_stop">暂停下载</string>
 </resources>
