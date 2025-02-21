@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RouteFirebaseScreen
 
-fun NavHostController.navigateToFirebaseScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToFirebaseScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteFirebaseScreen, navOptions)
 }
 

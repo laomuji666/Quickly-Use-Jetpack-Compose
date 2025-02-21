@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RouteYoutubeDLScreen
 
-fun NavHostController.navigateToYoutubeDLScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToYoutubeDLScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteYoutubeDLScreen, navOptions)
 }
 

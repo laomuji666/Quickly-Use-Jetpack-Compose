@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data object RouteBiometricScreen
 
-fun NavHostController.navigateToBiometricScreen(navOptions: NavOptions = navOptionsPushBack(this)){
+fun NavHostController.navigateToBiometricScreen(navOptions: NavOptions = navOptionsPushBack()){
     navigate(RouteBiometricScreen, navOptions)
 }
 

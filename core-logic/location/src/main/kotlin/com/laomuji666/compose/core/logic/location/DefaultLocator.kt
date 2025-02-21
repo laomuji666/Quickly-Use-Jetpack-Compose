@@ -19,6 +19,10 @@ import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.laomuji666.compose.core.logic.common.Log
 import kotlinx.coroutines.CancellableContinuation
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
@@ -157,30 +161,33 @@ class DefaultLocator @Inject constructor(
     private fun requestSingleLocation(
         callback:(Location)->Unit
     ){
-        val locationListener = object : LocationListenerCompat {
-            override fun onLocationChanged(location: Location) {
-                Log.debug(TAG, "requestSingleLocation $location")
-                callback(location)
-                locationManager.removeUpdates(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            val locationListener = object : LocationListenerCompat {
+                override fun onLocationChanged(location: Location) {
+                    Log.debug(TAG, "requestSingleLocation $location")
+                    callback(location)
+                    locationManager.removeUpdates(this)
+                }
             }
-        }
-        if(hasGpsProvider()){
-            locationManager.requestLocationUpdates(
-                LocationManager.GPS_PROVIDER,
-                0,
-                0f,
-                locationListener,
-                Looper.getMainLooper()
-            )
-        }
-        if(hasNetworkProvider()){
-            locationManager.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                0,
-                0f,
-                locationListener,
-                Looper.getMainLooper()
-            )
+            if(hasGpsProvider()){
+                locationManager.requestLocationUpdates(
+                    LocationManager.GPS_PROVIDER,
+                    0,
+                    0f,
+                    locationListener,
+                    Looper.getMainLooper()
+                )
+            }
+            delay(3000)
+            if(hasNetworkProvider()){
+                locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    0,
+                    0f,
+                    locationListener,
+                    Looper.getMainLooper()
+                )
+            }
         }
     }
 }
