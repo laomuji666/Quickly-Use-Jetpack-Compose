@@ -20,7 +20,6 @@ fun NavHostController.navOptionsPushBack(): NavOptions {
                 this.saveState = true
             }
         }
-        launchSingleTop = true
     }
 }
 
