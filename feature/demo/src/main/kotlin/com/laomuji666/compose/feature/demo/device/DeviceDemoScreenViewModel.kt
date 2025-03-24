@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.common.cache.CacheUtil
 import com.laomuji666.compose.core.logic.location.Locator
 import com.laomuji666.compose.core.ui.stateInTimeout
+import com.laomuji666.compose.launcher.PermissionUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
@@ -56,7 +57,7 @@ class DeviceDemoScreenViewModel @Inject constructor(
 
     fun getLocation(context: Context){
         if(!locator.isEnableGps()){
-            locator.openGpsSetting(context)
+            PermissionUtil.Setting.openGpsSetting(context)
             return
         }
         viewModelScope.launch {

@@ -1,10 +1,5 @@
 package com.laomuji666.compose.feature.chat.me
 
-import android.Manifest
-import android.app.Activity
-import android.os.Build
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -21,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -28,15 +24,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.app.ActivityCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.launcher.PermissionUtil
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -45,26 +40,14 @@ fun MeScreen(
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    val permissionLauncher = rememberLauncherForActivityResult(
-        contract = ActivityResultContracts.RequestPermission(),
-        onResult = { isGranted ->
-            if(isGranted){
-                viewModel.onAction(MeScreenAction.SwitchEnableNotification)
-            }else{
-                if(!ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, Manifest.permission.POST_NOTIFICATIONS)){
-                    Toast.showText(context = context, resId = R.string.string_permission_notification_forever_denied)
-                }
-            }
-        }
-    )
+    val permissionLauncher = PermissionUtil.getPostNotificationLauncher{
+        viewModel.onAction(MeScreenAction.SwitchEnableNotification)
+    }
+    val hasPermission by rememberUpdatedState(PermissionUtil.hasPostNotificationPermission(context))
     MeScreenUi(
-        enableNotification = uiState.enableNotification,
+        enableNotification = uiState.enableNotification && hasPermission,
         onEnableNotificationClick = {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
-                permissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-            }else{
-                viewModel.onAction(MeScreenAction.SwitchEnableNotification)
-            }
+            permissionLauncher()
         }
     )
 }
