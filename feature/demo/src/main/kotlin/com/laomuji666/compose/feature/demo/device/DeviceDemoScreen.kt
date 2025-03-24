@@ -2,10 +2,6 @@ package com.laomuji666.compose.feature.demo.device
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.app.Activity
-import android.content.pm.PackageManager.PERMISSION_GRANTED
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
@@ -16,8 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.common.Toast
@@ -27,6 +21,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.launcher.PermissionUtil
 import com.laomuji666.compose.launcher.openAlbum
 import com.laomuji666.compose.launcher.openCamera
 import com.laomuji666.compose.launcher.openContact
@@ -64,18 +59,18 @@ fun DeviceDemoScreen(
         Toast.showText(context, "${it.name} : ${it.mobile}")
     }
 
-    val launcherMultiplePermissions = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { permissionMap ->
-        val fineLocationGranted = permissionMap[ACCESS_FINE_LOCATION] ?: false
-        val coarseLocationGranted = permissionMap[ACCESS_COARSE_LOCATION] ?: false
-        val activity = context as Activity
-        if(!fineLocationGranted && !ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_FINE_LOCATION)){
-            if(!coarseLocationGranted && !ActivityCompat.shouldShowRequestPermissionRationale(activity, ACCESS_COARSE_LOCATION)){
+    val launcherMultiplePermissions = PermissionUtil.getPermissionsLauncher(
+        permissions = listOf(
+            ACCESS_FINE_LOCATION,
+            ACCESS_COARSE_LOCATION
+        ),
+        onCallback = { _, _, foreverDenied ->
+            if(foreverDenied.contains(ACCESS_FINE_LOCATION) && foreverDenied.contains(ACCESS_COARSE_LOCATION)){
                 Toast.showText(context = context, resId = R.string.string_permission_location_forever_denied)
+                PermissionUtil.Setting.openSetting(context)
             }
         }
-    }
+    )
 
     DeviceDemoScreenUi(
         uiState = uiState,
@@ -83,12 +78,10 @@ fun DeviceDemoScreen(
             viewModel.switchAppLogo(context)
         },
         onLocationClick = {
-            if(ContextCompat.checkSelfPermission(context, ACCESS_FINE_LOCATION) == PERMISSION_GRANTED ||
-                ContextCompat.checkSelfPermission(context, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
-            ){
+            if(PermissionUtil.hasPermission(context, ACCESS_FINE_LOCATION) || PermissionUtil.hasPermission(context, ACCESS_COARSE_LOCATION)){
                 viewModel.getLocation(context)
             }else{
-                launcherMultiplePermissions.launch(arrayOf(ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION))
+                launcherMultiplePermissions()
             }
         },
         onSelectMobileClick = {

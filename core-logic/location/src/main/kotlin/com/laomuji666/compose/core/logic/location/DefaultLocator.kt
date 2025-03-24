@@ -5,12 +5,10 @@ import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager.PERMISSION_GRANTED
 import android.location.Location
 import android.location.LocationManager
 import android.os.Looper
-import android.provider.Settings
 import androidx.core.content.ContextCompat
 import androidx.core.location.LocationListenerCompat
 import com.google.android.gms.location.CurrentLocationRequest
@@ -51,19 +49,6 @@ class DefaultLocator @Inject constructor(
 
     override fun isEnableGps():Boolean{
         return hasGpsProvider() || hasNetworkProvider()
-    }
-
-    override fun openGpsSetting(context: Context){
-        val intent = Intent()
-        intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-
-        //application context 必须加上 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        //如果不加上 会导致找不到activity栈 导致闪退
-        if(context is Application){
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        }
-
-        context.startActivity(intent)
     }
 
     @SuppressLint("MissingPermission")
@@ -158,6 +143,7 @@ class DefaultLocator @Inject constructor(
         }
     }
 
+    @SuppressLint("MissingPermission")
     private fun requestSingleLocation(
         callback:(Location)->Unit
     ){
