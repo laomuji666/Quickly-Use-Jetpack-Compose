@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
@@ -60,13 +62,15 @@ fun WeTopNavigationBar(
                 )
             }
         }
-        Spacer(modifier = Modifier.weight(1f))
         Text(
             text = title,
             style = WeTheme.typography.emTitle,
-            color = WeTheme.colorScheme.fontColor90
+            color = WeTheme.colorScheme.fontColor90,
+            modifier = Modifier.weight(1f),
+            textAlign = TextAlign.Center,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis
         )
-        Spacer(modifier = Modifier.weight(1f))
         Row(
             modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth),
             horizontalArrangement = Arrangement.End

@@ -40,6 +40,7 @@ fun DemoScreen(
     onAiChatClick:()->Unit,
     onBiometricScreenClick:()->Unit,
     onYoutubeDLClick:()->Unit,
+    onWebViewClick:()->Unit,
 ){
     //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
     val lifecycleOwner = LocalLifecycleOwner.current
@@ -98,7 +99,8 @@ fun DemoScreen(
                     onHttpClick = onHttpClick,
                     onAiChatClick = onAiChatClick,
                     onBiometricScreenClick = onBiometricScreenClick,
-                    onYoutubeDLClick = onYoutubeDLClick
+                    onYoutubeDLClick = onYoutubeDLClick,
+                    onWebViewClick = onWebViewClick,
                 )
                 DemoSelectEnum.DEVICE -> DeviceDemoScreen()
                 DemoSelectEnum.UI -> UiDemoScreen(
@@ -158,7 +160,8 @@ private fun PreviewDemoScreen() {
             onHttpClick = {},
             onAiChatClick = {},
             onBiometricScreenClick = {},
-            onYoutubeDLClick = {}
+            onYoutubeDLClick = {},
+            onWebViewClick = {}
         )
     }
 }

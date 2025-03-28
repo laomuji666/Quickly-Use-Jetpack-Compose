@@ -24,6 +24,7 @@ fun FeatureDemoScreen(
     onAiChatClick:()->Unit,
     onBiometricScreenClick:()->Unit,
     onYoutubeDLClick:()->Unit,
+    onWebViewClick:()->Unit,
 ){
     val context = LocalContext.current
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
@@ -65,7 +66,11 @@ fun FeatureDemoScreen(
         WeTableClickRow(
             title = stringResource(id = R.string.string_demo_screen_youtubedl_demo),
             onClick = onYoutubeDLClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_demo_screen_web_view_demo),
+            onClick = onWebViewClick
         )
     }
 }
@@ -80,7 +85,8 @@ private fun PreviewFeatureDemoScreen() {
                 onHttpClick = {},
                 onAiChatClick = {},
                 onBiometricScreenClick = {},
-                onYoutubeDLClick = {}
+                onYoutubeDLClick = {},
+                onWebViewClick = {}
             )
         }
     }

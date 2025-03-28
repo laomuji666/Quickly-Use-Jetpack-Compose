@@ -26,6 +26,8 @@ import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollDispatcherScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollDispatcherScreen
+import com.laomuji666.compose.feature.webview.composeWebViewScreen
+import com.laomuji666.compose.feature.webview.navigateToWebViewScreen
 import com.laomuji666.compose.feature.youtubedl.composeYoutubeDLScreen
 import com.laomuji666.compose.feature.youtubedl.navigateToYoutubeDLScreen
 
@@ -94,6 +96,9 @@ fun NavigationHost(
             },
             onYoutubeDLClick = {
                 navHostController.navigateToYoutubeDLScreen()
+            },
+            onWebViewClick = {
+                navHostController.navigateToWebViewScreen("https://www.baidu.com")
             }
         )
 
@@ -133,5 +138,14 @@ fun NavigationHost(
         composePainterScreen()
 
         composeYoutubeDLScreen()
+
+        composeWebViewScreen(
+            onBackClick = {
+                navHostController.safePopBackStack()
+            },
+            onOpenNewWindow = { url ->
+                navHostController.navigateToWebViewScreen(url)
+            }
+        )
     }
 }
