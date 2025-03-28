@@ -45,6 +45,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + 生物认证: 通过指纹或锁屏密码进行生物认证.
 + 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
 + 视频下载播放: 使用youtubedl进行万能视频下载,使用media3进行视频播放.
++ WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
 
 # 开发/发布环境
 保证最新版Android Studio可用,但不保证旧版可用.
