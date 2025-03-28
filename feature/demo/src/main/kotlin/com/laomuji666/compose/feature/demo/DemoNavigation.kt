@@ -16,7 +16,8 @@ fun NavGraphBuilder.composeDemoScreen(
     onNestedScrollDispatcherScreenClick:()->Unit,
     onBiometricScreenClick:()->Unit,
     onPainterScreenClick:()->Unit,
-    onYoutubeDLClick:()->Unit
+    onYoutubeDLClick:()->Unit,
+    onWebViewClick:()->Unit,
 ){
     composable<RouteDemoScreen>{
         DemoScreen(
@@ -28,7 +29,8 @@ fun NavGraphBuilder.composeDemoScreen(
             onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick,
             onBiometricScreenClick = onBiometricScreenClick,
             onPainterScreenClick = onPainterScreenClick,
-            onYoutubeDLClick = onYoutubeDLClick
+            onYoutubeDLClick = onYoutubeDLClick,
+            onWebViewClick = onWebViewClick,
         )
     }
 }

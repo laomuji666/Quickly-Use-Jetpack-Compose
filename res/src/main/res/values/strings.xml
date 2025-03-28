@@ -30,12 +30,13 @@
     <string name="string_demo_screen_open_contact">选择联系人</string>
     <string name="string_demo_screen_switch_app_logo">动态切换图标</string>
 <!--  FeatureDemoScreen  -->
-    <string name="string_demo_screen_biometric">生物认证</string>
-    <string name="string_demo_screen_google_login_demo">谷歌登录例子</string>
-    <string name="string_demo_screen_ai_chat">AI聊天</string>
     <string name="string_demo_screen_firebase_demo">Firebase例子</string>
     <string name="string_demo_screen_http_demo">Ktor Http例子</string>
+    <string name="string_demo_screen_ai_chat">AI聊天</string>
+    <string name="string_demo_screen_biometric">生物认证</string>
+    <string name="string_demo_screen_google_login_demo">谷歌登录例子</string>
     <string name="string_demo_screen_youtubedl_demo">万能视频下载例子</string>
+    <string name="string_demo_screen_web_view_demo">WebView例子</string>
 
 <!--  HttpScreen  -->
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
