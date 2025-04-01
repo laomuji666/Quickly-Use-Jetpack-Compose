@@ -23,7 +23,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
-import com.laomuji666.compose.core.ui.we.icons.Device
+import com.laomuji666.compose.core.ui.we.icons.More
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
@@ -58,17 +58,35 @@ private fun WebViewScreenUi(
             WeTopNavigationBar(
                 title = uiState.title,
                 onBackClick = {
-                    if(webView != null && webView!!.canGoBack()){
-                        webView!!.goBack()
-                    }else{
-                        onBackClick()
-                    }
+                    webView?.run {
+                        if(canGoBack()){
+                            goBack()
+                        }else{
+                            onBackClick()
+                            return@run
+                        }
+                        val urlList = copyBackForwardList()
+                        val endPosition = urlList.currentIndex
+                        var targetPosition = 0
+                        for (position in endPosition downTo  0) {
+                            val urlInfo = urlList.getItemAtIndex(position)
+                            if(urlInfo.url != "about:blank"){
+                                targetPosition = endPosition - position
+                                break
+                            }
+                            if(position == 0){
+                                onBackClick()
+                                return@run
+                            }
+                        }
+                        goBackOrForward(targetPosition)
+                    } ?: onBackClick()
                 },
                 actions = {
                     WeTopNavigationBarAction(
-                        imageVector = WeIcons.Device,
+                        imageVector = WeIcons.More,
                         onActionClick = {
-                            WebViewScreenUtil.openBrowser(url = uiState.url, context = context)
+                            WebViewScreenUtil.useOtherAppOpen(url = uiState.url, context = context)
                         }
                     )
                 }
@@ -127,13 +145,11 @@ fun composeWebView(
                 //设置没有用户的手势触摸也可以播放视频
                 settings.mediaPlaybackRequiresUserGesture = false
 
-                //设置WebViewClient,正常链接直接在当前WebView中打开,
+                //设置WebViewClient,正常链接直接在当前WebView中打开
                 webViewClient = CustomWebViewClient(
                     openBrowser = {
                         if (url.startsWith("http") || url.startsWith("https")) {
                             loadUrl(url)
-                        } else {
-                            WebViewScreenUtil.openBrowser(url = url, context = context)
                         }
                     },
                     onUrlChanged = onUrlChanged
@@ -144,8 +160,6 @@ fun composeWebView(
                     onOpenNewWindow = { url->
                         if (url.startsWith("http") || url.startsWith("https")) {
                             onOpenNewWindow(url)
-                        } else {
-                            WebViewScreenUtil.openBrowser(url = url, context = context)
                         }
                     },
                     onReceivedTitle = onReceivedTitle,
@@ -172,7 +186,10 @@ private fun WebViewScreenProgressView(
     progress: Int
 ){
     if(progress < 100){
-        Spacer(modifier = Modifier.height(1.dp).fillMaxWidth(progress / 100f).background(WeTheme.colorScheme.cursorColor))
+        Spacer(modifier = Modifier
+            .height(4.dp)
+            .fillMaxWidth(progress / 100f)
+            .background(WeTheme.colorScheme.cursorColor))
     }
 }
 
@@ -182,7 +199,7 @@ private fun PreviewWebViewScreenUi() {
     QuicklyTheme {
         WebViewScreenUi(
             uiState = WebViewScreenUiState(
-                url = "https://www.google.com",
+                url = "https://www.google.com/",
                 title = "GoogleGoogleGoogleGoogleGoogleGoogleGoogleGoogleGoogle",
                 progress = 75
             ),
