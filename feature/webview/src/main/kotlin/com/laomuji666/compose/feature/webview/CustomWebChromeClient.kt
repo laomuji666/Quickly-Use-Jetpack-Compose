@@ -5,6 +5,7 @@ import android.webkit.ConsoleMessage
 import android.webkit.JsResult
 import android.webkit.WebChromeClient
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import androidx.appcompat.app.AlertDialog
 import com.laomuji666.compose.core.logic.common.Log
 
@@ -44,12 +45,28 @@ class CustomWebChromeClient(
 
     //拦截打开新窗口
     override fun onCreateWindow(
-        webView: WebView,
+        view: WebView,
         isDialog: Boolean,
         isUserGesture: Boolean,
         resultMsg: Message
     ): Boolean {
-        onOpenNewWindow(webView.url.toString())
+        val newWebView = WebView(view.context)
+        newWebView.webViewClient = object : WebViewClient() {
+            private var isOpened = false
+            override fun onPageFinished(view: WebView, url: String) {
+                super.onPageFinished(view, url)
+                if(isOpened){
+                    return
+                }
+                isOpened = true
+                onOpenNewWindow(url)
+            }
+        }
+        val transport = resultMsg.obj as? WebView.WebViewTransport
+        transport?.let {
+            it.webView = newWebView
+            resultMsg.sendToTarget()
+        }
         return true
     }
 

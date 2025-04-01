@@ -98,7 +98,7 @@ fun NavigationHost(
                 navHostController.navigateToYoutubeDLScreen()
             },
             onWebViewClick = {
-                navHostController.navigateToWebViewScreen("https://www.baidu.com")
+                navHostController.navigateToWebViewScreen("https://www.baidu.com/")
             }
         )
 

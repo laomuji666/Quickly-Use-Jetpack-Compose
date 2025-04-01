@@ -112,4 +112,7 @@
     <string name="string_youtubedl_screen_download_error">下载失败</string>
     <string name="string_youtubedl_screen_download_done">下载成功\n点击播放</string>
     <string name="string_youtubedl_screen_download_stop">暂停下载</string>
+
+<!--  WebViewScreen  -->
+    <string name="string_web_view_screen_open_browser_fail">该链接无法由外部打开,已复制链接到剪切板.</string>
 </resources>

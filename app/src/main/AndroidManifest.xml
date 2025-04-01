@@ -25,7 +25,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme.SplashScreen">
-            <intent-filter>
+            <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -64,6 +64,18 @@
         <activity
             android:name=".feature.video.VideoPlayActivity"
             android:exported="false" />
+
+        <activity android:name=".WebViewActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
