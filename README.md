@@ -26,7 +26,8 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + build-logic: 自定义的插件都放在这里,统一管理依赖.
 + core-logic: 数据处理,与本地数据库或远程服务器交互.
 + core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的UI组件.
-+ feature: 功能模块,按程序功能分成多个module,每个module都由Screen,ViewModel,Navigation组成.
++ feature: 功能模块,按程序功能分成多个module,每个module都由Route,Screen,ViewModel,UiState,Action组成.
++ flavor: 区分flavor,根据不同的flavor引入不同的module,不同的渠道引入不同的包.
 + res: 资源文件,统一管理图片,文字等资源文件.
 
 # 已提供的示例代码
