@@ -13,7 +13,6 @@ object Toast{
         }
     }
     fun showText(context: Context, resId: Int){
-        val text = context.resources.getText(resId)
-        Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+        showText(context, context.resources.getText(resId))
     }
 }
