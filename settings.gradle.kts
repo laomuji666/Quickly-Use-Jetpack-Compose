@@ -47,4 +47,7 @@ include(":feature:youtubedl")
 include(":feature:video")
 include(":feature:webview")
 
+include(":flavor:flavor-gp")
+include(":flavor:flavor-sam")
+
 include(":core-launcher")

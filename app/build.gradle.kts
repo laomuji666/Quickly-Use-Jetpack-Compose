@@ -26,7 +26,7 @@ android {
     }
 
     //使用不同的 build variant
-    flavorDimensions += listOf("channel", "style")
+    flavorDimensions += "channel"
     productFlavors {
         create("gp"){
             dimension = "channel"
@@ -35,13 +35,6 @@ android {
         }
         create("sam"){
             dimension = "channel"
-        }
-
-        create("green"){
-            dimension = "style"
-        }
-        create("blue"){
-            dimension = "style"
         }
     }
 }
@@ -71,4 +64,10 @@ dependencies {
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
+
+    //根据不同的渠道引入不同的module
+    val gpImplementation by configurations
+    val samImplementation by configurations
+    gpImplementation(project(":flavor:flavor-gp"))
+    samImplementation(project(":flavor:flavor-sam"))
 }
