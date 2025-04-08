@@ -2,14 +2,19 @@ package com.laomuji666.compose.core.ui.we
 
 import android.app.Activity
 import android.content.res.Configuration
+import android.os.Build
+import android.view.WindowInsets
 import androidx.compose.foundation.IndicationNodeFactory
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.interaction.FocusInteraction
 import androidx.compose.foundation.interaction.HoverInteraction
 import androidx.compose.foundation.interaction.InteractionSource
 import androidx.compose.foundation.interaction.PressInteraction
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -40,21 +45,42 @@ internal fun DefaultWeTheme(
     WeTheme(
         weColorScheme = weColorScheme
     ){
-        SetSystemBarsColor()
-        content()
+        SetSystemBarsColor(content = content)
     }
 }
 
 @Composable
-private fun SetSystemBarsColor(){
+private fun SetSystemBarsColor(
+    content: @Composable () -> Unit
+){
     val view = LocalView.current
-    val bottomNavigationBarBackground = WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
+    val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
     if(!view.isInEditMode){
+        val bottomNavigationBarBackground = WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
         //每次成功重组时,设置底部导航栏颜色
         SideEffect {
             val window = (view.context as Activity).window
-            window.navigationBarColor = bottomNavigationBarBackground
+            if (isOldWindowInsetsApi) {
+                //API35结束的API,因为限定了版本,可以抑制DEPRECATION
+                @Suppress("DEPRECATION")
+                window.navigationBarColor = bottomNavigationBarBackground
+            }else{
+                window.decorView.setOnApplyWindowInsetsListener { view, insets ->
+                    view.setBackgroundColor(bottomNavigationBarBackground)
+                    view.setPadding(0, 0, 0, insets.getInsets(WindowInsets.Type.navigationBars()).bottom)
+                    insets
+                }
+            }
         }
+    }
+    Box(modifier = Modifier.then(
+        if (isOldWindowInsetsApi){
+            Modifier.background(WeTheme.colorScheme.bottomNavigationBarBackground).navigationBarsPadding()
+        }else{
+            Modifier
+        }
+    )) {
+        content()
     }
 }
 

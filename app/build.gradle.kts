@@ -37,6 +37,14 @@ android {
             dimension = "channel"
         }
     }
+
+    androidComponents {
+        //强制使用传统打包方式,兼容 youtubedl
+        onVariants(selector().all()) { variant ->
+            @Suppress("UnstableApiUsage")
+            variant.packaging.jniLibs.useLegacyPackaging = true
+        }
+    }
 }
 
 dependencies {
@@ -60,6 +68,7 @@ dependencies {
     implementation(project(":feature:youtubedl"))
     implementation(project(":feature:video"))
     implementation(project(":feature:webview"))
+    implementation(project(":feature:template"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

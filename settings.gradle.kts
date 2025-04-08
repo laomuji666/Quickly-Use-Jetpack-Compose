@@ -21,9 +21,10 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "quickly"
-include(":app")
-include(":res")
 
+include(":app")
+
+include(":res")
 include(":core-ui")
 
 include(":core-logic:common")
@@ -35,6 +36,9 @@ include(":core-logic:database")
 include(":core-logic:repository")
 include(":core-logic:location")
 
+include(":core-launcher")
+
+include(":feature:template")
 include(":feature:demo")
 include(":feature:firebase")
 include(":feature:http")
@@ -50,4 +54,3 @@ include(":feature:webview")
 include(":flavor:flavor-gp")
 include(":flavor:flavor-sam")
 
-include(":core-launcher")
