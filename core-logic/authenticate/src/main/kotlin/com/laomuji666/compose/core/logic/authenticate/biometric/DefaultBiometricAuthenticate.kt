@@ -87,7 +87,8 @@ class DefaultBiometricAuthenticate @Inject constructor() : BiometricAuthenticate
                 }
             }
             Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> {
-                //从API28开始的生物认证
+                //从API28开始的生物认证,因为限定了版本,可以抑制DEPRECATION
+                @Suppress("DEPRECATION")
                 Intent(Settings.ACTION_FINGERPRINT_ENROLL)
             }
             else -> {
