@@ -1,6 +1,9 @@
 # Quickly-Use-Jetpack-Compose
 简单易用的 Jetpack Compose 快速开发框架,以Compose的方式实现功能. 如果觉得对您有帮助,请为项目点个star,感谢!
 
+# 协议
+[查看隐私协议](PRIVACY.md)
+
 # 架构
 Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵守[官方架构指南](https://developer.android.com/topic/architecture?hl=zh-cn).
 ## 架构组件
