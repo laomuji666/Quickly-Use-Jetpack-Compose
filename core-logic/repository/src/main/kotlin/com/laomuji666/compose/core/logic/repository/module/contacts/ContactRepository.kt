@@ -29,92 +29,92 @@ class ContactRepository(
             ContactInfoEntity(
                 account = 10000,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_ragdoll_cat.png",
-                category = "宠物",
-                nickname = "布偶猫"
+                category = "Pet",
+                nickname = "Ragdoll cat"
             ),
             ContactInfoEntity(
                 account = 10001,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_golden_dog.png",
-                category = "宠物",
-                nickname = "金毛狗"
+                category = "Pet",
+                nickname = "Golden retriever"
             ),
             ContactInfoEntity(
                 account = 10002,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_parrot.png",
-                category = "宠物",
-                nickname = "鹦鹉"
+                category = "Pet",
+                nickname = "Parrot"
             ),
             ContactInfoEntity(
                 account = 10003,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_siberian_husky.png",
-                category = "宠物",
-                nickname = "哈士奇"
+                category = "Pet",
+                nickname = "Siberian Husky"
             ),
             ContactInfoEntity(
                 account = 10004,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_british_shorthair.png",
-                category = "宠物",
-                nickname = "蓝猫"
+                category = "Pet",
+                nickname = "British Shorthair"
             ),
             ContactInfoEntity(
                 account = 10005,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_sheep.png",
-                category = "动物",
-                nickname = "绵羊"
+                category = "Animal",
+                nickname = "Sheep"
             ),
             ContactInfoEntity(
                 account = 10006,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_tiger.png",
-                category = "动物",
-                nickname = "老虎"
+                category = "Animal",
+                nickname = "Tiger"
             ),
             ContactInfoEntity(
                 account = 10007,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_mouse.png",
-                category = "动物",
-                nickname = "老鼠"
+                category = "Animal",
+                nickname = "Mouse"
             ),
             ContactInfoEntity(
                 account = 10008,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_giraffe.png",
-                category = "动物",
-                nickname = "长颈鹿"
+                category = "Animal",
+                nickname = "Giraffe"
             ),
             ContactInfoEntity(
                 account = 1009,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_eagle.png",
-                category = "动物",
-                nickname = "老鹰"
+                category = "Animal",
+                nickname = "Eagle"
             ),
             ContactInfoEntity(
                 account = 10010,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_wolf.png",
-                category = "动物",
-                nickname = "狼"
+                category = "Animal",
+                nickname = "Wolf"
             ),
             ContactInfoEntity(
                 account = 10011,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_leopard.png",
-                category = "动物",
-                nickname = "金钱豹"
+                category = "Animal",
+                nickname = "Leopard"
             ),
             ContactInfoEntity(
                 account = 10012,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_bee.png",
-                category = "昆虫",
-                nickname = "蜜蜂"
+                category = "insect",
+                nickname = "Bee"
             ),
             ContactInfoEntity(
                 account = 10013,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_butterfly.png",
-                category = "昆虫",
-                nickname = "蝴蝶"
+                category = "insect",
+                nickname = "Butterfly"
             ),
             ContactInfoEntity(
                 account = 10014,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_mantis.png",
-                category = "昆虫",
-                nickname = "螳螂"
+                category = "insect",
+                nickname = "Mantis"
             )
         )
     }
