@@ -21,8 +21,8 @@ android {
     //默认配置
     defaultConfig {
         applicationId = "com.laomuji666.compose"
-        versionCode = 11
-        versionName = "1.1"
+        versionCode = 12
+        versionName = "1.2"
     }
 
     //使用不同的 build variant

@@ -8,7 +8,7 @@ import androidx.navigation.navDeepLink
 import com.laomuji666.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
-const val CHAT_SCREEN_DEEP_LINK = "https://compose.laomuji666.com/chat"
+const val CHAT_SCREEN_DEEP_LINK = "laomuji://compose.laomuji666.com/chat"
 
 @Serializable
 data class RouteChatScreen(
