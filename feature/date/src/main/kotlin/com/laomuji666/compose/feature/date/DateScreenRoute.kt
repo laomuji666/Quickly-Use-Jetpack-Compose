@@ -8,15 +8,14 @@ import com.laomuji666.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object RouteDateScreen
+data object DateScreenRoute{
+    fun NavHostController.navigateToDateScreen(navOptions: NavOptions = navOptionsPushBack()){
+        navigate(DateScreenRoute, navOptions)
+    }
 
-
-fun NavHostController.navigateToDateScreen(navOptions: NavOptions = navOptionsPushBack()){
-    navigate(RouteDateScreen, navOptions)
-}
-
-fun NavGraphBuilder.composeDateScreen(){
-    composable<RouteDateScreen>{
-        DateScreen()
+    fun NavGraphBuilder.composeDateScreen(){
+        composable<DateScreenRoute>{
+            DateScreen()
+        }
     }
 }

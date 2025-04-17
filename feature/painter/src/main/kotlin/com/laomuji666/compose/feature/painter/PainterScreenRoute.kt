@@ -8,14 +8,15 @@ import com.laomuji666.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object RoutePainterScreen
+data object PainterScreenRoute{
+    fun NavHostController.navigateToPainterScreen(navOptions: NavOptions = navOptionsPushBack()){
+        navigate(PainterScreenRoute, navOptions)
+    }
 
-fun NavHostController.navigateToPainterScreen(navOptions: NavOptions = navOptionsPushBack()){
-    navigate(RoutePainterScreen, navOptions)
-}
-
-fun NavGraphBuilder.composePainterScreen(){
-    composable<RoutePainterScreen>{
-        PainterScreen()
+    fun NavGraphBuilder.composePainterScreen(){
+        composable<PainterScreenRoute>{
+            PainterScreen()
+        }
     }
 }
+

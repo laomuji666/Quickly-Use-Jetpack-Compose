@@ -106,7 +106,7 @@ private fun FirebasePermissionSlot(
 
 @Preview
 @Composable
-fun PreviewFirebaseScreen(){
+fun PreviewFirebaseScreenUi(){
     QuicklyTheme {
         FirebaseScreenUi(
             uiState = FirebaseScreenUiState(),
