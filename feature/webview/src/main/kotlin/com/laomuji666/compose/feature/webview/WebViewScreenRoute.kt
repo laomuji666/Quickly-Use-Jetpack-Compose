@@ -10,20 +10,22 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class WebViewScreenRoute(
     val url:String
-)
-
-fun NavHostController.navigateToWebViewScreen(url: String, navOptions: NavOptions = navOptionsPushBack()){
-    navigate(WebViewScreenRoute(url = url), navOptions)
-}
-
-fun NavGraphBuilder.composeWebViewScreen(
-    onBackClick: () -> Unit,
-    onOpenNewWindow: (String)->Unit,
 ){
-    composable<WebViewScreenRoute>{
-        WebViewScreen(
-            onBackClick = onBackClick,
-            onOpenNewWindow = onOpenNewWindow,
-        )
+    companion object{
+        fun NavHostController.navigateToWebViewScreen(url: String, navOptions: NavOptions = navOptionsPushBack()){
+            navigate(WebViewScreenRoute(url = url), navOptions)
+        }
+
+        fun NavGraphBuilder.composeWebViewScreen(
+            onBackClick: () -> Unit,
+            onOpenNewWindow: (String)->Unit,
+        ){
+            composable<WebViewScreenRoute>{
+                WebViewScreen(
+                    onBackClick = onBackClick,
+                    onOpenNewWindow = onOpenNewWindow,
+                )
+            }
+        }
     }
 }

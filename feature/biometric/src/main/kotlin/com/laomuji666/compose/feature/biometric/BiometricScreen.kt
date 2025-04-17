@@ -107,7 +107,7 @@ private fun BiometricScreenUi(
 
 @Preview
 @Composable
-private fun PreviewBiometricScreen() {
+private fun PreviewBiometricScreenUi() {
     QuicklyTheme {
         BiometricScreenUi(
             uiState = BiometricScreenUiState(),

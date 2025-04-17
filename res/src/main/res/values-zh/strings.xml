@@ -1,0 +1,88 @@
+<resources>
+    <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+    <string name="string_toast_done">成功</string>
+    <string name="string_toast_loading">載入中</string>
+    <string name="string_toast_error">失敗</string>
+    <string name="string_permission_notification_forever_denied">通知權限被永久拒絕,需要手動授權.</string>
+    <string name="string_permission_location_forever_denied">定位權限被永久拒絕,請手動打開.</string>
+    <string name="string_error_view_title">出錯了</string>
+    <string name="string_error_view_content">請檢查網路或稍後重試</string>
+    <string name="string_error_view_refresh">刷新目前頁面</string>
+    <string name="string_demo_screen_navigation_feature">功能</string>
+    <string name="string_demo_screen_navigation_device">裝置</string>
+    <string name="string_demo_screen_navigation_ui">UI</string>
+    <string name="string_demo_screen_painter">繪畫畫板</string>
+    <string name="string_demo_screen_date">自訂日曆</string>
+    <string name="string_demo_screen_scroll_connect">滑動巢狀 NestedScrollConnection</string>
+    <string name="string_demo_screen_scroll_dispatcher">滑動巢狀 NestedScrollDispatcher</string>
+    <string name="string_demo_screen_long_click_sort">長按拖曳列表排序</string>
+    <string name="string_demo_screen_select_mobile_demo">選擇手機號碼例子</string>
+    <string name="string_demo_screen_get_location">取得定位</string>
+    <string name="string_demo_screen_open_album">相簿選擇照片</string>
+    <string name="string_demo_screen_open_camera">相機拍攝照片</string>
+    <string name="string_demo_screen_open_contact">選擇聯絡人</string>
+    <string name="string_demo_screen_switch_app_logo">動態切換圖示</string>
+    <string name="string_demo_screen_firebase_demo">Firebase 例子</string>
+    <string name="string_demo_screen_http_demo">Ktor Http 例子</string>
+    <string name="string_demo_screen_ai_chat">AI 聊天</string>
+    <string name="string_demo_screen_biometric">生物認證</string>
+    <string name="string_demo_screen_google_login_demo">Google 登入例子</string>
+    <string name="string_demo_screen_youtubedl_demo">萬用影片下載例子</string>
+    <string name="string_demo_screen_web_view_demo">WebView 例子</string>
+    <string name="string_http_screen_is_online">網路是否可用: %1$s</string>
+    <string name="string_http_screen_get_demo">GET, 後台延遲 3 秒</string>
+    <string name="string_http_screen_post_demo">POST</string>
+    <string name="string_firebase_screen_log_event">測試埋點</string>
+    <string name="string_firebase_screen_crush">測試崩潰</string>
+    <string name="string_firebase_screen_notification">申請通知權限</string>
+    <string name="string_widget_screen_toast_title">Toast 示例</string>
+    <string name="string_widget_screen_show_toast">彈出彈窗</string>
+    <string name="string_widget_screen_action_sheet_title">ActionSheet 示例</string>
+    <string name="string_widget_screen_show_action_sheet">彈出 ActionSheet</string>
+    <string name="string_widget_screen_action_sheet_cancel">取消</string>
+    <string name="string_widget_screen_action_sheet_item1">提示文案</string>
+    <string name="string_widget_screen_action_sheet_item2">操作一</string>
+    <string name="string_widget_screen_action_sheet_item3">操作二</string>
+    <string name="string_widget_screen_action_sheet_item4">警示操作</string>
+    <string name="string_ai_chat_screen_navigation_message">訊息</string>
+    <string name="string_ai_chat_screen_navigation_contact">聯絡人</string>
+    <string name="string_ai_chat_screen_navigation_me">我</string>
+    <string name="string_ai_chat_me_screen_we_chat_name">老母雞</string>
+    <string name="string_ai_chat_me_screen_we_chat_number_format">微信號: %1$s</string>
+    <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
+    <string name="string_ai_chat_me_screen_enable_notification">訊息通知</string>
+    <string name="string_chat_screen_send_text">傳送</string>
+    <string name="string_notification_new_messages_name">聊天訊息</string>
+    <string name="string_notification_new_messages_description">收到的未讀取聊天訊息</string>
+    <string-array name="string_date_screen_week_day">
+        <item>一</item>
+        <item>二</item>
+        <item>三</item>
+        <item>四</item>
+        <item>五</item>
+        <item>六</item>
+        <item>日</item>
+    </string-array>
+    <string name="string_biometric_screen_title_title">標題</string>
+    <string name="string_biometric_screen_title_tip">生物認證時的標題</string>
+    <string name="string_biometric_screen_description_title">描述</string>
+    <string name="string_biometric_screen_description_tip">生物認證時的描述</string>
+    <string name="string_biometric_screen_handle_title">呼叫生物認證</string>
+    <string name="string_biometric_screen_setting_title">設定生物認證</string>
+    <string name="string_biometric_screen_status_hardware_not_found">硬體未找到</string>
+    <string name="string_biometric_screen_status_hardware_unavailable">硬體不可用</string>
+    <string name="string_biometric_screen_status_hardware_not_set">使用者未設定生物認證</string>
+    <string name="string_biometric_screen_status_hardware_other_error">終止原因: %1$s</string>
+    <string name="string_biometric_screen_status_hardware_success">生物認證成功</string>
+    <string name="string_biometric_screen_status_hardware_fail">生物認證失敗</string>
+    <string name="string_painter_screen_clear">清空畫板</string>
+    <string name="string_youtubedl_screen_duration_format">%1$d 分 %2$d 秒</string>
+    <string name="string_youtubedl_screen_loading">取得影片資訊</string>
+    <string name="string_youtubedl_screen_url_title">網址</string>
+    <string name="string_youtubedl_screen_url_tip">請輸入影片連結</string>
+    <string name="string_youtubedl_screen_download">下載影片</string>
+    <string name="string_youtubedl_screen_download_error">下載失敗</string>
+    <string name="string_youtubedl_screen_download_done">下載成功\n點擊播放</string>
+    <string name="string_youtubedl_screen_download_stop">暫停下載</string>
+    <string name="string_web_view_screen_open_browser_fail">該連結無法由外部開啟,已複製連結到剪貼簿.</string>
+</resources>

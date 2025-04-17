@@ -21,7 +21,7 @@ class ChatScreenViewModel @Inject constructor(
     private val notificationHelper: NotificationHelper
 ):ViewModel() {
     //获取联系人的信息
-    private val contactInfo = contactDao.getByAccount((savedStateHandle.toRoute<RouteChatScreen>()).account)
+    private val contactInfo = contactDao.getByAccount((savedStateHandle.toRoute<ChatScreenRoute>()).account)
     //获取聊天列表,flow,实际上返回的是数据库的,在数据库更新时自动emit,所以一直都是最新的值.
     private val _messageList = chatRepository.getMessageList(contactInfo.account)
 

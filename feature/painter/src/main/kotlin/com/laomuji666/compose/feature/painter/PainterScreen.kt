@@ -236,7 +236,7 @@ private fun DrawScope.drawPathData(
 
 @Preview
 @Composable
-private fun PreviewPainterScreen() {
+private fun PreviewPainterScreenUi() {
     QuicklyTheme {
         PainterScreen(viewModel = PainterScreenViewModel())
     }

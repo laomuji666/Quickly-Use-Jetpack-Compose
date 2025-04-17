@@ -11,8 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.feature.webview.WebViewScreenRoute
-import com.laomuji666.compose.feature.webview.composeWebViewScreen
-import com.laomuji666.compose.feature.webview.navigateToWebViewScreen
+import com.laomuji666.compose.feature.webview.WebViewScreenRoute.Companion.composeWebViewScreen
+import com.laomuji666.compose.feature.webview.WebViewScreenRoute.Companion.navigateToWebViewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -13,7 +13,7 @@ data class ContactInfoEntity(
     var avatar: String
 ){
     val contentUri: Uri
-        get() = "https://compose.laomuji666.com/chat/$account".toUri()
+        get() = "laomuji://compose.laomuji666.com/chat/$account".toUri()
 
     val avatarUri: Uri
         get() = avatar.toUri()

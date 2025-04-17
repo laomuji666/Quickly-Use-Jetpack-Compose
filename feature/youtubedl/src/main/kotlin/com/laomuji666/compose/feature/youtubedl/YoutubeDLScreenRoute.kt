@@ -8,14 +8,14 @@ import com.laomuji666.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object RouteYoutubeDLScreen
+data object YoutubeDLScreenRoute{
+    fun NavHostController.navigateToYoutubeDLScreen(navOptions: NavOptions = navOptionsPushBack()){
+        navigate(YoutubeDLScreenRoute, navOptions)
+    }
 
-fun NavHostController.navigateToYoutubeDLScreen(navOptions: NavOptions = navOptionsPushBack()){
-    navigate(RouteYoutubeDLScreen, navOptions)
-}
-
-fun NavGraphBuilder.composeYoutubeDLScreen(){
-    composable<RouteYoutubeDLScreen>{
-        YoutubeDLScreen()
+    fun NavGraphBuilder.composeYoutubeDLScreen(){
+        composable<YoutubeDLScreenRoute>{
+            YoutubeDLScreen()
+        }
     }
 }

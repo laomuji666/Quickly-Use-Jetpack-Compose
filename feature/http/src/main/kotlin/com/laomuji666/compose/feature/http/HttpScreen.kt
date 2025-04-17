@@ -103,7 +103,7 @@ private fun HttpScreenSlot(
 
 @Preview
 @Composable
-fun PreviewHttpScreen(){
+fun PreviewHttpScreenUi(){
     QuicklyTheme {
         HttpScreenUi(
             onBackClick = {},
