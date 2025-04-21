@@ -90,8 +90,7 @@ fun DemoScreen(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = if(isPreview()) 0 else DemoSelectEnum.entries.size,
-            userScrollEnabled = false
+            beyondViewportPageCount = if(isPreview()) 0 else DemoSelectEnum.entries.size
         ) {
             when(DemoSelectEnum.entries[it]){
                 DemoSelectEnum.FEATURE -> FeatureDemoScreen(
