@@ -31,12 +31,13 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 @Composable
 fun WeTableInput(
     modifier: Modifier = Modifier,
-    title:String? = null,
-    value:String = "",
-    tip:String = "",
-    onValueChange:(String) -> Unit = {},
-    onImeNext:() -> Unit = {}
-){
+    title: String? = null,
+    value: String = "",
+    tip: String = "",
+    onValueChange: (String) -> Unit = {},
+    imeAction: ImeAction = ImeAction.Next,
+    onImeAction: () -> Unit = {}
+) {
     val focusRequester = remember { FocusRequester() }
     WeTableRow(
         modifier = modifier,
@@ -59,18 +60,18 @@ fun WeTableInput(
                         .fillMaxHeight()
                         .weight(1f),
                     decorationBox = { innerTextField ->
-                        Box(modifier = Modifier.fillMaxSize()){
+                        Box(modifier = Modifier.fillMaxSize()) {
                             Row(
                                 modifier = Modifier.fillMaxSize(),
                                 verticalAlignment = Alignment.CenterVertically
-                            ){
+                            ) {
                                 innerTextField()
                             }
                             if (value.isEmpty()) {
                                 Row(
                                     modifier = Modifier.fillMaxSize(),
                                     verticalAlignment = Alignment.CenterVertically
-                                ){
+                                ) {
                                     Text(
                                         text = tip,
                                         style = WeTheme.typography.title,
@@ -84,11 +85,26 @@ fun WeTableInput(
                     cursorBrush = SolidColor(WeTheme.colorScheme.cursorColor),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Next
+                        imeAction = imeAction
                     ),
                     keyboardActions = KeyboardActions(
+                        onPrevious = {
+                            onImeAction()
+                        },
                         onNext = {
-                            onImeNext()
+                            onImeAction()
+                        },
+                        onDone = {
+                            onImeAction()
+                        },
+                        onSearch = {
+                            onImeAction()
+                        },
+                        onSend = {
+                            onImeAction()
+                        },
+                        onGo = {
+                            onImeAction()
                         }
                     )
                 )
@@ -105,7 +121,7 @@ fun WeTableInput(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableInput(){
+fun PreviewWeTableInput() {
     DefaultWeTheme {
         val focusManager = LocalFocusManager.current
 
@@ -121,7 +137,7 @@ fun PreviewWeTableInput(){
                 onValueChange = {
                     name = it
                 },
-                onImeNext = {
+                onImeAction = {
                     focusManager.moveFocus(FocusDirection.Down)
                 }
             )
@@ -132,7 +148,7 @@ fun PreviewWeTableInput(){
                 onValueChange = {
                     email = it
                 },
-                onImeNext = {
+                onImeAction = {
                     focusManager.moveFocus(FocusDirection.Down)
                 }
             )
@@ -143,7 +159,7 @@ fun PreviewWeTableInput(){
                 onValueChange = {
                     password = it
                 },
-                onImeNext = {
+                onImeAction = {
                     focusManager.clearFocus()
                 }
             )

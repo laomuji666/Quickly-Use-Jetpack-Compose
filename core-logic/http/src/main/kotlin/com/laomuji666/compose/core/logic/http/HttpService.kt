@@ -15,10 +15,6 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -32,19 +28,6 @@ class HttpService @Inject constructor(
 ) {
     companion object {
         private const val TAG = "tag_http"
-    }
-
-    /**
-     * 当前是否有网络
-     */
-    private var isConnected = false
-
-    init {
-        CoroutineScope(Dispatchers.IO).launch {
-            connectivityObserver.isConnected.collectLatest {
-                isConnected = it
-            }
-        }
     }
 
     val client = HttpClient {
@@ -146,7 +129,7 @@ class HttpService @Inject constructor(
         install(HttpRequestRetry) {
             maxRetries = 3
             retryOnExceptionIf { _, _ ->
-                isConnected
+                connectivityObserver.isConnected
             }
             exponentialDelay()
         }

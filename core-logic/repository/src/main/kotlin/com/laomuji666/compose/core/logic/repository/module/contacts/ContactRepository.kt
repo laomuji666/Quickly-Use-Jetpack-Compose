@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 class ContactRepository(
     private val contactDao: ContactDao
 ) {
-    fun contactsList() = flow{
+    fun contactsList() = flow {
         //先使用缓存的列表
         emit(contactDao.getAll())
 
@@ -24,7 +24,7 @@ class ContactRepository(
         emit(ArrayList())
     }
 
-    private fun fakeRequestContacts(): List<ContactInfoEntity>{
+    private fun fakeRequestContacts(): List<ContactInfoEntity> {
         return listOf(
             ContactInfoEntity(
                 account = 10000,
@@ -101,19 +101,19 @@ class ContactRepository(
             ContactInfoEntity(
                 account = 10012,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_bee.png",
-                category = "insect",
+                category = "Insect",
                 nickname = "Bee"
             ),
             ContactInfoEntity(
                 account = 10013,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_butterfly.png",
-                category = "insect",
+                category = "Insect",
                 nickname = "Butterfly"
             ),
             ContactInfoEntity(
                 account = 10014,
                 avatar = "content://compose.laomuji666.contact.assert/avatar/avatar_mantis.png",
-                category = "insect",
+                category = "Insect",
                 nickname = "Mantis"
             )
         )

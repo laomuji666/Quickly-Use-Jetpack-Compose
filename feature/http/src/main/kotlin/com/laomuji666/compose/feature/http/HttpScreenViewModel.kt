@@ -10,7 +10,6 @@ import com.laomuji666.compose.core.logic.http.request.CreateUserRequest
 import com.laomuji666.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,21 +21,12 @@ class HttpScreenViewModel @Inject constructor(
 ) : ViewModel() {
     private val _isError = MutableStateFlow(false)
     private val _isLoading = MutableStateFlow(false)
-    private val _isConnect = MutableStateFlow(false)
     private val _responseText = MutableStateFlow("")
-
-    init {
-        viewModelScope.launch {
-            connectivityObserver.isConnected.collectLatest {
-                _isConnect.value = it
-            }
-        }
-    }
 
     val uiState = combine(
         _isError,
         _isLoading,
-        _isConnect,
+        connectivityObserver.isConnectedFlow,
         _responseText
     ) { isError, isLoading, isConnect, responseText ->
         HttpScreenUiState(
