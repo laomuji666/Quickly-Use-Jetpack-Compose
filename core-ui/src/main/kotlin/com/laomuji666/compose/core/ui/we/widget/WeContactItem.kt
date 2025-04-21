@@ -25,8 +25,8 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 fun WeContactItem(
     avatar: Uri,
     text: String,
-    onClick:()->Unit = {}
-){
+    onClick: () -> Unit,
+) {
     val imageRequest = ImageRequest
         .Builder(LocalContext.current)
         .data(avatar)
@@ -58,26 +58,30 @@ fun WeContactItem(
         weTableRowType = WeTableRowType.SINGLE,
         outlineModifier = Modifier.padding(start = WeTheme.dimens.contactIconSize + WeTheme.dimens.listPaddingHorizontal * 2),
         weTableRowOutlineType = WeTableRowOutlineType.FULL,
-        onClick = onClick
+        clickTimeout = 1500L,
+        onClick = onClick,
     )
 }
 
 @PreviewLightDark
 @Composable
-fun PreviewWeContactItem(){
+fun PreviewWeContactItem() {
     DefaultWeTheme {
         Column {
             WeContactItem(
                 "".toUri(),
-                text = "A"
+                text = "A",
+                onClick = {}
             )
             WeContactItem(
                 "".toUri(),
-                text = "B"
+                text = "B",
+                onClick = {}
             )
             WeContactItem(
                 "".toUri(),
-                text = "C"
+                text = "C",
+                onClick = {}
             )
         }
     }

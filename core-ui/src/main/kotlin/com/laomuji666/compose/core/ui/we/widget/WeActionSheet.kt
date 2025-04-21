@@ -1,7 +1,5 @@
 package com.laomuji666.compose.core.ui.we.widget
 
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -20,11 +18,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.laomuji666.compose.core.ui.we.animated.AnimatedSlide
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
+import com.laomuji666.compose.core.ui.we.animated.AnimatedSlide
 
-enum class WeActionSheetType{
+enum class WeActionSheetType {
     SUMMARY,
     NORMAL,
     WRONG
@@ -32,17 +31,17 @@ enum class WeActionSheetType{
 
 @Composable
 fun WeActionSheetRow(
-    text:String,
-    onClick:()->Unit = {},
+    text: String,
+    onClick: () -> Unit = {},
     weActionSheetType: WeActionSheetType = WeActionSheetType.NORMAL,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
-){
+) {
     WeTableRow(
         start = {
             Spacer(modifier = Modifier.weight(1f))
         },
         center = {
-            when(weActionSheetType){
+            when (weActionSheetType) {
                 WeActionSheetType.SUMMARY -> {
                     Text(
                         text = text,
@@ -50,6 +49,7 @@ fun WeActionSheetRow(
                         color = WeTheme.colorScheme.fontColor50
                     )
                 }
+
                 WeActionSheetType.NORMAL -> {
                     Text(
                         text = text,
@@ -57,6 +57,7 @@ fun WeActionSheetRow(
                         color = WeTheme.colorScheme.fontColor90
                     )
                 }
+
                 WeActionSheetType.WRONG -> {
                     Text(
                         text = text,
@@ -76,31 +77,26 @@ fun WeActionSheetRow(
 
 @Composable
 fun WeActionSheetDialog(
-    onDismissRequest: ()->Unit = {},
-    dismissText:String?=null,
-    content: @Composable ColumnScope.()->Unit
-){
+    onDismissRequest: () -> Unit = {},
+    dismissText: String? = null,
+    content: @Composable ColumnScope.() -> Unit
+) {
     Dialog(
         onDismissRequest = {},
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
-        Box(modifier = Modifier.fillMaxSize()){
+        Box(modifier = Modifier.fillMaxSize()) {
             AnimatedSlide(scope = {
                 Show()
-            }){
+            }) {
                 val dismissRequest = {
                     hide { onDismissRequest() }
                 }
                 Box(
                     modifier = Modifier
-                        .clickable(
-                            interactionSource = remember {
-                                MutableInteractionSource()
-                            },
-                            indication = null
-                        ) { dismissRequest() }
+                        .clickableDebounce(onClick = dismissRequest)
                         .fillMaxSize()
-                ){
+                ) {
                     Column(
                         modifier = Modifier
                             .align(Alignment.BottomCenter)
@@ -112,7 +108,7 @@ fun WeActionSheetDialog(
                             )
                     ) {
                         content()
-                        dismissText?.let{
+                        dismissText?.let {
                             WeActionSheetRow(
                                 text = it,
                                 onClick = dismissRequest
@@ -127,16 +123,16 @@ fun WeActionSheetDialog(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeActionSheetRow1(){
+fun PreviewWeActionSheetRow1() {
     var showDialog by remember {
         mutableStateOf(true)
     }
     DefaultWeTheme {
-        if(showDialog){
+        if (showDialog) {
             WeActionSheetDialog(
                 onDismissRequest = { showDialog = false },
                 dismissText = "取消"
-            ){
+            ) {
                 WeActionSheetRow(
                     text = "警示操作提示文案",
                     weTableRowOutlineType = WeTableRowOutlineType.FULL,

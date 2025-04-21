@@ -3,7 +3,6 @@ package com.laomuji666.compose.core.ui.we.widget
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -34,9 +33,9 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 fun WeTableSwitchRow(
     title: String,
     checked: Boolean,
-    onClick: ()->Unit = {},
+    onClick: () -> Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
-){
+) {
     WeTableRow(
         start = {
             Text(
@@ -47,8 +46,7 @@ fun WeTableSwitchRow(
         },
         end = {
             WeSwitch(
-                checked = checked,
-                onClick = onClick
+                checked = checked
             )
         },
         onClick = onClick,
@@ -59,7 +57,6 @@ fun WeTableSwitchRow(
 @Composable
 fun WeSwitch(
     checked: Boolean,
-    onClick: () -> Unit,
     width: Dp = WeTheme.dimens.switchIconWidth,
     height: Dp = WeTheme.dimens.switchIconHeight,
     thumbSize: Dp = height - 5.dp,
@@ -76,23 +73,23 @@ fun WeSwitch(
             .width(width)
             .height(height)
             .clip(CircleShape)
-            .clickable { onClick() }
             .background(if (checked) WeTheme.colorScheme.switchSelectBackground else WeTheme.colorScheme.switchUnSelectBackground)
     ) {
-        Spacer(modifier = Modifier
-            .size(thumbSize)
-            .offset {
-                IntOffset(offsetX.roundToPx(), 0)
-            }
-            .shadow(elevation = gap, shape = CircleShape)
-            .background(Color.White, shape = CircleShape)
+        Spacer(
+            modifier = Modifier
+                .size(thumbSize)
+                .offset {
+                    IntOffset(offsetX.roundToPx(), 0)
+                }
+                .shadow(elevation = gap, shape = CircleShape)
+                .background(Color.White, shape = CircleShape)
         )
     }
 }
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableSwitchRow(){
+fun PreviewWeTableSwitchRow() {
     var checked1 by remember { mutableStateOf(false) }
     var checked2 by remember { mutableStateOf(true) }
     DefaultWeTheme {

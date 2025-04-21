@@ -1,7 +1,6 @@
 package com.laomuji666.compose.feature.chat.contacts
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -27,6 +26,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji666.compose.core.logic.database.entity.getTypeList
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
@@ -38,7 +38,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun ContactsScreen(
     viewModel: ContactsViewModel = hiltViewModel(),
-    onContactClick: (ContactInfoEntity)->Unit
+    onContactClick: (ContactInfoEntity) -> Unit
 ) {
     LaunchedEffect(Unit) {
         viewModel.onAction(ContactsScreenAction.UpdateContactList)
@@ -60,18 +60,18 @@ fun ContactsScreen(
 @Composable
 private fun ContactsScreenUi(
     paddingTop: Dp = WeTheme.dimens.navigationBarHeight - 1.dp,
-    contactList:List<ContactInfoEntity>,
-    onContactClick: (ContactInfoEntity)->Unit
-){
-    val paddingTopPx = with(LocalDensity.current){
+    contactList: List<ContactInfoEntity>,
+    onContactClick: (ContactInfoEntity) -> Unit
+) {
+    val paddingTopPx = with(LocalDensity.current) {
         paddingTop.toPx()
     }
     val listState = rememberScrollState()
     val typeList = contactList.getTypeList()
-    val typeMap = mutableMapOf<String,Float>()
+    val typeMap = mutableMapOf<String, Float>()
     val coroutineScope = rememberCoroutineScope()
 
-    Box(modifier = Modifier.fillMaxSize()){
+    Box(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .background(WeTheme.colorScheme.background)
@@ -79,9 +79,9 @@ private fun ContactsScreenUi(
         ) {
             Column(
                 modifier = Modifier.verticalScroll(state = listState)
-            ){
-                contactList.forEachIndexed { index,item ->
-                    if(index == 0 || item.category != contactList[index - 1].category){
+            ) {
+                contactList.forEachIndexed { index, item ->
+                    if (index == 0 || item.category != contactList[index - 1].category) {
                         WeTableTitle(
                             modifier = Modifier.onGloballyPositioned {
                                 typeMap[item.category] = it.positionInRoot().y - it.size.height
@@ -105,7 +105,7 @@ private fun ContactsScreenUi(
             typeList.forEach { item ->
                 Text(
                     modifier = Modifier
-                        .clickable {
+                        .clickableDebounce {
                             coroutineScope.launch {
                                 listState.scrollBy((typeMap[item] ?: 0f) - paddingTopPx)
                             }
@@ -122,7 +122,7 @@ private fun ContactsScreenUi(
 
 @PreviewLightDark
 @Composable
-fun PreviewContactsScreenUi(){
+fun PreviewContactsScreenUi() {
     QuicklyTheme {
         ContactsScreenUi(
             contactList = listOf(

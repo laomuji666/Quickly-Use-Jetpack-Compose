@@ -2,8 +2,6 @@ package com.laomuji666.compose.core.ui.we.widget
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -23,6 +21,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
@@ -40,21 +39,21 @@ fun RowScope.WeBottomNavigationBarItem(
     unSelectImageVector: ImageVector? = null,
     selectImageVector: ImageVector? = unSelectImageVector,
     onClick: () -> Unit
-){
-    val color = if(selected)WeTheme.colorScheme.navigationBarSelect else WeTheme.colorScheme.navigationBarUnSelect
+) {
+    val color =
+        if (selected) WeTheme.colorScheme.navigationBarSelect else WeTheme.colorScheme.navigationBarUnSelect
     Column(
         modifier = Modifier
             .weight(1f)
             .fillMaxHeight()
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
+            .clickableDebounce(
                 indication = null,
                 onClick = onClick
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        if(selected){
+        if (selected) {
             selectImageVector?.let {
                 Image(
                     imageVector = it,
@@ -64,7 +63,7 @@ fun RowScope.WeBottomNavigationBarItem(
                     modifier = Modifier.height(WeTheme.dimens.bottomNavigationBarIconSize)
                 )
             }
-        }else{
+        } else {
             unSelectImageVector?.let {
                 Image(
                     imageVector = it,
@@ -86,7 +85,7 @@ fun RowScope.WeBottomNavigationBarItem(
 @Composable
 fun WeBottomNavigationBar(
     content: @Composable RowScope.() -> Unit
-){
+) {
     Column {
         WeTableRowOutline(
             color = WeTheme.colorScheme.navigationBarOutline,
@@ -105,10 +104,10 @@ fun WeBottomNavigationBar(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeBottomNavigationBar(){
+fun PreviewWeBottomNavigationBar() {
     var selected by remember { mutableIntStateOf(0) }
     QuicklyTheme {
-        WeBottomNavigationBar{
+        WeBottomNavigationBar {
             WeBottomNavigationBarItem(
                 title = "微信",
                 selected = selected == 0,
