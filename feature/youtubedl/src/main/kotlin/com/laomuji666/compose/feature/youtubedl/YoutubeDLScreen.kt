@@ -1,7 +1,6 @@
 package com.laomuji666.compose.feature.youtubedl
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -34,6 +33,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Add
@@ -52,14 +52,14 @@ import com.laomuji666.compose.res.R
 @Composable
 fun YoutubeDLScreen(
     viewModel: YoutubeDLScreenViewModel = hiltViewModel()
-){
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     YoutubeDLScreenUi(
         uiState = uiState,
         onAction = viewModel::onAction
     )
 
-    if(uiState.isLoading){
+    if (uiState.isLoading) {
         WeToast(
             weToastType = WeToastType.LOADING,
             message = stringResource(R.string.string_youtubedl_screen_loading)
@@ -71,10 +71,10 @@ fun YoutubeDLScreen(
 private fun YoutubeDLScreenUi(
     uiState: YoutubeDLScreenUiState,
     onAction: (YoutubeDLScreenAction) -> Unit
-){
+) {
     val context = LocalContext.current
     var showAddDownloadDialog by rememberSaveable { mutableStateOf(false) }
-    if(showAddDownloadDialog){
+    if (showAddDownloadDialog) {
         AddDownloadDialog(
             onDismissRequest = {
                 showAddDownloadDialog = false
@@ -112,11 +112,11 @@ private fun YoutubeDLScreenUi(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LazyColumn {
-                items(uiState.downloadInfo){ item ->
-                    DownloadInfoItemView(item){ downloadInfo ->
-                        if(downloadInfo.isDone){
+                items(uiState.downloadInfo) { item ->
+                    DownloadInfoItemView(item) { downloadInfo ->
+                        if (downloadInfo.isDone) {
                             VideoPlayActivity.open(context, downloadInfo.filename)
-                        }else{
+                        } else {
                             onAction(YoutubeDLScreenAction.SwitchDownloadVideo(downloadInfo))
                         }
                     }
@@ -131,8 +131,8 @@ private fun YoutubeDLScreenUi(
 @Composable
 private fun DownloadInfoItemView(
     downloadInfo: DownloadInfo,
-    onClick:(DownloadInfo)->Unit
-){
+    onClick: (DownloadInfo) -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -151,18 +151,22 @@ private fun DownloadInfoItemView(
             AsyncImage(
                 model = imageRequest,
                 contentDescription = null,
-                modifier = Modifier.align(Alignment.CenterEnd).fillMaxSize(),
+                modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .fillMaxSize(),
                 contentScale = ContentScale.Crop
             )
         }
-        Box(modifier = Modifier.fillMaxSize().padding(12.dp)){
+        Box(modifier = Modifier
+            .fillMaxSize()
+            .padding(12.dp)) {
             Box(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .clip(RoundedCornerShape(4.dp))
                     .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
-            ){
+            ) {
                 Text(
                     text = downloadInfo.title,
                     style = WeTheme.typography.desc,
@@ -181,7 +185,7 @@ private fun DownloadInfoItemView(
                         .clip(RoundedCornerShape(4.dp))
                         .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
-                ){
+                ) {
                     Text(
                         text = downloadInfo.getFileSizeText(),
                         style = WeTheme.typography.footnote,
@@ -194,7 +198,7 @@ private fun DownloadInfoItemView(
                         .clip(RoundedCornerShape(4.dp))
                         .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
-                ){
+                ) {
                     Text(
                         text = downloadInfo.getDurationText(),
                         style = WeTheme.typography.footnote,
@@ -202,13 +206,13 @@ private fun DownloadInfoItemView(
                     )
                 }
             }
-            val centerText = if(downloadInfo.isError){
+            val centerText = if (downloadInfo.isError) {
                 stringResource(R.string.string_youtubedl_screen_download_error)
-            }else if(downloadInfo.isDone){
+            } else if (downloadInfo.isDone) {
                 stringResource(R.string.string_youtubedl_screen_download_done)
-            }else if(!downloadInfo.isDownloading){
+            } else if (!downloadInfo.isDownloading) {
                 stringResource(R.string.string_youtubedl_screen_download_stop)
-            }else{
+            } else {
                 downloadInfo.getProgressText()
             }
             Box(
@@ -217,10 +221,10 @@ private fun DownloadInfoItemView(
                     .clip(CircleShape)
                     .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
                     .size(80.dp)
-                    .clickable {
+                    .clickableDebounce {
                         onClick(downloadInfo)
                     }
-            ){
+            ) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
                     text = centerText,

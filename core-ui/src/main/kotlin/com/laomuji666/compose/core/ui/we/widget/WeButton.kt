@@ -1,7 +1,6 @@
 package com.laomuji666.compose.core.ui.we.widget
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.ifCondition
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
@@ -26,31 +26,32 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 fun WeButton(
     weButtonType: WeButtonType = WeButtonType.SMALL,
     weButtonColor: WeButtonColor = WeButtonColor.PRIMARY,
-    text:String,
-    onClick:()->Unit
-){
-    val buttonWidth = when(weButtonType){
+    text: String,
+    clickTimeout: Long = 200L,
+    onClick: () -> Unit,
+) {
+    val buttonWidth = when (weButtonType) {
         WeButtonType.BIG -> WeTheme.dimens.bigButtonWidth
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonWidth
         WeButtonType.WARP -> 0.dp
     }
-    val buttonHeight = when(weButtonType){
+    val buttonHeight = when (weButtonType) {
         WeButtonType.BIG -> WeTheme.dimens.bigButtonHeight
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonHeight
-        WeButtonType.WARP ->  WeTheme.dimens.smallButtonHeight
+        WeButtonType.WARP -> WeTheme.dimens.smallButtonHeight
     }
-    val buttonRoundedCornerDp = when(weButtonType){
+    val buttonRoundedCornerDp = when (weButtonType) {
         WeButtonType.BIG -> WeTheme.dimens.bigButtonRoundedCornerDp
         WeButtonType.SMALL -> WeTheme.dimens.smallButtonRoundedCornerDp
-        WeButtonType.WARP ->  WeTheme.dimens.smallButtonRoundedCornerDp
+        WeButtonType.WARP -> WeTheme.dimens.smallButtonRoundedCornerDp
     }
-    val buttonColor = when(weButtonColor) {
+    val buttonColor = when (weButtonColor) {
         WeButtonColor.PRIMARY -> WeTheme.colorScheme.primaryButton
         WeButtonColor.SECONDARY -> WeTheme.colorScheme.secondaryButton
         WeButtonColor.DISABLE -> WeTheme.colorScheme.disableButton
         WeButtonColor.WRONG -> WeTheme.colorScheme.wrongButton
     }
-    val textColor = when(weButtonColor){
+    val textColor = when (weButtonColor) {
         WeButtonColor.PRIMARY -> WeTheme.colorScheme.onPrimaryButton
         WeButtonColor.SECONDARY -> WeTheme.colorScheme.onSecondaryButton
         WeButtonColor.DISABLE -> WeTheme.colorScheme.onDisableButton
@@ -60,7 +61,7 @@ fun WeButton(
         modifier = Modifier
             .clip(RoundedCornerShape(buttonRoundedCornerDp))
             .defaultMinSize(minWidth = buttonWidth, minHeight = buttonHeight)
-            .clickable { onClick() }
+            .clickableDebounce(onClick = onClick, timeout = clickTimeout)
             .background(buttonColor),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -72,19 +73,19 @@ fun WeButton(
             modifier = Modifier.ifCondition(
                 condition = weButtonType != WeButtonType.WARP,
                 onTrue = { padding(horizontal = 0.dp) },
-                onFalse =  { padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal) }
+                onFalse = { padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal) }
             )
         )
     }
 }
 
-enum class WeButtonType{
+enum class WeButtonType {
     BIG,
     SMALL,
     WARP
 }
 
-enum class WeButtonColor{
+enum class WeButtonColor {
     PRIMARY,
     SECONDARY,
     DISABLE,
@@ -93,8 +94,8 @@ enum class WeButtonColor{
 
 @PreviewLightDark
 @Composable
-fun PreviewWeButton(){
-    DefaultWeTheme{
+fun PreviewWeButton() {
+    DefaultWeTheme {
         Column(
             modifier = Modifier
                 .fillMaxWidth(),

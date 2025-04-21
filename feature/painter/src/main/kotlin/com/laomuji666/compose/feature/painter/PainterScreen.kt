@@ -3,7 +3,6 @@ package com.laomuji666.compose.feature.painter
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectDragGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -42,6 +41,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
@@ -51,7 +51,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 @Composable
 fun PainterScreen(
     viewModel: PainterScreenViewModel = hiltViewModel()
-){
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     PainterScreenUi(
         colorList = uiState.colorList,
@@ -83,31 +83,33 @@ fun PainterScreen(
 
 @Composable
 private fun PainterScreenUi(
-    colorList:List<Color>,
-    currentColorIndex:Int,
-    widthList:List<Dp>,
-    currentWidthIndex:Int,
-    pathList:List<PathData>,
-    currentPath:PathData?,
-    onCurrentColorIndexChange:(Int) -> Unit,
-    onCurrentWidthIndexChange:(Int) -> Unit,
-    onClearCanvasClick:()->Unit,
-    onDragStart:(Offset)->Unit,
-    onDragEnd:()->Unit,
-    onDrag:(Offset) -> Unit
-){
+    colorList: List<Color>,
+    currentColorIndex: Int,
+    widthList: List<Dp>,
+    currentWidthIndex: Int,
+    pathList: List<PathData>,
+    currentPath: PathData?,
+    onCurrentColorIndexChange: (Int) -> Unit,
+    onCurrentWidthIndexChange: (Int) -> Unit,
+    onClearCanvasClick: () -> Unit,
+    onDragStart: (Offset) -> Unit,
+    onDragEnd: () -> Unit,
+    onDrag: (Offset) -> Unit
+) {
     val density = LocalDensity.current
-    Column(modifier = Modifier.fillMaxSize().background(Color.White)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .background(Color.White)) {
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .pointerInput(Unit){
+                .pointerInput(Unit) {
                     detectDragGestures(
                         onDragStart = onDragStart,
                         onDragEnd = onDragEnd,
                         onDragCancel = onDragEnd,
-                        onDrag = {change, _ ->
+                        onDrag = { change, _ ->
                             change.consume()
                             onDrag(change.position)
                         }
@@ -118,11 +120,11 @@ private fun PainterScreenUi(
                         drawContent()
                     }
                 }
-        ){
+        ) {
             pathList.forEach {
                 drawPathData(
                     pathData = it,
-                    strokeWidth = with(density){
+                    strokeWidth = with(density) {
                         it.width.toPx()
                     }
                 )
@@ -130,7 +132,7 @@ private fun PainterScreenUi(
             currentPath?.let {
                 drawPathData(
                     pathData = it,
-                    strokeWidth = with(density){
+                    strokeWidth = with(density) {
                         it.width.toPx()
                     }
                 )
@@ -143,20 +145,24 @@ private fun PainterScreenUi(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(horizontal = 12.dp)
         ) {
-            itemsIndexed(widthList){ index, width ->
+            itemsIndexed(widthList) { index, width ->
                 val isSelected = index == currentWidthIndex
                 Box(
                     modifier = Modifier
                         .graphicsLayer {
-                            scaleX = if(isSelected) 1.25f else 1f
-                            scaleY = if(isSelected) 1.25f else 1f
+                            scaleX = if (isSelected) 1.25f else 1f
+                            scaleY = if (isSelected) 1.25f else 1f
                         }
                         .height(30.dp)
                         .clip(RoundedCornerShape(4.dp))
-                        .border(1.dp, if(isSelected) Color.Black else Color.Transparent, RoundedCornerShape(4.dp))
+                        .border(
+                            1.dp,
+                            if (isSelected) Color.Black else Color.Transparent,
+                            RoundedCornerShape(4.dp)
+                        )
                         .padding(horizontal = 12.dp)
-                        .clickable { onCurrentWidthIndexChange(index) }
-                ){
+                        .clickableDebounce { onCurrentWidthIndexChange(index) }
+                ) {
                     Text(
                         text = "$width",
                         modifier = Modifier.align(Alignment.Center)
@@ -173,19 +179,23 @@ private fun PainterScreenUi(
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(horizontal = 12.dp)
         ) {
-            itemsIndexed(colorList){ index, color ->
+            itemsIndexed(colorList) { index, color ->
                 val isSelected = index == currentColorIndex
                 Spacer(
                     modifier = Modifier
                         .graphicsLayer {
-                            scaleX = if(isSelected) 1.25f else 1f
-                            scaleY = if(isSelected) 1.25f else 1f
+                            scaleX = if (isSelected) 1.25f else 1f
+                            scaleY = if (isSelected) 1.25f else 1f
                         }
                         .size(44.dp)
                         .clip(CircleShape)
                         .background(color)
-                        .border(2.dp, if(isSelected) Color.Black else Color.Transparent, CircleShape)
-                        .clickable { onCurrentColorIndexChange(index) }
+                        .border(
+                            2.dp,
+                            if (isSelected) Color.Black else Color.Transparent,
+                            CircleShape
+                        )
+                        .clickableDebounce { onCurrentColorIndexChange(index) }
                 )
             }
         }
@@ -209,11 +219,11 @@ private fun DrawScope.drawPathData(
     pathData: PathData,
     strokeWidth: Float,
     cap: StrokeCap = StrokeCap.Round
-){
+) {
     val smoothedPath = Path().apply {
-        if(pathData.path.isEmpty())return@apply
+        if (pathData.path.isEmpty()) return@apply
         moveTo(pathData.path.first().x, pathData.path.first().y)
-        for(i in 1 until pathData.path.size){
+        for (i in 1 until pathData.path.size) {
             val from = pathData.path[i - 1]
             val to = pathData.path[i]
             quadraticTo(

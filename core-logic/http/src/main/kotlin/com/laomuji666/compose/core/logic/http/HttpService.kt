@@ -15,6 +15,10 @@ import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import kotlinx.serialization.json.Json
 import java.security.SecureRandom
 import java.security.cert.X509Certificate
@@ -23,9 +27,27 @@ import javax.net.ssl.SSLContext
 import javax.net.ssl.X509TrustManager
 
 class HttpService @Inject constructor(
-    private val myCookiesStorage: MyCookiesStorage
+    private val myCookiesStorage: MyCookiesStorage,
+    private val connectivityObserver: ConnectivityObserver
 ) {
-    val client = HttpClient{
+    companion object {
+        private const val TAG = "tag_http"
+    }
+
+    /**
+     * 当前是否有网络
+     */
+    private var isConnected = false
+
+    init {
+        CoroutineScope(Dispatchers.IO).launch {
+            connectivityObserver.isConnected.collectLatest {
+                isConnected = it
+            }
+        }
+    }
+
+    val client = HttpClient {
         enableLog()
         trustAllCertificates()
         enableJsonConvert()
@@ -37,13 +59,13 @@ class HttpService @Inject constructor(
     /**
      * 打印响应日志
      */
-    private fun HttpClientConfig<*>.enableLog(){
-        install(Logging){
+    private fun HttpClientConfig<*>.enableLog() {
+        install(Logging) {
             level = LogLevel.ALL
             logger = Logger.DEFAULT
             logger = object : Logger {
                 override fun log(message: String) {
-                    Log.debug("tag_http", message)
+                    Log.debug(TAG, message)
                 }
             }
         }
@@ -53,7 +75,7 @@ class HttpService @Inject constructor(
      * 信任所有证书
      * 防止证书过期后不可用
      */
-    private fun HttpClientConfig<*>.trustAllCertificates(){
+    private fun HttpClientConfig<*>.trustAllCertificates() {
         engine {
             this as OkHttpConfig
             config {
@@ -63,12 +85,16 @@ class HttpService @Inject constructor(
                     override fun checkClientTrusted(
                         chain: Array<out X509Certificate>?,
                         authType: String?,
-                    ) {}
+                    ) {
+                    }
+
                     @SuppressLint("TrustAllX509TrustManager")
                     override fun checkServerTrusted(
                         chain: Array<out X509Certificate>?,
                         authType: String?,
-                    ) {}
+                    ) {
+                    }
+
                     override fun getAcceptedIssuers(): Array<X509Certificate> = arrayOf()
                 }
                 val sslContext = SSLContext.getInstance("SSL")
@@ -82,9 +108,9 @@ class HttpService @Inject constructor(
      * 支持 Json 转换
      * 必须添加 @Serializable 注解
      */
-    private fun HttpClientConfig<*>.enableJsonConvert(){
-        install(ContentNegotiation){
-            json(Json{
+    private fun HttpClientConfig<*>.enableJsonConvert() {
+        install(ContentNegotiation) {
+            json(Json {
                 ignoreUnknownKeys = true
                 prettyPrint = true
                 isLenient = true
@@ -96,19 +122,19 @@ class HttpService @Inject constructor(
     /**
      * 超时时间
      */
-    private fun HttpClientConfig<*>.enableTimeOut(){
-        install(HttpTimeout){
+    private fun HttpClientConfig<*>.enableTimeOut() {
+        install(HttpTimeout) {
             requestTimeoutMillis = 120 * 1000
             connectTimeoutMillis = requestTimeoutMillis
-            socketTimeoutMillis  = requestTimeoutMillis
+            socketTimeoutMillis = requestTimeoutMillis
         }
     }
 
     /**
      * 保留 cookies
      */
-    private fun HttpClientConfig<*>.keepCookies(){
-        install(HttpCookies){
+    private fun HttpClientConfig<*>.keepCookies() {
+        install(HttpCookies) {
             storage = myCookiesStorage
         }
     }
@@ -116,11 +142,11 @@ class HttpService @Inject constructor(
     /**
      * 开启超时重试
      */
-    private fun HttpClientConfig<*>.enableRetry(){
-        install(HttpRequestRetry){
+    private fun HttpClientConfig<*>.enableRetry() {
+        install(HttpRequestRetry) {
             maxRetries = 3
             retryOnExceptionIf { _, _ ->
-                true
+                isConnected
             }
             exponentialDelay()
         }
