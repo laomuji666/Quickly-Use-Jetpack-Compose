@@ -62,8 +62,7 @@ private fun AiChatScreenUi(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = 3,
-            userScrollEnabled = false
+            beyondViewportPageCount = 3
         ) {
             when (it) {
                 AiScreenSelectEnum.CONTACTS.ordinal -> contactsContent()

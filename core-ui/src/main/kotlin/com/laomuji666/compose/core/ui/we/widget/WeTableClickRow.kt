@@ -71,8 +71,7 @@ fun WeTableClickRow(
         },
         weTableRowType = if(summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType,
-        showClickIndication = true
+        weTableRowOutlineType = weTableRowOutlineType
     )
 }
 
