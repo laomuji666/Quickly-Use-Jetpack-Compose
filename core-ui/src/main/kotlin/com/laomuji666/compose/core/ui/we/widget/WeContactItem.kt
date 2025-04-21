@@ -58,8 +58,7 @@ fun WeContactItem(
         weTableRowType = WeTableRowType.SINGLE,
         outlineModifier = Modifier.padding(start = WeTheme.dimens.contactIconSize + WeTheme.dimens.listPaddingHorizontal * 2),
         weTableRowOutlineType = WeTableRowOutlineType.FULL,
-        onClick = onClick,
-        showClickIndication = true
+        onClick = onClick
     )
 }
 

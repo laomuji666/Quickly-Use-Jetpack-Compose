@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @Composable
@@ -75,7 +76,9 @@ private fun SetSystemBarsColor(
     }
     Box(modifier = Modifier.then(
         if (isOldWindowInsetsApi){
-            Modifier.background(WeTheme.colorScheme.bottomNavigationBarBackground).navigationBarsPadding()
+            Modifier
+                .background(WeTheme.colorScheme.bottomNavigationBarBackground)
+                .navigationBarsPadding()
         }else{
             Modifier
         }
@@ -127,22 +130,34 @@ object WeTheme{
         get() = LocalWeTypography.current
 }
 
-class WeIndication(
-    private val pressedColor: Color
+data class WeIndication(
+    val pressedColor: Color,
+    val focusedColor: Color = pressedColor,
+    val dragColor: Color = pressedColor,
 ) : IndicationNodeFactory {
 
     override fun create(interactionSource: InteractionSource): DelegatableNode =
-        DefaultDebugIndicationInstance(interactionSource, pressedColor)
+        WeDefaultIndicationInstance(interactionSource)
 
-    override fun hashCode(): Int = -1
+    override fun hashCode(): Int {
+        var result = pressedColor.hashCode()
+        result = 31 * result + focusedColor.hashCode()
+        result = 31 * result + dragColor.hashCode()
+        return result
+    }
 
-    override fun equals(other: Any?) = other === this
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is WeIndication) return false
+        if (pressedColor != other.pressedColor) return false
+        if (focusedColor != other.focusedColor) return false
+        if (dragColor != other.dragColor) return false
+        return true
+    }
 
-    private class DefaultDebugIndicationInstance(
-        private val interactionSource: InteractionSource,
-        private val pressedColor: Color
-    ) :
-        Modifier.Node(), DrawModifierNode {
+    private inner class WeDefaultIndicationInstance(
+        private val interactionSource: InteractionSource
+    ) : Modifier.Node(), DrawModifierNode {
         private var isPressed = false
         private var isHovered = false
         private var isFocused = false
@@ -156,13 +171,21 @@ class WeIndication(
                 var dragCount = 0
                 interactionSource.interactions.collect { interaction ->
                     when (interaction) {
-                        is PressInteraction.Press -> pressCount++
-                        is PressInteraction.Release -> pressCount--
+                        is PressInteraction.Press -> {
+                            pressCount++
+                        }
+                        is PressInteraction.Release -> {
+                            delay(50)
+                            pressCount--
+                        }
                         is PressInteraction.Cancel -> pressCount--
+
                         is HoverInteraction.Enter -> hoverCount++
                         is HoverInteraction.Exit -> hoverCount--
+
                         is FocusInteraction.Focus -> focusCount++
                         is FocusInteraction.Unfocus -> focusCount--
+
                         is DragInteraction.Start -> dragCount++
                         is DragInteraction.Stop -> dragCount--
                         is DragInteraction.Cancel -> dragCount--
@@ -170,6 +193,7 @@ class WeIndication(
                     val pressed = pressCount > 0
                     val hovered = hoverCount > 0
                     val focused = focusCount > 0
+                    val dragged = dragCount > 0
                     var invalidateNeeded = false
                     if (isPressed != pressed) {
                         isPressed = pressed
@@ -183,8 +207,8 @@ class WeIndication(
                         isFocused = focused
                         invalidateNeeded = true
                     }
-                    if (isDrag != dragCount > 0) {
-                        isDrag = dragCount > 0
+                    if (isDrag != dragged) {
+                        isDrag = dragged
                         invalidateNeeded = true
                     }
                     if (invalidateNeeded) invalidateDraw()
@@ -197,7 +221,9 @@ class WeIndication(
             if (isPressed) {
                 drawRect(color = pressedColor, size = size)
             } else if (isHovered || isFocused) {
-                drawRect(color = pressedColor, size = size)
+                drawRect(color = focusedColor, size = size)
+            } else if (isDrag) {
+                drawRect(color = dragColor, size = size)
             }
         }
     }
