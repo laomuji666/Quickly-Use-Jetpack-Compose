@@ -28,6 +28,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -49,8 +50,8 @@ import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 @Composable
 fun ChatScreen(
     viewModel: ChatScreenViewModel = hiltViewModel(),
-    onBackClick: ()->Unit
-){
+    onBackClick: () -> Unit
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
 
@@ -74,10 +75,10 @@ fun ChatScreen(
 @Composable
 private fun ChatScreenUi(
     uiState: ChatScreenUiState,
-    onBackClick: ()->Unit,
-    onInputTextChanged: (String)->Unit,
-    onSendInputTextClick: ()->Unit
-){
+    onBackClick: () -> Unit,
+    onInputTextChanged: (String) -> Unit,
+    onSendInputTextClick: () -> Unit
+) {
     WeScaffold(
         topBar = {
             WeTopNavigationBar(
@@ -106,9 +107,14 @@ private fun ChatScreenUi(
                         modifier = Modifier.weight(1f),
                         value = uiState.inputText,
                         onValueChange = onInputTextChanged,
-                        onImeNext = onSendInputTextClick
+                        imeAction = ImeAction.Send,
+                        onImeAction = onSendInputTextClick
                     )
-                    WeButton(text = stringResource(id = com.laomuji666.compose.res.R.string.string_chat_screen_send_text), weButtonType = WeButtonType.WARP, onClick = onSendInputTextClick)
+                    WeButton(
+                        text = stringResource(id = com.laomuji666.compose.res.R.string.string_chat_screen_send_text),
+                        weButtonType = WeButtonType.WARP,
+                        onClick = onSendInputTextClick
+                    )
                 }
             }
         }
@@ -117,14 +123,14 @@ private fun ChatScreenUi(
             modifier = Modifier.padding(horizontal = WeTheme.dimens.chatPaddingHorizontal),
             reverseLayout = true
         ) {
-            itemsIndexed(uiState.messageList){index, item->
-                Column(modifier = Modifier.padding(top = WeTheme.dimens.chatPaddingHorizontal)){
+            itemsIndexed(uiState.messageList) { index, item ->
+                Column(modifier = Modifier.padding(top = WeTheme.dimens.chatPaddingHorizontal)) {
                     ChatMessageText(
-                        avatar = if(item.isSend) uiState.sendAvatar else uiState.receiveAvatar,
+                        avatar = if (item.isSend) uiState.sendAvatar else uiState.receiveAvatar,
                         text = item.text,
                         isSend = item.isSend
                     )
-                    if(index == 0){
+                    if (index == 0) {
                         Spacer(modifier = Modifier.height(WeTheme.dimens.chatPaddingHorizontal))
                     }
                 }
@@ -137,9 +143,9 @@ private fun ChatScreenUi(
 private fun ChatMessageAvatar(
     avatar: String,
     isShow: Boolean = true
-){
-    Box(modifier = Modifier.size(WeTheme.dimens.chatAvatarSize)){
-        if(isShow){
+) {
+    Box(modifier = Modifier.size(WeTheme.dimens.chatAvatarSize)) {
+        if (isShow) {
             val imageRequest = ImageRequest
                 .Builder(LocalContext.current)
                 .data(avatar)
@@ -164,14 +170,14 @@ private fun ChatMessageText(
     avatar: String,
     text: String,
     isSend: Boolean
-){
+) {
     Row(
         modifier = Modifier.fillMaxWidth()
     ) {
         ChatMessageAvatar(avatar = avatar, isShow = !isSend)
         Row(
             modifier = Modifier.weight(1f),
-            horizontalArrangement = if(isSend)Arrangement.End else Arrangement.Start
+            horizontalArrangement = if (isSend) Arrangement.End else Arrangement.Start
         ) {
             SelectionContainer {
                 Text(
@@ -182,7 +188,7 @@ private fun ChatMessageText(
                         .padding(WeTheme.dimens.chatPaddingHorizontal),
                     text = text,
                     style = WeTheme.typography.title,
-                    color = if (isSend)WeTheme.colorScheme.chatMessageTextSend else WeTheme.colorScheme.chatMessageTextReceive
+                    color = if (isSend) WeTheme.colorScheme.chatMessageTextSend else WeTheme.colorScheme.chatMessageTextReceive
                 )
             }
         }
@@ -193,7 +199,7 @@ private fun ChatMessageText(
 
 @PreviewLightDark
 @Composable
-fun PreviewChatScreenUi(){
+fun PreviewChatScreenUi() {
     QuicklyTheme {
         ChatScreenUi(
             uiState = ChatScreenUiState(

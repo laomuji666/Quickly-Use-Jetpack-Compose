@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.laomuji666.compose.core.ui.we.WeTheme
@@ -23,15 +24,19 @@ import com.laomuji666.compose.res.R
 
 @Composable
 internal fun AddDownloadDialog(
-    onDismissRequest: ()->Unit,
+    onDismissRequest: () -> Unit,
     url: String,
-    onValueChange: (String)->Unit,
-    onDownloadVideoClick: ()->Unit
-){
+    onValueChange: (String) -> Unit,
+    onDownloadVideoClick: () -> Unit
+) {
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
     Dialog(onDismissRequest = onDismissRequest) {
         Column(
-            modifier = Modifier.fillMaxWidth().clip(RoundedCornerShape(12.dp)).background(WeTheme.colorScheme.tableRowBackground).padding(12.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(12.dp))
+                .background(WeTheme.colorScheme.tableRowBackground)
+                .padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             WeTableInput(
@@ -39,7 +44,8 @@ internal fun AddDownloadDialog(
                 value = url,
                 tip = stringResource(R.string.string_youtubedl_screen_url_tip),
                 onValueChange = onValueChange,
-                onImeNext = {
+                imeAction = ImeAction.Done,
+                onImeAction = {
                     softwareKeyboardController?.hide()
                 }
             )

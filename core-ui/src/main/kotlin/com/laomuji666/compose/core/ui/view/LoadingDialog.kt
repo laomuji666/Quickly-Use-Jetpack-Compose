@@ -1,28 +1,27 @@
 package com.laomuji666.compose.core.ui.view
 
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.widget.WeToast
+import com.laomuji666.compose.core.ui.we.widget.WeToastType
 
 @Composable
 fun LoadingDialog(loading: Boolean) {
     if (!loading) {
         return
     }
-    Dialog(onDismissRequest = {}) {
-        CircularProgressIndicator(
-            strokeWidth = 6.dp,
-            modifier = Modifier.size(60.dp),
-            color = MaterialTheme.colorScheme.surfaceVariant,
-            trackColor = MaterialTheme.colorScheme.secondary,
+    Dialog(onDismissRequest = {}, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        WeToast(
+            weToastType = WeToastType.LOADING,
+            message = stringResource(com.laomuji666.compose.res.R.string.string_toast_loading),
+            onDismissRequest = {}
         )
     }
+
 }
 
 @Preview

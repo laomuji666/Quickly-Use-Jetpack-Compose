@@ -100,12 +100,13 @@ private fun ContactsScreenUi(
             }
         }
         Column(
-            modifier = Modifier.align(Alignment.CenterEnd)
+            modifier = Modifier.align(Alignment.CenterEnd),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
             typeList.forEach { item ->
                 Text(
                     modifier = Modifier
-                        .clickableDebounce {
+                        .clickableDebounce(indication = null) {
                             coroutineScope.launch {
                                 listState.scrollBy((typeMap[item] ?: 0f) - paddingTopPx)
                             }

@@ -1,6 +1,7 @@
 package com.laomuji666.compose.core.logic.http.di
 
 import android.content.Context
+import com.laomuji666.compose.core.logic.common.dispatchers.IoCoroutineScope
 import com.laomuji666.compose.core.logic.http.ConnectivityObserver
 import com.laomuji666.compose.core.logic.http.HttpRepository
 import com.laomuji666.compose.core.logic.http.HttpService
@@ -9,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Module
@@ -25,8 +27,9 @@ class HttpModule {
     @Singleton
     @Provides
     fun bindConnectivityObserver(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        @IoCoroutineScope coroutineScope: CoroutineScope
     ): ConnectivityObserver {
-        return ConnectivityObserver(context)
+        return ConnectivityObserver(context = context, coroutineScope = coroutineScope)
     }
 }

@@ -34,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
+import com.laomuji666.compose.core.ui.ifCondition
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -42,22 +43,23 @@ internal fun DefaultWeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val weColorScheme = if(darkTheme) DarkWeColorScheme else LightWeColorScheme
+    val weColorScheme = if (darkTheme) DarkWeColorScheme else LightWeColorScheme
     WeTheme(
         weColorScheme = weColorScheme
-    ){
-        SetSystemBarsColor(content = content)
+    ) {
+        WeBaseContent(content = content)
     }
 }
 
 @Composable
-private fun SetSystemBarsColor(
+private fun WeBaseContent(
     content: @Composable () -> Unit
-){
+) {
     val view = LocalView.current
     val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
-    if(!view.isInEditMode){
-        val bottomNavigationBarBackground = WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
+    if (!view.isInEditMode) {
+        val bottomNavigationBarBackground =
+            WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
         //每次成功重组时,设置底部导航栏颜色
         SideEffect {
             val window = (view.context as Activity).window
@@ -65,24 +67,27 @@ private fun SetSystemBarsColor(
                 //API35结束的API,因为限定了版本,可以抑制DEPRECATION
                 @Suppress("DEPRECATION")
                 window.navigationBarColor = bottomNavigationBarBackground
-            }else{
+            } else {
                 window.decorView.setOnApplyWindowInsetsListener { view, insets ->
                     view.setBackgroundColor(bottomNavigationBarBackground)
-                    view.setPadding(0, 0, 0, insets.getInsets(WindowInsets.Type.navigationBars()).bottom)
+                    view.setPadding(
+                        0,
+                        0,
+                        0,
+                        insets.getInsets(WindowInsets.Type.navigationBars()).bottom
+                    )
                     insets
                 }
             }
         }
     }
-    Box(modifier = Modifier.then(
-        if (isOldWindowInsetsApi){
-            Modifier
-                .background(WeTheme.colorScheme.bottomNavigationBarBackground)
-                .navigationBarsPadding()
-        }else{
-            Modifier
-        }
-    )) {
+    Box(
+        modifier = Modifier
+            .background(WeTheme.colorScheme.background)
+            .ifCondition(condition = isOldWindowInsetsApi, onTrue = {
+                navigationBarsPadding()
+            })
+    ) {
         content()
     }
 }
@@ -112,7 +117,7 @@ fun WeTheme(
     }
 }
 
-object WeTheme{
+object WeTheme {
     val colorScheme: WeColorScheme
         @Composable
         @ReadOnlyComposable
@@ -174,10 +179,12 @@ data class WeIndication(
                         is PressInteraction.Press -> {
                             pressCount++
                         }
+
                         is PressInteraction.Release -> {
                             delay(50)
                             pressCount--
                         }
+
                         is PressInteraction.Cancel -> pressCount--
 
                         is HoverInteraction.Enter -> hoverCount++
