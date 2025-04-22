@@ -69,6 +69,7 @@ dependencies {
     implementation(project(":feature:video"))
     implementation(project(":feature:webview"))
     implementation(project(":feature:template"))
+    implementation(project(":feature:language"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.laomuji666.compose.core.logic.common.cache.Cache
 
-class CacheAndroid(
+internal class CacheAndroid(
     private val context: Context
 ): Cache {
     private val sharedPreferences: SharedPreferences

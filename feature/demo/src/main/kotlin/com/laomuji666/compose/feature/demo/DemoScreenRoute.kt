@@ -17,6 +17,7 @@ data object DemoScreenRoute{
         onPainterScreenClick:()->Unit,
         onYoutubeDLClick:()->Unit,
         onWebViewClick:()->Unit,
+        onLanguageClick:()->Unit,
     ){
         composable<DemoScreenRoute>{
             DemoScreen(
@@ -30,6 +31,7 @@ data object DemoScreenRoute{
                 onPainterScreenClick = onPainterScreenClick,
                 onYoutubeDLClick = onYoutubeDLClick,
                 onWebViewClick = onWebViewClick,
+                onLanguageClick = onLanguageClick,
             )
         }
     }

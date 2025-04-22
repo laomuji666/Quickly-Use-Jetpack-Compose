@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+    <string name="string_toast_done">Éxito</string>
+    <string name="string_toast_loading">Cargando</string>
+    <string name="string_toast_error">Falló</string>
+    <string name="string_permission_notification_forever_denied">El permiso de notificación está denegado permanentemente, se requiere autorización manual.</string>
+    <string name="string_permission_location_forever_denied">El permiso de ubicación está denegado permanentemente, actívelo manualmente.</string>
+    <string name="string_error_view_title">Algo salió mal</string>
+    <string name="string_error_view_content">Verifique la red o intente nuevamente más tarde</string>
+    <string name="string_error_view_refresh">Actualizar la página actual</string>
+    <string name="string_demo_screen_navigation_feature">Características</string>
+    <string name="string_demo_screen_navigation_device">Dispositivo</string>
+    <string name="string_demo_screen_navigation_ui">IU</string>
+    <string name="string_demo_screen_painter">Lienzo de pintura</string>
+    <string name="string_demo_screen_date">Calendario personalizado</string>
+    <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
+    <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
+    <string name="string_demo_screen_long_click_sort">Mantenga presionado para arrastrar y ordenar la lista</string>
+    <string name="string_demo_screen_select_mobile_demo">Seleccionar ejemplo de número de teléfono móvil</string>
+    <string name="string_demo_screen_get_location">Obtener ubicación</string>
+    <string name="string_demo_screen_open_album">Seleccionar fotos del álbum</string>
+    <string name="string_demo_screen_open_camera">Tomar fotos con la cámara</string>
+    <string name="string_demo_screen_open_contact">Seleccionar contactos</string>
+    <string name="string_demo_screen_switch_app_logo">Cambiar iconos dinámicamente</string>
+    <string name="string_demo_screen_firebase_demo">Ejemplo de Firebase</string>
+    <string name="string_demo_screen_http_demo">Ejemplo de Ktor Http</string>
+    <string name="string_demo_screen_ai_chat">Chat de IA</string>
+    <string name="string_demo_screen_biometric">Autenticación biométrica</string>
+    <string name="string_demo_screen_google_login_demo">Ejemplo de inicio de sesión de Google</string>
+    <string name="string_demo_screen_youtubedl_demo">Ejemplo de descarga universal de videos</string>
+    <string name="string_demo_screen_web_view_demo">Ejemplo de WebView</string>
+    <string name="string_http_screen_is_online">Red disponible: %1$s</string>
+    <string name="string_http_screen_get_demo">GET, 3 segundos de retraso en segundo plano</string>
+    <string name="string_http_screen_post_demo">POST</string>
+    <string name="string_firebase_screen_log_event">Evento de prueba</string>
+    <string name="string_firebase_screen_crush">Prueba de falla</string>
+    <string name="string_firebase_screen_notification">Solicitar permiso de notificación</string>
+    <string name="string_widget_screen_toast_title">Ejemplo de Toast</string>
+    <string name="string_widget_screen_show_toast">Mostrar Toast</string>
+    <string name="string_widget_screen_action_sheet_title">Ejemplo de ActionSheet</string>
+    <string name="string_widget_screen_show_action_sheet">Mostrar ActionSheet</string>
+    <string name="string_widget_screen_action_sheet_cancel">Cancelar</string>
+    <string name="string_widget_screen_action_sheet_item1">Texto de aviso</string>
+    <string name="string_widget_screen_action_sheet_item2">Acción uno</string>
+    <string name="string_widget_screen_action_sheet_item3">Acción dos</string>
+    <string name="string_widget_screen_action_sheet_item4">Acción de advertencia</string>
+    <string name="string_ai_chat_screen_navigation_message">Mensajes</string>
+    <string name="string_ai_chat_screen_navigation_contact">Contactos</string>
+    <string name="string_ai_chat_screen_navigation_me">Yo</string>
+    <string name="string_ai_chat_me_screen_we_chat_name">Laomuji</string>
+    <string name="string_ai_chat_me_screen_we_chat_number_format">ID de WeChat: %1$s</string>
+    <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
+    <string name="string_ai_chat_me_screen_enable_notification">Notificación de mensajes</string>
+    <string name="string_chat_screen_send_text">Enviar</string>
+    <string name="string_notification_new_messages_name">Mensajes de chat</string>
+    <string name="string_notification_new_messages_description">Mensajes de chat no leídos recibidos</string>
+    <string-array name="string_date_screen_week_day">
+        <item>Lun</item>
+        <item>Mar</item>
+        <item>Mié</item>
+        <item>Jue</item>
+        <item>Vie</item>
+        <item>Sáb</item>
+        <item>Dom</item>
+    </string-array>
+    <string name="string_biometric_screen_title_title">Título</string>
+    <string name="string_biometric_screen_title_tip">Título cuando se muestra la autenticación biométrica</string>
+    <string name="string_biometric_screen_description_title">Descripción</string>
+    <string name="string_biometric_screen_description_tip">Descripción cuando se muestra la autenticación biométrica</string>
+    <string name="string_biometric_screen_handle_title">Activar autenticación biométrica</string>
+    <string name="string_biometric_screen_setting_title">Configurar autenticación biométrica</string>
+    <string name="string_biometric_screen_status_hardware_not_found">Hardware no encontrado</string>
+    <string name="string_biometric_screen_status_hardware_unavailable">Hardware no disponible</string>
+    <string name="string_biometric_screen_status_hardware_not_set">El usuario no ha configurado la autenticación biométrica</string>
+    <string name="string_biometric_screen_status_hardware_other_error">Motivo de la terminación: %1$s</string>
+    <string name="string_biometric_screen_status_hardware_success">Autenticación biométrica exitosa</string>
+    <string name="string_biometric_screen_status_hardware_fail">Autenticación biométrica fallida</string>
+    <string name="string_painter_screen_clear">Limpiar lienzo</string>
+    <string name="string_youtubedl_screen_duration_format">%1$d minutos %2$d segundos</string>
+    <string name="string_youtubedl_screen_loading">Obteniendo información del video</string>
+    <string name="string_youtubedl_screen_url_title">Url</string>
+    <string name="string_youtubedl_screen_url_tip">Ingrese el enlace del video</string>
+    <string name="string_youtubedl_screen_download">Descargar video</string>
+    <string name="string_youtubedl_screen_download_error">Descarga fallida</string>
+    <string name="string_youtubedl_screen_download_done">Descarga exitosa\nHaga clic para reproducir</string>
+    <string name="string_youtubedl_screen_download_stop">Pausar descarga</string>
+    <string name="string_web_view_screen_open_browser_fail">Este enlace no se puede abrir externamente, se ha copiado al portapapeles.</string>
+    <string name="string_language_system">Lenguaje del sistema</string>
+    <string name="string_language_screen_title">Idiomas</string>
+</resources>

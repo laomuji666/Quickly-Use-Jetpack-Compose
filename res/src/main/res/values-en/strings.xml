@@ -1,35 +1,27 @@
 <resources>
-    <!--  Common  -->
     <string name="app_name">Quickly-Use-Jetpack-Compose</string>
     <string name="string_toast_done">Success</string>
     <string name="string_toast_loading">Loading</string>
     <string name="string_toast_error">Failed</string>
     <string name="string_permission_notification_forever_denied">Notification permission is permanently denied, manual authorization is required.</string>
     <string name="string_permission_location_forever_denied">Location permission is permanently denied, please turn it on manually.</string>
-
-    <!--  ErrorView  -->
     <string name="string_error_view_title">Something went wrong</string>
     <string name="string_error_view_content">Please check the network or try again later</string>
     <string name="string_error_view_refresh">Refresh the current page</string>
-
-    <!--  DemoScreen  -->
     <string name="string_demo_screen_navigation_feature">Features</string>
     <string name="string_demo_screen_navigation_device">Device</string>
     <string name="string_demo_screen_navigation_ui">UI</string>
-    <!--  UiDemoScreen  -->
     <string name="string_demo_screen_painter">Painting Canvas</string>
     <string name="string_demo_screen_date">Custom Calendar</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
     <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
     <string name="string_demo_screen_long_click_sort">Long press to drag and sort the list</string>
-    <!--  DeviceDemoScreen  -->
     <string name="string_demo_screen_select_mobile_demo">Select mobile phone number example</string>
     <string name="string_demo_screen_get_location">Get location</string>
     <string name="string_demo_screen_open_album">Select photos from album</string>
     <string name="string_demo_screen_open_camera">Take photos with camera</string>
     <string name="string_demo_screen_open_contact">Select contacts</string>
     <string name="string_demo_screen_switch_app_logo">Dynamically switch icons</string>
-    <!--  FeatureDemoScreen  -->
     <string name="string_demo_screen_firebase_demo">Firebase example</string>
     <string name="string_demo_screen_http_demo">Ktor Http example</string>
     <string name="string_demo_screen_ai_chat">AI Chat</string>
@@ -37,18 +29,12 @@
     <string name="string_demo_screen_google_login_demo">Google Login Example</string>
     <string name="string_demo_screen_youtubedl_demo">Universal Video Download Example</string>
     <string name="string_demo_screen_web_view_demo">WebView Example</string>
-
-    <!--  HttpScreen  -->
     <string name="string_http_screen_is_online">Network available: %1$s</string>
     <string name="string_http_screen_get_demo">GET, 3 seconds delay in the background</string>
     <string name="string_http_screen_post_demo">POST</string>
-
-    <!--  FirebaseScreen  -->
     <string name="string_firebase_screen_log_event">Test event</string>
     <string name="string_firebase_screen_crush">Test crash</string>
     <string name="string_firebase_screen_notification">Request notification permission</string>
-
-    <!--  WidgetScreen  -->
     <string name="string_widget_screen_toast_title">Toast Example</string>
     <string name="string_widget_screen_show_toast">Show Toast</string>
     <string name="string_widget_screen_action_sheet_title">ActionSheet Example</string>
@@ -58,8 +44,6 @@
     <string name="string_widget_screen_action_sheet_item2">Action One</string>
     <string name="string_widget_screen_action_sheet_item3">Action Two</string>
     <string name="string_widget_screen_action_sheet_item4">Warning Action</string>
-
-    <!--  AiChatScreen  -->
     <string name="string_ai_chat_screen_navigation_message">Messages</string>
     <string name="string_ai_chat_screen_navigation_contact">Contacts</string>
     <string name="string_ai_chat_screen_navigation_me">Me</string>
@@ -67,15 +51,9 @@
     <string name="string_ai_chat_me_screen_we_chat_number_format">WeChat ID: %1$s</string>
     <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
     <string name="string_ai_chat_me_screen_enable_notification">Message Notification</string>
-
-    <!--  ChatScreen  -->
     <string name="string_chat_screen_send_text">Send</string>
-
-    <!--  Notification  -->
     <string name="string_notification_new_messages_name">Chat Messages</string>
     <string name="string_notification_new_messages_description">Unread chat messages received</string>
-
-    <!--  DateScreen  -->
     <string-array name="string_date_screen_week_day">
         <item>Mon</item>
         <item>Tue</item>
@@ -85,8 +63,6 @@
         <item>Sat</item>
         <item>Sun</item>
     </string-array>
-
-    <!--  BiometricScreen  -->
     <string name="string_biometric_screen_title_title">Title</string>
     <string name="string_biometric_screen_title_tip">Title when biometric authentication is displayed</string>
     <string name="string_biometric_screen_description_title">Description</string>
@@ -99,11 +75,7 @@
     <string name="string_biometric_screen_status_hardware_other_error">Reason for termination: %1$s</string>
     <string name="string_biometric_screen_status_hardware_success">Biometric authentication successful</string>
     <string name="string_biometric_screen_status_hardware_fail">Biometric authentication failed</string>
-
-    <!--  PainterScreen  -->
     <string name="string_painter_screen_clear">Clear Canvas</string>
-
-    <!--  YoutubeDLScreen  -->
     <string name="string_youtubedl_screen_duration_format">%1$d minutes %2$d seconds</string>
     <string name="string_youtubedl_screen_loading">Getting video information</string>
     <string name="string_youtubedl_screen_url_title">Url</string>
@@ -112,7 +84,7 @@
     <string name="string_youtubedl_screen_download_error">Download failed</string>
     <string name="string_youtubedl_screen_download_done">Download successful\nClick to play</string>
     <string name="string_youtubedl_screen_download_stop">Pause Download</string>
-
-    <!--  WebViewScreen  -->
     <string name="string_web_view_screen_open_browser_fail">This link cannot be opened externally, it has been copied to the clipboard.</string>
+    <string name="string_language_system">System language</string>
+    <string name="string_language_screen_title">Language</string>
 </resources>

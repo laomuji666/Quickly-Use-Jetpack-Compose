@@ -1,0 +1,90 @@
+<resources>
+    <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+    <string name="string_toast_done">تم بنجاح</string>
+    <string name="string_toast_loading">جاري التحميل</string>
+    <string name="string_toast_error">فشل</string>
+    <string name="string_permission_notification_forever_denied">تم رفض إذن الإشعارات نهائيًا، التفويض اليدوي مطلوب.</string>
+    <string name="string_permission_location_forever_denied">تم رفض إذن الموقع نهائيًا، يرجى تشغيله يدويًا.</string>
+    <string name="string_error_view_title">حدث خطأ ما</string>
+    <string name="string_error_view_content">يرجى التحقق من الشبكة أو المحاولة مرة أخرى لاحقًا</string>
+    <string name="string_error_view_refresh">تحديث الصفحة الحالية</string>
+    <string name="string_demo_screen_navigation_feature">الميزات</string>
+    <string name="string_demo_screen_navigation_device">الجهاز</string>
+    <string name="string_demo_screen_navigation_ui">واجهة المستخدم</string>
+    <string name="string_demo_screen_painter">لوحة الرسم</string>
+    <string name="string_demo_screen_date">تقويم مخصص</string>
+    <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
+    <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
+    <string name="string_demo_screen_long_click_sort">اضغط لفترة طويلة واسحب لفرز القائمة</string>
+    <string name="string_demo_screen_select_mobile_demo">مثال على تحديد رقم الهاتف المحمول</string>
+    <string name="string_demo_screen_get_location">الحصول على الموقع</string>
+    <string name="string_demo_screen_open_album">تحديد الصور من الألبوم</string>
+    <string name="string_demo_screen_open_camera">التقاط صور بالكاميرا</string>
+    <string name="string_demo_screen_open_contact">تحديد جهات الاتصال</string>
+    <string name="string_demo_screen_switch_app_logo">تبديل الرموز ديناميكيًا</string>
+    <string name="string_demo_screen_firebase_demo">مثال Firebase</string>
+    <string name="string_demo_screen_http_demo">مثال Ktor Http</string>
+    <string name="string_demo_screen_ai_chat">دردشة AI</string>
+    <string name="string_demo_screen_biometric">المصادقة البيومترية</string>
+    <string name="string_demo_screen_google_login_demo">مثال تسجيل الدخول بحساب Google</string>
+    <string name="string_demo_screen_youtubedl_demo">مثال تنزيل الفيديو العالمي</string>
+    <string name="string_demo_screen_web_view_demo">مثال WebView</string>
+    <string name="string_http_screen_is_online">الشبكة متاحة: %1$s</string>
+    <string name="string_http_screen_get_demo">GET، تأخير 3 ثوانٍ في الخلفية</string>
+    <string name="string_http_screen_post_demo">POST</string>
+    <string name="string_firebase_screen_log_event">حدث الاختبار</string>
+    <string name="string_firebase_screen_crush">اختبار الانهيار</string>
+    <string name="string_firebase_screen_notification">طلب إذن الإشعارات</string>
+    <string name="string_widget_screen_toast_title">مثال Toast</string>
+    <string name="string_widget_screen_show_toast">إظهار Toast</string>
+    <string name="string_widget_screen_action_sheet_title">مثال ActionSheet</string>
+    <string name="string_widget_screen_show_action_sheet">إظهار ActionSheet</string>
+    <string name="string_widget_screen_action_sheet_cancel">إلغاء</string>
+    <string name="string_widget_screen_action_sheet_item1">نص المطالبة</string>
+    <string name="string_widget_screen_action_sheet_item2">الإجراء الأول</string>
+    <string name="string_widget_screen_action_sheet_item3">الإجراء الثاني</string>
+    <string name="string_widget_screen_action_sheet_item4">إجراء التحذير</string>
+    <string name="string_ai_chat_screen_navigation_message">الرسائل</string>
+    <string name="string_ai_chat_screen_navigation_contact">جهات الاتصال</string>
+    <string name="string_ai_chat_screen_navigation_me">أنا</string>
+    <string name="string_ai_chat_me_screen_we_chat_name">Laomuji</string>
+    <string name="string_ai_chat_me_screen_we_chat_number_format">معرف WeChat: %1$s</string>
+    <string name="string_ai_chat_me_screen_we_chat_number">composable</string>
+    <string name="string_ai_chat_me_screen_enable_notification">إشعار الرسائل</string>
+    <string name="string_chat_screen_send_text">إرسال</string>
+    <string name="string_notification_new_messages_name">رسائل الدردشة</string>
+    <string name="string_notification_new_messages_description">رسائل دردشة غير مقروءة مستلمة</string>
+    <string-array name="string_date_screen_week_day">
+        <item>الاثنين</item>
+        <item>الثلاثاء</item>
+        <item>الأربعاء</item>
+        <item>الخميس</item>
+        <item>الجمعة</item>
+        <item>السبت</item>
+        <item>الأحد</item>
+    </string-array>
+    <string name="string_biometric_screen_title_title">العنوان</string>
+    <string name="string_biometric_screen_title_tip">العنوان عند عرض المصادقة البيومترية</string>
+    <string name="string_biometric_screen_description_title">الوصف</string>
+    <string name="string_biometric_screen_description_tip">الوصف عند عرض المصادقة البيومترية</string>
+    <string name="string_biometric_screen_handle_title">تشغيل المصادقة البيومترية</string>
+    <string name="string_biometric_screen_setting_title">إعداد المصادقة البيومترية</string>
+    <string name="string_biometric_screen_status_hardware_not_found">لم يتم العثور على الجهاز</string>
+    <string name="string_biometric_screen_status_hardware_unavailable">الجهاز غير متوفر</string>
+    <string name="string_biometric_screen_status_hardware_not_set">لم يقم المستخدم بإعداد المصادقة البيومترية</string>
+    <string name="string_biometric_screen_status_hardware_other_error">سبب الإنهاء: %1$s</string>
+    <string name="string_biometric_screen_status_hardware_success">نجحت المصادقة البيومترية</string>
+    <string name="string_biometric_screen_status_hardware_fail">فشلت المصادقة البيومترية</string>
+    <string name="string_painter_screen_clear">مسح اللوحة</string>
+    <string name="string_youtubedl_screen_duration_format">%1$d دقيقة %2$d ثانية</string>
+    <string name="string_youtubedl_screen_loading">جارِ الحصول على معلومات الفيديو</string>
+    <string name="string_youtubedl_screen_url_title">عنوان URL</string>
+    <string name="string_youtubedl_screen_url_tip">الرجاء إدخال رابط الفيديو</string>
+    <string name="string_youtubedl_screen_download">تنزيل الفيديو</string>
+    <string name="string_youtubedl_screen_download_error">فشل التنزيل</string>
+    <string name="string_youtubedl_screen_download_done">تم التنزيل بنجاح\nانقر للتشغيل</string>
+    <string name="string_youtubedl_screen_download_stop">إيقاف التنزيل مؤقتًا</string>
+    <string name="string_web_view_screen_open_browser_fail">لا يمكن فتح هذا الرابط خارجيًا، تم نسخه إلى الحافظة.</string>
+    <string name="string_language_system">لغة النظام</string>
+    <string name="string_language_screen_title">لغة</string>
+</resources>

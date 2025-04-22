@@ -85,4 +85,6 @@
     <string name="string_youtubedl_screen_download_done">下載成功\n點擊播放</string>
     <string name="string_youtubedl_screen_download_stop">暫停下載</string>
     <string name="string_web_view_screen_open_browser_fail">該連結無法由外部開啟,已複製連結到剪貼簿.</string>
+    <string name="string_language_system">系統語言</string>
+    <string name="string_language_screen_title">多語言</string>
 </resources>

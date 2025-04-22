@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+    <string name="string_toast_done">সফল</string>
+    <string name="string_toast_loading">লোড হচ্ছে</string>
+    <string name="string_toast_error">ব্যর্থ হয়েছে</string>
+    <string name="string_permission_notification_forever_denied">বিজ্ঞপ্তি অনুমতি স্থায়ীভাবে অস্বীকার করা হয়েছে, ম্যানুয়াল অনুমোদন প্রয়োজন৷</string>
+    <string name="string_permission_location_forever_denied">অবস্থান অনুমতি স্থায়ীভাবে অস্বীকার করা হয়েছে, অনুগ্রহ করে এটি ম্যানুয়ালি চালু করুন৷</string>
+    <string name="string_error_view_title">কিছু ভুল হয়েছে</string>
+    <string name="string_error_view_content">অনুগ্রহ করে নেটওয়ার্ক চেক করুন অথবা পরে আবার চেষ্টা করুন</string>
+    <string name="string_error_view_refresh">বর্তমান পৃষ্ঠা রিফ্রেশ করুন</string>
+    <string name="string_demo_screen_navigation_feature">বৈশিষ্ট্য</string>
+    <string name="string_demo_screen_navigation_device">ডিভাইস</string>
+    <string name="string_demo_screen_navigation_ui">UI</string>
+    <string name="string_demo_screen_painter">পেইন্টিং ক্যানভাস</string>
+    <string name="string_demo_screen_date">কাস্টম ক্যালেন্ডার</string>
+    <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
+    <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
+    <string name="string_demo_screen_long_click_sort">তালিকা ড্র্যাগ এবং বাছাই করার জন্য দীর্ঘক্ষণ প্রেস করুন</string>
+    <string name="string_demo_screen_select_mobile_demo">মোবাইল ফোন নম্বর উদাহরণ নির্বাচন করুন</string>
+    <string name="string_demo_screen_get_location">অবস্থান পান</string>
+    <string name="string_demo_screen_open_album">অ্যালবাম থেকে ছবি নির্বাচন করুন</string>
+    <string name="string_demo_screen_open_camera">ক্যামেরা দিয়ে ছবি তুলুন</string>
+    <string name="string_demo_screen_open_contact">যোগাযোগ নির্বাচন করুন</string>
+    <string name="string_demo_screen_switch_app_logo">গতিশীলভাবে আইকন পরিবর্তন করুন</string>
+    <string name="string_demo_screen_firebase_demo">Firebase উদাহরণ</string>
+    <string name="string_demo_screen_http_demo">Ktor Http উদাহরণ</string>
+    <string name="string_demo_screen_ai_chat">AI চ্যাট</string>
+    <string name="string_demo_screen_biometric">বায়োমেট্রিক প্রমাণীকরণ</string>
+    <string name="string_demo_screen_google_login_demo">Google লগইন উদাহরণ</string>
+    <string name="string_demo_screen_youtubedl_demo">সার্বজনীন ভিডিও ডাউনলোড উদাহরণ</string>
+    <string name="string_demo_screen_web_view_demo">WebView উদাহরণ</string>
+    <string name="string_http_screen_is_online">নেটওয়ার্ক উপলব্ধ: %1$s</string>
+    <string name="string_http_screen_get_demo">GET, ব্যাকগ্রাউন্ডে 3 সেকেন্ড বিলম্ব</string>
+    <string name="string_http_screen_post_demo">POST</string>
+    <string name="string_firebase_screen_log_event">টেস্ট ইভেন্ট</string>
+    <string name="string_firebase_screen_crush">টেস্ট ক্র্যাশ</string>
+    <string name="string_firebase_screen_notification">বিজ্ঞপ্তি অনুমতির জন্য অনুরোধ করুন</string>
+    <string name="string_widget_screen_toast_title">টোস্ট উদাহরণ</string>
+    <string name="string_widget_screen_show_toast">টোস্ট দেখান</string>
+    <string name="string_widget_screen_action_sheet_title">ActionSheet উদাহরণ</string>
+    <string name="string_widget_screen_show_action_sheet">ActionSheet দেখান</string>
+    <string name="string_widget_screen_action_sheet_cancel">বাতিল</string>
+    <string name="string_widget_screen_action_sheet_item1">প্রম্পট টেক্সট</string>
+    <string name="string_widget_screen_action_sheet_item2">অ্যাকশন এক</string>
+    <string name="string_widget_screen_action_sheet_item3">অ্যাকশন দুই</string>
+    <string name="string_widget_screen_action_sheet_item4">সতর্কতা অ্যাকশন</string>
+    <string name="string_ai_chat_screen_navigation_message">বার্তা</string>
+    <string name="string_ai_chat_screen_navigation_contact">যোগাযোগ</string>
+    <string name="string_ai_chat_screen_navigation_me">আমি</string>
+    <string name="string_ai_chat_me_screen_we_chat_name">লাওমুজি</string>
+    <string name="string_ai_chat_me_screen_we_chat_number_format">WeChat ID: %1$s</string>
+    <string name="string_ai_chat_me_screen_we_chat_number">কম্পোজযোগ্য</string>
+    <string name="string_ai_chat_me_screen_enable_notification">মেসেজ নোটিফিকেশন</string>
+    <string name="string_chat_screen_send_text">পাঠান</string>
+    <string name="string_notification_new_messages_name">চ্যাট বার্তা</string>
+    <string name="string_notification_new_messages_description">অপঠিত চ্যাট বার্তা গ্রহণ করা হয়েছে</string>
+    <string-array name="string_date_screen_week_day">
+        <item>সোম</item>
+        <item>মঙ্গল</item>
+        <item>বুধ</item>
+        <item>বৃহস্পতি</item>
+        <item>শুক্র</item>
+        <item>শনি</item>
+        <item>রবি</item>
+    </string-array>
+    <string name="string_biometric_screen_title_title">শিরোনাম</string>
+    <string name="string_biometric_screen_title_tip">যখন বায়োমেট্রিক প্রমাণীকরণ দেখানো হয় তখন শিরোনাম</string>
+    <string name="string_biometric_screen_description_title">বিবরণ</string>
+    <string name="string_biometric_screen_description_tip">যখন বায়োমেট্রিক প্রমাণীকরণ দেখানো হয় তখন বিবরণ</string>
+    <string name="string_biometric_screen_handle_title">বায়োমেট্রিক প্রমাণীকরণ ট্রিগার করুন</string>
+    <string name="string_biometric_screen_setting_title">বায়োমেট্রিক প্রমাণীকরণ সেট আপ করুন</string>
+    <string name="string_biometric_screen_status_hardware_not_found">হার্ডওয়্যার পাওয়া যায়নি</string>
+    <string name="string_biometric_screen_status_hardware_unavailable">হার্ডওয়্যার উপলব্ধ নেই</string>
+    <string name="string_biometric_screen_status_hardware_not_set">ব্যবহারকারী বায়োমেট্রিক প্রমাণীকরণ সেট আপ করেননি</string>
+    <string name="string_biometric_screen_status_hardware_other_error">সমাপ্তির কারণ: %1$s</string>
+    <string name="string_biometric_screen_status_hardware_success">বায়োমেট্রিক প্রমাণীকরণ সফল হয়েছে</string>
+    <string name="string_biometric_screen_status_hardware_fail">বায়োমেট্রিক প্রমাণীকরণ ব্যর্থ হয়েছে</string>
+    <string name="string_painter_screen_clear">ক্যানভাস পরিষ্কার করুন</string>
+    <string name="string_youtubedl_screen_duration_format">%1$d মিনিট %2$d সেকেন্ড</string>
+    <string name="string_youtubedl_screen_loading">ভিডিও তথ্য পাওয়া যাচ্ছে</string>
+    <string name="string_youtubedl_screen_url_title">URL</string>
+    <string name="string_youtubedl_screen_url_tip">অনুগ্রহ করে ভিডিও লিঙ্ক প্রবেশ করুন</string>
+    <string name="string_youtubedl_screen_download">ভিডিও ডাউনলোড করুন</string>
+    <string name="string_youtubedl_screen_download_error">ডাউনলোড ব্যর্থ হয়েছে</string>
+    <string name="string_youtubedl_screen_download_done">ডাউনলোড সফল হয়েছে\nপ্লে করতে ক্লিক করুন</string>
+    <string name="string_youtubedl_screen_download_stop">ডাউনলোড থামান</string>
+    <string name="string_web_view_screen_open_browser_fail">এই লিঙ্কটি বাইরে থেকে খোলা যাবে না, এটি ক্লিপবোর্ডে কপি করা হয়েছে।</string>
+    <string name="string_language_system">সিস্টেম ভাষা</string>
+    <string name="string_language_screen_title">ভাষা</string>
+</resources>
