@@ -35,6 +35,7 @@ include(":core-logic:http")
 include(":core-logic:database")
 include(":core-logic:repository")
 include(":core-logic:location")
+include(":core-logic:language")
 
 include(":core-launcher")
 
@@ -50,6 +51,7 @@ include(":feature:painter")
 include(":feature:youtubedl")
 include(":feature:video")
 include(":feature:webview")
+include(":feature:language")
 
 include(":flavor:flavor-gp")
 include(":flavor:flavor-sam")

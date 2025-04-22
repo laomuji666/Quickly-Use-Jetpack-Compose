@@ -115,4 +115,8 @@
 
     <!--  WebViewScreen  -->
     <string name="string_web_view_screen_open_browser_fail">This link cannot be opened externally, it has been copied to the clipboard.</string>
+
+    <!--  Language  -->
+    <string name="string_language_system">System language</string>
+    <string name="string_language_screen_title">Language</string>
 </resources>

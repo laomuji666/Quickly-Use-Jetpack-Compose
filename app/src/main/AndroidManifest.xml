@@ -19,6 +19,8 @@
         android:enableOnBackInvokedCallback="true"
         tools:targetApi="33">
 
+        <profileable android:shell="true" />
+
         <activity
             android:name="com.laomuji666.compose.MainActivity"
             android:exported="true"

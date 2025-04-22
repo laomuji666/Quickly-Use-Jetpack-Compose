@@ -31,28 +31,31 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun DemoScreen(
-    onDateClick:()->Unit,
-    onNestedScrollConnectionScreenClick:()->Unit,
-    onNestedScrollDispatcherScreenClick:()->Unit,
-    onPainterScreenClick:()->Unit,
-    onFirebaseClick: ()->Unit,
-    onHttpClick:()->Unit,
-    onAiChatClick:()->Unit,
-    onBiometricScreenClick:()->Unit,
-    onYoutubeDLClick:()->Unit,
-    onWebViewClick:()->Unit,
-){
+    onDateClick: () -> Unit,
+    onNestedScrollConnectionScreenClick: () -> Unit,
+    onNestedScrollDispatcherScreenClick: () -> Unit,
+    onPainterScreenClick: () -> Unit,
+    onFirebaseClick: () -> Unit,
+    onHttpClick: () -> Unit,
+    onAiChatClick: () -> Unit,
+    onBiometricScreenClick: () -> Unit,
+    onYoutubeDLClick: () -> Unit,
+    onWebViewClick: () -> Unit,
+    onLanguageClick: () -> Unit,
+) {
     //生命周期日志,在进入HelloScreen时开始记录,离开HelloScreen时停止记录.
     val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
-        val lifecycleObserver = LifecycleEventObserver { _,event->
-            when(event){
+        val lifecycleObserver = LifecycleEventObserver { _, event ->
+            when (event) {
                 Lifecycle.Event.ON_START -> {
                     Log.debug("tag_demo_screen", "ON_START")
                 }
+
                 Lifecycle.Event.ON_STOP -> {
                     Log.debug("tag_demo_screen", "ON_STOP")
                 }
+
                 else -> {}
             }
         }
@@ -69,7 +72,7 @@ fun DemoScreen(
     WeScaffold(
         topBar = {
             WeTopNavigationBar(
-                title = when(DemoSelectEnum.entries[pagerState.currentPage]){
+                title = when (DemoSelectEnum.entries[pagerState.currentPage]) {
                     DemoSelectEnum.FEATURE -> stringResource(id = R.string.string_demo_screen_navigation_feature)
                     DemoSelectEnum.DEVICE -> stringResource(id = R.string.string_demo_screen_navigation_device)
                     DemoSelectEnum.UI -> stringResource(id = R.string.string_demo_screen_navigation_ui)
@@ -90,9 +93,9 @@ fun DemoScreen(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
-            beyondViewportPageCount = if(isPreview()) 0 else DemoSelectEnum.entries.size
+            beyondViewportPageCount = if (isPreview()) 0 else DemoSelectEnum.entries.size
         ) {
-            when(DemoSelectEnum.entries[it]){
+            when (DemoSelectEnum.entries[it]) {
                 DemoSelectEnum.FEATURE -> FeatureDemoScreen(
                     onFirebaseClick = onFirebaseClick,
                     onHttpClick = onHttpClick,
@@ -100,7 +103,9 @@ fun DemoScreen(
                     onBiometricScreenClick = onBiometricScreenClick,
                     onYoutubeDLClick = onYoutubeDLClick,
                     onWebViewClick = onWebViewClick,
+                    onLanguageClick = onLanguageClick,
                 )
+
                 DemoSelectEnum.DEVICE -> DeviceDemoScreen()
                 DemoSelectEnum.UI -> UiDemoScreen(
                     onDateClick = onDateClick,
@@ -117,7 +122,7 @@ fun DemoScreen(
 private fun DemoScreenBottomBar(
     selectedEnum: DemoSelectEnum,
     onSelectedEnumChange: (DemoSelectEnum) -> Unit,
-){
+) {
     WeBottomNavigationBar {
         WeBottomNavigationBarItem(
             unSelectImageVector = WeIcons.Feature,
@@ -160,7 +165,8 @@ private fun PreviewDemoScreen() {
             onAiChatClick = {},
             onBiometricScreenClick = {},
             onYoutubeDLClick = {},
-            onWebViewClick = {}
+            onWebViewClick = {},
+            onLanguageClick = {},
         )
     }
 }

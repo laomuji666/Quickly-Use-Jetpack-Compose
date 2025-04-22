@@ -19,15 +19,20 @@ import com.laomuji666.compose.res.R
 
 @Composable
 fun FeatureDemoScreen(
-    onFirebaseClick: ()->Unit,
-    onHttpClick:()->Unit,
-    onAiChatClick:()->Unit,
-    onBiometricScreenClick:()->Unit,
-    onYoutubeDLClick:()->Unit,
-    onWebViewClick:()->Unit,
-){
+    onFirebaseClick: () -> Unit,
+    onHttpClick: () -> Unit,
+    onAiChatClick: () -> Unit,
+    onBiometricScreenClick: () -> Unit,
+    onYoutubeDLClick: () -> Unit,
+    onWebViewClick: () -> Unit,
+    onLanguageClick: () -> Unit,
+) {
     val context = LocalContext.current
-    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         WeTableClickRow(
             title = stringResource(id = R.string.string_demo_screen_firebase_demo),
             onClick = onFirebaseClick,
@@ -70,7 +75,13 @@ fun FeatureDemoScreen(
         )
         WeTableClickRow(
             title = stringResource(id = R.string.string_demo_screen_web_view_demo),
-            onClick = onWebViewClick
+            onClick = onWebViewClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+        )
+        WeTableClickRow(
+            title = stringResource(id = R.string.string_language_screen_title),
+            onClick = onLanguageClick,
+            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
     }
 }
@@ -86,7 +97,8 @@ private fun PreviewFeatureDemoScreen() {
                 onAiChatClick = {},
                 onBiometricScreenClick = {},
                 onYoutubeDLClick = {},
-                onWebViewClick = {}
+                onWebViewClick = {},
+                onLanguageClick = {},
             )
         }
     }

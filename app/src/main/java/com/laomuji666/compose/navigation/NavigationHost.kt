@@ -20,6 +20,8 @@ import com.laomuji666.compose.feature.firebase.FirebaseScreenRoute.composeFireba
 import com.laomuji666.compose.feature.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
 import com.laomuji666.compose.feature.http.HttpScreenRoute.composeHttpScreen
 import com.laomuji666.compose.feature.http.HttpScreenRoute.navigateToHttpScreen
+import com.laomuji666.compose.feature.language.LanguageScreenRoute.composeLanguageScreen
+import com.laomuji666.compose.feature.language.LanguageScreenRoute.navigateToLanguageScreen
 import com.laomuji666.compose.feature.painter.PainterScreenRoute.composePainterScreen
 import com.laomuji666.compose.feature.painter.PainterScreenRoute.navigateToPainterScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
@@ -38,9 +40,9 @@ import com.laomuji666.compose.feature.youtubedl.YoutubeDLScreenRoute.navigateToY
 @Composable
 fun NavigationHost(
     navHostController: NavHostController,
-    startDestination:Any = DemoScreenRoute,
-    animTime:Int = 300
-){
+    startDestination: Any = DemoScreenRoute,
+    animTime: Int = 300
+) {
     NavHost(
         navController = navHostController,
         startDestination = startDestination,
@@ -68,7 +70,7 @@ fun NavigationHost(
                 animationSpec = tween(animTime)
             )
         }
-    ){
+    ) {
         composeDemoScreen(
             onFirebaseClick = {
                 navHostController.navigateToFirebaseScreen()
@@ -99,6 +101,9 @@ fun NavigationHost(
             },
             onWebViewClick = {
                 navHostController.navigateToWebViewScreen("https://www.google.com/")
+            },
+            onLanguageClick = {
+                navHostController.navigateToLanguageScreen()
             }
         )
 
@@ -145,6 +150,12 @@ fun NavigationHost(
             },
             onOpenNewWindow = { url ->
                 navHostController.navigateToWebViewScreen(url)
+            }
+        )
+
+        composeLanguageScreen(
+            onBackClick = {
+                navHostController.safePopBackStack()
             }
         )
     }
