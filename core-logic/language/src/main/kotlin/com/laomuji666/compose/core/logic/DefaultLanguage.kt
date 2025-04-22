@@ -3,6 +3,7 @@ package com.laomuji666.compose.core.logic
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import com.laomuji666.compose.core.logic.common.cache.CacheUtil
+import java.util.Locale
 import javax.inject.Inject
 
 class DefaultLanguage @Inject constructor(
@@ -24,6 +25,11 @@ class DefaultLanguage @Inject constructor(
 
     override fun setAppUsingLanguage(appLanguage: AppLanguages) {
         usingLanguageTag = appLanguage.getTag()
-        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(appLanguage.locale))
+        val locale = if (appLanguage == AppLanguages.FlowSystem) {
+            Locale.getDefault()
+        } else {
+            appLanguage.locale
+        }
+        AppCompatDelegate.setApplicationLocales(LocaleListCompat.create(locale))
     }
 }
