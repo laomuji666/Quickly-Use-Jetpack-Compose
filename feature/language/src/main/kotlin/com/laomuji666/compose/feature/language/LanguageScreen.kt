@@ -3,6 +3,7 @@ package com.laomuji666.compose.feature.language
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -30,6 +31,9 @@ fun LanguageScreen(
         onAction = viewModel::onAction,
         onBackClick = onBackClick
     )
+    LaunchedEffect(Unit) {
+        viewModel.updateLanguage()
+    }
 }
 
 @Composable
@@ -53,7 +57,7 @@ private fun LanguageScreenUi(
                     title = it.getDisplayName(context),
                     checked = it == uiState.usingLanguage,
                     onClick = {
-                        onAction(LanguageScreenAction.OnLanguageClick(it))
+                        onAction(LanguageScreenAction.OnLanguageClick(it, context))
                     },
                     weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
                 )

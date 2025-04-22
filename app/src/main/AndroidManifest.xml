@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
         android:enableOnBackInvokedCallback="true"
+        android:localeConfig="@xml/app_languages"
         tools:targetApi="33">
 
         <profileable android:shell="true" />

@@ -17,7 +17,8 @@ val WeIcons.Back: ImageVector
             defaultWidth = 24.dp,
             defaultHeight = 24.dp,
             viewportWidth = 24f,
-            viewportHeight = 24f
+            viewportHeight = 24f,
+            autoMirror = true
         ).apply {
             path(
                 fill = SolidColor(Color(0xFF000000)),
