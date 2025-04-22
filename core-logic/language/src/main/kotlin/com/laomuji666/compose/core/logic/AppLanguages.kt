@@ -1,11 +1,12 @@
 package com.laomuji666.compose.core.logic
 
 import android.content.Context
+import android.content.res.Resources
 import com.laomuji666.compose.res.R
 import java.util.Locale
 
 sealed class AppLanguages(val locale: Locale) {
-    data object FlowSystem : AppLanguages(Locale.getDefault())
+    data object FlowSystem : AppLanguages(getSystemLanguage())
     data object ChineseSimpled : AppLanguages(Locale.forLanguageTag("zh-Hans"))
     data object ChineseTraditional : AppLanguages(Locale.forLanguageTag("zh-Hant"))
     data object English : AppLanguages(Locale("en"))
@@ -14,6 +15,15 @@ sealed class AppLanguages(val locale: Locale) {
     data object Bengali : AppLanguages(Locale("bn"))
 
     companion object {
+        fun getSystemLanguage(): Locale {
+            val locales = Resources.getSystem().configuration.locales
+            return if (locales.size() > 0) {
+                locales[0]
+            } else {
+                Locale.getDefault()
+            }
+        }
+
         fun fromTag(tag: String?): AppLanguages {
             return when (tag) {
                 "zh-Hans" -> ChineseSimpled
