@@ -28,12 +28,12 @@ android {
     //使用不同的 build variant
     flavorDimensions += "channel"
     productFlavors {
-        create("gp"){
+        create("gp") {
             dimension = "channel"
             //这里也可以对包名后缀进行进一步区分
             // applicationIdSuffix = ".gp"
         }
-        create("sam"){
+        create("sam") {
             dimension = "channel"
         }
     }
@@ -57,6 +57,7 @@ dependencies {
     implementation(project(":core-ui"))
     implementation(project(":core-logic:common"))
     implementation(project(":core-logic:notification"))
+    implementation(project(":core-logic:language"))
     implementation(project(":feature:demo"))
     implementation(project(":feature:firebase"))
     implementation(project(":feature:http"))

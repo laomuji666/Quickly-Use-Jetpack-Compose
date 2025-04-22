@@ -1,12 +1,16 @@
 package com.laomuji666.compose
 
+import android.app.Activity
 import android.app.Application
+import android.os.Bundle
 import coil.ImageLoader
 import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
+import com.laomuji666.compose.core.logic.Language
 import dagger.hilt.android.HiltAndroidApp
+import javax.inject.Inject
 
 /**
  * [HiltAndroidApp] hilt依赖注入入口
@@ -14,6 +18,9 @@ import dagger.hilt.android.HiltAndroidApp
  */
 @HiltAndroidApp
 class ComposeApp : Application(), ImageLoaderFactory {
+
+    @Inject
+    lateinit var language: Language
 
     /**
      * coil缓存图片的规则
@@ -31,5 +38,23 @@ class ComposeApp : Application(), ImageLoaderFactory {
             .respectCacheHeaders(false)
             .logger(DebugLogger())
             .build()
+    }
+
+    private val languageInitCallbacks = object : ActivityLifecycleCallbacks {
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            language.initLanguage()
+        }
+
+        override fun onActivityStarted(activity: Activity) {}
+        override fun onActivityResumed(activity: Activity) {}
+        override fun onActivityPaused(activity: Activity) {}
+        override fun onActivityStopped(activity: Activity) {}
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+        override fun onActivityDestroyed(activity: Activity) {}
+    }
+
+    override fun onCreate() {
+        super.onCreate()
+        registerActivityLifecycleCallbacks(languageInitCallbacks)
     }
 }

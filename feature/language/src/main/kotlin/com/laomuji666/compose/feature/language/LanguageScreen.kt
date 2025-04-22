@@ -32,7 +32,7 @@ fun LanguageScreen(
         onBackClick = onBackClick
     )
     LaunchedEffect(Unit) {
-        viewModel.updateLanguage()
+        viewModel.updateLanguageStatus()
     }
 }
 
