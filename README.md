@@ -1,20 +1,30 @@
 # Quickly-Use-Jetpack-Compose
-简单易用的 Jetpack Compose 快速开发框架,以Compose的方式实现功能. 如果觉得对您有帮助,请为项目点个star,感谢!
+
+简单易用的 Jetpack Compose 快速开发框架,以Compose的方式实现功能.
+如果觉得对您有帮助,请为项目点个star,感谢!
 
 # 协议
+
 [查看隐私协议](PRIVACY.md)
 
 # 架构
-Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵守[官方架构指南](https://developer.android.com/topic/architecture?hl=zh-cn).
+
+Quickly-Use-Jetpack-Compose
+使用了大部分架构组件,但并没有完全遵守[官方架构指南](https://developer.android.com/topic/architecture?hl=zh-cn).
+
 ## 架构组件
+
 + 模块化,多module,插件化管理依赖.
 + 依赖注入,使用hilt进行依赖注入.
 + 单Activity架构,使用Navigation进行导航.
 + Compose+ViewModel+Flow(MVI),使用协程进行异步操作的反应式ui.
 
 # 设计系统
+
 自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统,有白天和夜间两种颜色模式.
+
 ## Theme
+
 + 竖屏以375宽度适配屏幕,横屏不适配正常显示.
 + WeTheme: 替代MaterialTheme.
 + WeColorScheme: 定义颜色.
@@ -25,6 +35,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + WeWidget: 实现WX风格的组件,如顶部导航,底部导航,Button,Toast,ActionSheet,单选,多选,开关等组件.
 
 # Module目录简介
+
 + app: 程序的入口,把各个module关联起来,组成一个完整的app.
 + build-logic: 自定义的插件都放在这里,统一管理依赖.
 + core-logic: 数据处理,与本地数据库或远程服务器交互.
@@ -34,6 +45,7 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + res: 资源文件,统一管理图片,文字等资源文件.
 
 # 已提供的示例代码
+
 + firebase: 埋点,崩溃分析,推送.
 + ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
 + google登录: CredentialManager添加登录选项.
@@ -50,33 +62,44 @@ Quickly-Use-Jetpack-Compose 使用了大部分架构组件,但并没有完全遵
 + 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
 + 视频下载播放: 使用youtubedl进行万能视频下载,使用media3进行视频播放.
 + WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
++ 多语言: 动态切换多语言,支持SDK33的应用首选语言.
 
 # 开发/发布环境
+
 保证最新版Android Studio可用,但不保证旧版可用.
 <br/>在Android Studio更新时,项目也会更新,我会持续把学到的新知识更新到本仓库.
+
 ## 运行
+
 确保切换到app,点击运行按钮.
 ![Run App](docs/images/RunApp.png)
+
 ## 密钥
+
 密钥文件存放在根目录的**keystore**目录中.
 <br/>密钥配置在**ApplicationConventionPlugin.kt**文件中.
+
 ## 打包
+
 使用了productFlavors,可以在Build Variant中选择不同的打包信息.
 <br/>bundleRelease打包aab.
 <br/>assembleRelease打包apk.
 
 ## 运行效果(gif比较模糊)
-| 例子                   | 截图                                                             |
-|----------------------|----------------------------------------------------------------|
-| 定位、图片、联系人            | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
-| 绘画画板                 | <img src="docs/images/PainterScreen.png" width="320"/>         |
-| Lazy列表排序             | <img src="docs/images/LazySort.gif" width="320"/>              |
-| 自定义日历                | <img src="docs/images/CustomizeCalendar.gif" width="320"/>     |
-| 动态切换logo             | <img src="docs/images/SwitchAppLogo.gif" width="320"/>         |
-| Ai聊天,推送              | <img src="docs/images/AiChat.gif" width="320"/>                | 
-| 网络异常处理               | <img src="docs/images/HttpScreen.gif" width="320"/>            |
-| 轮播图                  | <img src="docs/images/BannerView.gif" width="320"/>            |
-| 组件示例                 | <img src="docs/images/WidgetScreen.gif" width="320"/>          |
+
+| 例子        | 截图                                                             |
+|-----------|----------------------------------------------------------------|
+| 绘画画板      | <img src="docs/images/PainterScreen.png" width="320"/>         |
+| 多语言       | <img src="docs/images/LanguageSwitch.png" width="320"/>        |
+| Lazy列表排序  | <img src="docs/images/LazySort.gif" width="320"/>              |
+| 自定义日历     | <img src="docs/images/CustomizeCalendar.gif" width="320"/>     |
+| 动态切换logo  | <img src="docs/images/SwitchAppLogo.gif" width="320"/>         |
+| Ai聊天,推送   | <img src="docs/images/AiChat.gif" width="320"/>                | 
+| 网络异常处理    | <img src="docs/images/HttpScreen.gif" width="320"/>            |
+| 轮播图       | <img src="docs/images/BannerView.gif" width="320"/>            |
+| 组件示例      | <img src="docs/images/WidgetScreen.gif" width="320"/>          |
+| 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
 
 ## Star History
+
 [![Star History Chart](https://api.star-history.com/svg?repos=laomuji666/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji666/Quickly-Use-Jetpack-Compose&Date)
