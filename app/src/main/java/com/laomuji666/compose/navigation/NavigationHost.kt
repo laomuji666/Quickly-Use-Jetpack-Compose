@@ -1,11 +1,12 @@
 package com.laomuji666.compose.navigation
 
-import androidx.compose.animation.AnimatedContentTransitionScope
-import androidx.compose.animation.core.tween
+import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.laomuji666.compose.WebViewActivity
 import com.laomuji666.compose.core.ui.safePopBackStack
+import com.laomuji666.compose.core.ui.screen.SlideNavigation
 import com.laomuji666.compose.feature.biometric.BiometricScreenRoute.composeBiometricScreen
 import com.laomuji666.compose.feature.biometric.BiometricScreenRoute.navigateToBiometricScreen
 import com.laomuji666.compose.feature.chat.AiChatScreenRoute.composeAiChatScreen
@@ -28,8 +29,6 @@ import com.laomuji666.compose.feature.scroll.composeNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.composeNestedScrollDispatcherScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollConnectionScreen
 import com.laomuji666.compose.feature.scroll.navigateToNestedScrollDispatcherScreen
-import com.laomuji666.compose.feature.webview.WebViewScreenRoute.Companion.composeWebViewScreen
-import com.laomuji666.compose.feature.webview.WebViewScreenRoute.Companion.navigateToWebViewScreen
 import com.laomuji666.compose.feature.youtubedl.YoutubeDLScreenRoute.composeYoutubeDLScreen
 import com.laomuji666.compose.feature.youtubedl.YoutubeDLScreenRoute.navigateToYoutubeDLScreen
 
@@ -41,35 +40,15 @@ import com.laomuji666.compose.feature.youtubedl.YoutubeDLScreenRoute.navigateToY
 fun NavigationHost(
     navHostController: NavHostController,
     startDestination: Any = DemoScreenRoute,
-    animTime: Int = 300
 ) {
+    val activity = LocalActivity.current
     NavHost(
         navController = navHostController,
         startDestination = startDestination,
-        enterTransition = {
-            slideIntoContainer(
-                AnimatedContentTransitionScope.SlideDirection.Start,
-                animationSpec = tween(animTime)
-            )
-        },
-        exitTransition = {
-            slideOutOfContainer(
-                AnimatedContentTransitionScope.SlideDirection.Start,
-                animationSpec = tween(animTime)
-            )
-        },
-        popEnterTransition = {
-            slideIntoContainer(
-                AnimatedContentTransitionScope.SlideDirection.End,
-                animationSpec = tween(animTime)
-            )
-        },
-        popExitTransition = {
-            slideOutOfContainer(
-                AnimatedContentTransitionScope.SlideDirection.End,
-                animationSpec = tween(animTime)
-            )
-        }
+        enterTransition = SlideNavigation.enterTransition,
+        exitTransition = SlideNavigation.exitTransition,
+        popEnterTransition = SlideNavigation.popEnterTransition,
+        popExitTransition = SlideNavigation.popExitTransition
     ) {
         composeDemoScreen(
             onFirebaseClick = {
@@ -100,7 +79,9 @@ fun NavigationHost(
                 navHostController.navigateToYoutubeDLScreen()
             },
             onWebViewClick = {
-                navHostController.navigateToWebViewScreen("https://www.google.com/")
+                activity?.let {
+                    WebViewActivity.openWebViewActivity("https://www.google.com/", activity)
+                }
             },
             onLanguageClick = {
                 navHostController.navigateToLanguageScreen()
@@ -143,15 +124,6 @@ fun NavigationHost(
         composePainterScreen()
 
         composeYoutubeDLScreen()
-
-        composeWebViewScreen(
-            onBackClick = {
-                navHostController.safePopBackStack()
-            },
-            onOpenNewWindow = { url ->
-                navHostController.navigateToWebViewScreen(url)
-            }
-        )
 
         composeLanguageScreen(
             onBackClick = {

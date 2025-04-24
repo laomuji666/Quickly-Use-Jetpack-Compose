@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
+import com.laomuji666.compose.core.ui.screen.SlideActivity
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  * [AndroidEntryPoint] hilt依赖注入入口
  */
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : SlideActivity() {
 
     /**
      * 注入ViewModel
@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
                 )
             }
         }
+
+        viewModel.initModule(this)
     }
 
     /**
@@ -58,12 +60,12 @@ class MainActivity : AppCompatActivity() {
      * 默认在setContent后就不再显示启动屏幕
      * 如果需要在启动时初始化一些三方SDK,可以保留启动屏幕到初始化完成后再显示
      */
-    private fun checkKeepOnScreenCondition(splashScreen: SplashScreen){
+    private fun checkKeepOnScreenCondition(splashScreen: SplashScreen) {
         var uiState: MainUiState by mutableStateOf(MainUiState.Loading)
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState
-                    .collect{
+                    .collect {
                         uiState = it
                     }
             }
