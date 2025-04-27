@@ -1,5 +1,7 @@
 package com.laomuji666.compose
 
+import android.app.Activity
+import android.webkit.WebView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji666.compose.core.logic.common.Log
@@ -30,10 +32,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
      * 个人比较喜欢在启动屏幕初始化三方SDK
      * 在Application中初始化会导致启动时间过长
      */
-    init {
+    fun initModule(activity: Activity) {
         Log.debug("tag_flavor", FlavorDemo().getFlavor())
         viewModelScope.launch {
             //假设在这里初始化一些三方SDK
+            WebView(activity)
             _mainUiState.value = MainUiState.Success
         }
     }

@@ -34,21 +34,21 @@ import com.laomuji666.compose.core.ui.we.icons.Search
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
-fun WeTopNavigationBar(
+fun WeTopActionBar(
     title: String = "",
     onBackClick: (() -> Unit)? = null,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
         modifier = Modifier
-            .background(WeTheme.colorScheme.topNavigationBarBackground)
+            .background(WeTheme.colorScheme.background)
             .statusBarsPadding()
             .fillMaxWidth()
-            .height(WeTheme.dimens.navigationBarHeight)
-            .padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal),
+            .height(WeTheme.dimens.topActionBar)
+            .padding(horizontal = WeTheme.dimens.topActionBarPaddingHorizontal),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Row(modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth)) {
+        Row(modifier = Modifier.width(WeTheme.dimens.topActionBarBarActionWidth)) {
             onBackClick?.let {
                 BackHandler {
                     it()
@@ -62,14 +62,14 @@ fun WeTopNavigationBar(
         Text(
             text = title,
             style = WeTheme.typography.emTitle,
-            color = WeTheme.colorScheme.fontColor90,
+            color = WeTheme.colorScheme.fontColorDark,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis
         )
         Row(
-            modifier = Modifier.width(WeTheme.dimens.navigationBarActionWidth),
+            modifier = Modifier.width(WeTheme.dimens.topActionBarBarActionWidth),
             horizontalArrangement = Arrangement.End
         ) {
             actions()
@@ -94,24 +94,24 @@ fun WeTopNavigationBarAction(
             imageVector = imageVector,
             contentDescription = null,
             contentScale = ContentScale.FillHeight,
-            colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColor90),
+            colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorDark),
             modifier = Modifier
                 .align(Alignment.Center)
-                .size(WeTheme.dimens.navigationBarIconSize),
+                .size(WeTheme.dimens.actionIconSize),
         )
     }
 }
 
 @Composable
 fun WeTopNavigationBarSpace() {
-    Spacer(modifier = Modifier.width(WeTheme.dimens.navigationBarActionPaddingWidth))
+    Spacer(modifier = Modifier.width(WeTheme.dimens.topActionBarActionPaddingWidth))
 }
 
 @PreviewLightDark
 @Composable
 fun PreviewWeTopNavigationBar() {
     DefaultWeTheme {
-        WeTopNavigationBar(
+        WeTopActionBar(
             title = "标题",
             onBackClick = {},
             actions = {

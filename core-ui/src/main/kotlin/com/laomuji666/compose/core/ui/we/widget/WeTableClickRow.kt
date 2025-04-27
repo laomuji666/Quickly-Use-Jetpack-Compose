@@ -11,65 +11,64 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
-import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Arrow
+import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
 fun WeTableClickRow(
-    title:String,
-    summary:String? = null,
-    summaryInBottom:Boolean = false,
-    onClick:()->Unit = {},
+    title: String,
+    summary: String? = null,
+    summaryInBottom: Boolean = false,
+    onClick: () -> Unit = {},
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
-){
+) {
     WeTableRow(
         start = {
-            if(summaryInBottom){
+            if (summaryInBottom) {
                 Column {
                     Text(
                         text = title,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColor90
+                        color = WeTheme.colorScheme.fontColorDark
                     )
                     summary?.let {
                         Text(
                             text = it,
                             style = WeTheme.typography.desc,
-                            color = WeTheme.colorScheme.fontColor50
+                            color = WeTheme.colorScheme.fontColorLight
                         )
                     }
                 }
-            }else{
+            } else {
                 Text(
                     text = title,
                     style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColor90
+                    color = WeTheme.colorScheme.fontColorDark
                 )
             }
         },
         end = {
-            if(!summaryInBottom){
+            if (!summaryInBottom) {
                 summary?.let {
                     Text(
                         text = it,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColor50
+                        color = WeTheme.colorScheme.fontColorLight
                     )
-                    Spacer(modifier = Modifier.width(10.dp))
+                    Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowInnerPaddingHorizontal))
                 }
             }
             Image(
                 imageVector = WeIcons.Arrow,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColor50),
-                modifier = Modifier.height(WeTheme.dimens.tableIconSize)
+                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorLight),
+                modifier = Modifier.height(WeTheme.dimens.actionIconSize)
             )
         },
-        weTableRowType = if(summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
+        weTableRowType = if (summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
         onClick = onClick,
         weTableRowOutlineType = weTableRowOutlineType
     )
@@ -77,7 +76,7 @@ fun WeTableClickRow(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableClickRow1(){
+fun PreviewWeTableClickRow1() {
     DefaultWeTheme {
         WeTableClickRow(
             title = "双行标题",
@@ -89,7 +88,7 @@ fun PreviewWeTableClickRow1(){
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableClickRow2(){
+fun PreviewWeTableClickRow2() {
     DefaultWeTheme {
         WeTableClickRow(
             title = "单行标题",

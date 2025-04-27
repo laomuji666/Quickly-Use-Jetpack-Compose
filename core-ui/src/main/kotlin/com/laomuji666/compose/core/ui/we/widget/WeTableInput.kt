@@ -47,10 +47,10 @@ fun WeTableInput(
                     Text(
                         text = it,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColor90,
+                        color = WeTheme.colorScheme.fontColorDark,
                         modifier = Modifier.width(WeTheme.dimens.tableLabelWidth)
                     )
-                    Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal / 2))
+                    Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowInnerPaddingHorizontal))
                 }
                 BasicTextField(
                     value = value,
@@ -75,13 +75,13 @@ fun WeTableInput(
                                     Text(
                                         text = tip,
                                         style = WeTheme.typography.title,
-                                        color = WeTheme.colorScheme.fontColor50
+                                        color = WeTheme.colorScheme.fontColorLight
                                     )
                                 }
                             }
                         }
                     },
-                    textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColor90),
+                    textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColorDark),
                     cursorBrush = SolidColor(WeTheme.colorScheme.cursorColor),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(

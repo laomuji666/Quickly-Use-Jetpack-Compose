@@ -16,13 +16,13 @@ fun WeTableTitle(
     title:String
 ){
     Row(
-        modifier = modifier.background(Color.Transparent).fillMaxWidth().padding(horizontal = WeTheme.dimens.listPaddingHorizontal)
+        modifier = modifier.background(Color.Transparent).fillMaxWidth().padding(horizontal = WeTheme.dimens.tableRowPaddingHorizontal)
     ) {
         Text(
             text = title,
             style = WeTheme.typography.desc,
-            color = WeTheme.colorScheme.fontColor50,
-            modifier = Modifier.padding(vertical = WeTheme.dimens.listPaddingHorizontal / 2)
+            color = WeTheme.colorScheme.fontColorLight,
+            modifier = Modifier.padding(vertical = WeTheme.dimens.tableRowInnerPaddingHorizontal)
         )
     }
 }

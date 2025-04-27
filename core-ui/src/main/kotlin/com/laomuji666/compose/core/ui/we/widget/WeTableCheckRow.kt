@@ -33,13 +33,13 @@ fun WeTableCheckRow(
                 imageVector = if(checked) WeIcons.Select else WeIcons.Unselect,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                modifier = Modifier.height(WeTheme.dimens.tableIconSize)
+                modifier = Modifier.height(WeTheme.dimens.actionIconSize)
             )
-            Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal))
+            Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowPaddingHorizontal))
             Text(
                 text = title,
                 style = WeTheme.typography.title,
-                color = WeTheme.colorScheme.fontColor90
+                color = WeTheme.colorScheme.fontColorDark
             )
         },
         onClick = onClick,

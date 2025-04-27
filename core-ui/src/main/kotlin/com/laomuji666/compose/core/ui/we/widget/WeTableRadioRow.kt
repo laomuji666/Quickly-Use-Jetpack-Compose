@@ -36,11 +36,11 @@ fun WeTableRadioRow(
             Text(
                 text = title,
                 style = WeTheme.typography.title,
-                color = WeTheme.colorScheme.fontColor90
+                color = WeTheme.colorScheme.fontColorDark
             )
         },
         end = {
-            Row(modifier = Modifier.size(WeTheme.dimens.tableIconSize)) {
+            Row(modifier = Modifier.size(WeTheme.dimens.actionIconSize)) {
                 AnimatedVisibility(
                     visible = checked,
                     enter = expandHorizontally(

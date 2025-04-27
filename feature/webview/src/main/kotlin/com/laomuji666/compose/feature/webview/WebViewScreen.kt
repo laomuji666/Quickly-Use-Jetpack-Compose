@@ -26,15 +26,15 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.More
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 
 @Composable
 fun WebViewScreen(
     viewModel: WebViewScreenViewModel = hiltViewModel(),
     onBackClick: () -> Unit,
-    onOpenNewWindow: (String)->Unit,
-){
+    onOpenNewWindow: (String) -> Unit,
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     WebViewScreenUi(
         uiState = uiState,
@@ -47,34 +47,34 @@ fun WebViewScreen(
 @Composable
 private fun WebViewScreenUi(
     uiState: WebViewScreenUiState,
-    onAction: (WebViewScreenAction)->Unit,
-    onBackClick: ()->Unit,
-    onOpenNewWindow: (String)->Unit,
-){
+    onAction: (WebViewScreenAction) -> Unit,
+    onBackClick: () -> Unit,
+    onOpenNewWindow: (String) -> Unit,
+) {
     val context = LocalContext.current
-    var webView:WebView? by remember { mutableStateOf(null) }
+    var webView: WebView? by remember { mutableStateOf(null) }
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = uiState.title,
                 onBackClick = {
                     webView?.run {
-                        if(canGoBack()){
+                        if (canGoBack()) {
                             goBack()
-                        }else{
+                        } else {
                             onBackClick()
                             return@run
                         }
                         val urlList = copyBackForwardList()
                         val endPosition = urlList.currentIndex
                         var targetPosition = 0
-                        for (position in endPosition downTo  0) {
+                        for (position in endPosition downTo 0) {
                             val urlInfo = urlList.getItemAtIndex(position)
-                            if(urlInfo.url != "about:blank"){
+                            if (urlInfo.url != "about:blank") {
                                 targetPosition = endPosition - position
                                 break
                             }
-                            if(position == 0){
+                            if (position == 0) {
                                 onBackClick()
                                 return@run
                             }
@@ -115,15 +115,15 @@ private fun WebViewScreenUi(
 @Composable
 fun composeWebView(
     url: String,
-    onProgressChanged: (Int)->Unit,
-    onOpenNewWindow: (String)->Unit,
-    onReceivedTitle: (String?)->Unit,
-    onUrlChanged:(String)->Unit
-):WebView?{
-    if(LocalInspectionMode.current){
+    onProgressChanged: (Int) -> Unit,
+    onOpenNewWindow: (String) -> Unit,
+    onReceivedTitle: (String?) -> Unit,
+    onUrlChanged: (String) -> Unit
+): WebView? {
+    if (LocalInspectionMode.current) {
         return null
     }
-    var webView:WebView? by remember { mutableStateOf(null) }
+    var webView: WebView? by remember { mutableStateOf(null) }
     AndroidView(
         modifier = Modifier.fillMaxSize(),
         factory = { context ->
@@ -157,7 +157,7 @@ fun composeWebView(
                 //设置WebChromeClient
                 webChromeClient = CustomWebChromeClient(
                     onProgressChanged = onProgressChanged,
-                    onOpenNewWindow = { url->
+                    onOpenNewWindow = { url ->
                         if (url.startsWith("http") || url.startsWith("https")) {
                             onOpenNewWindow(url)
                         }
@@ -166,14 +166,14 @@ fun composeWebView(
                 )
 
                 //加载url
-                if(url.isNotEmpty()){
+                if (url.isNotEmpty()) {
                     loadUrl(url)
                 }
             }
             webView!!
         },
         update = {
-            if(url != it.url){
+            if (url != it.url) {
                 it.loadUrl(url)
             }
         }
@@ -184,12 +184,14 @@ fun composeWebView(
 @Composable
 private fun WebViewScreenProgressView(
     progress: Int
-){
-    if(progress < 100){
-        Spacer(modifier = Modifier
-            .height(4.dp)
-            .fillMaxWidth(progress / 100f)
-            .background(WeTheme.colorScheme.cursorColor))
+) {
+    if (progress < 100) {
+        Spacer(
+            modifier = Modifier
+                .height(4.dp)
+                .fillMaxWidth(progress / 100f)
+                .background(WeTheme.colorScheme.cursorColor)
+        )
     }
 }
 

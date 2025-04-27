@@ -44,7 +44,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableInput
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 
 @Composable
@@ -81,7 +81,7 @@ private fun ChatScreenUi(
 ) {
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = uiState.nickname,
                 onBackClick = onBackClick,
                 actions = {

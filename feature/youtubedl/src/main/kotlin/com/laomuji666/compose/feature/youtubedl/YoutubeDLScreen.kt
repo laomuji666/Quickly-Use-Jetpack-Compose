@@ -43,7 +43,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeToast
 import com.laomuji666.compose.core.ui.we.widget.WeToastType
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 import com.laomuji666.compose.feature.video.VideoPlayActivity
 import com.laomuji666.compose.feature.youtubedl.model.DownloadInfo
@@ -91,7 +91,7 @@ private fun YoutubeDLScreenUi(
     }
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = stringResource(R.string.string_demo_screen_youtubedl_demo),
                 actions = {
                     WeTopNavigationBarAction(
@@ -164,7 +164,7 @@ private fun DownloadInfoItemView(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .clip(RoundedCornerShape(4.dp))
-                    .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                    .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
@@ -183,7 +183,7 @@ private fun DownloadInfoItemView(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(4.dp))
-                        .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                        .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
@@ -196,7 +196,7 @@ private fun DownloadInfoItemView(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(4.dp))
-                        .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                        .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
@@ -219,7 +219,7 @@ private fun DownloadInfoItemView(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .clip(CircleShape)
-                    .background(WeTheme.colorScheme.fontColor90.copy(alpha = 0.5f))
+                    .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
                     .size(80.dp)
                     .clickableDebounce {
                         onClick(downloadInfo)

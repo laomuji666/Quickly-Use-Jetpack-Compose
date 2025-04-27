@@ -31,7 +31,7 @@ fun Modifier.ifCondition(
 
 @Composable
 fun Modifier.clickableDebounce(
-    timeout: Long = 200L,
+    timeout: Long = 500L,
     indication: Indication? = LocalIndication.current,
     onClick: () -> Unit
 ): Modifier {

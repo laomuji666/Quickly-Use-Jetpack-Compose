@@ -24,38 +24,26 @@ fun WeTableRow(
     center: @Composable RowScope.() -> Unit = { Spacer(modifier = Modifier.weight(1f)) },
     end: @Composable RowScope.() -> Unit = {},
     backgroundColor: Color = WeTheme.colorScheme.tableRowBackground,
-    clickTimeout: Long = 200L,
     onClick: () -> Unit = {},
     weTableRowType: WeTableRowType = WeTableRowType.SINGLE,
     outlineModifier: Modifier = Modifier,
     weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL,
 ) {
     val rowHeight = when (weTableRowType) {
-        WeTableRowType.SINGLE -> if (weTableRowOutlineType == WeTableRowOutlineType.SPLIT) {
-            WeTheme.dimens.listSingleRowHeight + WeTheme.dimens.outlineSplitHeight
-        } else {
-            WeTheme.dimens.listSingleRowHeight
-        }
-
-        WeTableRowType.DOUBLE -> if (weTableRowOutlineType == WeTableRowOutlineType.SPLIT) {
-            WeTheme.dimens.listDoubleRowHeight + WeTheme.dimens.outlineSplitHeight
-        } else {
-            WeTheme.dimens.listDoubleRowHeight
-        }
+        WeTableRowType.SINGLE -> WeTheme.dimens.tableRowSingleRowHeight
+        WeTableRowType.DOUBLE -> WeTheme.dimens.tableRowDoubleRowHeight
     }
     Column(
         modifier = modifier
             .background(backgroundColor)
             .fillMaxWidth()
-            .height(rowHeight)
-            .clickableDebounce(onClick = onClick, timeout = clickTimeout)
+            .clickableDebounce(onClick = onClick)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(1f)
-                .weight(1f)
-                .padding(horizontal = WeTheme.dimens.listPaddingHorizontal),
+                .height(rowHeight)
+                .padding(horizontal = WeTheme.dimens.tableRowPaddingHorizontal),
             verticalAlignment = Alignment.CenterVertically
         ) {
             start()
@@ -79,13 +67,20 @@ enum class WeTableRowType {
 fun PreviewWeTableRow() {
     DefaultWeTheme {
         Column {
-            WeTableRow()
-            WeTableRow()
-            WeTableRow(
-                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
-            )
             WeTableRow(
                 weTableRowOutlineType = WeTableRowOutlineType.NONE
+            )
+            WeTableRow(
+                weTableRowOutlineType = WeTableRowOutlineType.FULL
+            )
+            WeTableRow(
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            )
+            WeTableRow(
+                weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+            )
+            WeTableRow(
+                weTableRowOutlineType = WeTableRowOutlineType.SPLIT
             )
         }
     }

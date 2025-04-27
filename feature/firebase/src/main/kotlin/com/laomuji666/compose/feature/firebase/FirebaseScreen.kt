@@ -22,7 +22,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.launcher.PermissionUtil
 import com.laomuji666.compose.res.R
 
@@ -60,7 +60,7 @@ private fun FirebaseScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = stringResource(id = R.string.string_demo_screen_firebase_demo),
                 onBackClick = onBackClick
             )
@@ -96,7 +96,7 @@ private fun FirebasePermissionSlot(
     updatePushToken:()->Unit
 ){
     if(PermissionUtil.hasPostNotificationPermission(LocalContext.current) && pushToken.isNotEmpty()){
-        Text(text = pushToken, color = WeTheme.colorScheme.fontColor90)
+        Text(text = pushToken, color = WeTheme.colorScheme.fontColorDark)
     }else{
         FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             updatePushToken()

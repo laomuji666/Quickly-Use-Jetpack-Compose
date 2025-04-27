@@ -18,7 +18,7 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 
 @Composable
 fun LanguageScreen(
@@ -45,7 +45,7 @@ private fun LanguageScreenUi(
     val context = LocalContext.current
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = stringResource(id = com.laomuji666.compose.res.R.string.string_language_screen_title),
                 onBackClick = onBackClick
             )

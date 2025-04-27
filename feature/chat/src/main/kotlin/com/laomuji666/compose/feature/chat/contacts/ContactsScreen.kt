@@ -21,7 +21,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.database.entity.ContactInfoEntity
@@ -59,7 +58,7 @@ fun ContactsScreen(
 
 @Composable
 private fun ContactsScreenUi(
-    paddingTop: Dp = WeTheme.dimens.navigationBarHeight - 1.dp,
+    paddingTop: Dp = WeTheme.dimens.topActionBar,
     contactList: List<ContactInfoEntity>,
     onContactClick: (ContactInfoEntity) -> Unit
 ) {
@@ -111,10 +110,10 @@ private fun ContactsScreenUi(
                                 listState.scrollBy((typeMap[item] ?: 0f) - paddingTopPx)
                             }
                         }
-                        .padding(WeTheme.dimens.listPaddingHorizontal / 2),
+                        .padding(WeTheme.dimens.tableRowPaddingHorizontal / 2),
                     text = item,
                     style = WeTheme.typography.small,
-                    color = WeTheme.colorScheme.fontColor50
+                    color = WeTheme.colorScheme.fontColorLight
                 )
             }
         }

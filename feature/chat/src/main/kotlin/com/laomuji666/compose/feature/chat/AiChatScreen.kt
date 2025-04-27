@@ -21,7 +21,7 @@ import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarSpace
 import com.laomuji666.compose.feature.chat.contacts.ContactsScreen
@@ -77,7 +77,7 @@ fun AiChatTopBar(
     title:String,
     onMenuClick:()->Unit
 ){
-    WeTopNavigationBar(
+    WeTopActionBar(
         title = title,
         actions = {
             WeTopNavigationBarAction(

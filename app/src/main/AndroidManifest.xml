@@ -2,22 +2,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="com.laomuji666.compose.ComposeApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
+        android:enableOnBackInvokedCallback="false"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:localeConfig="@xml/app_languages"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
-        android:enableOnBackInvokedCallback="true"
-        android:localeConfig="@xml/app_languages"
         tools:targetApi="33">
 
         <profileable android:shell="true" />
@@ -25,8 +25,8 @@
         <activity
             android:name="com.laomuji666.compose.MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/AppTheme.SplashScreen">
+            android:theme="@style/AppTheme.SplashScreen"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -34,12 +34,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:pathPattern="/chat/*"
                     android:host="compose.laomuji666.com"
+                    android:pathPattern="/chat/*"
                     android:scheme="laomuji" />
             </intent-filter>
         </activity>
-        
+
         <activity-alias
             android:name="com.laomuji666.compose.DefaultAliasActivity"
             android:enabled="true"
@@ -67,10 +67,13 @@
             android:name=".feature.video.VideoPlayActivity"
             android:exported="false" />
 
-        <activity android:name=".WebViewActivity"
-            android:exported="true">
+        <activity
+            android:name=".WebViewActivity"
+            android:exported="true"
+            android:taskAffinity="com.laomuji666.compose.WebViewTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
 
