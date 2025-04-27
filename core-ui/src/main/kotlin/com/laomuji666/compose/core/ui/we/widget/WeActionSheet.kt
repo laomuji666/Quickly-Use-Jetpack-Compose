@@ -46,7 +46,7 @@ fun WeActionSheetRow(
                     Text(
                         text = text,
                         style = WeTheme.typography.desc,
-                        color = WeTheme.colorScheme.fontColor50
+                        color = WeTheme.colorScheme.fontColorLight
                     )
                 }
 
@@ -54,7 +54,7 @@ fun WeActionSheetRow(
                     Text(
                         text = text,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColor90
+                        color = WeTheme.colorScheme.fontColorDark
                     )
                 }
 
@@ -62,7 +62,7 @@ fun WeActionSheetRow(
                     Text(
                         text = text,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.error
+                        color = WeTheme.colorScheme.fontError
                     )
                 }
             }

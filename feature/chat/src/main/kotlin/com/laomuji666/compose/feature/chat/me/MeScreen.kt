@@ -71,27 +71,27 @@ fun MeScreenUi(
             Spacer(modifier = Modifier.height(80.dp))
             Row(modifier = Modifier
                 .height(95.dp)
-                .padding(WeTheme.dimens.listPaddingHorizontal)) {
+                .padding(WeTheme.dimens.tableRowPaddingHorizontal)) {
                 Image(
                     painter = painterResource(id = R.mipmap.ic_launcher),
                     contentDescription = null,
                     contentScale = ContentScale.FillHeight,
                     modifier = Modifier.fillMaxHeight()
                 )
-                Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal))
+                Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowPaddingHorizontal))
                 Column(modifier = Modifier
                     .fillMaxHeight()
-                    .padding(vertical = WeTheme.dimens.listPaddingHorizontal / 4)) {
+                    .padding(vertical = WeTheme.dimens.tableRowPaddingHorizontal / 4)) {
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_name),
                         style = WeTheme.typography.emTitle,
-                        color = WeTheme.colorScheme.fontColor90
+                        color = WeTheme.colorScheme.fontColorDark
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_number_format, stringResource(id = R.string.string_ai_chat_me_screen_we_chat_number)),
                         style = WeTheme.typography.desc,
-                        color = WeTheme.colorScheme.fontColor50
+                        color = WeTheme.colorScheme.fontColorLight
                     )
                 }
             }

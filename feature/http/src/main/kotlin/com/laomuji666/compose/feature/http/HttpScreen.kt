@@ -23,7 +23,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeButton
 import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.res.R
 
 @Composable
@@ -60,7 +60,7 @@ private fun HttpScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = stringResource(id = R.string.string_demo_screen_http_demo),
                 onBackClick = onBackClick
             )
@@ -70,7 +70,7 @@ private fun HttpScreenUi(
         Text(
             text = stringResource(id = R.string.string_http_screen_is_online, uiState.isConnect),
             style = WeTheme.typography.emTitle,
-            color = WeTheme.colorScheme.fontColor90,
+            color = WeTheme.colorScheme.fontColorDark,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center
         )
@@ -83,7 +83,7 @@ private fun HttpScreenUi(
             text = stringResource(id = R.string.string_http_screen_post_demo),
             onClick = { onAction(HttpScreenAction.CreateUser) }
         )
-        Text(text = uiState.responseText, color = WeTheme.colorScheme.fontColor90)
+        Text(text = uiState.responseText, color = WeTheme.colorScheme.fontColorDark)
     }
 }
 

@@ -26,7 +26,7 @@ import com.laomuji666.compose.core.ui.we.widget.WeButtonColor
 import com.laomuji666.compose.core.ui.we.widget.WeButtonType
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
 import com.laomuji666.compose.core.ui.we.widget.WeTableInput
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.res.R.string
 
 @Composable
@@ -65,7 +65,7 @@ private fun BiometricScreenUi(
     }
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(title = text)
+            WeTopActionBar(title = text)
         }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {

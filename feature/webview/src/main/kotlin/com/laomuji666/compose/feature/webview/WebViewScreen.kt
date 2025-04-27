@@ -26,7 +26,7 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.More
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBarAction
 
 @Composable
@@ -55,7 +55,7 @@ private fun WebViewScreenUi(
     var webView: WebView? by remember { mutableStateOf(null) }
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = uiState.title,
                 onBackClick = {
                     webView?.run {

@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji666.compose.core.ui.clickableDebounce
-import com.laomuji666.compose.core.ui.theme.QuicklyTheme
+import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.ChatsSelect
 import com.laomuji666.compose.core.ui.we.icons.ChatsUnselect
@@ -41,7 +41,7 @@ fun RowScope.WeBottomNavigationBarItem(
     onClick: () -> Unit
 ) {
     val color =
-        if (selected) WeTheme.colorScheme.navigationBarSelect else WeTheme.colorScheme.navigationBarUnSelect
+        if (selected) WeTheme.colorScheme.bottomNavigationBarSelect else WeTheme.colorScheme.bottomNavigationBarUnSelect
     Column(
         modifier = Modifier
             .weight(1f)
@@ -88,7 +88,6 @@ fun WeBottomNavigationBar(
 ) {
     Column {
         WeTableRowOutline(
-            color = WeTheme.colorScheme.navigationBarOutline,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
         Row(
@@ -106,7 +105,7 @@ fun WeBottomNavigationBar(
 @Composable
 fun PreviewWeBottomNavigationBar() {
     var selected by remember { mutableIntStateOf(0) }
-    QuicklyTheme {
+    DefaultWeTheme {
         WeBottomNavigationBar {
             WeBottomNavigationBarItem(
                 title = "微信",

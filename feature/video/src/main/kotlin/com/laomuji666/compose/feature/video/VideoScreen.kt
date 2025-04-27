@@ -70,10 +70,10 @@ fun VideoScreen(
                 imageVector = WeIcons.More,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColor90),
+                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorDark),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(WeTheme.dimens.navigationBarIconSize),
+                    .size(WeTheme.dimens.actionIconSize),
             )
         }
     }

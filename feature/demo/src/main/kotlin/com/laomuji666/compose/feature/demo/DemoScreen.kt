@@ -22,7 +22,7 @@ import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBar
 import com.laomuji666.compose.core.ui.we.widget.WeBottomNavigationBarItem
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTopNavigationBar
+import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 import com.laomuji666.compose.feature.demo.device.DeviceDemoScreen
 import com.laomuji666.compose.feature.demo.feature.FeatureDemoScreen
 import com.laomuji666.compose.feature.demo.ui.UiDemoScreen
@@ -71,7 +71,7 @@ fun DemoScreen(
     val coroutineScope = rememberCoroutineScope()
     WeScaffold(
         topBar = {
-            WeTopNavigationBar(
+            WeTopActionBar(
                 title = when (DemoSelectEnum.entries[pagerState.currentPage]) {
                     DemoSelectEnum.FEATURE -> stringResource(id = R.string.string_demo_screen_navigation_feature)
                     DemoSelectEnum.DEVICE -> stringResource(id = R.string.string_demo_screen_navigation_device)

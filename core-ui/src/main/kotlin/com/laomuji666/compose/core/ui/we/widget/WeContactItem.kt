@@ -40,25 +40,24 @@ fun WeContactItem(
                 contentDescription = null,
                 placeholder = painterResource(id = com.laomuji666.compose.res.R.mipmap.ic_launcher),
                 modifier = Modifier
-                    .size(WeTheme.dimens.contactIconSize)
-                    .clip(RoundedCornerShape(WeTheme.dimens.contactIconRoundedCornerDp)),
+                    .size(WeTheme.dimens.tableRowIconSize)
+                    .clip(RoundedCornerShape(WeTheme.dimens.tableRowIconRoundedCornerDp)),
                 contentScale = ContentScale.Crop
             )
-            Spacer(modifier = Modifier.width(WeTheme.dimens.listPaddingHorizontal))
+            Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowPaddingHorizontal))
         },
         center = {
             Column {
                 Text(
                     text = text,
                     style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColor90
+                    color = WeTheme.colorScheme.fontColorDark
                 )
             }
         },
         weTableRowType = WeTableRowType.SINGLE,
-        outlineModifier = Modifier.padding(start = WeTheme.dimens.contactIconSize + WeTheme.dimens.listPaddingHorizontal * 2),
+        outlineModifier = Modifier.padding(start = WeTheme.dimens.tableRowIconSize + WeTheme.dimens.tableRowPaddingHorizontal * 2),
         weTableRowOutlineType = WeTableRowOutlineType.FULL,
-        clickTimeout = 1500L,
         onClick = onClick,
     )
 }

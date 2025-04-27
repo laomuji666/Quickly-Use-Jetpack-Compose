@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji666.compose.core.ui.clickableDebounce
@@ -27,7 +28,6 @@ fun WeButton(
     weButtonType: WeButtonType = WeButtonType.SMALL,
     weButtonColor: WeButtonColor = WeButtonColor.PRIMARY,
     text: String,
-    clickTimeout: Long = 200L,
     onClick: () -> Unit,
 ) {
     val buttonWidth = when (weButtonType) {
@@ -61,7 +61,7 @@ fun WeButton(
         modifier = Modifier
             .clip(RoundedCornerShape(buttonRoundedCornerDp))
             .defaultMinSize(minWidth = buttonWidth, minHeight = buttonHeight)
-            .clickableDebounce(onClick = onClick, timeout = clickTimeout)
+            .clickableDebounce(onClick = onClick)
             .background(buttonColor),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
@@ -70,10 +70,12 @@ fun WeButton(
             text = text,
             style = WeTheme.typography.emTitle,
             color = textColor,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier.ifCondition(
-                condition = weButtonType != WeButtonType.WARP,
-                onTrue = { padding(horizontal = 0.dp) },
-                onFalse = { padding(horizontal = WeTheme.dimens.navigationBarPaddingHorizontal) }
+                condition = weButtonType == WeButtonType.WARP,
+                onTrue = { padding(horizontal = WeTheme.dimens.warpButtonHorizontalPaddingDp) },
+                onFalse = { padding(horizontal = 0.dp) }
             )
         )
     }

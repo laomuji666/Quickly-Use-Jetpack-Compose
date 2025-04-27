@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
@@ -41,7 +40,7 @@ fun WeTableSwitchRow(
             Text(
                 text = title,
                 style = WeTheme.typography.title,
-                color = WeTheme.colorScheme.fontColor90
+                color = WeTheme.colorScheme.fontColorDark
             )
         },
         end = {
@@ -59,7 +58,7 @@ fun WeSwitch(
     checked: Boolean,
     width: Dp = WeTheme.dimens.switchIconWidth,
     height: Dp = WeTheme.dimens.switchIconHeight,
-    thumbSize: Dp = height - 5.dp,
+    thumbSize: Dp = height * 0.85f,
     gap: Dp = 3.dp
 ) {
     val animationDuration = 300
@@ -82,7 +81,7 @@ fun WeSwitch(
                     IntOffset(offsetX.roundToPx(), 0)
                 }
                 .shadow(elevation = gap, shape = CircleShape)
-                .background(Color.White, shape = CircleShape)
+                .background(WeTheme.colorScheme.switchThumbColor, shape = CircleShape)
         )
     }
 }
