@@ -19,7 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.view.DragListDemo
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowClick
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.res.R
 
@@ -69,27 +69,27 @@ private fun UiDemoScreenUi(
     onPainterScreenClick:()->Unit,
 ){
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_date),
             onClick = onDateClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_scroll_connect),
             onClick = onNestedScrollConnectionScreenClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_scroll_dispatcher),
             onClick = onNestedScrollDispatcherScreenClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),
             onClick = onLongClickSortClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_painter),
             onClick = onPainterScreenClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL

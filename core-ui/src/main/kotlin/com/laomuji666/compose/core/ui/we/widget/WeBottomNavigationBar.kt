@@ -33,6 +33,25 @@ import com.laomuji666.compose.core.ui.we.icons.MeUnselect
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
+fun WeBottomNavigationBar(
+    content: @Composable RowScope.() -> Unit
+) {
+    Column {
+        WeTableRowOutline(
+            weTableRowOutlineType = WeTableRowOutlineType.FULL
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(WeTheme.colorScheme.bottomNavigationBarBackground)
+                .height(WeTheme.dimens.bottomNavigationBarHeight)
+        ) {
+            content()
+        }
+    }
+}
+
+@Composable
 fun RowScope.WeBottomNavigationBarItem(
     title: String,
     selected: Boolean,
@@ -79,25 +98,6 @@ fun RowScope.WeBottomNavigationBarItem(
             style = WeTheme.typography.footnote,
             color = color
         )
-    }
-}
-
-@Composable
-fun WeBottomNavigationBar(
-    content: @Composable RowScope.() -> Unit
-) {
-    Column {
-        WeTableRowOutline(
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
-        )
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(WeTheme.colorScheme.bottomNavigationBarBackground)
-                .height(WeTheme.dimens.bottomNavigationBarHeight)
-        ) {
-            content()
-        }
     }
 }
 

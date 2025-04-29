@@ -25,7 +25,7 @@ import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Checked
 
 @Composable
-fun WeTableRadioRow(
+fun WeTableRowRadio(
     title: String,
     checked: Boolean,
     onClick: ()->Unit = {},
@@ -72,7 +72,7 @@ private fun WeTableRadioColumn(
 ){
     Column(modifier = modifier) {
         titleList.forEachIndexed { index, title ->
-            WeTableRadioRow(
+            WeTableRowRadio(
                 title = title,
                 checked = index == currentItem,
                 weTableRowOutlineType = if(index == titleList.lastIndex) WeTableRowOutlineType.NONE else WeTableRowOutlineType.PADDING_HORIZONTAL,

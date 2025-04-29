@@ -16,7 +16,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji666.compose.core.logic.AppLanguages
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableRadioRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowRadio
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.core.ui.we.widget.WeTopActionBar
 
@@ -53,7 +53,7 @@ private fun LanguageScreenUi(
     ) {
         LazyColumn {
             items(items = uiState.appLanguageList) {
-                WeTableRadioRow(
+                WeTableRowRadio(
                     title = it.getDisplayName(context),
                     checked = it == uiState.usingLanguage,
                     onClick = {

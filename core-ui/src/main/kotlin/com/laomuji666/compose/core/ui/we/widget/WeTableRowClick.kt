@@ -17,7 +17,7 @@ import com.laomuji666.compose.core.ui.we.icons.Arrow
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 
 @Composable
-fun WeTableClickRow(
+fun WeTableRowClick(
     title: String,
     summary: String? = null,
     summaryInBottom: Boolean = false,
@@ -76,9 +76,9 @@ fun WeTableClickRow(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableClickRow1() {
+fun PreviewWeTableRowClick1() {
     DefaultWeTheme {
-        WeTableClickRow(
+        WeTableRowClick(
             title = "双行标题",
             summary = "详细信息",
             summaryInBottom = true
@@ -88,9 +88,9 @@ fun PreviewWeTableClickRow1() {
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableClickRow2() {
+fun PreviewWeTableRowClick2() {
     DefaultWeTheme {
-        WeTableClickRow(
+        WeTableRowClick(
             title = "单行标题",
             summary = "详细信息"
         )

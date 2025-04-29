@@ -30,7 +30,7 @@ import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutline
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowSwitch
 import com.laomuji666.compose.launcher.PermissionUtil
 import com.laomuji666.compose.res.R
 
@@ -99,7 +99,7 @@ fun MeScreenUi(
                 weTableRowOutlineType = WeTableRowOutlineType.SPLIT
             )
         }
-        WeTableSwitchRow(
+        WeTableRowSwitch(
             title = stringResource(id = R.string.string_ai_chat_me_screen_enable_notification),
             checked = enableNotification,
             onClick = onEnableNotificationClick

@@ -29,7 +29,7 @@ import com.laomuji666.compose.core.ui.clickableDebounce
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.widget.WeContactItem
-import com.laomuji666.compose.core.ui.we.widget.WeTableTitle
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowTitle
 import com.laomuji666.compose.feature.chat.AiChatTopBar
 import com.laomuji666.compose.res.R
 import kotlinx.coroutines.launch
@@ -81,7 +81,7 @@ private fun ContactsScreenUi(
             ) {
                 contactList.forEachIndexed { index, item ->
                     if (index == 0 || item.category != contactList[index - 1].category) {
-                        WeTableTitle(
+                        WeTableRowTitle(
                             modifier = Modifier.onGloballyPositioned {
                                 typeMap[item.category] = it.positionInRoot().y - it.size.height
                             },

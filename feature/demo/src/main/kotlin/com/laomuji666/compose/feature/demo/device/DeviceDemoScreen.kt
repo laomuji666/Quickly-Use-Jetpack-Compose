@@ -18,9 +18,9 @@ import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.view.LoadingDialog
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowClick
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji666.compose.core.ui.we.widget.WeTableSwitchRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowSwitch
 import com.laomuji666.compose.launcher.PermissionUtil
 import com.laomuji666.compose.launcher.openAlbum
 import com.laomuji666.compose.launcher.openCamera
@@ -110,34 +110,34 @@ private fun DeviceDemoScreenUi(
     onOpenContactClick: ()->Unit
 ){
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-        WeTableSwitchRow(
+        WeTableRowSwitch(
             title = stringResource(id = R.string.string_demo_screen_switch_app_logo),
             checked = uiState.enableSwitchAppLogo,
             onClick = onSwitchAppLogoClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_get_location),
             summary = uiState.location,
             onClick = onLocationClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_select_mobile_demo),
             onClick = onSelectMobileClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_open_album),
             onClick = onOpenAlbumClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_open_camera),
             onClick = onOpenCameraClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_open_contact),
             onClick = onOpenContactClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
