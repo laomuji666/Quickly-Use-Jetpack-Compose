@@ -17,8 +17,7 @@ fun LoadingDialog(loading: Boolean) {
     Dialog(onDismissRequest = {}, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         WeToast(
             weToastType = WeToastType.LOADING,
-            message = stringResource(com.laomuji666.compose.res.R.string.string_toast_loading),
-            onDismissRequest = {}
+            message = stringResource(com.laomuji666.compose.res.R.string.string_toast_loading)
         )
     }
 

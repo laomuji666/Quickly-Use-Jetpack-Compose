@@ -19,6 +19,7 @@ import com.laomuji666.compose.core.logic.common.Log
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -32,7 +33,7 @@ import kotlin.coroutines.resume
  * 1. FusedLocationProviderClient
  * 2. LocationManager
  * FusedLocationProviderClient 的准确性更高,但没有ACCESS_FINE_LOCATION权限时无法主动获取定位,只能被动接收位置,经常会出现null.
- * LocationManager 的准确性较低,但可以指定获取什么类型的定位,作为备选方案,只通过网络获取定位.
+ * LocationManager 的准确性较低,但可以指定获取什么类型的定位,作为备选方案.
  * 只有在 FusedLocationProviderClient 无法获取定位的情况才会使用 LocationManager
  */
 class DefaultLocator @Inject constructor(
@@ -49,26 +50,25 @@ class DefaultLocator @Inject constructor(
     private val locationManager =
         application.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-    override fun isEnableGps(): Boolean {
+    override fun hasLocatorProvider(): Boolean {
         return hasGpsProvider() || hasNetworkProvider()
     }
 
     @SuppressLint("MissingPermission")
-    override suspend fun getCurrentLocation(): Location? {
-        if (!isEnableGps()) {
-            Log.debug(TAG, "isEnableGps false")
-            return null
-        }
-        if (!hasCoarseLocationPermission() && !hasFineLocationPermission()) {
-            Log.debug(TAG, "hasCoarseLocationPermission && hasFineLocationPermission false")
-            return null
-        }
+    override suspend fun getCurrentLocation(): LocatorResult {
         val priority = if (hasFineLocationPermission()) {
             Log.debug(TAG, "use PRIORITY_HIGH_ACCURACY")
             Priority.PRIORITY_HIGH_ACCURACY
-        } else {
+        } else if (hasCoarseLocationPermission()) {
             Log.debug(TAG, "use PRIORITY_BALANCED_POWER_ACCURACY")
             Priority.PRIORITY_BALANCED_POWER_ACCURACY
+        } else {
+            Log.debug(TAG, "no permission")
+            return LocatorResult.PermissionDenied
+        }
+        if (!hasLocatorProvider()) {
+            Log.debug(TAG, "hasLocatorProvider false")
+            return LocatorResult.ProvidersDisabled
         }
         return try {
             withTimeout(30 * 1000) {
@@ -82,57 +82,50 @@ class DefaultLocator @Inject constructor(
                     ).apply {
                         fusedLocationProviderClient.locationAvailability.addOnSuccessListener {
                             if (it.isLocationAvailable) {
-                                Log.debug(
-                                    TAG,
-                                    "isLocationAvailable is true, use fusedLocationProviderClient"
-                                )
+                                Log.debug(TAG, "use fusedLocationProviderClient")
                                 Log.debug(TAG, "isComplete $isComplete")
                                 if (isComplete) {
                                     if (isSuccessful) {
-                                        Log.debug(TAG, "successful")
-                                        cont.safeResume(result)
+                                        Log.debug(TAG, "successful, use result")
+                                        cont.safeResume(LocatorResult.Success(result))
                                     } else {
-                                        Log.debug(TAG, "unsuccessful")
-                                        requestSingleLocation { location ->
-                                            cont.safeResume(location)
-                                        }
+                                        Log.debug(TAG, "unsuccessful, use locationManager")
+                                        requestSingleLocation(cont)
                                     }
                                 } else {
                                     addOnSuccessListener { result ->
                                         if (result != null) {
                                             Log.debug(TAG, "onSuccess $result")
-                                            cont.safeResume(result)
+                                            cont.safeResume(LocatorResult.Success(result))
                                         } else {
                                             Log.debug(TAG, "onSuccess null, use locationManager")
-                                            requestSingleLocation { location ->
-                                                cont.safeResume(location)
-                                            }
+                                            requestSingleLocation(cont)
                                         }
                                     }
                                     addOnFailureListener {
-                                        Log.debug(TAG, "onFailure")
-                                        requestSingleLocation { location ->
-                                            cont.safeResume(location)
-                                        }
+                                        Log.debug(TAG, "onFailure, use locationManager")
+                                        requestSingleLocation(cont)
                                     }
                                     addOnCanceledListener {
-                                        Log.debug(TAG, "onCancel")
-                                        cont.safeResume(null)
+                                        Log.debug(TAG, "onCancel, return null")
+                                        cont.safeResume(LocatorResult.Cancelled)
                                     }
                                 }
                             } else {
                                 Log.debug(TAG, "isLocationAvailable is false, use locationManager")
-                                requestSingleLocation { location ->
-                                    cont.safeResume(location)
-                                }
+                                requestSingleLocation(cont)
                             }
                         }
                     }
                 }
             }
         } catch (e: Exception) {
-            Log.debug(TAG, "${e.message}")
-            null
+            if (e is TimeoutCancellationException) {
+                Log.debug(TAG, "timeout, return null")
+            } else {
+                Log.debug(TAG, "${e.message}")
+            }
+            LocatorResult.Error(e)
         }
     }
 
@@ -140,6 +133,9 @@ class DefaultLocator @Inject constructor(
 
     private fun hasNetworkProvider() =
         locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+
+    private fun hasPassiveProvider() =
+        locationManager.isProviderEnabled(LocationManager.PASSIVE_PROVIDER)
 
     private fun hasCoarseLocationPermission() =
         ContextCompat.checkSelfPermission(application, ACCESS_COARSE_LOCATION) == PERMISSION_GRANTED
@@ -155,29 +151,48 @@ class DefaultLocator @Inject constructor(
 
     @SuppressLint("MissingPermission")
     private fun requestSingleLocation(
-        callback: (Location) -> Unit
+        cont: CancellableContinuation<LocatorResult>
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             val locationListener = object : LocationListenerCompat {
+                private var isCalled = false
                 override fun onLocationChanged(location: Location) {
+                    if (isCalled) {
+                        Log.debug(TAG, "requestSingleLocation ignore")
+                        return
+                    }
+                    isCalled = true
                     Log.debug(TAG, "requestSingleLocation $location")
-                    callback(location)
+                    cont.safeResume(LocatorResult.Success(location))
                     locationManager.removeUpdates(this)
                 }
             }
+
+            cont.invokeOnCancellation {
+                locationManager.removeUpdates(locationListener)
+            }
+
             if (hasGpsProvider()) {
                 locationManager.requestLocationUpdates(
-                    LocationManager.GPS_PROVIDER,
+                    LocationManager.GPS_PROVIDER, 0, 0f, locationListener, Looper.getMainLooper()
+                )
+                delay(3000)
+            }
+
+            if (hasNetworkProvider()) {
+                locationManager.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
                     0,
                     0f,
                     locationListener,
                     Looper.getMainLooper()
                 )
+                delay(5000)
             }
-            delay(3000)
-            if (hasNetworkProvider()) {
+
+            if (hasPassiveProvider()) {
                 locationManager.requestLocationUpdates(
-                    LocationManager.NETWORK_PROVIDER,
+                    LocationManager.PASSIVE_PROVIDER,
                     0,
                     0f,
                     locationListener,

@@ -1,5 +1,6 @@
 package com.laomuji666.compose.core.logic
 
+import android.app.Application
 import android.content.Intent
 
 interface Language {
@@ -22,5 +23,5 @@ interface Language {
      * 初始化语言设置
      * 在跟随系统语言时,需要调用此方法
      */
-    fun initLanguage()
+    fun initLanguage(application: Application)
 }

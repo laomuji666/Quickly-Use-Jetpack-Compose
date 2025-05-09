@@ -1,10 +1,14 @@
 package com.laomuji666.compose.core.logic
 
+import android.app.Activity
+import android.app.Application
+import android.app.Application.ActivityLifecycleCallbacks
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import android.provider.Settings
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
@@ -13,8 +17,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 class DefaultLanguage @Inject constructor(
-    @ApplicationContext context: Context,
-    cacheUtil: CacheUtil
+    @ApplicationContext context: Context, cacheUtil: CacheUtil
 ) : Language {
     companion object {
         private const val DEFAULT_LANGUAGE_USING_LANGUAGE_TAG =
@@ -22,8 +25,7 @@ class DefaultLanguage @Inject constructor(
     }
 
     private var usingLanguageTag by cacheUtil.cacheable(
-        DEFAULT_LANGUAGE_USING_LANGUAGE_TAG,
-        AppLanguages.FlowSystem.getTag()
+        DEFAULT_LANGUAGE_USING_LANGUAGE_TAG, AppLanguages.FlowSystem.getTag()
     )
 
     private val systemLocaleSettingIntent =
@@ -32,8 +34,7 @@ class DefaultLanguage @Inject constructor(
                 data = Uri.fromParts("package", context.packageName, null)
             }
             if (context.packageManager.queryIntentActivities(
-                    intent,
-                    PackageManager.MATCH_ALL
+                    intent, PackageManager.MATCH_ALL
                 ).isNotEmpty()
             ) {
                 intent
@@ -73,11 +74,23 @@ class DefaultLanguage @Inject constructor(
         return systemLocaleSettingIntent
     }
 
-    override fun initLanguage() {
-        val appUsingLanguage = getAppUsingLanguage()
-        if (appUsingLanguage != AppLanguages.FlowSystem) {
-            return
+    private val languageInitCallbacks = object : ActivityLifecycleCallbacks {
+        override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+            if (getAppUsingLanguage() == AppLanguages.FlowSystem) {
+                setAppUsingLanguage(AppLanguages.FlowSystem)
+            }
         }
-        setAppUsingLanguage(AppLanguages.FlowSystem)
+
+        override fun onActivityStarted(activity: Activity) {}
+        override fun onActivityResumed(activity: Activity) {}
+        override fun onActivityPaused(activity: Activity) {}
+        override fun onActivityStopped(activity: Activity) {}
+        override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
+        override fun onActivityDestroyed(activity: Activity) {}
+    }
+
+    override fun initLanguage(application: Application) {
+        application.unregisterActivityLifecycleCallbacks(languageInitCallbacks)
+        application.registerActivityLifecycleCallbacks(languageInitCallbacks)
     }
 }

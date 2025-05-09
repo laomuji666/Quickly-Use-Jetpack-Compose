@@ -13,7 +13,7 @@ import com.laomuji666.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji666.compose.core.logic.common.Toast
 import com.laomuji666.compose.core.ui.theme.QuicklyTheme
 import com.laomuji666.compose.core.ui.we.widget.WeScaffold
-import com.laomuji666.compose.core.ui.we.widget.WeTableClickRow
+import com.laomuji666.compose.core.ui.we.widget.WeTableRowClick
 import com.laomuji666.compose.core.ui.we.widget.WeTableRowOutlineType
 import com.laomuji666.compose.res.R
 
@@ -33,27 +33,27 @@ fun FeatureDemoScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_firebase_demo),
             onClick = onFirebaseClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_http_demo),
             onClick = onHttpClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_ai_chat),
             onClick = onAiChatClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_biometric),
             onClick = onBiometricScreenClick,
             weTableRowOutlineType = WeTableRowOutlineType.FULL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_google_login_demo),
             onClick = {
                 GoogleAuthenticate().requestLogin(
@@ -68,17 +68,17 @@ fun FeatureDemoScreen(
             },
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_youtubedl_demo),
             onClick = onYoutubeDLClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_demo_screen_web_view_demo),
             onClick = onWebViewClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
         )
-        WeTableClickRow(
+        WeTableRowClick(
             title = stringResource(id = R.string.string_language_screen_title),
             onClick = onLanguageClick,
             weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL

@@ -11,7 +11,7 @@ import androidx.compose.ui.graphics.Color
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
-fun WeTableTitle(
+fun WeTableRowTitle(
     modifier: Modifier = Modifier,
     title:String
 ){

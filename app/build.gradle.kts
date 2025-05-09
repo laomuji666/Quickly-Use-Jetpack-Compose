@@ -41,7 +41,6 @@ android {
     androidComponents {
         //强制使用传统打包方式,兼容 youtubedl
         onVariants(selector().all()) { variant ->
-            @Suppress("UnstableApiUsage")
             variant.packaging.jniLibs.useLegacyPackaging = true
         }
     }

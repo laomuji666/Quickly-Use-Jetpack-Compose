@@ -29,7 +29,7 @@ import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.WeTheme
 
 @Composable
-fun WeTableSwitchRow(
+fun WeTableRowSwitch(
     title: String,
     checked: Boolean,
     onClick: () -> Unit = {},
@@ -88,18 +88,18 @@ fun WeSwitch(
 
 @PreviewLightDark
 @Composable
-fun PreviewWeTableSwitchRow() {
+fun PreviewWeTableRowSwitch() {
     var checked1 by remember { mutableStateOf(false) }
     var checked2 by remember { mutableStateOf(true) }
     DefaultWeTheme {
         Column {
-            WeTableSwitchRow(
+            WeTableRowSwitch(
                 title = "勿扰模式",
                 checked = checked1,
                 onClick = { checked1 = !checked1 },
                 weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
             )
-            WeTableSwitchRow(
+            WeTableRowSwitch(
                 title = "消息推送",
                 checked = checked2,
                 onClick = { checked2 = !checked2 }
