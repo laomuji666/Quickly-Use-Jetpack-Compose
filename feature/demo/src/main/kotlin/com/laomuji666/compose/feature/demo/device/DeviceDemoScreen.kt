@@ -31,21 +31,18 @@ import com.laomuji666.compose.res.R
 @Composable
 fun DeviceDemoScreen(
     viewModel: DeviceDemoScreenViewModel = hiltViewModel()
-){
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LoadingDialog(loading = uiState.isLoading)
 
     val context = LocalContext.current
 
-    val selectMobile = selectMobileLauncher(
-        onSuccess = {
-            Toast.showText(context, it)
-        },
-        onFail = {
-            Toast.showText(context, "...")
-        }
-    )
+    val selectMobile = selectMobileLauncher(onSuccess = {
+        Toast.showText(context, it)
+    }, onFail = {
+        Toast.showText(context, "...")
+    })
 
     val openAlbum = openAlbum {
         Toast.showText(context, "$it")
@@ -61,55 +58,51 @@ fun DeviceDemoScreen(
 
     val launcherMultiplePermissions = PermissionUtil.getPermissionsLauncher(
         permissions = listOf(
-            ACCESS_FINE_LOCATION,
-            ACCESS_COARSE_LOCATION
-        ),
-        onCallback = { _, _, foreverDenied ->
-            if(foreverDenied.contains(ACCESS_FINE_LOCATION) && foreverDenied.contains(ACCESS_COARSE_LOCATION)){
-                Toast.showText(context = context, resId = R.string.string_permission_location_forever_denied)
+            ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
+        ), onCallback = { _, _, foreverDenied ->
+            if (foreverDenied.contains(ACCESS_FINE_LOCATION) && foreverDenied.contains(
+                    ACCESS_COARSE_LOCATION
+                )
+            ) {
+                Toast.showText(
+                    context = context, resId = R.string.string_permission_location_forever_denied
+                )
                 PermissionUtil.Setting.openSetting(context)
             }
-        }
-    )
+        })
 
-    DeviceDemoScreenUi(
-        uiState = uiState,
-        onSwitchAppLogoClick = {
-            viewModel.switchAppLogo(context)
-        },
-        onLocationClick = {
-            if(PermissionUtil.hasPermission(context, ACCESS_FINE_LOCATION) || PermissionUtil.hasPermission(context, ACCESS_COARSE_LOCATION)){
-                viewModel.getLocation(context)
-            }else{
-                launcherMultiplePermissions()
-            }
-        },
-        onSelectMobileClick = {
-            selectMobile()
-        },
-        onOpenAlbumClick = {
-            openAlbum()
-        },
-        onOpenCameraClick = {
-            openCamera()
-        },
-        onOpenContactClick = {
-            openContact()
-        }
-    )
+    DeviceDemoScreenUi(uiState = uiState, onSwitchAppLogoClick = {
+        viewModel.switchAppLogo(context)
+    }, onLocationClick = {
+        viewModel.getLocation(context = context, onPermissionDenied = {
+            launcherMultiplePermissions()
+        })
+    }, onSelectMobileClick = {
+        selectMobile()
+    }, onOpenAlbumClick = {
+        openAlbum()
+    }, onOpenCameraClick = {
+        openCamera()
+    }, onOpenContactClick = {
+        openContact()
+    })
 }
 
 @Composable
 private fun DeviceDemoScreenUi(
     uiState: DeviceDemoScreenUiState,
-    onSwitchAppLogoClick: ()->Unit,
-    onLocationClick: ()->Unit,
-    onSelectMobileClick: ()->Unit,
-    onOpenAlbumClick: ()->Unit,
-    onOpenCameraClick: ()->Unit,
-    onOpenContactClick: ()->Unit
-){
-    Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
+    onSwitchAppLogoClick: () -> Unit,
+    onLocationClick: () -> Unit,
+    onSelectMobileClick: () -> Unit,
+    onOpenAlbumClick: () -> Unit,
+    onOpenCameraClick: () -> Unit,
+    onOpenContactClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+    ) {
         WeTableRowSwitch(
             title = stringResource(id = R.string.string_demo_screen_switch_app_logo),
             checked = uiState.enableSwitchAppLogo,
@@ -157,8 +150,7 @@ private fun PreviewDeviceDemoScreen() {
                 onSelectMobileClick = {},
                 onOpenAlbumClick = {},
                 onOpenCameraClick = {},
-                onOpenContactClick = {}
-            )
+                onOpenContactClick = {})
         }
     }
 }

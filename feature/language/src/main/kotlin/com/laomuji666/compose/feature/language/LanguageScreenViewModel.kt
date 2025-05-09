@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,7 +19,6 @@ class LanguageScreenViewModel @Inject constructor(
 ) : ViewModel() {
     private val _usingLanguage = MutableStateFlow(language.getAppUsingLanguage())
     private val _appLanguageList = MutableStateFlow(AppLanguages.getAppLanguageList())
-
 
     val uiState = combine(
         _usingLanguage,
@@ -35,7 +35,7 @@ class LanguageScreenViewModel @Inject constructor(
     ) {
         when (action) {
             is LanguageScreenAction.OnLanguageClick -> {
-                if (language.getSystemLanguagesHandleIntent() != null && action.appLanguage == AppLanguages.FlowSystem) {
+                if (action.appLanguage == AppLanguages.FlowSystem && language.getSystemLanguagesHandleIntent() != null) {
                     action.context.startActivity(language.getSystemLanguagesHandleIntent())
                     viewModelScope.launch {
                         delay(1000)
@@ -49,7 +49,9 @@ class LanguageScreenViewModel @Inject constructor(
     }
 
     private fun setAppLanguage(action: LanguageScreenAction.OnLanguageClick) {
-        _usingLanguage.value = action.appLanguage
+        _usingLanguage.update {
+            action.appLanguage
+        }
 
         language.setAppUsingLanguage(
             appLanguage = action.appLanguage
@@ -57,7 +59,11 @@ class LanguageScreenViewModel @Inject constructor(
     }
 
     fun updateLanguageStatus() {
-        _usingLanguage.value = language.getAppUsingLanguage()
-        _appLanguageList.value = AppLanguages.getAppLanguageList()
+        _usingLanguage.update {
+            language.getAppUsingLanguage()
+        }
+        _appLanguageList.update {
+            AppLanguages.getAppLanguageList()
+        }
     }
 }

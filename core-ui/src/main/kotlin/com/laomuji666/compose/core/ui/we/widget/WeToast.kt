@@ -25,17 +25,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import com.laomuji666.compose.core.ui.R
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.laomuji666.compose.core.ui.we.DefaultWeTheme
 import com.laomuji666.compose.core.ui.we.LocalWeDimens
 import com.laomuji666.compose.core.ui.we.WeTheme
 import com.laomuji666.compose.core.ui.we.icons.Done
 import com.laomuji666.compose.core.ui.we.icons.Error
+import com.laomuji666.compose.core.ui.we.icons.Loading
 import com.laomuji666.compose.core.ui.we.icons.WeIcons
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -46,7 +46,10 @@ fun WeToast(
     message: String,
     onDismissRequest: () -> Unit = {}
 ) {
-    Popup(onDismissRequest = onDismissRequest) {
+    Dialog(
+        onDismissRequest = onDismissRequest,
+        properties = DialogProperties(usePlatformDefaultWidth = false)
+    ) {
         Box(modifier = Modifier.fillMaxSize()) {
             Column(
                 modifier = Modifier
@@ -83,7 +86,7 @@ fun WeToast(
                             animationSpec = tween(durationMillis = 1000), label = ""
                         )
                         Image(
-                            painter = painterResource(id = R.drawable.loading),
+                            imageVector = WeIcons.Loading,
                             contentDescription = null,
                             contentScale = ContentScale.FillHeight,
                             modifier = Modifier
