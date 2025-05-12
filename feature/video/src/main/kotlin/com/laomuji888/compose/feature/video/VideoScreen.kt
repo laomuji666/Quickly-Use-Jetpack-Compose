@@ -70,7 +70,7 @@ fun VideoScreen(
                 imageVector = WeIcons.More,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorDark),
+                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorHeavy),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(WeTheme.dimens.actionIconSize),

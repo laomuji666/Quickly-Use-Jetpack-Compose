@@ -85,7 +85,7 @@ fun MeScreenUi(
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_name),
                         style = WeTheme.typography.emTitle,
-                        color = WeTheme.colorScheme.fontColorDark
+                        color = WeTheme.colorScheme.fontColorHeavy
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(

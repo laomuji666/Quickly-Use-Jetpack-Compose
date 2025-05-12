@@ -164,7 +164,7 @@ private fun DownloadInfoItemView(
                 modifier = Modifier
                     .align(Alignment.TopCenter)
                     .clip(RoundedCornerShape(4.dp))
-                    .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
+                    .background(WeTheme.colorScheme.fontColorHeavy.copy(alpha = 0.5f))
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
@@ -183,7 +183,7 @@ private fun DownloadInfoItemView(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(4.dp))
-                        .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
+                        .background(WeTheme.colorScheme.fontColorHeavy.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
@@ -196,7 +196,7 @@ private fun DownloadInfoItemView(
                 Box(
                     modifier = Modifier
                         .clip(RoundedCornerShape(4.dp))
-                        .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
+                        .background(WeTheme.colorScheme.fontColorHeavy.copy(alpha = 0.5f))
                         .padding(horizontal = 8.dp, vertical = 4.dp)
                 ) {
                     Text(
@@ -219,7 +219,7 @@ private fun DownloadInfoItemView(
                 modifier = Modifier
                     .align(Alignment.Center)
                     .clip(CircleShape)
-                    .background(WeTheme.colorScheme.fontColorDark.copy(alpha = 0.5f))
+                    .background(WeTheme.colorScheme.fontColorHeavy.copy(alpha = 0.5f))
                     .size(80.dp)
                     .clickableDebounce {
                         onClick(downloadInfo)

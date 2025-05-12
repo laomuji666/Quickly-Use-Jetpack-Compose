@@ -57,7 +57,10 @@ data class WeDimens(
     val chatInputHeight: Dp,
     val chatPaddingHorizontal: Dp,
     val chatAvatarSize: Dp,
-    val chatAvatarRoundedCornerDp: Dp
+    val chatAvatarRoundedCornerDp: Dp,
+
+    //联系人页面,特定尺寸
+    val categorySize: Dp,
 )
 
 val DefaultWeDimens = WeDimens(
@@ -105,7 +108,9 @@ val DefaultWeDimens = WeDimens(
     chatInputHeight = 56.dp,
     chatPaddingHorizontal = 10.dp,
     chatAvatarSize = 40.dp,
-    chatAvatarRoundedCornerDp = 4.dp
+    chatAvatarRoundedCornerDp = 4.dp,
+
+    categorySize = 20.dp,
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }

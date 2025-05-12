@@ -31,7 +31,7 @@ fun WeTableRowClick(
                     Text(
                         text = title,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColorDark
+                        color = WeTheme.colorScheme.fontColorHeavy
                     )
                     summary?.let {
                         Text(
@@ -45,7 +45,7 @@ fun WeTableRowClick(
                 Text(
                     text = title,
                     style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColorDark
+                    color = WeTheme.colorScheme.fontColorHeavy
                 )
             }
         },

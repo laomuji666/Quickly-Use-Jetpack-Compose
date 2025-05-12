@@ -149,7 +149,7 @@ private fun SelectYearUi(
                     .clickable {
                         onYearClick(item)
                     },
-                color = if (currentYear == item) WeTheme.colorScheme.fontColorDark else WeTheme.colorScheme.fontColorLight
+                color = if (currentYear == item) WeTheme.colorScheme.fontColorHeavy else WeTheme.colorScheme.fontColorLight
             )
         }
     }
@@ -265,7 +265,7 @@ private fun MonthDetailUi(
                                         onMonthClick(dateDetail.month)
                                         onDayClick(day)
                                     },
-                                color = if (uiState.currentYear == dateDetail.year && uiState.currentMonth == dateDetail.month && uiState.currentDay == day) WeTheme.colorScheme.primaryButton else WeTheme.colorScheme.fontColorDark
+                                color = if (uiState.currentYear == dateDetail.year && uiState.currentMonth == dateDetail.month && uiState.currentDay == day) WeTheme.colorScheme.primaryButton else WeTheme.colorScheme.fontColorHeavy
                             )
                         }
                     }

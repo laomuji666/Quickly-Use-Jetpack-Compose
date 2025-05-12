@@ -96,7 +96,7 @@ private fun FirebasePermissionSlot(
     updatePushToken:()->Unit
 ){
     if(PermissionUtil.hasPostNotificationPermission(LocalContext.current) && pushToken.isNotEmpty()){
-        Text(text = pushToken, color = WeTheme.colorScheme.fontColorDark)
+        Text(text = pushToken, color = WeTheme.colorScheme.fontColorHeavy)
     }else{
         FirebaseScreenSlot(text = stringResource(id = R.string.string_firebase_screen_notification), onClick = {
             updatePushToken()

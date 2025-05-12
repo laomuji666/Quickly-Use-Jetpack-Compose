@@ -10,7 +10,7 @@ data class WeColorScheme(
     val cursorColor: Color,
 
     //重字体色
-    val fontColorDark: Color,
+    val fontColorHeavy: Color,
     //轻字体色
     val fontColorLight: Color,
     //异常字体色
@@ -52,13 +52,16 @@ data class WeColorScheme(
     val toastBackgroundColor: Color,
     val onToastBackgroundColor: Color,
 
-
     //聊天页面,特定颜色
     val chatInputBackground: Color,
     val chatMessageBackgroundSend: Color,
     val chatMessageBackgroundReceive: Color,
     val chatMessageTextSend: Color,
     val chatMessageTextReceive: Color,
+
+    //联系人页面,特定颜色
+    val categoryTextColor: Color,
+    val categoryBackground: Color,
 )
 
 val LightWeColorScheme = WeColorScheme(
@@ -66,7 +69,7 @@ val LightWeColorScheme = WeColorScheme(
     cursorColor = WeColors.Color_07C160,
 
 
-    fontColorDark = WeColors.Color_000000_90,
+    fontColorHeavy = WeColors.Color_000000_90,
     fontColorLight = WeColors.Color_000000_50,
 
 
@@ -104,6 +107,9 @@ val LightWeColorScheme = WeColorScheme(
     chatMessageBackgroundReceive = WeColors.Color_FFFFFFFF,
     chatMessageTextSend = WeColors.Color_000000_90,
     chatMessageTextReceive = WeColors.Color_000000_90,
+
+    categoryTextColor = WeColors.Color_FFFFFF_90,
+    categoryBackground = WeColors.Color_07C160,
 )
 
 val DarkWeColorScheme = WeColorScheme(
@@ -111,7 +117,7 @@ val DarkWeColorScheme = WeColorScheme(
     cursorColor = WeColors.Color_07C160,
 
 
-    fontColorDark = WeColors.Color_FFFFFF_90,
+    fontColorHeavy = WeColors.Color_FFFFFF_90,
     fontColorLight = WeColors.Color_FFFFFF_50,
 
 
@@ -149,6 +155,9 @@ val DarkWeColorScheme = WeColorScheme(
     chatMessageBackgroundReceive = WeColors.Color_191919,
     chatMessageTextSend = WeColors.Color_000000_90,
     chatMessageTextReceive = WeColors.Color_FFFFFF_90,
+
+    categoryTextColor = WeColors.Color_FFFFFF_90,
+    categoryBackground = WeColors.Color_07C160,
 )
 
 internal val LocalWeColorScheme = staticCompositionLocalOf { LightWeColorScheme }

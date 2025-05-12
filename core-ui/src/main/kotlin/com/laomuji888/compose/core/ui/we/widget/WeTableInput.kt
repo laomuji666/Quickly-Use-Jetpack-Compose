@@ -47,7 +47,7 @@ fun WeTableInput(
                     Text(
                         text = it,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColorDark,
+                        color = WeTheme.colorScheme.fontColorHeavy,
                         modifier = Modifier.width(WeTheme.dimens.tableLabelWidth)
                     )
                     Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowInnerPaddingHorizontal))
@@ -81,7 +81,7 @@ fun WeTableInput(
                             }
                         }
                     },
-                    textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColorDark),
+                    textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColorHeavy),
                     cursorBrush = SolidColor(WeTheme.colorScheme.cursorColor),
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(

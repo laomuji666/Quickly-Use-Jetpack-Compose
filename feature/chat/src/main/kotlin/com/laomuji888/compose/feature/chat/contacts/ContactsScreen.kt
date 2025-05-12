@@ -1,43 +1,56 @@
 package com.laomuji888.compose.feature.chat.contacts
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollBy
+import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.layout.positionInRoot
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.logic.database.entity.ContactInfoEntity
-import com.laomuji888.compose.core.logic.database.entity.getTypeList
 import com.laomuji888.compose.core.ui.clickableDebounce
+import com.laomuji888.compose.core.ui.ifCondition
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.widget.WeContactItem
 import com.laomuji888.compose.core.ui.we.widget.WeTableRowTitle
 import com.laomuji888.compose.feature.chat.AiChatTopBar
+import com.laomuji888.compose.feature.chat.contacts.ContactsScreenUiState.ContactInfo
 import com.laomuji888.compose.res.R
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 @Composable
 fun ContactsScreen(
-    viewModel: ContactsViewModel = hiltViewModel(),
-    onContactClick: (ContactInfoEntity) -> Unit
+    viewModel: ContactsViewModel = hiltViewModel(), onContactClick: (ContactInfoEntity) -> Unit
 ) {
     LaunchedEffect(Unit) {
         viewModel.onAction(ContactsScreenAction.UpdateContactList)
@@ -47,76 +60,178 @@ fun ContactsScreen(
     Column(modifier = Modifier.fillMaxSize()) {
         AiChatTopBar(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_message),
-            onMenuClick = {}
-        )
+            onMenuClick = {})
         ContactsScreenUi(
-            contactList = uiState.contactList,
-            onContactClick = onContactClick
+            contactInfoList = uiState.contactInfoList, onContactClick = onContactClick
         )
     }
 }
 
 @Composable
 private fun ContactsScreenUi(
-    paddingTop: Dp = WeTheme.dimens.topActionBar,
-    contactList: List<ContactInfoEntity>,
-    onContactClick: (ContactInfoEntity) -> Unit
+    contactInfoList: List<ContactInfo>, onContactClick: (ContactInfoEntity) -> Unit
 ) {
-    val paddingTopPx = with(LocalDensity.current) {
-        paddingTop.toPx()
-    }
-    val listState = rememberScrollState()
-    val typeList = contactList.getTypeList()
-    val typeMap = mutableMapOf<String, Float>()
-    val coroutineScope = rememberCoroutineScope()
-
+    val state = rememberLazyListState()
     Box(modifier = Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .background(WeTheme.colorScheme.background)
-                .fillMaxSize(),
+        LazyColumn(
+            state = state
         ) {
-            Column(
-                modifier = Modifier.verticalScroll(state = listState)
-            ) {
-                contactList.forEachIndexed { index, item ->
-                    if (index == 0 || item.category != contactList[index - 1].category) {
-                        WeTableRowTitle(
-                            modifier = Modifier.onGloballyPositioned {
-                                typeMap[item.category] = it.positionInRoot().y - it.size.height
-                            },
-                            title = item.category
-                        )
-                    }
-                    WeContactItem(
-                        avatar = item.avatarUri,
-                        text = item.nickname,
-                        onClick = {
-                            onContactClick(item)
-                        }
+            contactInfoList.forEach {
+                item {
+                    WeTableRowTitle(
+                        modifier = Modifier, title = it.category
                     )
+                }
+                items(items = it.contactList) { item ->
+                    WeContactItem(
+                        avatar = item.avatarUri, text = item.nickname, onClick = {
+                            onContactClick(item)
+                        })
                 }
             }
         }
-        Column(
+        CategoryView(
             modifier = Modifier.align(Alignment.CenterEnd),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            typeList.forEach { item ->
-                Text(
-                    modifier = Modifier
-                        .clickableDebounce(indication = null) {
-                            coroutineScope.launch {
-                                listState.scrollBy((typeMap[item] ?: 0f) - paddingTopPx)
+            state = state,
+            contactInfoList = contactInfoList
+        )
+    }
+}
+
+@Composable
+private fun CategoryView(
+    modifier: Modifier, state: LazyListState, contactInfoList: List<ContactInfo>
+) {
+    val coroutineScope = rememberCoroutineScope()
+    var itemHeight by remember { mutableFloatStateOf(0f) }
+    var currentIndex by remember { mutableIntStateOf(-1) }
+    Box(modifier = modifier) {
+        Box(modifier = Modifier.align(Alignment.CenterEnd)) {
+            Column(
+                modifier = Modifier
+                    .onGloballyPositioned { layoutCoordinates ->
+                        itemHeight = layoutCoordinates.size.height / contactInfoList.size.toFloat()
+                    }
+                    .pointerInput(Unit) {
+                        detectVerticalDragGestures(onVerticalDrag = { change, _ ->
+                            val newIndex = (change.position.y / itemHeight).roundToInt()
+                                .coerceIn(contactInfoList.indices)
+                            if (newIndex != currentIndex) {
+                                currentIndex = newIndex
+                                coroutineScope.launch {
+                                    state.scrollToItem(
+                                        getCategoryIndex(
+                                            contactInfoList = contactInfoList, index = newIndex
+                                        )
+                                    )
+                                }
                             }
-                        }
-                        .padding(WeTheme.dimens.tableRowPaddingHorizontal / 2),
-                    text = item,
-                    style = WeTheme.typography.small,
-                    color = WeTheme.colorScheme.fontColorLight
-                )
+                        }, onDragEnd = {
+                            currentIndex = -1
+                        })
+                    },
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                for ((index, it) in contactInfoList.withIndex()) {
+                    Box(
+                        modifier = Modifier
+                            .clickableDebounce(indication = null) {
+                                coroutineScope.launch {
+                                    state.scrollToItem(
+                                        getCategoryIndex(
+                                            contactInfoList = contactInfoList, index = index
+                                        )
+                                    )
+                                }
+                            }
+                            .ifCondition(condition = index == currentIndex, onTrue = {
+                                background(
+                                    color = WeTheme.colorScheme.categoryBackground,
+                                    shape = CircleShape
+                                )
+                            })
+                            .size(
+                                WeTheme.dimens.categorySize
+                            )
+                    ) {
+                        Text(
+                            modifier = Modifier.align(Alignment.Center),
+                            text = it.category,
+                            textAlign = TextAlign.Center,
+                            style = WeTheme.typography.small,
+                            color = if (index == currentIndex) WeTheme.colorScheme.categoryTextColor else WeTheme.colorScheme.fontColorLight,
+                        )
+                    }
+                }
             }
         }
+        if (currentIndex >= 0) {
+            CategoryIndicator(
+                category = contactInfoList[currentIndex].category,
+                index = currentIndex,
+                itemHeight = with(LocalDensity.current) {
+                    itemHeight.toDp()
+                })
+        }
+    }
+
+}
+
+private fun getCategoryIndex(
+    contactInfoList: List<ContactInfo>, index: Int
+): Int {
+    val category = contactInfoList[index].category
+    var findIndex = 0
+    for (contactInfo in contactInfoList) {
+        if (contactInfo.category == category) {
+            return findIndex
+        }
+        findIndex += contactInfo.contactList.size + 1
+    }
+    return 0
+}
+
+@Composable
+private fun CategoryIndicator(
+    category: String,
+    index: Int,
+    itemHeight: Dp,
+) {
+    val color = WeTheme.colorScheme.categoryBackground
+    Box(
+        modifier = Modifier
+            .size(itemHeight)
+            .offset(
+                x = -itemHeight * 2, y = itemHeight * index
+            )
+    ) {
+        Canvas(
+            modifier = Modifier
+                .fillMaxSize()
+        ) {
+            val radius = size.width
+            val center = Offset(size.width / 2, size.height / 2)
+
+            drawCircle(
+                color = color, radius = radius, center = center
+            )
+
+            val trianglePath = Path().apply {
+                moveTo(center.x + radius + size.width / 2, center.y)
+                lineTo(center.x + radius - size.width / 2, center.y - size.width / 4)
+                lineTo(center.x + radius - size.width / 2, center.y + size.width / 4)
+                close()
+            }
+            drawPath(
+                path = trianglePath, color = color
+            )
+        }
+        Text(
+            modifier = Modifier.align(Alignment.Center),
+            text = category,
+            style = WeTheme.typography.title,
+            color = WeTheme.colorScheme.categoryTextColor,
+        )
     }
 }
 
@@ -125,27 +240,6 @@ private fun ContactsScreenUi(
 fun PreviewContactsScreenUi() {
     QuicklyTheme {
         ContactsScreenUi(
-            contactList = listOf(
-                ContactInfoEntity(
-                    account = 1,
-                    nickname = "A",
-                    category = "A",
-                    avatar = ""
-                ),
-                ContactInfoEntity(
-                    account = 2,
-                    nickname = "A",
-                    category = "A",
-                    avatar = ""
-                ),
-                ContactInfoEntity(
-                    account = 3,
-                    nickname = "A",
-                    category = "B",
-                    avatar = ""
-                )
-            ),
-            onContactClick = {}
-        )
+            contactInfoList = emptyList(), onContactClick = {})
     }
 }

@@ -62,7 +62,7 @@ fun WeTopActionBar(
         Text(
             text = title,
             style = WeTheme.typography.emTitle,
-            color = WeTheme.colorScheme.fontColorDark,
+            color = WeTheme.colorScheme.fontColorHeavy,
             modifier = Modifier.weight(1f),
             textAlign = TextAlign.Center,
             maxLines = 1,
@@ -94,7 +94,7 @@ fun WeTopNavigationBarAction(
             imageVector = imageVector,
             contentDescription = null,
             contentScale = ContentScale.FillHeight,
-            colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorDark),
+            colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorHeavy),
             modifier = Modifier
                 .align(Alignment.Center)
                 .size(WeTheme.dimens.actionIconSize),

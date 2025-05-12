@@ -19,16 +19,16 @@ class ContactsViewModel @Inject constructor(
     private val contactsRepository: ContactRepository,
     @IoCoroutineScope val ioCoroutineScope: CoroutineScope
 ) : ViewModel() {
-    private val _contactList: MutableStateFlow<List<ContactInfoEntity>> =
-        MutableStateFlow(emptyList())
+    private val _contactMap: MutableStateFlow<Map<String, List<ContactInfoEntity>>> =
+        MutableStateFlow(emptyMap())
 
-    val uiState = _contactList
-        .asStateFlow()
-        .map {
-            ContactsScreenUiState(
-                contactList = it
+    val uiState = _contactMap.asStateFlow().map { it ->
+        ContactsScreenUiState(contactInfoList = it.map {
+            ContactsScreenUiState.ContactInfo(
+                category = it.key, contactList = it.value
             )
-        }.stateInTimeout(viewModelScope, ContactsScreenUiState())
+        })
+    }.stateInTimeout(viewModelScope, ContactsScreenUiState())
 
     fun onAction(action: ContactsScreenAction) {
         when (action) {
@@ -38,8 +38,9 @@ class ContactsViewModel @Inject constructor(
 
     private fun updateContactList() {
         ioCoroutineScope.launch {
-            contactsRepository.contactsList().collect {
-                _contactList.value = it
+            contactsRepository.contactsList().collect { it ->
+                _contactMap.value =
+                    it.sortedBy { it.nickname }.groupBy { it.category }.toSortedMap()
             }
         }
     }

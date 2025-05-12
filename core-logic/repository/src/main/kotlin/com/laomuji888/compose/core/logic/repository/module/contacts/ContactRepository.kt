@@ -10,15 +10,15 @@ class ContactRepository(
 ) {
     fun contactsList() = flow {
         //先使用缓存的列表
-        emit(contactDao.getAll())
+        val cacheContact = contactDao.getAll()
+        emit(cacheContact)
 
-        //获取后台的联系人列表, 因为没有后台,这里弄成从本地添加
-        val contacts = fakeRequestContacts()
-
-        //缓存到数据库
-        contactDao.insertAll(contacts)
-        //使用保存的列表
-        emit(contactDao.getAll())
+        //这里用假数据代替,实际应该不管是否为空都要从后台获取
+        if (cacheContact.isEmpty()) {
+            val contacts = fakeRequestContacts() + fakeRandomContacts()
+            contactDao.insertAll(contacts)
+            emit(contacts)
+        }
     }.catch {
         it.printStackTrace()
         emit(ArrayList())
@@ -29,93 +29,104 @@ class ContactRepository(
             ContactInfoEntity(
                 account = 10000,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_ragdoll_cat.png",
-                category = "Pet",
+                category = "P",
                 nickname = "Ragdoll cat"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10001,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_golden_dog.png",
-                category = "Pet",
+                category = "P",
                 nickname = "Golden retriever"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10002,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_parrot.png",
-                category = "Pet",
+                category = "P",
                 nickname = "Parrot"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10003,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_siberian_husky.png",
-                category = "Pet",
+                category = "P",
                 nickname = "Siberian Husky"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10004,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_british_shorthair.png",
-                category = "Pet",
+                category = "P",
                 nickname = "British Shorthair"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10005,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_sheep.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Sheep"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10006,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_tiger.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Tiger"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10007,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_mouse.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Mouse"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10008,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_giraffe.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Giraffe"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 1009,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_eagle.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Eagle"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10010,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_wolf.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Wolf"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10011,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_leopard.png",
-                category = "Animal",
+                category = "A",
                 nickname = "Leopard"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10012,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_bee.png",
-                category = "Insect",
+                category = "I",
                 nickname = "Bee"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10013,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_butterfly.png",
-                category = "Insect",
+                category = "I",
                 nickname = "Butterfly"
-            ),
-            ContactInfoEntity(
+            ), ContactInfoEntity(
                 account = 10014,
                 avatar = "content://compose.laomuji888.contact.assert/avatar/avatar_mantis.png",
-                category = "Insect",
+                category = "I",
                 nickname = "Mantis"
             )
         )
+    }
+
+    private fun fakeRandomContacts(): List<ContactInfoEntity> {
+        val result = mutableListOf<ContactInfoEntity>()
+        for (i in 1..999) {
+            val category = randomCategory()
+            val name = category + randomName()
+            result.add(
+                ContactInfoEntity(
+                    account = (20000 + i).toLong(),
+                    avatar = "https://picsum.photos/seed/lmj$i/200.webp",
+                    category = category,
+                    nickname = name
+                )
+            )
+        }
+        return result
+    }
+
+    private fun randomCategory(): String {
+        return ('A'..'Z').random().toString()
+    }
+
+    private fun randomName(): String {
+        return randomCategory() + randomCategory() + randomCategory()
     }
 }

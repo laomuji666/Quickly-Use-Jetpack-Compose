@@ -7,24 +7,14 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class ContactInfoEntity(
-    @PrimaryKey var account:Long,
+    @PrimaryKey var account: Long,
     var nickname: String,
     var category: String,
     var avatar: String
-){
+) {
     val contentUri: Uri
         get() = "laomuji://compose.laomuji888.com/chat/$account".toUri()
 
     val avatarUri: Uri
         get() = avatar.toUri()
-}
-
-fun List<ContactInfoEntity>.getTypeList():List<String> {
-    val typeList = mutableListOf<String>()
-    forEach {
-        if(!typeList.contains(it.category)){
-            typeList.add(it.category)
-        }
-    }
-    return typeList
 }

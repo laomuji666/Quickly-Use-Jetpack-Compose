@@ -54,7 +54,7 @@ fun WeActionSheetRow(
                     Text(
                         text = text,
                         style = WeTheme.typography.title,
-                        color = WeTheme.colorScheme.fontColorDark
+                        color = WeTheme.colorScheme.fontColorHeavy
                     )
                 }
 

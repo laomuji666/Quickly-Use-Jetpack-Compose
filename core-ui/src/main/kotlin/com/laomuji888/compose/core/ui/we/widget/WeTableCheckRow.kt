@@ -39,7 +39,7 @@ fun WeTableCheckRow(
             Text(
                 text = title,
                 style = WeTheme.typography.title,
-                color = WeTheme.colorScheme.fontColorDark
+                color = WeTheme.colorScheme.fontColorHeavy
             )
         },
         onClick = onClick,
