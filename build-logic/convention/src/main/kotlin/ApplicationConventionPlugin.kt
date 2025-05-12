@@ -53,14 +53,14 @@ class ApplicationConventionPlugin : Plugin<Project> {
             getByName("debug") {
                 storeFile = project.file("../keystore/key.jks")
                 keyAlias = "laomuji"
-                storePassword = "laomuji666"
-                keyPassword = "laomuji666"
+                storePassword = "laomuji888"
+                keyPassword = "laomuji888"
             }
             create("release") {
                 storeFile = project.file("../keystore/key.jks")
                 keyAlias = "laomuji"
-                storePassword = "laomuji666"
-                keyPassword = "laomuji666"
+                storePassword = "laomuji888"
+                keyPassword = "laomuji888"
             }
         }
         //打包配置

@@ -4,7 +4,7 @@
     <application>
         <provider
             android:name=".module.contacts.ContactAssetFileProvider"
-            android:authorities="compose.laomuji666.contact.assert"
+            android:authorities="compose.laomuji888.contact.assert"
             android:exported="true"
             tools:ignore="ExportedContentProvider" />
     </application>

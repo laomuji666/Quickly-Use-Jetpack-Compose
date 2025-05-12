@@ -103,9 +103,9 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
 # build-logic
-laomuji666-compose-hilt = { id = "laomuji666.compose.hilt", version = "unspecified" }
-laomuji666-compose-application = { id = "laomuji666.compose.application", version = "unspecified" }
-laomuji666-compose-library = { id = "laomuji666.compose.library", version = "unspecified" }
+laomuji888-compose-hilt = { id = "laomuji888.compose.hilt", version = "unspecified" }
+laomuji888-compose-application = { id = "laomuji888.compose.application", version = "unspecified" }
+laomuji888-compose-library = { id = "laomuji888.compose.library", version = "unspecified" }
 
 
 

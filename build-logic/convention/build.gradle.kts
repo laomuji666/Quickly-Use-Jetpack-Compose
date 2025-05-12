@@ -4,7 +4,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.laomuji666.compose.buildlogic"
+group = "com.laomuji888.compose.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_21
@@ -37,15 +37,15 @@ tasks {
 gradlePlugin {
     plugins {
         register("hiltConvention") {
-            id = "laomuji666.compose.hilt"
+            id = "laomuji888.compose.hilt"
             implementationClass = "HiltConventionPlugin"
         }
         register("applicationConvention"){
-            id = "laomuji666.compose.application"
+            id = "laomuji888.compose.application"
             implementationClass = "ApplicationConventionPlugin"
         }
         register("libraryConvention"){
-            id = "laomuji666.compose.library"
+            id = "laomuji888.compose.library"
             implementationClass = "LibraryConventionPlugin"
         }
     }
