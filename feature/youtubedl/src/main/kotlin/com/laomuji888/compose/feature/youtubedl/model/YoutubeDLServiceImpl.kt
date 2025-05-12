@@ -40,11 +40,11 @@ class YoutubeDLServiceImpl @Inject constructor(
                 YoutubeDL.init(context)
                 FFmpeg.init(context)
                 Aria2c.init(context)
-            }catch (e: YoutubeDLException){
+            } catch (e: YoutubeDLException) {
                 e.printStackTrace()
             }
-            dao.getYoutubeDLInfoListOnce().toDownloadInfoList().forEach { downloadInfo->
-                if(!downloadInfo.isDone && downloadInfo.isDownloading){
+            dao.getYoutubeDLInfoListOnce().toDownloadInfoList().forEach { downloadInfo ->
+                if (!downloadInfo.isDone && downloadInfo.isDownloading) {
                     setDownloadInfo(downloadInfo.copy(isDownloading = false))
                 }
             }
@@ -72,21 +72,22 @@ class YoutubeDLServiceImpl @Inject constructor(
                 addOption("--downloader", "libaria2c.so")
             }
             val processId = System.currentTimeMillis()
-            val response: YoutubeDLResponse = YoutubeDL.getInstance().execute(request, processId.toString(), null)
+            val response: YoutubeDLResponse =
+                YoutubeDL.getInstance().execute(request, processId.toString(), null)
             json.decodeFromString<VideoInfo>(response.out)
         }
     }
 
     private fun downloadVideo(
         videoInfo: VideoInfo,
-        callback:  ((Float, Long, String) -> Unit)? = null
+        callback: ((Float, Long, String) -> Unit)? = null
     ): Boolean {
         videoInfo.runCatching {
             val url = videoInfo.originalUrl ?: videoInfo.webpageUrl ?: return false
             val request = YoutubeDLRequest(url)
             request.apply {
                 addOption("--no-mtime")
-                addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best");
+                addOption("-f", "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best")
                 addOption("-o", videoInfo.getFilename(getCachePath()))
                 addOption("--downloader", "libaria2c.so")
             }
@@ -101,13 +102,13 @@ class YoutubeDLServiceImpl @Inject constructor(
 
 
     private val downloadInfoList = dao.getYoutubeDLInfoList()
-    private fun setDownloadInfo(downloadInfo: DownloadInfo){
+    private fun setDownloadInfo(downloadInfo: DownloadInfo) {
         dao.insert(downloadInfo.toYoutubeDLInfoEntity())
     }
 
     override fun downloadVideo(
         url: String,
-        onGetInfoCallback:()->Unit
+        onGetInfoCallback: () -> Unit
     ) {
         CoroutineScope(Dispatchers.IO).launch {
             var downloadInfo = DownloadInfo(
@@ -128,20 +129,20 @@ class YoutubeDLServiceImpl @Inject constructor(
                     )
                     setDownloadInfo(downloadInfo)
 
-                    downloadVideo(videoInfo = it){ progress,_,_ ->
+                    downloadVideo(videoInfo = it) { progress, _, _ ->
                         downloadInfo = downloadInfo.copy(
                             progress = progress
                         )
                         setDownloadInfo(downloadInfo)
                     }
 
-                    if(File(downloadInfo.filename).exists()){
+                    if (File(downloadInfo.filename).exists()) {
                         downloadInfo = downloadInfo.copy(
                             progress = 100f,
                             isDone = true
                         )
                         setDownloadInfo(downloadInfo)
-                    }else{
+                    } else {
                         downloadInfo = downloadInfo.copy(
                             isDownloading = false
                         )
@@ -159,7 +160,7 @@ class YoutubeDLServiceImpl @Inject constructor(
         }
     }
 
-    private fun stopDownload(filename: String, callback: () -> Unit){
+    private fun stopDownload(filename: String, callback: () -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             YoutubeDL.destroyProcessById(filename)
             callback()
@@ -167,13 +168,13 @@ class YoutubeDLServiceImpl @Inject constructor(
     }
 
     override fun switchDownloadVideo(downloadInfo: DownloadInfo, callback: () -> Unit) {
-        if(downloadInfo.isDone){
+        if (downloadInfo.isDone) {
             return
         }
-        if(downloadInfo.isDownloading){
+        if (downloadInfo.isDownloading) {
             stopDownload(downloadInfo.filename, callback)
             setDownloadInfo(downloadInfo.copy(isDownloading = false))
-        }else{
+        } else {
             downloadVideo(url = downloadInfo.url, onGetInfoCallback = callback)
         }
     }

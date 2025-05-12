@@ -19,8 +19,7 @@ internal object DatabaseModule {
     fun provideDatabase(application: Application): Database {
         return Room
             .databaseBuilder(application, Database::class.java, "quickly_use_jetpack_compose.db")
-            .fallbackToDestructiveMigration()
-            .allowMainThreadQueries()
+            .fallbackToDestructiveMigration(false)
             .build()
     }
 

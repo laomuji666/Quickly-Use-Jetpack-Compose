@@ -1,7 +1,7 @@
 package com.laomuji888.compose.feature.video
 
 import android.content.Context
-import android.net.Uri
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.MediaItem
@@ -25,7 +25,7 @@ class VideoScreenViewModel @Inject constructor() : ViewModel() {
         if (_playerState.value == null) {
             viewModelScope.launch {
                 val exoPlayer = ExoPlayer.Builder(context).build().also {
-                    val mediaItem = MediaItem.fromUri(Uri.parse(videoUri))
+                    val mediaItem = MediaItem.fromUri(videoUri.toUri())
                     it.setMediaItem(mediaItem)
                     it.prepare()
                     it.playWhenReady = true

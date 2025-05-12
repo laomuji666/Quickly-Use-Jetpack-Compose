@@ -1,33 +1,33 @@
 [versions]
-agp = "8.9.0"
+agp = "8.9.2"
 biometric = "1.1.0"
 coilCompose = "2.7.0"
 credentials = "1.5.0"
 googleid = "1.1.1"
-kotlin = "2.0.20"
-coreKtx = "1.15.0"
-kotlinxSerializationJson = "1.7.3"
-lifecycleRuntimeKtx = "2.8.7"
+kotlin = "2.1.20"
+coreKtx = "1.16.0"
+kotlinxSerializationJson = "1.8.1"
+lifecycleRuntimeKtx = "2.9.0"
 activityCompose = "1.10.1"
-composeBom = "2025.03.00"
-ksp = "2.0.20-1.0.25"
+composeBom = "2025.05.00"
+ksp = "2.1.20-2.0.0"
 androidGradlePlugin = "8.4.2"
-hilt = "2.53.1"
+hilt = "2.56"
 androidxCoreSplashscreen = "1.0.1"
 androidxHiltNavigationCompose = "1.2.0"
-media3 = "1.5.1"
-navigationCompose = "2.8.9"
+media3 = "1.6.1"
+navigationCompose = "2.9.0"
 googleGmsGoogleServices = "4.4.2"
-firebaseBom = "33.11.0"
+firebaseBom = "33.13.0"
 googleFirebaseCrashlytics = "3.0.3"
 ktor = "2.3.12"
 playServicesAuth = "21.3.0"
-androidxRoom = "2.6.1"
+androidxRoom = "2.7.1"
 generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
 appcompat = "1.7.0"
-youtubedlAndroid = "0.17.1"
-documentfile = "1.0.1"
+youtubedlAndroid = "0.17.3"
+documentfile = "1.1.0"
 
 [libraries]
 # app
@@ -64,7 +64,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
 # google ai
-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai"}
+generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
 # serialization, Used by build logic
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 # hilt, Used by build logic
