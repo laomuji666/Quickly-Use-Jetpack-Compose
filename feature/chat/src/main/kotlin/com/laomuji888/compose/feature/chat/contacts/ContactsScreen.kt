@@ -1,18 +1,22 @@
 package com.laomuji888.compose.feature.chat.contacts
 
+import android.net.Uri
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectVerticalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,24 +28,32 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.Dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.laomuji888.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji888.compose.core.ui.clickableDebounce
 import com.laomuji888.compose.core.ui.ifCondition
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
-import com.laomuji888.compose.core.ui.we.widget.WeContactItem
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowTitle
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.row.WeRow
+import com.laomuji888.compose.core.ui.we.widget.row.WeRowType
+import com.laomuji888.compose.core.ui.we.widget.title.WeTitle
 import com.laomuji888.compose.feature.chat.AiChatTopBar
 import com.laomuji888.compose.feature.chat.contacts.ContactsScreenUiState.ContactInfo
 import com.laomuji888.compose.res.R
@@ -78,7 +90,7 @@ private fun ContactsScreenUi(
         ) {
             contactInfoList.forEach {
                 item {
-                    WeTableRowTitle(
+                    WeTitle(
                         modifier = Modifier, title = it.category
                     )
                 }
@@ -233,6 +245,47 @@ private fun CategoryIndicator(
             color = WeTheme.colorScheme.categoryTextColor,
         )
     }
+}
+
+@Composable
+fun WeContactItem(
+    avatar: Uri,
+    text: String,
+    onClick: () -> Unit,
+) {
+    val imageRequest =
+        ImageRequest.Builder(LocalContext.current).data(avatar).diskCacheKey(avatar.toString())
+            .build()
+
+    WeRow(
+        start = {
+            AsyncImage(
+                model = imageRequest,
+                contentDescription = null,
+                placeholder = painterResource(id = com.laomuji888.compose.res.R.mipmap.ic_launcher),
+                modifier = Modifier
+                    .size(WeTheme.dimens.rowIconSize)
+                    .clip(RoundedCornerShape(WeTheme.dimens.rowIconRoundedCornerDp)),
+                contentScale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(WeTheme.dimens.rowPaddingHorizontal))
+        },
+        center = {
+            Column {
+                Text(
+                    text = text,
+                    style = WeTheme.typography.title,
+                    color = WeTheme.colorScheme.fontColorHeavy
+                )
+            }
+        },
+        weTableRowType = WeRowType.Single,
+        weOutlineType = WeOutlineType.Custom(
+            start = WeTheme.dimens.rowIconSize + WeTheme.dimens.rowPaddingHorizontal * 2,
+            height = WeTheme.dimens.outlineHeight
+        ),
+        onClick = onClick,
+    )
 }
 
 @PreviewLightDark

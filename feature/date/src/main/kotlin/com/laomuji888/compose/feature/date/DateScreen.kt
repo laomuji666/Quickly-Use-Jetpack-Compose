@@ -39,8 +39,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutline
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
 import kotlin.math.abs
 
 @Composable
@@ -67,18 +67,18 @@ private fun DateScreenUi(
                 yearList = uiState.yearList,
                 onYearClick = { onAction(DateScreenAction.OnYearClick(it)) }
             )
-            WeTableRowOutline(
+            WeOutline(
                 modifier = Modifier.fillMaxWidth()
             )
         },
         bottomBar = {
-            WeTableRowOutline(
+            WeOutline(
                 modifier = Modifier.fillMaxWidth()
             )
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(WeTheme.dimens.bottomNavigationBarHeight),
+                    .height(WeTheme.dimens.bottomBarHeight),
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {

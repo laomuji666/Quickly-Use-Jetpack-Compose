@@ -46,18 +46,18 @@ private fun WeBaseContent(
     val view = LocalView.current
     val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
     if (!view.isInEditMode) {
-        val bottomNavigationBarBackground =
-            WeTheme.colorScheme.bottomNavigationBarBackground.toArgb()
+        val bottomBarBackground =
+            WeTheme.colorScheme.bottomBarBackground.toArgb()
         //每次成功重组时,设置底部导航栏颜色
         SideEffect {
             val window = (view.context as Activity).window
             if (isOldWindowInsetsApi) {
                 //API35结束的API,因为限定了版本,可以抑制DEPRECATION
                 @Suppress("DEPRECATION")
-                window.navigationBarColor = bottomNavigationBarBackground
+                window.navigationBarColor = bottomBarBackground
             } else {
                 window.decorView.setOnApplyWindowInsetsListener { view, insets ->
-                    view.setBackgroundColor(bottomNavigationBarBackground)
+                    view.setBackgroundColor(bottomBarBackground)
                     view.setPadding(
                         0,
                         0,

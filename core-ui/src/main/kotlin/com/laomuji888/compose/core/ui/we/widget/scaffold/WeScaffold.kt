@@ -1,4 +1,4 @@
-package com.laomuji888.compose.core.ui.we.widget
+package com.laomuji888.compose.core.ui.we.widget.scaffold
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

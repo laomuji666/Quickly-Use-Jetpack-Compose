@@ -1,4 +1,4 @@
-package com.laomuji888.compose.core.ui.we.widget
+package com.laomuji888.compose.core.ui.we.widget.click
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
@@ -10,21 +10,22 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.tooling.preview.PreviewLightDark
-import com.laomuji888.compose.core.ui.we.DefaultWeTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.icons.Arrow
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.row.WeRow
+import com.laomuji888.compose.core.ui.we.widget.row.WeRowType
 
 @Composable
-fun WeTableRowClick(
+fun WeClick(
     title: String,
     summary: String? = null,
     summaryInBottom: Boolean = false,
     onClick: () -> Unit = {},
-    weTableRowOutlineType: WeTableRowOutlineType = WeTableRowOutlineType.NONE
+    weOutlineType: WeOutlineType = WeOutlineType.None
 ) {
-    WeTableRow(
+    WeRow(
         start = {
             if (summaryInBottom) {
                 Column {
@@ -57,7 +58,7 @@ fun WeTableRowClick(
                         style = WeTheme.typography.title,
                         color = WeTheme.colorScheme.fontColorLight
                     )
-                    Spacer(modifier = Modifier.width(WeTheme.dimens.tableRowInnerPaddingHorizontal))
+                    Spacer(modifier = Modifier.width(WeTheme.dimens.rowInnerPaddingHorizontal))
                 }
             }
             Image(
@@ -68,31 +69,8 @@ fun WeTableRowClick(
                 modifier = Modifier.height(WeTheme.dimens.actionIconSize)
             )
         },
-        weTableRowType = if (summaryInBottom) WeTableRowType.DOUBLE else WeTableRowType.SINGLE,
+        weTableRowType = if (summaryInBottom) WeRowType.Double else WeRowType.Single,
         onClick = onClick,
-        weTableRowOutlineType = weTableRowOutlineType
+        weOutlineType = weOutlineType
     )
-}
-
-@PreviewLightDark
-@Composable
-fun PreviewWeTableRowClick1() {
-    DefaultWeTheme {
-        WeTableRowClick(
-            title = "双行标题",
-            summary = "详细信息",
-            summaryInBottom = true
-        )
-    }
-}
-
-@PreviewLightDark
-@Composable
-fun PreviewWeTableRowClick2() {
-    DefaultWeTheme {
-        WeTableRowClick(
-            title = "单行标题",
-            summary = "详细信息"
-        )
-    }
 }

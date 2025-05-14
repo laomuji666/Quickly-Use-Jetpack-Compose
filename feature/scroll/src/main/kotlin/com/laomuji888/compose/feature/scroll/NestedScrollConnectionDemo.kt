@@ -27,7 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.res.R
 
 /**

@@ -21,12 +21,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.logic.authenticate.biometric.BiometricAuthenticate
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonColor
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableInput
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonColor
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.input.WeInput
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji888.compose.res.R.string
 
 @Composable
@@ -65,19 +65,19 @@ private fun BiometricScreenUi(
     }
     WeScaffold(
         topBar = {
-            WeTopActionBar(title = text)
+            WeTopBar(title = text)
         }
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Spacer(modifier = Modifier.height(10.dp))
-            WeTableInput(
+            WeInput(
                 title = stringResource(id = string.string_biometric_screen_title_title),
                 tip = stringResource(id = string.string_biometric_screen_title_tip),
                 value = uiState.title,
                 onValueChange = {onAction(BiometricScreenAction.OnTitleChange(it))}
             )
             Spacer(modifier = Modifier.height(10.dp))
-            WeTableInput(
+            WeInput(
                 title = stringResource(id = string.string_biometric_screen_description_title),
                 tip = stringResource(id = string.string_biometric_screen_description_tip),
                 value = uiState.description,
@@ -88,7 +88,7 @@ private fun BiometricScreenUi(
             WeButton(
                 text = stringResource(id = string.string_biometric_screen_handle_title),
                 onClick = { onAction(BiometricScreenAction.HandleBiometric(context)) },
-                weButtonType = WeButtonType.BIG
+                weButtonType = WeButtonType.Big
             )
 
             if(uiState.biometricResult is BiometricAuthenticate.BiometricAuthenticateResult.NotSetBiometric){
@@ -96,8 +96,8 @@ private fun BiometricScreenUi(
                 WeButton(
                     text = stringResource(id = string.string_biometric_screen_setting_title),
                     onClick = { onAction(BiometricScreenAction.OnSettingClick(biometricLauncher!!)) },
-                    weButtonType = WeButtonType.BIG,
-                    weButtonColor = WeButtonColor.SECONDARY
+                    weButtonType = WeButtonType.Big,
+                    weButtonColor = WeButtonColor.Secondary
                 )
             }
         }

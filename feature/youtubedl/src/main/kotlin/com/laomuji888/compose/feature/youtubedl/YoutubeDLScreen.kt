@@ -38,13 +38,13 @@ import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.icons.Add
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutline
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji888.compose.core.ui.we.widget.WeToast
-import com.laomuji888.compose.core.ui.we.widget.WeToastType
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
-import com.laomuji888.compose.core.ui.we.widget.WeTopNavigationBarAction
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.toast.WeToast
+import com.laomuji888.compose.core.ui.we.widget.toast.WeToastType
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarAction
 import com.laomuji888.compose.feature.video.VideoPlayActivity
 import com.laomuji888.compose.feature.youtubedl.model.DownloadInfo
 import com.laomuji888.compose.res.R
@@ -61,7 +61,7 @@ fun YoutubeDLScreen(
 
     if (uiState.isLoading) {
         WeToast(
-            weToastType = WeToastType.LOADING,
+            weToastType = WeToastType.Loading,
             message = stringResource(R.string.string_youtubedl_screen_loading)
         )
     }
@@ -91,10 +91,10 @@ private fun YoutubeDLScreenUi(
     }
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = stringResource(R.string.string_demo_screen_youtubedl_demo),
                 actions = {
-                    WeTopNavigationBarAction(
+                    WeTopBarAction(
                         imageVector = WeIcons.Add,
                         onActionClick = {
                             showAddDownloadDialog = true
@@ -102,8 +102,8 @@ private fun YoutubeDLScreenUi(
                     )
                 }
             )
-            WeTableRowOutline(
-                weTableRowOutlineType = WeTableRowOutlineType.FULL
+            WeOutline(
+                weOutlineType = WeOutlineType.Full
             )
         }
     ) {
@@ -139,7 +139,7 @@ private fun DownloadInfoItemView(
             .padding(horizontal = 12.dp, vertical = 6.dp)
             .aspectRatio(1.77f)
             .clip(RoundedCornerShape(12.dp))
-            .background(WeTheme.colorScheme.tableRowBackground)
+            .background(WeTheme.colorScheme.rowBackground)
     ) {
         downloadInfo.thumbnail?.let {
             val imageUrl = it.replace("http://", "https://")

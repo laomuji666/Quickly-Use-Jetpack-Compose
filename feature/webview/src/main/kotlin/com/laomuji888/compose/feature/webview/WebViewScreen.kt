@@ -25,9 +25,9 @@ import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.icons.More
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
-import com.laomuji888.compose.core.ui.we.widget.WeTopNavigationBarAction
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarAction
 
 @Composable
 fun WebViewScreen(
@@ -55,7 +55,7 @@ private fun WebViewScreenUi(
     var webView: WebView? by remember { mutableStateOf(null) }
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = uiState.title,
                 onBackClick = {
                     webView?.run {
@@ -83,7 +83,7 @@ private fun WebViewScreenUi(
                     } ?: onBackClick()
                 },
                 actions = {
-                    WeTopNavigationBarAction(
+                    WeTopBarAction(
                         imageVector = WeIcons.More,
                         onActionClick = {
                             WebViewScreenUtil.useOtherAppOpen(url = uiState.url, context = context)

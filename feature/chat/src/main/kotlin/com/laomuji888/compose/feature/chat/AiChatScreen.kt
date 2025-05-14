@@ -18,12 +18,12 @@ import com.laomuji888.compose.core.ui.we.icons.MeSelect
 import com.laomuji888.compose.core.ui.we.icons.MeUnselect
 import com.laomuji888.compose.core.ui.we.icons.Search
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
-import com.laomuji888.compose.core.ui.we.widget.WeBottomNavigationBar
-import com.laomuji888.compose.core.ui.we.widget.WeBottomNavigationBarItem
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
-import com.laomuji888.compose.core.ui.we.widget.WeTopNavigationBarAction
-import com.laomuji888.compose.core.ui.we.widget.WeTopNavigationBarSpace
+import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBar
+import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBarItem
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarAction
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarActionSpace
 import com.laomuji888.compose.feature.chat.contacts.ContactsScreen
 import com.laomuji888.compose.feature.chat.me.MeScreen
 import com.laomuji888.compose.res.R
@@ -77,14 +77,14 @@ fun AiChatTopBar(
     title:String,
     onMenuClick:()->Unit
 ){
-    WeTopActionBar(
+    WeTopBar(
         title = title,
         actions = {
-            WeTopNavigationBarAction(
+            WeTopBarAction(
                 imageVector = WeIcons.Search
             )
-            WeTopNavigationBarSpace()
-            WeTopNavigationBarAction(
+            WeTopBarActionSpace()
+            WeTopBarAction(
                 imageVector = WeIcons.Add,
                 onActionClick = onMenuClick
             )
@@ -97,8 +97,8 @@ private fun BottomBar(
     pagerState: PagerState
 ){
     val coroutineScope = rememberCoroutineScope()
-    WeBottomNavigationBar {
-        WeBottomNavigationBarItem(
+    WeBottomBar {
+        WeBottomBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_contact),
             selected = pagerState.currentPage == AiScreenSelectEnum.CONTACTS.ordinal,
             onClick = {
@@ -109,7 +109,7 @@ private fun BottomBar(
             unSelectImageVector = WeIcons.ContactsUnselect,
             selectImageVector = WeIcons.ContactsSelect
         )
-        WeBottomNavigationBarItem(
+        WeBottomBarItem(
             title = stringResource(id = R.string.string_ai_chat_screen_navigation_me),
             selected = pagerState.currentPage == AiScreenSelectEnum.ME.ordinal,
             onClick = {

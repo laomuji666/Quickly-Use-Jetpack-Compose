@@ -17,10 +17,10 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.logic.common.Toast
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.LoadingDialog
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowClick
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowSwitch
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.click.WeClick
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.switc.WeSwitch
 import com.laomuji888.compose.launcher.PermissionUtil
 import com.laomuji888.compose.launcher.openAlbum
 import com.laomuji888.compose.launcher.openCamera
@@ -103,37 +103,39 @@ private fun DeviceDemoScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        WeTableRowSwitch(
+        WeSwitch(
             title = stringResource(id = R.string.string_demo_screen_switch_app_logo),
             checked = uiState.enableSwitchAppLogo,
-            onClick = onSwitchAppLogoClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            onCheckedChange = {
+                onSwitchAppLogoClick()
+            },
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_get_location),
             summary = uiState.location,
             onClick = onLocationClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_select_mobile_demo),
             onClick = onSelectMobileClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_album),
             onClick = onOpenAlbumClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_camera),
             onClick = onOpenCameraClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_contact),
             onClick = onOpenContactClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
     }
 }

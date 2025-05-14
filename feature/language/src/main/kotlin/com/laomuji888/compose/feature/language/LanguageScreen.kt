@@ -15,10 +15,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.logic.AppLanguages
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowRadio
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutlineType
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.radio.WeRadio
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.res.R
 
 @Composable
 fun LanguageScreen(
@@ -45,21 +46,21 @@ private fun LanguageScreenUi(
     val context = LocalContext.current
     WeScaffold(
         topBar = {
-            WeTopActionBar(
-                title = stringResource(id = com.laomuji888.compose.res.R.string.string_language_screen_title),
+            WeTopBar(
+                title = stringResource(id = R.string.string_language_screen_title),
                 onBackClick = onBackClick
             )
         }
     ) {
         LazyColumn {
             items(items = uiState.appLanguageList) {
-                WeTableRowRadio(
+                WeRadio(
                     title = it.getDisplayName(context),
                     checked = it == uiState.usingLanguage,
                     onClick = {
                         onAction(LanguageScreenAction.OnLanguageClick(it, context))
                     },
-                    weTableRowOutlineType = WeTableRowOutlineType.PADDING_START
+                    weOutlineType = WeOutlineType.PaddingStart
                 )
             }
         }

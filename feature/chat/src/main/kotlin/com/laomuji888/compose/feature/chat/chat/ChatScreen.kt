@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -39,13 +40,14 @@ import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.icons.More
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableInput
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutline
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
-import com.laomuji888.compose.core.ui.we.widget.WeTopNavigationBarAction
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.input.WeInput
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarAction
+import com.laomuji888.compose.res.R
 
 @Composable
 fun ChatScreen(
@@ -81,20 +83,20 @@ private fun ChatScreenUi(
 ) {
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = uiState.nickname,
                 onBackClick = onBackClick,
                 actions = {
-                    WeTopNavigationBarAction(
+                    WeTopBarAction(
                         imageVector = WeIcons.More
                     )
                 }
             )
-            WeTableRowOutline()
+            WeOutline()
         },
         bottomBar = {
             Column(modifier = Modifier.imePadding()) {
-                WeTableRowOutline()
+                WeOutline()
                 Row(
                     modifier = Modifier
                         .background(WeTheme.colorScheme.chatInputBackground)
@@ -103,16 +105,16 @@ private fun ChatScreenUi(
                         .padding(horizontal = WeTheme.dimens.chatPaddingHorizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    WeTableInput(
+                    WeInput(
                         modifier = Modifier.weight(1f),
                         value = uiState.inputText,
                         onValueChange = onInputTextChanged,
-                        imeAction = ImeAction.Send,
+                        keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
                         onImeAction = onSendInputTextClick
                     )
                     WeButton(
-                        text = stringResource(id = com.laomuji888.compose.res.R.string.string_chat_screen_send_text),
-                        weButtonType = WeButtonType.WARP,
+                        text = stringResource(id = R.string.string_chat_screen_send_text),
+                        weButtonType = WeButtonType.Warp,
                         onClick = onSendInputTextClick
                     )
                 }

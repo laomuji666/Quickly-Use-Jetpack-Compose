@@ -12,9 +12,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji888.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji888.compose.core.logic.common.Toast
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowClick
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.click.WeClick
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji888.compose.res.R
 
 @Composable
@@ -33,27 +33,27 @@ fun FeatureDemoScreen(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_firebase_demo),
             onClick = onFirebaseClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_http_demo),
             onClick = onHttpClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_ai_chat),
             onClick = onAiChatClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_biometric),
             onClick = onBiometricScreenClick,
-            weTableRowOutlineType = WeTableRowOutlineType.FULL
+            weOutlineType = WeOutlineType.Full
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_google_login_demo),
             onClick = {
                 GoogleAuthenticate().requestLogin(
@@ -66,22 +66,22 @@ fun FeatureDemoScreen(
                     }
                 )
             },
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_youtubedl_demo),
             onClick = onYoutubeDLClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_web_view_demo),
             onClick = onWebViewClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_language_screen_title),
             onClick = onLanguageClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
     }
 }

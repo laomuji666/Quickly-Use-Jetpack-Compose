@@ -43,10 +43,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.clickableDebounce
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonColor
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutline
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonColor
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji888.compose.res.R
 
 @Composable
 fun PainterScreen(
@@ -138,7 +139,7 @@ private fun PainterScreenUi(
                 )
             }
         }
-        WeTableRowOutline(modifier = Modifier.fillMaxWidth())
+        WeOutline(modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -172,7 +173,7 @@ private fun PainterScreenUi(
             }
         }
         Spacer(modifier = Modifier.height(16.dp))
-        WeTableRowOutline(modifier = Modifier.fillMaxWidth())
+        WeOutline(modifier = Modifier.fillMaxWidth())
         Spacer(modifier = Modifier.height(16.dp))
         LazyRow(
             modifier = Modifier.fillMaxWidth(),
@@ -205,9 +206,9 @@ private fun PainterScreenUi(
             horizontalArrangement = Arrangement.Center
         ) {
             WeButton(
-                weButtonType = WeButtonType.BIG,
-                weButtonColor = WeButtonColor.PRIMARY,
-                text = stringResource(id = com.laomuji888.compose.res.R.string.string_painter_screen_clear),
+                weButtonType = WeButtonType.Big,
+                weButtonColor = WeButtonColor.Primary,
+                text = stringResource(id = R.string.string_painter_screen_clear),
                 onClick = onClearCanvasClick
             )
         }

@@ -12,11 +12,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableInput
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.input.WeInput
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
 
 @Composable
 fun TemplateScreen(
@@ -45,13 +45,13 @@ private fun TemplateScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = uiState.title,
                 onBackClick = onBackClick
             )
         }
     ) {
-        WeTableInput(
+        WeInput(
             title = "",
             value = uiState.text,
             onValueChange = {
@@ -67,7 +67,7 @@ private fun TemplateScreenUi(
                 onClick = {
                     onAction(TemplateScreenAction.OnButtonClicked)
                 },
-                weButtonType = WeButtonType.BIG
+                weButtonType = WeButtonType.Big
             )
         }
     }

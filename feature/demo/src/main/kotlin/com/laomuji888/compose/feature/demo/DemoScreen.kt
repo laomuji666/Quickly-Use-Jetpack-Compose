@@ -19,10 +19,10 @@ import com.laomuji888.compose.core.ui.we.icons.Device
 import com.laomuji888.compose.core.ui.we.icons.Feature
 import com.laomuji888.compose.core.ui.we.icons.Ui
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
-import com.laomuji888.compose.core.ui.we.widget.WeBottomNavigationBar
-import com.laomuji888.compose.core.ui.we.widget.WeBottomNavigationBarItem
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
+import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBar
+import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBarItem
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji888.compose.feature.demo.device.DeviceDemoScreen
 import com.laomuji888.compose.feature.demo.feature.FeatureDemoScreen
 import com.laomuji888.compose.feature.demo.ui.UiDemoScreen
@@ -71,7 +71,7 @@ fun DemoScreen(
     val coroutineScope = rememberCoroutineScope()
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = when (DemoSelectEnum.entries[pagerState.currentPage]) {
                     DemoSelectEnum.FEATURE -> stringResource(id = R.string.string_demo_screen_navigation_feature)
                     DemoSelectEnum.DEVICE -> stringResource(id = R.string.string_demo_screen_navigation_device)
@@ -123,8 +123,8 @@ private fun DemoScreenBottomBar(
     selectedEnum: DemoSelectEnum,
     onSelectedEnumChange: (DemoSelectEnum) -> Unit,
 ) {
-    WeBottomNavigationBar {
-        WeBottomNavigationBarItem(
+    WeBottomBar {
+        WeBottomBarItem(
             unSelectImageVector = WeIcons.Feature,
             title = stringResource(id = R.string.string_demo_screen_navigation_feature),
             selected = selectedEnum == DemoSelectEnum.FEATURE,
@@ -132,7 +132,7 @@ private fun DemoScreenBottomBar(
                 onSelectedEnumChange(DemoSelectEnum.FEATURE)
             }
         )
-        WeBottomNavigationBarItem(
+        WeBottomBarItem(
             unSelectImageVector = WeIcons.Device,
             title = stringResource(id = R.string.string_demo_screen_navigation_device),
             selected = selectedEnum == DemoSelectEnum.DEVICE,
@@ -140,7 +140,7 @@ private fun DemoScreenBottomBar(
                 onSelectedEnumChange(DemoSelectEnum.DEVICE)
             }
         )
-        WeBottomNavigationBarItem(
+        WeBottomBarItem(
             unSelectImageVector = WeIcons.Ui,
             title = stringResource(id = R.string.string_demo_screen_navigation_ui),
             selected = selectedEnum == DemoSelectEnum.UI,

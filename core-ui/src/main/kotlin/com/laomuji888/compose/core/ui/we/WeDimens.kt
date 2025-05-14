@@ -9,32 +9,32 @@ data class WeDimens(
     val actionIconSize: Dp,
 
     //顶部导航 尺寸
-    val topActionBar: Dp,
-    val topActionBarPaddingHorizontal: Dp,
-    val topActionBarBarActionWidth: Dp,
-    val topActionBarActionPaddingWidth: Dp,
+    val topBarHeight: Dp,
+    val topBarPaddingHorizontal: Dp,
+    val topBarActionSpace: Dp,
 
     //底部导航 尺寸
-    val bottomNavigationBarIconSize: Dp,
-    val bottomNavigationBarHeight: Dp,
+    val bottomBarIconSize: Dp,
+    val bottomBarHeight: Dp,
 
     //按钮 尺寸
+    val buttonRondCornerDp: Dp,
     val bigButtonWidth: Dp,
     val bigButtonHeight: Dp,
-    val bigButtonRoundedCornerDp: Dp,
     val smallButtonWidth: Dp,
     val smallButtonHeight: Dp,
-    val smallButtonRoundedCornerDp: Dp,
     val warpButtonHorizontalPaddingDp: Dp,
 
-    //列表组件 尺寸
-    val tableRowSingleRowHeight: Dp,
-    val tableRowDoubleRowHeight: Dp,
-    val tableRowPaddingHorizontal: Dp,
-    val tableRowInnerPaddingHorizontal: Dp,
-    val tableRowIconSize: Dp,
-    val tableRowIconRoundedCornerDp: Dp,
-    val tableLabelWidth: Dp,
+    //Row组件 尺寸
+    val rowSingleHeight: Dp,
+    val rowDoubleHeight: Dp,
+    val rowPaddingHorizontal: Dp,
+    val rowInnerPaddingHorizontal: Dp,
+    val rowIconSize: Dp,
+    val rowIconRoundedCornerDp: Dp,
+
+    //Input 尺寸
+    val inputLabelWidth: Dp,
 
     //Action Sheet 尺寸
     val actionSheetRoundedCornerDp: Dp,
@@ -66,28 +66,26 @@ data class WeDimens(
 val DefaultWeDimens = WeDimens(
     actionIconSize = 24.dp,
 
-    topActionBar = 44.dp,
-    topActionBarPaddingHorizontal = 10.dp,
-    topActionBarBarActionWidth = 90.dp,
-    topActionBarActionPaddingWidth = 16.dp,
+    topBarHeight = 44.dp,
+    topBarPaddingHorizontal = 10.dp,
+    topBarActionSpace = 16.dp,
 
     bigButtonWidth = 320.dp,
     bigButtonHeight = 40.dp,
-    bigButtonRoundedCornerDp = 4.dp,
     smallButtonWidth = 120.dp,
     smallButtonHeight = 40.dp,
-    smallButtonRoundedCornerDp = 4.dp,
+    buttonRondCornerDp = 4.dp,
     warpButtonHorizontalPaddingDp = 10.dp,
 
-    tableRowSingleRowHeight = 54.dp,
-    tableRowDoubleRowHeight = 80.dp,
-    tableRowPaddingHorizontal = 16.dp,
-    tableRowInnerPaddingHorizontal = 8.dp,
+    rowSingleHeight = 54.dp,
+    rowDoubleHeight = 80.dp,
+    rowPaddingHorizontal = 16.dp,
+    rowInnerPaddingHorizontal = 8.dp,
 
     actionSheetRoundedCornerDp = 12.dp,
 
-    bottomNavigationBarIconSize = 26.dp,
-    bottomNavigationBarHeight = 52.dp,
+    bottomBarIconSize = 26.dp,
+    bottomBarHeight = 52.dp,
 
 
     switchIconWidth = 50.dp,
@@ -100,10 +98,10 @@ val DefaultWeDimens = WeDimens(
     outlineHeight = (0.5).dp,
     outlineSplitHeight = 8.dp,
 
-    tableRowIconSize = 40.dp,
-    tableRowIconRoundedCornerDp = 4.dp,
+    rowIconSize = 40.dp,
+    rowIconRoundedCornerDp = 4.dp,
 
-    tableLabelWidth = 60.dp,
+    inputLabelWidth = 60.dp,
 
     chatInputHeight = 56.dp,
     chatPaddingHorizontal = 10.dp,

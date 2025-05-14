@@ -18,11 +18,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonColor
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTopActionBar
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonColor
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji888.compose.launcher.PermissionUtil
 import com.laomuji888.compose.res.R
 
@@ -60,7 +60,7 @@ private fun FirebaseScreenUi(
 ){
     WeScaffold(
         topBar = {
-            WeTopActionBar(
+            WeTopBar(
                 title = stringResource(id = R.string.string_demo_screen_firebase_demo),
                 onBackClick = onBackClick
             )
@@ -85,7 +85,7 @@ private fun FirebaseScreenSlot(
     onClick:()->Unit
 ){
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.BIG, weButtonColor = WeButtonColor.PRIMARY, text = text, onClick = onClick)
+        WeButton(weButtonType = WeButtonType.Big, weButtonColor = WeButtonColor.Primary, text = text, onClick = onClick)
     }
 }
 

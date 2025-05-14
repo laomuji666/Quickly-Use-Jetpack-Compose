@@ -130,7 +130,7 @@ fun DragListDemo(
             itemContent = {item, isDrag->
                 Row(
                     modifier = Modifier.fillMaxWidth().border(1.dp, WeTheme.colorScheme.outline).height(
-                        WeTheme.dimens.topActionBar).background(
+                        WeTheme.dimens.topBarHeight).background(
                         if(isDrag){
                             WeTheme.colorScheme.primaryButton
                         }else{
@@ -167,7 +167,7 @@ private fun PreviewDragList() {
                 list = list.toList(),
                 itemContent = {item, isDrag->
                     Row(
-                        modifier = Modifier.fillMaxWidth().border(1.dp, WeTheme.colorScheme.outline).height(WeTheme.dimens.topActionBar).background(
+                        modifier = Modifier.fillMaxWidth().border(1.dp, WeTheme.colorScheme.outline).height(WeTheme.dimens.topBarHeight).background(
                             if(isDrag){
                                 WeTheme.colorScheme.primaryButton
                             }else{

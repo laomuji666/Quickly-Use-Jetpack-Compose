@@ -18,9 +18,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.DragListDemo
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowClick
-import com.laomuji888.compose.core.ui.we.widget.WeTableRowOutlineType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.click.WeClick
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji888.compose.res.R
 
 @Composable
@@ -69,30 +69,30 @@ private fun UiDemoScreenUi(
     onPainterScreenClick:()->Unit,
 ){
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState())) {
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_date),
             onClick = onDateClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_scroll_connect),
             onClick = onNestedScrollConnectionScreenClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_scroll_dispatcher),
             onClick = onNestedScrollDispatcherScreenClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),
             onClick = onLongClickSortClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
-        WeTableRowClick(
+        WeClick(
             title = stringResource(id = R.string.string_demo_screen_painter),
             onClick = onPainterScreenClick,
-            weTableRowOutlineType = WeTableRowOutlineType.PADDING_HORIZONTAL
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
     }
 }

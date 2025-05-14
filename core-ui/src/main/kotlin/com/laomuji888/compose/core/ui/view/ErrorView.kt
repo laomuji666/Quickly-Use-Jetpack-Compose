@@ -24,10 +24,10 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
-import com.laomuji888.compose.core.ui.we.widget.WeButton
-import com.laomuji888.compose.core.ui.we.widget.WeButtonColor
-import com.laomuji888.compose.core.ui.we.widget.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.WeScaffold
+import com.laomuji888.compose.core.ui.we.widget.button.WeButton
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonColor
+import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.res.R
 
 class ErrorViewContent {
@@ -72,8 +72,8 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 WeButton(
-                    weButtonType = WeButtonType.WARP,
-                    weButtonColor = WeButtonColor.WRONG,
+                    weButtonType = WeButtonType.Warp,
+                    weButtonColor = WeButtonColor.Wrong,
                     text = stringResource(id = R.string.string_error_view_refresh),
                     onClick = { isClickRefresh = true }
                 )

@@ -35,8 +35,8 @@ data class WeColorScheme(
     val pressed: Color,
 
     //列表组件背景色
-    val tableRowBackground: Color,
-    val tableRowInputBackground: Color,
+    val rowBackground: Color,
+    val rowInputBackground: Color,
 
     //开关组件颜色
     val switchThumbColor: Color,
@@ -44,9 +44,9 @@ data class WeColorScheme(
     val switchUnSelectBackground: Color,
 
     //底部导航组件颜色
-    val bottomNavigationBarSelect: Color,
-    val bottomNavigationBarUnSelect: Color,
-    val bottomNavigationBarBackground: Color,
+    val bottomBarSelect: Color,
+    val bottomBarUnSelect: Color,
+    val bottomBarBackground: Color,
 
     //Toast组件颜色
     val toastBackgroundColor: Color,
@@ -87,9 +87,9 @@ val LightWeColorScheme = WeColorScheme(
     pressed = WeColors.Color_000000_08,
     fontError = WeColors.Color_FA5151,
 
-    bottomNavigationBarBackground = WeColors.Color_EDEDED,
-    bottomNavigationBarSelect = WeColors.Color_07C160,
-    bottomNavigationBarUnSelect = WeColors.Color_000000_90,
+    bottomBarBackground = WeColors.Color_EDEDED,
+    bottomBarSelect = WeColors.Color_07C160,
+    bottomBarUnSelect = WeColors.Color_000000_90,
     toastBackgroundColor = WeColors.Color_4C4C4C_90,
     onToastBackgroundColor = WeColors.Color_FFFFFF_90,
 
@@ -98,8 +98,8 @@ val LightWeColorScheme = WeColorScheme(
     switchUnSelectBackground = WeColors.Color_000000_10,
 
 
-    tableRowBackground = WeColors.Color_FFFFFFFF,
-    tableRowInputBackground = WeColors.Color_TRANSPARENT,
+    rowBackground = WeColors.Color_FFFFFFFF,
+    rowInputBackground = WeColors.Color_TRANSPARENT,
 
 
     chatInputBackground = WeColors.Color_EDEDED,
@@ -135,9 +135,9 @@ val DarkWeColorScheme = WeColorScheme(
     pressed = WeColors.Color_FFFFFF_05,
     fontError = WeColors.Color_FA5151,
 
-    bottomNavigationBarBackground = WeColors.Color_191919,
-    bottomNavigationBarSelect = WeColors.Color_07C160,
-    bottomNavigationBarUnSelect = WeColors.Color_FFFFFF_90,
+    bottomBarBackground = WeColors.Color_191919,
+    bottomBarSelect = WeColors.Color_07C160,
+    bottomBarUnSelect = WeColors.Color_FFFFFF_90,
     toastBackgroundColor = WeColors.Color_4C4C4C_90,
     onToastBackgroundColor = WeColors.Color_FFFFFF_90,
 
@@ -146,8 +146,8 @@ val DarkWeColorScheme = WeColorScheme(
     switchUnSelectBackground = WeColors.Color_FFFFFF_08,
 
 
-    tableRowBackground = WeColors.Color_191919,
-    tableRowInputBackground = WeColors.Color_TRANSPARENT,
+    rowBackground = WeColors.Color_191919,
+    rowInputBackground = WeColors.Color_TRANSPARENT,
 
 
     chatInputBackground = WeColors.Color_191919,
