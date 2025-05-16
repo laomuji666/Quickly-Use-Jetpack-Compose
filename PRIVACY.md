@@ -1,6 +1,6 @@
 ## Privacy Policy
 
-Quickly-Use-Jetpack-Compose (hereinafter referred to as "this project") is an open-source project developed by [laomuji666](https://github.com/laomuji666).
+Quickly-Use-Jetpack-Compose (hereinafter referred to as "this project") is an open-source project developed by [laomuji888](https://github.com/laomuji888).
 
 **Data Collection**
 

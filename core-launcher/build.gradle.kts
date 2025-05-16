@@ -1,9 +1,9 @@
 plugins {
-    alias(libs.plugins.laomuji666.compose.library)
+    alias(libs.plugins.laomuji888.compose.library)
 }
 
 android {
-    namespace = "com.laomuji666.compose.core.launcher"
+    namespace = "com.laomuji888.compose.core.launcher"
 }
 
 dependencies {

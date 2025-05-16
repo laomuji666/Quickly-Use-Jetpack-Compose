@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.laomuji666.compose.application)
-    alias(libs.plugins.laomuji666.compose.hilt)
+    alias(libs.plugins.laomuji888.compose.application)
+    alias(libs.plugins.laomuji888.compose.hilt)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
 }
@@ -16,11 +16,11 @@ class AppHelloWorldPlugin : Plugin<Project> {
 //其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
 android {
     //命名空间,尽量和applicationId一致,涉及到一些文件的路径.
-    namespace = "com.laomuji666.compose"
+    namespace = "com.laomuji888.compose"
 
     //默认配置
     defaultConfig {
-        applicationId = "com.laomuji666.compose"
+        applicationId = "com.laomuji888.compose"
         versionCode = 12
         versionName = "1.2"
     }

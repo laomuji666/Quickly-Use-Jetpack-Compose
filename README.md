@@ -102,4 +102,4 @@ Quickly-Use-Jetpack-Compose
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=laomuji666/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji666/Quickly-Use-Jetpack-Compose&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=laomuji888/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji888/Quickly-Use-Jetpack-Compose&Date)

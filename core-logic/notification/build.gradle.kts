@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.laomuji666.compose.library)
-    alias(libs.plugins.laomuji666.compose.hilt)
+    alias(libs.plugins.laomuji888.compose.library)
+    alias(libs.plugins.laomuji888.compose.hilt)
 }
 
 android {
-    namespace = "com.laomuji666.compose.core.logic.notification"
+    namespace = "com.laomuji888.compose.core.logic.notification"
 }
 
 dependencies {
