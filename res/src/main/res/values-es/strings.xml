@@ -9,9 +9,9 @@
     <string name="string_error_view_title">Algo salió mal</string>
     <string name="string_error_view_content">Verifique la red o intente nuevamente más tarde</string>
     <string name="string_error_view_refresh">Actualizar la página actual</string>
-    <string name="string_demo_screen_navigation_feature">Características</string>
-    <string name="string_demo_screen_navigation_device">Dispositivo</string>
-    <string name="string_demo_screen_navigation_ui">IU</string>
+    <string name="string_main_screen_page_features">Características</string>
+    <string name="string_main_screen_page_settings">Configuración</string>
+    <string name="string_main_screen_page_ui">Ui</string>
     <string name="string_demo_screen_painter">Lienzo de pintura</string>
     <string name="string_demo_screen_date">Calendario personalizado</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>

@@ -1,4 +1,4 @@
-package com.laomuji888.compose.feature.demo.ui
+package com.laomuji888.compose.feature.main.ui
 
 data class UiDemoScreenUiState(
     val dragList: List<String> = emptyList(),
