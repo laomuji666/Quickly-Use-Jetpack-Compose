@@ -8,8 +8,7 @@
 
 # 架构
 
-Quickly-Use-Jetpack-Compose
-使用了大部分架构组件,但并没有完全遵守[官方架构指南](https://developer.android.com/topic/architecture?hl=zh-cn).
+Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in Android App](https://github.com/android/nowinandroid).
 
 ## 架构组件
 
@@ -21,8 +20,6 @@ Quickly-Use-Jetpack-Compose
 # 设计系统
 
 自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统,有白天和夜间两种颜色模式,也可以添加更多颜色模式.
-
-## Theme
 
 + 竖屏以375宽度适配屏幕,横屏不适配正常显示.
 + WeTheme: 替代MaterialTheme.
