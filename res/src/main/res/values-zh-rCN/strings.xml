@@ -87,4 +87,10 @@
     <string name="string_web_view_screen_open_browser_fail">该链接无法由外部打开,已复制链接到剪切板.</string>
     <string name="string_language_system">系统语言</string>
     <string name="string_language_screen_title">多语言</string>
+    <string name="string_theme_dialog_title">主题</string>
+    <string name="string_theme_dialog_we_theme_system">系统主题</string>
+    <string name="string_theme_dialog_we_theme_light">浅色主题</string>
+    <string name="string_theme_dialog_we_theme_dark">深色主题</string>
+    <string name="string_theme_dialog_we_theme_blue">蓝色主题</string>
+    <string name="string_theme_dialog_we_theme_cancel">取消</string>
 </resources>

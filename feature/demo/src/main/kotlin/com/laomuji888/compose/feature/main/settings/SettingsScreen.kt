@@ -5,12 +5,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.theme.WeThemeSettingDialog
 import com.laomuji888.compose.feature.main.MainScreenAction
 import com.laomuji888.compose.res.R
 
@@ -27,6 +32,11 @@ fun SettingsScreen(
 fun SettingsScreenUi(
     onAction: (MainScreenAction) -> Unit,
 ) {
+    var showThemeSettingDialog by rememberSaveable { mutableStateOf(false) }
+    WeThemeSettingDialog(showThemeSettingDialog) {
+        showThemeSettingDialog = false
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -37,8 +47,12 @@ fun SettingsScreenUi(
                 onAction(MainScreenAction.OnLanguageClick)
             }, weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeClick(
+            title = stringResource(id = R.string.string_theme_dialog_title), onClick = {
+                showThemeSettingDialog = true
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
     }
-
 }
 
 @Preview

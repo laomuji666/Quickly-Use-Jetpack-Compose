@@ -63,7 +63,7 @@ data class WeDimens(
     val categorySize: Dp,
 )
 
-val DefaultWeDimens = WeDimens(
+val WeDimensDefault = WeDimens(
     actionIconSize = 24.dp,
 
     topBarHeight = 44.dp,
@@ -111,4 +111,4 @@ val DefaultWeDimens = WeDimens(
     categorySize = 20.dp,
 )
 
-internal val LocalWeDimens = staticCompositionLocalOf { DefaultWeDimens }
+internal val LocalWeDimens = staticCompositionLocalOf { WeDimensDefault }

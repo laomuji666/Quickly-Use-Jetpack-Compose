@@ -12,6 +12,7 @@ import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -48,6 +49,8 @@ class ConnectivityObserver(
                             networkCapabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)
                         Log.debug(TAG, "onCapabilitiesChanged: $connected")
                         trySend(connected)
+                    }else{
+                        trySend(true)
                     }
                 }
 
@@ -75,7 +78,7 @@ class ConnectivityObserver(
             awaitClose {
                 connectivityManager.unregisterNetworkCallback(callback)
             }
-        }
+        }.distinctUntilChanged()
 
     var isConnected = false
         private set

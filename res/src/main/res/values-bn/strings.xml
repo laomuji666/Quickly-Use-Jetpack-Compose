@@ -88,4 +88,10 @@
     <string name="string_web_view_screen_open_browser_fail">এই লিঙ্কটি বাইরে থেকে খোলা যাবে না, এটি ক্লিপবোর্ডে কপি করা হয়েছে।</string>
     <string name="string_language_system">সিস্টেম ভাষা</string>
     <string name="string_language_screen_title">ভাষা</string>
+    <string name="string_theme_dialog_title">থিম</string>
+    <string name="string_theme_dialog_we_theme_system">সিস্টেম থিম</string>
+    <string name="string_theme_dialog_we_theme_light">হালকা থিম</string>
+    <string name="string_theme_dialog_we_theme_dark">গাঢ় থিম</string>
+    <string name="string_theme_dialog_we_theme_blue">নীল থিম</string>
+    <string name="string_theme_dialog_we_theme_cancel">বাতিল</string>
 </resources>

@@ -87,4 +87,10 @@
     <string name="string_web_view_screen_open_browser_fail">لا يمكن فتح هذا الرابط خارجيًا، تم نسخه إلى الحافظة.</string>
     <string name="string_language_system">لغة النظام</string>
     <string name="string_language_screen_title">لغة</string>
+    <string name="string_theme_dialog_title">السمة</string>
+    <string name="string_theme_dialog_we_theme_system">سمة النظام</string>
+    <string name="string_theme_dialog_we_theme_light">السمة الفاتحة</string>
+    <string name="string_theme_dialog_we_theme_dark">السمة الداكنة</string>
+    <string name="string_theme_dialog_we_theme_blue">السمة الزرقاء</string>
+    <string name="string_theme_dialog_we_theme_cancel">إلغاء</string>
 </resources>

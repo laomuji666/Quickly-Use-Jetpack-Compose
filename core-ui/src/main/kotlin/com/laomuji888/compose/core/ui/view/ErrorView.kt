@@ -57,17 +57,17 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
                     contentDescription = null,
                     modifier = Modifier.width(180.dp),
                     contentScale = ContentScale.FillWidth,
-                    colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontError)
+                    colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorError)
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 Text(
                     text = stringResource(id = R.string.string_error_view_title),
-                    color = WeTheme.colorScheme.fontError,
+                    color = WeTheme.colorScheme.fontColorError,
                     style = WeTheme.typography.title
                 )
                 Text(
                     text = stringResource(id = R.string.string_error_view_content),
-                    color = WeTheme.colorScheme.fontError,
+                    color = WeTheme.colorScheme.fontColorError,
                     style = WeTheme.typography.desc
                 )
                 Spacer(modifier = Modifier.height(10.dp))

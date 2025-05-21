@@ -18,8 +18,7 @@ fun PreviewWeActionSheetDialog() {
     QuicklyTheme {
         if (showDialog) {
             WeActionSheetDialog(
-                onDismissRequest = { showDialog = false }, dismissText = "取消"
-            ) {
+                onDismissRequest = { showDialog = false }) {
                 WeActionSheet(
                     text = "警示操作提示文案",
                     weOutlineType = WeOutlineType.Full,
@@ -41,6 +40,9 @@ fun PreviewWeActionSheetDialog() {
                     text = "警示操作",
                     weActionSheetType = WeActionSheetType.Wrong,
                     weOutlineType = WeOutlineType.Split,
+                )
+                WeActionSheet(
+                    text = "取消"
                 )
             }
         }

@@ -87,4 +87,10 @@
     <string name="string_web_view_screen_open_browser_fail">該連結無法由外部開啟,已複製連結到剪貼簿.</string>
     <string name="string_language_system">系統語言</string>
     <string name="string_language_screen_title">多語言</string>
+    <string name="string_theme_dialog_title">主題</string>
+    <string name="string_theme_dialog_we_theme_system">系統主題</string>
+    <string name="string_theme_dialog_we_theme_light">淺色主題</string>
+    <string name="string_theme_dialog_we_theme_dark">深色主題</string>
+    <string name="string_theme_dialog_we_theme_blue">藍色主題</string>
+    <string name="string_theme_dialog_we_theme_cancel">取消</string>
 </resources>

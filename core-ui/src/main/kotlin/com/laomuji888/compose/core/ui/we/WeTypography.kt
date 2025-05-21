@@ -13,7 +13,7 @@ data class WeTypography(
     val small:TextStyle
 )
 
-val DefaultWeTypography = WeTypography(
+val WeTypographyDefault = WeTypography(
     emTitle = TextStyle(
         fontWeight = FontWeight.Medium,
         fontSize = 17.sp
@@ -36,4 +36,4 @@ val DefaultWeTypography = WeTypography(
     )
 )
 
-internal val LocalWeTypography = staticCompositionLocalOf { DefaultWeTypography }
+internal val LocalWeTypography = staticCompositionLocalOf { WeTypographyDefault }

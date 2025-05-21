@@ -13,39 +13,50 @@ fun WeActionSheet(
     text: String,
     onClick: () -> Unit = {},
     weActionSheetType: WeActionSheetType = WeActionSheetType.Normal,
-    weOutlineType: WeOutlineType = WeOutlineType.None
+    weOutlineType: WeOutlineType = WeOutlineType.Full
 ) {
     WeRow(
         start = {
-        Spacer(modifier = Modifier.weight(1f))
-    }, center = {
-        when (weActionSheetType) {
-            WeActionSheetType.Summary -> {
-                Text(
-                    text = text,
-                    style = WeTheme.typography.desc,
-                    color = WeTheme.colorScheme.fontColorLight
-                )
-            }
+            Spacer(modifier = Modifier.weight(1f))
+        },
+        center = {
+            when (weActionSheetType) {
+                WeActionSheetType.Summary -> {
+                    Text(
+                        text = text,
+                        style = WeTheme.typography.desc,
+                        color = WeTheme.colorScheme.fontColorLight
+                    )
+                }
 
-            WeActionSheetType.Normal -> {
-                Text(
-                    text = text,
-                    style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColorHeavy
-                )
-            }
+                WeActionSheetType.Normal -> {
+                    Text(
+                        text = text,
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorHeavy
+                    )
+                }
 
-            WeActionSheetType.Wrong -> {
-                Text(
-                    text = text,
-                    style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontError
-                )
+                WeActionSheetType.Wrong -> {
+                    Text(
+                        text = text,
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorError
+                    )
+                }
+
+                WeActionSheetType.Primary -> {
+                    Text(
+                        text = text,
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorPrimary
+                    )
+                }
             }
-        }
-    }, end = {
-        Spacer(modifier = Modifier.weight(1f))
-    }, onClick = onClick, weOutlineType = weOutlineType
+        },
+        end = {
+            Spacer(modifier = Modifier.weight(1f))
+        },
+        onClick = onClick, weOutlineType = weOutlineType,
     )
 }

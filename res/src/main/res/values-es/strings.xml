@@ -88,4 +88,10 @@
     <string name="string_web_view_screen_open_browser_fail">Este enlace no se puede abrir externamente, se ha copiado al portapapeles.</string>
     <string name="string_language_system">Lenguaje del sistema</string>
     <string name="string_language_screen_title">Idiomas</string>
+    <string name="string_theme_dialog_title">Tema</string>
+    <string name="string_theme_dialog_we_theme_system">Tema del sistema</string>
+    <string name="string_theme_dialog_we_theme_light">Tema claro</string>
+    <string name="string_theme_dialog_we_theme_dark">Tema oscuro</string>
+    <string name="string_theme_dialog_we_theme_blue">Tema azul</string>
+    <string name="string_theme_dialog_we_theme_cancel">Cancelar</string>
 </resources>

@@ -7,6 +7,7 @@ import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
 import com.laomuji888.compose.core.logic.Language
+import com.laomuji888.compose.core.ui.we.WeThemeCache
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -25,21 +26,16 @@ class ComposeApp : Application(), ImageLoaderFactory {
      * 启用磁盘缓存,保存到临时目录的image_coil文件夹下,在无网状态下也能使用
      */
     override fun newImageLoader(): ImageLoader {
-        return ImageLoader(this).newBuilder()
-            .diskCachePolicy(CachePolicy.ENABLED)
-            .diskCache {
-                DiskCache.Builder()
-                    .maxSizePercent(0.03)
-                    .directory(cacheDir.resolve("image_coil"))
-                    .build()
-            }
-            .respectCacheHeaders(false)
-            .logger(DebugLogger())
-            .build()
+        return ImageLoader(this).newBuilder().diskCachePolicy(CachePolicy.ENABLED).diskCache {
+            DiskCache.Builder().maxSizePercent(0.03).directory(cacheDir.resolve("image_coil"))
+                .build()
+        }.respectCacheHeaders(false).logger(DebugLogger()).build()
     }
 
     override fun onCreate() {
         super.onCreate()
         language.initLanguage(this)
+
+        WeThemeCache.initWeThemeCache(this)
     }
 }

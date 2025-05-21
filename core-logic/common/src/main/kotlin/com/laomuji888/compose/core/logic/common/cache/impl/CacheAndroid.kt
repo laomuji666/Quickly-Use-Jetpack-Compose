@@ -6,9 +6,9 @@ import com.laomuji888.compose.core.logic.common.cache.Cache
 
 internal class CacheAndroid(
     private val context: Context
-): Cache {
+) : Cache {
     private val sharedPreferences: SharedPreferences
-        get() = context.getSharedPreferences("cache_" + context.packageName, Context.MODE_PRIVATE)
+        get() = context.getSharedPreferences("${context.packageName}_cache", Context.MODE_PRIVATE)
 
     private fun getEditor(): SharedPreferences.Editor {
         return sharedPreferences.edit()
@@ -20,7 +20,7 @@ internal class CacheAndroid(
         editor.commit()
     }
 
-    override fun getInt(key: String, defValue: Int):Int {
+    override fun getInt(key: String, defValue: Int): Int {
         return sharedPreferences.getInt(key, defValue)
     }
 
@@ -30,7 +30,7 @@ internal class CacheAndroid(
         editor.commit()
     }
 
-    override fun getLong(key: String, defValue: Long):Long {
+    override fun getLong(key: String, defValue: Long): Long {
         return sharedPreferences.getLong(key, defValue)
     }
 
@@ -40,7 +40,7 @@ internal class CacheAndroid(
         editor.commit()
     }
 
-    override fun getFloat(key: String, defValue: Float):Float {
+    override fun getFloat(key: String, defValue: Float): Float {
         return sharedPreferences.getFloat(key, defValue)
     }
 
@@ -50,7 +50,7 @@ internal class CacheAndroid(
         editor.commit()
     }
 
-    override fun getBoolean(key: String, defValue: Boolean):Boolean {
+    override fun getBoolean(key: String, defValue: Boolean): Boolean {
         return sharedPreferences.getBoolean(key, defValue)
     }
 
@@ -60,7 +60,7 @@ internal class CacheAndroid(
         editor.commit()
     }
 
-    override fun getString(key: String, defValue: String):String {
+    override fun getString(key: String, defValue: String): String {
         return sharedPreferences.getString(key, defValue)!!
     }
 
