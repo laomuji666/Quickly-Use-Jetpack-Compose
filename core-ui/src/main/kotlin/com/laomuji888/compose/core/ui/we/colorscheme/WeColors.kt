@@ -1,4 +1,4 @@
-package com.laomuji888.compose.core.ui.we
+package com.laomuji888.compose.core.ui.we.colorscheme
 
 import androidx.compose.ui.graphics.Color
 

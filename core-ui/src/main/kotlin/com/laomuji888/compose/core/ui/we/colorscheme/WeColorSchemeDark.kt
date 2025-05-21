@@ -1,7 +1,5 @@
 package com.laomuji888.compose.core.ui.we.colorscheme
 
-import com.laomuji888.compose.core.ui.we.WeColors
-
 data object WeColorSchemeDark : WeColorScheme(
     isDarkFont = false,
 

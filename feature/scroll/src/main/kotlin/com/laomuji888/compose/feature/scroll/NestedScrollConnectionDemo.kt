@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -27,6 +26,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Velocity
 import androidx.compose.ui.unit.dp
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
+import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.res.R
 
@@ -34,16 +34,16 @@ import com.laomuji888.compose.res.R
  * 同节点的滑动事件,必须由共同的父节点对滑动进行处理.
  */
 @Composable
-fun NestedScrollConnectionScreen(){
+fun NestedScrollConnectionScreen() {
     val density = LocalDensity.current
 
     val imageHeightMax by remember {
-        mutableFloatStateOf(with(density){
+        mutableFloatStateOf(with(density) {
             300.dp.toPx()
         })
     }
     val imageHeightMin by remember {
-        mutableFloatStateOf(with(density){
+        mutableFloatStateOf(with(density) {
             100.dp.toPx()
         })
     }
@@ -55,45 +55,42 @@ fun NestedScrollConnectionScreen(){
     val animHeight by animateFloatAsState(imageHeight, label = "")
 
     val nestedScrollConnection = remember {
-        object : NestedScrollConnection{
+        object : NestedScrollConnection {
             override fun onPreScroll(
-                available: Offset,
-                source: NestedScrollSource
+                available: Offset, source: NestedScrollSource
             ): Offset {
-                if(source != NestedScrollSource.UserInput){
+                if (source != NestedScrollSource.UserInput) {
                     return super.onPreScroll(available, source)
                 }
                 //上滑
-                if(available.y < 0){
+                if (available.y < 0) {
                     val remainHeight = imageHeightMin - imageHeight
-                    if(remainHeight < available.y){
+                    if (remainHeight < available.y) {
                         imageHeight += available.y
-                        return Offset(0f,available.y)
-                    }else {
+                        return Offset(0f, available.y)
+                    } else {
                         imageHeight += remainHeight
-                        return Offset(0f,remainHeight)
+                        return Offset(0f, remainHeight)
                     }
                 }
                 return super.onPreScroll(available, source)
             }
 
             override fun onPostScroll(
-                consumed: Offset,
-                available: Offset,
-                source: NestedScrollSource
+                consumed: Offset, available: Offset, source: NestedScrollSource
             ): Offset {
-                if(source != NestedScrollSource.UserInput){
+                if (source != NestedScrollSource.UserInput) {
                     return super.onPreScroll(available, source)
                 }
                 //下滑
-                if(available.y > 0){
+                if (available.y > 0) {
                     val remainHeight = imageHeightMax - imageHeight
-                    if(remainHeight > available.y){
+                    if (remainHeight > available.y) {
                         imageHeight += available.y
-                        return Offset(0f,available.y)
-                    }else {
+                        return Offset(0f, available.y)
+                    } else {
                         imageHeight += remainHeight
-                        return Offset(0f,remainHeight)
+                        return Offset(0f, remainHeight)
                     }
                 }
                 return super.onPostScroll(consumed, available, source)
@@ -103,32 +100,31 @@ fun NestedScrollConnectionScreen(){
                 available: Velocity
             ): Velocity {
                 //重复上面的上滑
-                if(available.y < 0){
+                if (available.y < 0) {
                     val remainHeight = imageHeightMin - imageHeight
-                    if(remainHeight < available.y){
+                    if (remainHeight < available.y) {
                         imageHeight += available.y
-                        return Velocity(0f,available.y)
-                    }else {
+                        return Velocity(0f, available.y)
+                    } else {
                         imageHeight += remainHeight
-                        return Velocity(0f,remainHeight)
+                        return Velocity(0f, remainHeight)
                     }
                 }
                 return super.onPreFling(available)
             }
 
             override suspend fun onPostFling(
-                consumed: Velocity,
-                available: Velocity
+                consumed: Velocity, available: Velocity
             ): Velocity {
                 //重复上面的下滑
-                if(available.y > 0){
+                if (available.y > 0) {
                     val remainHeight = imageHeightMax - imageHeight
-                    if(remainHeight > available.y){
+                    if (remainHeight > available.y) {
                         imageHeight += available.y
-                        return Velocity(0f,available.y)
-                    }else {
+                        return Velocity(0f, available.y)
+                    } else {
                         imageHeight += remainHeight
-                        return Velocity(0f,remainHeight)
+                        return Velocity(0f, remainHeight)
                     }
                 }
                 return super.onPostFling(consumed, available)
@@ -149,7 +145,7 @@ fun NestedScrollConnectionScreen(){
                 contentScale = ContentScale.FillBounds,
                 modifier = Modifier
                     .verticalScroll(rememberScrollState()) // 使图片本身也可以被滑动
-                    .height(with(density){
+                    .height(with(density) {
                         animHeight.toDp()
                     })
                     .fillMaxWidth()
@@ -159,7 +155,9 @@ fun NestedScrollConnectionScreen(){
                 modifier = Modifier.fillMaxSize()
             ) {
                 items(300) {
-                    Text("$it")
+                    WeClick(
+                        title = "$it",
+                    )
                 }
             }
         }

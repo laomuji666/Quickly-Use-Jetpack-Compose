@@ -43,7 +43,7 @@ fun WeTheme(
             density = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
             fontScale = LocalDensity.current.fontScale
         ) else LocalDensity.current,
-        LocalIndication provides remember {
+        LocalIndication provides remember(weColorScheme) {
             WeIndication(weColorScheme.pressed)
         },
         LocalWeColorScheme provides weColorScheme,

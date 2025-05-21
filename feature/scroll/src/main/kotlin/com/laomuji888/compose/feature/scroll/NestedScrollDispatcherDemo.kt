@@ -26,6 +26,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
+import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.res.R
 
@@ -55,8 +56,10 @@ fun NestedScrollDispatcherScreen(){
     }
     WeScaffold {
         LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(50){
-                Text("$it")
+            items(30){
+                WeClick(
+                    title = "$it",
+                )
             }
             item {
                 Image(
@@ -104,8 +107,10 @@ fun NestedScrollDispatcherScreen(){
                         )
                 )
             }
-            items(50){
-                Text("$it")
+            items(30){
+                WeClick(
+                    title = "$it",
+                )
             }
         }
     }
