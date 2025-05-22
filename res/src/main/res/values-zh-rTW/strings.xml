@@ -8,9 +8,9 @@
     <string name="string_error_view_title">出錯了</string>
     <string name="string_error_view_content">請檢查網路或稍後重試</string>
     <string name="string_error_view_refresh">刷新目前頁面</string>
-    <string name="string_demo_screen_navigation_feature">功能</string>
-    <string name="string_demo_screen_navigation_device">裝置</string>
-    <string name="string_demo_screen_navigation_ui">UI</string>
+    <string name="string_main_screen_page_features">功能</string>
+    <string name="string_main_screen_page_settings">設定</string>
+    <string name="string_main_screen_page_ui">Ui</string>
     <string name="string_demo_screen_painter">繪畫畫板</string>
     <string name="string_demo_screen_date">自訂日曆</string>
     <string name="string_demo_screen_scroll_connect">滑動巢狀 NestedScrollConnection</string>
@@ -87,4 +87,10 @@
     <string name="string_web_view_screen_open_browser_fail">該連結無法由外部開啟,已複製連結到剪貼簿.</string>
     <string name="string_language_system">系統語言</string>
     <string name="string_language_screen_title">多語言</string>
+    <string name="string_theme_dialog_title">主題</string>
+    <string name="string_theme_dialog_we_theme_system">系統主題</string>
+    <string name="string_theme_dialog_we_theme_light">淺色主題</string>
+    <string name="string_theme_dialog_we_theme_dark">深色主題</string>
+    <string name="string_theme_dialog_we_theme_blue">藍色主題</string>
+    <string name="string_theme_dialog_we_theme_cancel">取消</string>
 </resources>

@@ -15,14 +15,14 @@ import com.laomuji888.compose.feature.chat.chat.ChatScreenRoute.Companion.compos
 import com.laomuji888.compose.feature.chat.chat.ChatScreenRoute.Companion.navigateToChatScreen
 import com.laomuji888.compose.feature.date.DateScreenRoute.composeDateScreen
 import com.laomuji888.compose.feature.date.DateScreenRoute.navigateToDateScreen
-import com.laomuji888.compose.feature.demo.DemoScreenRoute
-import com.laomuji888.compose.feature.demo.DemoScreenRoute.composeDemoScreen
 import com.laomuji888.compose.feature.firebase.FirebaseScreenRoute.composeFirebaseScreen
 import com.laomuji888.compose.feature.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
 import com.laomuji888.compose.feature.http.HttpScreenRoute.composeHttpScreen
 import com.laomuji888.compose.feature.http.HttpScreenRoute.navigateToHttpScreen
 import com.laomuji888.compose.feature.language.LanguageScreenRoute.composeLanguageScreen
 import com.laomuji888.compose.feature.language.LanguageScreenRoute.navigateToLanguageScreen
+import com.laomuji888.compose.feature.main.MainScreenRoute
+import com.laomuji888.compose.feature.main.MainScreenRoute.composeMainScreen
 import com.laomuji888.compose.feature.painter.PainterScreenRoute.composePainterScreen
 import com.laomuji888.compose.feature.painter.PainterScreenRoute.navigateToPainterScreen
 import com.laomuji888.compose.feature.scroll.composeNestedScrollConnectionScreen
@@ -39,7 +39,7 @@ import com.laomuji888.compose.feature.youtubedl.YoutubeDLScreenRoute.navigateToY
 @Composable
 fun NavigationHost(
     navHostController: NavHostController,
-    startDestination: Any = DemoScreenRoute,
+    startDestination: Any = MainScreenRoute,
 ) {
     val activity = LocalActivity.current
     NavHost(
@@ -50,7 +50,7 @@ fun NavigationHost(
         popEnterTransition = SlideNavigation.popEnterTransition,
         popExitTransition = SlideNavigation.popExitTransition
     ) {
-        composeDemoScreen(
+        composeMainScreen(
             onFirebaseClick = {
                 navHostController.navigateToFirebaseScreen()
             },

@@ -1,4 +1,4 @@
-package com.laomuji888.compose.feature.demo.device
+package com.laomuji888.compose.feature.main.feature
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.Manifest.permission.ACCESS_FINE_LOCATION
@@ -14,13 +14,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.laomuji888.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji888.compose.core.logic.common.Toast
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.LoadingDialog
-import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.switc.WeSwitch
+import com.laomuji888.compose.feature.main.MainScreenAction
 import com.laomuji888.compose.launcher.PermissionUtil
 import com.laomuji888.compose.launcher.openAlbum
 import com.laomuji888.compose.launcher.openCamera
@@ -29,8 +31,9 @@ import com.laomuji888.compose.launcher.selectMobileLauncher
 import com.laomuji888.compose.res.R
 
 @Composable
-fun DeviceDemoScreen(
-    viewModel: DeviceDemoScreenViewModel = hiltViewModel()
+fun FeatureScreen(
+    viewModel: FeatureScreenViewModel = hiltViewModel(),
+    onAction: (MainScreenAction) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -71,51 +74,105 @@ fun DeviceDemoScreen(
             }
         })
 
-    DeviceDemoScreenUi(uiState = uiState, onSwitchAppLogoClick = {
-        viewModel.switchAppLogo(context)
-    }, onLocationClick = {
-        viewModel.getLocation(context = context, onPermissionDenied = {
-            launcherMultiplePermissions()
-        })
-    }, onSelectMobileClick = {
-        selectMobile()
-    }, onOpenAlbumClick = {
-        openAlbum()
-    }, onOpenCameraClick = {
-        openCamera()
-    }, onOpenContactClick = {
-        openContact()
-    })
+    FeatureScreenUi(
+        uiState = uiState,
+        onSwitchAppLogoClick = {
+            viewModel.switchAppLogo(context)
+        },
+        onLocationClick = {
+            viewModel.getLocation(context = context, onPermissionDenied = {
+                launcherMultiplePermissions()
+            })
+        },
+        onSelectMobileClick = {
+            selectMobile()
+        },
+        onOpenAlbumClick = {
+            openAlbum()
+        },
+        onOpenCameraClick = {
+            openCamera()
+        },
+        onOpenContactClick = {
+            openContact()
+        },
+        onAction = onAction,
+    )
 }
 
 @Composable
-private fun DeviceDemoScreenUi(
-    uiState: DeviceDemoScreenUiState,
+private fun FeatureScreenUi(
+    uiState: FeatureScreenUiState,
     onSwitchAppLogoClick: () -> Unit,
     onLocationClick: () -> Unit,
     onSelectMobileClick: () -> Unit,
     onOpenAlbumClick: () -> Unit,
     onOpenCameraClick: () -> Unit,
-    onOpenContactClick: () -> Unit
+    onOpenContactClick: () -> Unit,
+    onAction: (MainScreenAction) -> Unit,
 ) {
+    val context = LocalContext.current
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_firebase_demo), onClick = {
+                onAction(MainScreenAction.OnFirebaseClick)
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_http_demo), onClick = {
+                onAction(MainScreenAction.OnHttpClick)
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_ai_chat), onClick = {
+                onAction(MainScreenAction.OnAiChatClick)
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_biometric), onClick = {
+                onAction(MainScreenAction.OnBiometricScreenClick)
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_google_login_demo), onClick = {
+                GoogleAuthenticate().requestLogin(
+                    activityContext = context,
+                    onSuccess = { email, idToken ->
+                        Toast.showText(context, "$email $idToken")
+                    },
+                    onFail = {
+                        Toast.showText(context, "...")
+                    })
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_youtubedl_demo), onClick = {
+                onAction(MainScreenAction.OnYoutubeDLClick)
+            }, weOutlineType = WeOutlineType.PaddingHorizontal
+        )
+        WeClick(
+            title = stringResource(id = R.string.string_demo_screen_web_view_demo), onClick = {
+                onAction(MainScreenAction.OnWebViewClick)
+            }, weOutlineType = WeOutlineType.Split
+        )
+
         WeSwitch(
             title = stringResource(id = R.string.string_demo_screen_switch_app_logo),
             checked = uiState.enableSwitchAppLogo,
             onCheckedChange = {
                 onSwitchAppLogoClick()
             },
-            weOutlineType = WeOutlineType.Full
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_get_location),
             summary = uiState.location,
             onClick = onLocationClick,
-            weOutlineType = WeOutlineType.Full
+            weOutlineType = WeOutlineType.PaddingHorizontal
         )
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_select_mobile_demo),
@@ -142,17 +199,18 @@ private fun DeviceDemoScreenUi(
 
 @Preview
 @Composable
-private fun PreviewDeviceDemoScreen() {
+private fun PreviewFeatureScreen() {
     QuicklyTheme {
         WeScaffold {
-            DeviceDemoScreenUi(
-                uiState = DeviceDemoScreenUiState(),
+            FeatureScreenUi(
+                uiState = FeatureScreenUiState(),
                 onSwitchAppLogoClick = {},
                 onLocationClick = {},
                 onSelectMobileClick = {},
                 onOpenAlbumClick = {},
                 onOpenCameraClick = {},
-                onOpenContactClick = {})
+                onOpenContactClick = {},
+                onAction = {})
         }
     }
 }

@@ -39,8 +39,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.WeTheme
-import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import kotlin.math.abs
 
 @Composable
@@ -49,53 +49,47 @@ fun DateScreen(
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     DateScreenUi(
-        uiState = uiState,
-        onAction = viewModel::onAction
+        uiState = uiState, onAction = viewModel::onAction
     )
 }
 
 @Composable
 private fun DateScreenUi(
-    uiState: DateScreenUiState,
-    onAction: (DateScreenAction) -> Unit
+    uiState: DateScreenUiState, onAction: (DateScreenAction) -> Unit
 ) {
-    WeScaffold(
-        topBar = {
-            Spacer(modifier = Modifier.statusBarsPadding())
-            SelectYearUi(
-                currentYear = uiState.currentYear,
-                yearList = uiState.yearList,
-                onYearClick = { onAction(DateScreenAction.OnYearClick(it)) }
-            )
-            WeOutline(
-                modifier = Modifier.fillMaxWidth()
-            )
-        },
-        bottomBar = {
-            WeOutline(
-                modifier = Modifier.fillMaxWidth()
-            )
-            Row(
+    WeScaffold(topBar = {
+        Spacer(modifier = Modifier.statusBarsPadding())
+        SelectYearUi(
+            currentYear = uiState.currentYear,
+            yearList = uiState.yearList,
+            onYearClick = { onAction(DateScreenAction.OnYearClick(it)) })
+        WeOutline(
+            modifier = Modifier.fillMaxWidth()
+        )
+    }, bottomBar = {
+        WeOutline(
+            modifier = Modifier.fillMaxWidth()
+        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(WeTheme.dimens.bottomBarHeight),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "${uiState.currentYear}/${uiState.currentMonth}/${uiState.currentDay}",
+                style = WeTheme.typography.emTitle,
+                color = WeTheme.colorScheme.fontColorPrimary,
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(WeTheme.dimens.bottomBarHeight),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "${uiState.currentYear}/${uiState.currentMonth}/${uiState.currentDay}",
-                    style = WeTheme.typography.emTitle,
-                    modifier = Modifier
-                )
-            }
+            )
         }
-    ) {
+    }) {
         MonthDayUi(
             uiState = uiState,
             onYearClick = { onAction(DateScreenAction.OnYearClick(it)) },
             onMonthClick = { onAction(DateScreenAction.OnMonthClick(it)) },
-            onDayClick = { onAction(DateScreenAction.OnDayClick(it)) }
-        )
+            onDayClick = { onAction(DateScreenAction.OnDayClick(it)) })
     }
 }
 
@@ -123,18 +117,16 @@ private fun SelectYearUi(
     LaunchedEffect(currentYear) {
         moveToCurrentYear()
     }
-    LazyRow(
-        modifier = Modifier
-            .background(WeTheme.colorScheme.background)
-            .onGloballyPositioned {
-                if (screenWidth == 0 && it.size.width > 0) {
-                    screenWidth = it.size.width
-                }
+    LazyRow(modifier = Modifier
+        .background(WeTheme.colorScheme.background)
+        .onGloballyPositioned {
+            if (screenWidth == 0 && it.size.width > 0) {
+                screenWidth = it.size.width
             }
-            .fillMaxWidth(),
+        }
+        .fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(spacesDp),
-        state = lazyListState
-    ) {
+        state = lazyListState) {
         items(yearList) { item ->
             Text(
                 text = "$item",
@@ -167,26 +159,20 @@ private fun MonthDayUi(
         dragWidth.toPx()
     }
     var dragStartX by remember { mutableFloatStateOf(0f) }
-    Column(
-        modifier = Modifier
-            .pointerInput(uiState.currentYear) {
-                detectHorizontalDragGestures(
-                    onDragStart = {
-                        dragStartX = 0f
-                    },
-                    onDragEnd = {
-                        if (abs(dragStartX) > dragWidthPx) {
-                            onYearClick(uiState.currentYear + if (dragStartX < 0) 1 else -1)
-                        }
-                    },
-                    onHorizontalDrag = { _, dragAmount ->
-                        dragStartX += dragAmount
-                    }
-                )
+    Column(modifier = Modifier
+        .pointerInput(uiState.currentYear) {
+            detectHorizontalDragGestures(onDragStart = {
+                dragStartX = 0f
+            }, onDragEnd = {
+                if (abs(dragStartX) > dragWidthPx) {
+                    onYearClick(uiState.currentYear + if (dragStartX < 0) 1 else -1)
+                }
+            }, onHorizontalDrag = { _, dragAmount ->
+                dragStartX += dragAmount
+            })
 
-            }
-            .verticalScroll(rememberScrollState())
-    ) {
+        }
+        .verticalScroll(rememberScrollState())) {
         for (i in 0 until uiState.dateDetailList.size) {
             Row(
                 modifier = Modifier.fillMaxWidth(),
@@ -226,10 +212,10 @@ private fun MonthDetailUi(
         Text(
             text = "${dateDetail.month}",
             style = WeTheme.typography.title,
+            color = WeTheme.colorScheme.fontColorLight,
             modifier = Modifier.clickable {
                 onMonthClick(dateDetail.month)
-            }
-        )
+            })
         val weekList =
             stringArrayResource(id = com.laomuji888.compose.res.R.array.string_date_screen_week_day)
         Row(
@@ -240,7 +226,8 @@ private fun MonthDetailUi(
                     Text(
                         text = it,
                         style = WeTheme.typography.footnote,
-                        modifier = Modifier.align(Alignment.Center)
+                        modifier = Modifier.align(Alignment.Center),
+                        color = WeTheme.colorScheme.fontColorLight
                     )
                 }
             }

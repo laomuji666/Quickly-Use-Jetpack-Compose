@@ -1,4 +1,4 @@
-package com.laomuji888.compose.feature.demo.device
+package com.laomuji888.compose.feature.main.feature
 
 import android.content.ComponentName
 import android.content.Context
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DeviceDemoScreenViewModel @Inject constructor(
+class FeatureScreenViewModel @Inject constructor(
     cacheUtil: CacheUtil, private val locator: Locator
 ) : ViewModel() {
     private val _isLoading = MutableStateFlow(false)
@@ -31,10 +31,10 @@ class DeviceDemoScreenViewModel @Inject constructor(
         _enableSwitchAppLogo,
         _location,
     ) { isLoading, enableSwitchAppLogo, location ->
-        DeviceDemoScreenUiState(
+        FeatureScreenUiState(
             isLoading = isLoading, enableSwitchAppLogo = enableSwitchAppLogo, location = location
         )
-    }.stateInTimeout(viewModelScope, DeviceDemoScreenUiState())
+    }.stateInTimeout(viewModelScope, FeatureScreenUiState())
 
     fun switchAppLogo(context: Context) {
         val targetValue = !_enableSwitchAppLogo.value

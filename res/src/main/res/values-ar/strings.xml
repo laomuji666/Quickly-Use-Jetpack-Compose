@@ -8,9 +8,9 @@
     <string name="string_error_view_title">حدث خطأ ما</string>
     <string name="string_error_view_content">يرجى التحقق من الشبكة أو المحاولة مرة أخرى لاحقًا</string>
     <string name="string_error_view_refresh">تحديث الصفحة الحالية</string>
-    <string name="string_demo_screen_navigation_feature">الميزات</string>
-    <string name="string_demo_screen_navigation_device">الجهاز</string>
-    <string name="string_demo_screen_navigation_ui">واجهة المستخدم</string>
+    <string name="string_main_screen_page_features">الميزات</string>
+    <string name="string_main_screen_page_settings">إعدادات</string>
+    <string name="string_main_screen_page_ui">واجهة المستخدم</string>
     <string name="string_demo_screen_painter">لوحة الرسم</string>
     <string name="string_demo_screen_date">تقويم مخصص</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
@@ -87,4 +87,10 @@
     <string name="string_web_view_screen_open_browser_fail">لا يمكن فتح هذا الرابط خارجيًا، تم نسخه إلى الحافظة.</string>
     <string name="string_language_system">لغة النظام</string>
     <string name="string_language_screen_title">لغة</string>
+    <string name="string_theme_dialog_title">السمة</string>
+    <string name="string_theme_dialog_we_theme_system">سمة النظام</string>
+    <string name="string_theme_dialog_we_theme_light">السمة الفاتحة</string>
+    <string name="string_theme_dialog_we_theme_dark">السمة الداكنة</string>
+    <string name="string_theme_dialog_we_theme_blue">السمة الزرقاء</string>
+    <string name="string_theme_dialog_we_theme_cancel">إلغاء</string>
 </resources>

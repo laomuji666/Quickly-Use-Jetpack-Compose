@@ -1,4 +1,4 @@
-package com.laomuji888.compose.feature.demo.ui
+package com.laomuji888.compose.feature.main.ui
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

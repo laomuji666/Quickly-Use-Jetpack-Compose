@@ -2,15 +2,31 @@ package com.laomuji888.compose.core.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
-import com.laomuji888.compose.core.ui.we.DefaultWeTheme
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.laomuji888.compose.core.ui.we.WeDimensDefault
+import com.laomuji888.compose.core.ui.we.WeTheme
+import com.laomuji888.compose.core.ui.we.WeTypographyDefault
+import com.laomuji888.compose.core.ui.we.colorscheme.WeColorSchemeBlue
+import com.laomuji888.compose.core.ui.we.colorscheme.WeColorSchemeDark
+import com.laomuji888.compose.core.ui.we.colorscheme.WeColorSchemeLight
+import com.laomuji888.compose.core.ui.we.colorscheme.WeThemeColorType
 
 @Composable
 fun QuicklyTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    DefaultWeTheme(
-        darkTheme = darkTheme,
-        content = content
+    val weThemeColorType by WeThemeColorType.currentWeThemeColorType.collectAsStateWithLifecycle()
+    val weColorScheme = when (weThemeColorType) {
+        WeThemeColorType.FlowSystem -> if (isSystemInDarkTheme()) WeColorSchemeDark else WeColorSchemeLight
+        WeThemeColorType.Light -> WeColorSchemeLight
+        WeThemeColorType.Dark -> WeColorSchemeDark
+        WeThemeColorType.Blue -> WeColorSchemeBlue
+    }
+    WeTheme(
+        weColorScheme = weColorScheme,
+        weDimens = WeDimensDefault,
+        weTypography = WeTypographyDefault,
+        content = content,
     )
 }

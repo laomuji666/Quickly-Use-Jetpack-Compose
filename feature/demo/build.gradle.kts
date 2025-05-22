@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji888.compose.feature.demo"
+    namespace = "com.laomuji888.compose.feature.main"
 }
 
 dependencies {
