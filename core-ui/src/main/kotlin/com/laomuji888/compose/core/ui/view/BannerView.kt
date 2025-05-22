@@ -1,16 +1,15 @@
 package com.laomuji888.compose.core.ui.view
 
-import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.AnimationSpec
-import androidx.compose.animation.core.FiniteAnimationSpec
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.rememberPagerState
@@ -25,153 +24,159 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
-import kotlin.math.abs
 
-enum class BannerViewScrollType{
-    NONE,
-    SCROLL_NEXT,
-    SCROLL_LAST
+enum class BannerViewScrollType {
+    NONE, SCROLL_NEXT, SCROLL_LAST
 }
 
 @Composable
-fun <T>BannerView(
-    modifier: Modifier = Modifier,
+fun <T> BannerView(
+    height: Dp,
     bannerList: List<T>,
     initialPage: Int = 0,
-    verticalPadding: Dp = 20.dp,
-    horizontalPadding: Dp = verticalPadding,
-    contentPadding: PaddingValues = PaddingValues(horizontal = 60.dp),
     scrollType: BannerViewScrollType = BannerViewScrollType.SCROLL_NEXT,
+    xScale: Float = 0.95f,
+    yScale: Float = 0.8f,
+    contentPaddingHorizontal: Dp = 20.dp,
     timeMillis: Long = 1000,
-    contentSizeAnim: FiniteAnimationSpec<IntSize> = tween(500),
-    scrollAnim: AnimationSpec<Float> = tween(500),
+    animDurationMillis: Int = 500,
     looperBanner: Boolean = true,
-    dragWidth:Float = 20.dp.value,
-    content: @Composable (T)->Unit
-){
-    val dragWidthPx = with(LocalDensity.current){
-        dragWidth.dp.toPx()
-    }
-    val dataList = ArrayList<T>()
-    if(looperBanner && bannerList.size > 1){
-        dataList.add(bannerList[bannerList.size - 2])
-        dataList.add(bannerList[bannerList.size - 1])
-        dataList.addAll(bannerList)
-        dataList.add(bannerList[0])
-        dataList.add(bannerList[1])
-    }else{
-        dataList.addAll(bannerList)
+    dragWidth: Float = 20.dp.value,
+    content: @Composable (T) -> Unit
+) {
+    val dragWidthPx = with(LocalDensity.current) { dragWidth.dp.toPx() }
+
+    // 构造循环数据
+    val dataList = remember(bannerList, looperBanner) {
+        buildList {
+            if (looperBanner && bannerList.size > 1) {
+                add(bannerList[bannerList.size - 2])
+                add(bannerList[bannerList.size - 1])
+                addAll(bannerList)
+                add(bannerList[0])
+                add(bannerList[1])
+            } else {
+                addAll(bannerList)
+            }
+        }
     }
 
     val coroutineScope = rememberCoroutineScope()
-
-    val pagerState = rememberPagerState(
-        pageCount = { dataList.size },
-        initialPage = if(looperBanner) initialPage + 2 else initialPage
-    )
-
     var dragStartX by remember { mutableFloatStateOf(0f) }
-
     var scrollFinish by remember { mutableStateOf(false) }
 
+    val actualInitialPage = remember(looperBanner, initialPage) {
+        if (looperBanner) initialPage + 2 else initialPage
+    }
+
+    val pagerState = rememberPagerState(
+        pageCount = { dataList.size }, initialPage = actualInitialPage
+    )
+
     HorizontalPager(
-        modifier = modifier.pointerInput(Unit){
-            detectHorizontalDragGestures(
-                onDragStart = {
-                    dragStartX = 0f
-                },
-                onDragEnd = {
-                    if(scrollFinish){
-                        return@detectHorizontalDragGestures
-                    }
+        modifier = Modifier
+            .height(height)
+            .pointerInput(Unit) {
+                detectHorizontalDragGestures(onDragStart = { dragStartX = 0f }, onDragEnd = {
+                    if (scrollFinish) return@detectHorizontalDragGestures
 
-
-                    if(dragStartX > 0){
-                        //last page
-                        if(dragStartX > dragWidthPx){
+                    when {
+                        dragStartX > dragWidthPx -> {
                             scrollFinish = true
                             coroutineScope.launch {
                                 lastPage(
-                                    pagerState = pagerState,
-                                    looperBanner = looperBanner,
-                                    dataListSize = dataList.size,
-                                    scrollAnim = scrollAnim
+                                    pagerState,
+                                    looperBanner,
+                                    dataList.size,
+                                    tween(animDurationMillis)
                                 )
                                 scrollFinish = false
                             }
                         }
-                    }else{
-                        //next page
-                        if(abs(dragStartX) > dragWidthPx){
+
+                        dragStartX < -dragWidthPx -> {
                             scrollFinish = true
                             coroutineScope.launch {
                                 nextPage(
-                                    pagerState = pagerState,
-                                    looperBanner = looperBanner,
-                                    dataListSize = dataList.size,
-                                    scrollAnim = scrollAnim
+                                    pagerState,
+                                    looperBanner,
+                                    dataList.size,
+                                    tween(animDurationMillis)
                                 )
                                 scrollFinish = false
                             }
                         }
                     }
-                },
-                onHorizontalDrag = { _, dragAmount ->
+                }, onHorizontalDrag = { _, dragAmount ->
                     dragStartX += dragAmount
-                }
-            )
-        },
+                })
+            },
         state = pagerState,
-        contentPadding = contentPadding,
-        userScrollEnabled = false
-    ) {
-        Box(modifier = Modifier.fillMaxSize()){
-            Box(modifier = Modifier
-                .align(Alignment.Center)
-                .padding(
-                    horizontal = if (it == pagerState.currentPage) 0.dp else horizontalPadding,
-                    vertical = if (it == pagerState.currentPage) 0.dp else verticalPadding
-                )
-                .animateContentSize(animationSpec = contentSizeAnim)
-            ){
-                content(dataList[it])
+        contentPadding = PaddingValues(horizontal = contentPaddingHorizontal),
+        userScrollEnabled = false,
+    ) { page ->
+        val isSelected = page == pagerState.currentPage
+        val xScaleAnim by animateFloatAsState(
+            targetValue = if (isSelected) 1f else xScale,
+            animationSpec = tween(500),
+            label = "xScale"
+        )
+        val yScaleAnim by animateFloatAsState(
+            targetValue = if (isSelected) 1f else yScale,
+            animationSpec = tween(500),
+            label = "yScale"
+        )
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .graphicsLayer {
+                    scaleX = xScaleAnim
+                    scaleY = yScaleAnim
+                }) {
+            if (dataList.isNotEmpty()) {
+                content(dataList[page.coerceIn(0, dataList.lastIndex)])
             }
         }
-
     }
-    LaunchedEffect(dragStartX) {
-        while (isActive){
-            delay(timeMillis)
-            when(scrollType){
-                BannerViewScrollType.NONE -> {}
-                BannerViewScrollType.SCROLL_NEXT -> {
-                    nextPage(
-                        pagerState = pagerState,
-                        looperBanner = looperBanner,
-                        dataListSize = dataList.size,
-                        scrollAnim = scrollAnim
-                    )
-                }
-                BannerViewScrollType.SCROLL_LAST -> {
-                    lastPage(
-                        pagerState = pagerState,
-                        looperBanner = looperBanner,
-                        dataListSize = dataList.size,
-                        scrollAnim = scrollAnim
-                    )
-                }
-            }
 
+    LaunchedEffect(dragStartX) {
+        while (isActive) {
+            if (timeMillis < 1) {
+                break
+            }
+            delay(timeMillis)
+            when (scrollType) {
+                BannerViewScrollType.SCROLL_NEXT -> {
+                    nextPage(pagerState, looperBanner, dataList.size, tween(animDurationMillis))
+                }
+
+                BannerViewScrollType.SCROLL_LAST -> {
+                    lastPage(pagerState, looperBanner, dataList.size, tween(animDurationMillis))
+                }
+
+                BannerViewScrollType.NONE -> Unit
+            }
         }
+    }
+
+
+    LaunchedEffect(Unit) {
+        pagerState.animateScrollToPage(
+            page = pagerState.currentPage, animationSpec = tween(animDurationMillis)
+        )
+        movePage(scrollType, pagerState, looperBanner, dataList.size)
     }
 }
 
@@ -180,27 +185,46 @@ private suspend fun nextPage(
     looperBanner: Boolean,
     dataListSize: Int,
     scrollAnim: AnimationSpec<Float>
-){
-    var targetIndex = pagerState.currentPage
-    if(looperBanner){
-        if(targetIndex == dataListSize - 3){
-            pagerState.animateScrollToPage(
-                page = targetIndex + 1,
-                animationSpec = scrollAnim
-            )
-            pagerState.scrollToPage(page = 2)
-        }else{
-            pagerState.animateScrollToPage(
-                page = targetIndex + 1,
-                animationSpec = scrollAnim
-            )
+) {
+    val current = pagerState.currentPage
+    val target =
+        if (looperBanner) current + 1 else if (current == dataListSize - 1) 0 else current + 1
+
+    pagerState.animateScrollToPage(page = target, animationSpec = scrollAnim)
+
+    movePage(BannerViewScrollType.SCROLL_NEXT, pagerState, looperBanner, dataListSize)
+}
+
+private suspend fun movePage(
+    scrollType: BannerViewScrollType,
+    pagerState: PagerState,
+    looperBanner: Boolean,
+    dataListSize: Int,
+) {
+    if (!looperBanner) {
+        return
+    }
+    val current = pagerState.currentPage
+    when (scrollType) {
+        BannerViewScrollType.SCROLL_NEXT -> {
+            val jumpPage = when (current) {
+                dataListSize - 2 -> 2
+                dataListSize - 1 -> 1
+                else -> null
+            }
+            jumpPage?.let { pagerState.scrollToPage(it) }
         }
-    }else{
-        targetIndex = if(targetIndex == dataListSize - 1) 0 else targetIndex + 1
-        pagerState.animateScrollToPage(
-            page = targetIndex,
-            animationSpec = scrollAnim
-        )
+
+        BannerViewScrollType.SCROLL_LAST -> {
+            val jumpPage = when (current) {
+                2 -> dataListSize - 2
+                1 -> dataListSize - 1
+                else -> null
+            }
+            jumpPage?.let { pagerState.scrollToPage(it) }
+        }
+
+        BannerViewScrollType.NONE -> Unit
     }
 }
 
@@ -209,46 +233,37 @@ private suspend fun lastPage(
     looperBanner: Boolean,
     dataListSize: Int,
     scrollAnim: AnimationSpec<Float>
-){
-    var targetIndex = pagerState.currentPage
-    if(looperBanner){
-        if(targetIndex == 2){
-            pagerState.animateScrollToPage(
-                page = targetIndex - 1,
-                animationSpec = scrollAnim
-            )
-            pagerState.scrollToPage(page = dataListSize - 3)
-        }else{
-            pagerState.animateScrollToPage(
-                page = targetIndex - 1,
-                animationSpec = scrollAnim
-            )
-        }
+) {
+    val current = pagerState.currentPage
+    val target =
+        if (looperBanner) current - 1 else if (current == 0) dataListSize - 1 else current - 1
 
-    }else{
-        targetIndex = if(targetIndex == 0) dataListSize - 1 else targetIndex - 1
-        pagerState.animateScrollToPage(
-            page = targetIndex,
-            animationSpec = scrollAnim
-        )
-    }
+    pagerState.animateScrollToPage(page = target, animationSpec = scrollAnim)
+
+    movePage(BannerViewScrollType.SCROLL_LAST, pagerState, looperBanner, dataListSize)
 }
 
 @Preview
 @Composable
-fun PreviewBannerView(){
+fun PreviewBannerView() {
     BannerView(
-        modifier = Modifier.height(200.dp),
-        bannerList = listOf(
-            Color.Red,
-            Color.Black,
-            Color.Blue,
-            Color.Cyan
+        height = 90.dp, bannerList = listOf(
+            Color.Red, Color.Yellow, Color.Blue, Color.Cyan
         )
     ) {
-        Box(modifier = Modifier
-            .background(it)
-            .fillMaxSize()){
+        Box(
+            modifier = Modifier
+                .background(it)
+                .fillMaxSize()
+        ) {
+            Image(
+                painter = painterResource(com.laomuji888.compose.res.R.mipmap.ic_launcher),
+                contentDescription = null,
+                contentScale = ContentScale.Fit,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .fillMaxSize()
+            )
         }
     }
 }

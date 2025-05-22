@@ -18,7 +18,9 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.DragListDemo
+import com.laomuji888.compose.core.ui.view.PreviewBannerView
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
+import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.feature.main.MainScreenAction
@@ -35,13 +37,18 @@ fun UiDemoScreen(
         mutableStateOf(false)
     }
     if (showDragListDialog) {
-        Dialog(onDismissRequest = {
-            showDragListDialog = false
-        }, properties = DialogProperties(usePlatformDefaultWidth = false)) {
+        Dialog(
+            onDismissRequest = {
+                showDragListDialog = false
+            },
+            properties = DialogProperties(usePlatformDefaultWidth = false),
+        ) {
             DragListDemo(
-                dragList = uiState.dragList, onSwap = { a, b ->
+                dragList = uiState.dragList,
+                onSwap = { a, b ->
                     viewModel.onAction(UiDemoScreenAction.SwapDragList(a, b))
-                })
+                },
+            )
         }
     }
 
@@ -63,30 +70,40 @@ private fun UiDemoScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        PreviewBannerView()
+        WeOutline(weOutlineType = WeOutlineType.Split)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),
             onClick = onLongClickSortClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
+            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_date), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_date),
+            onClick = {
                 onAction(MainScreenAction.OnDateClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
+            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_scroll_connect), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_scroll_connect),
+            onClick = {
                 onAction(MainScreenAction.OnNestedScrollConnectionScreenClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
+            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_scroll_dispatcher), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_scroll_dispatcher),
+            onClick = {
                 onAction(MainScreenAction.OnNestedScrollDispatcherScreenClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
+            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_painter), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_painter),
+            onClick = {
                 onAction(MainScreenAction.OnPainterScreenClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
+            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
     }
 }
