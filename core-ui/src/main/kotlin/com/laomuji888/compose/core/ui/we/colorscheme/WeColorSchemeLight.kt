@@ -1,5 +1,10 @@
 package com.laomuji888.compose.core.ui.we.colorscheme
 
+/**
+ * 白天风格颜色
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 data object WeColorSchemeLight : WeColorScheme(
     isDarkFont = true,
 

@@ -11,6 +11,8 @@ import java.util.Locale
 
 /**
  * 不同Activity间的切换,使用滑动进入滑动退出的效果
+ * @author laomuji666
+ * @since 2025/5/23
  */
 abstract class SlideActivity : AppCompatActivity() {
     override fun finish() {

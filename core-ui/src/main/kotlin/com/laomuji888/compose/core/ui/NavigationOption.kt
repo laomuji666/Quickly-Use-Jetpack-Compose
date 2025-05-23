@@ -6,6 +6,7 @@ import androidx.navigation.navOptions
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -14,9 +15,9 @@ import kotlinx.coroutines.launch
  * 新的屏幕会在添加在当前屏幕后
  */
 fun NavHostController.navOptionsPushBack(): NavOptions {
-    return navOptions{
-        if(currentDestination!=null){
-            popUpTo(currentDestination!!.route!!){
+    return navOptions {
+        currentDestination?.route?.let {
+            popUpTo(it) {
                 this.saveState = true
             }
         }
@@ -27,25 +28,25 @@ fun NavHostController.navOptionsPushBack(): NavOptions {
  * 增加一个屏幕
  * 从新的屏幕返回时 退出
  */
-fun navOptionsRemoveAll(): NavOptions {
-    return navOptions{
-        popUpTo(0)
+fun NavHostController.navOptionsRemoveAll(): NavOptions {
+    return navOptions {
+        popUpTo(graph.startDestinationId) {
+            inclusive = true
+        }
     }
 }
 
 /**
- * 一秒钟内只允许弹出一次
- * 防止用户点击过快
+ * 一秒钟内只允许栈中弹出一次屏幕
+ * 防止用户连续点击返回按钮
  */
 private var lastPopBackJob: Job? = null
-private val coroutineScope = CoroutineScope(Dispatchers.Main)
-fun NavHostController.safePopBackStack(){
-    if(lastPopBackJob !=null && lastPopBackJob!!.isActive){
-        return
-    }
-    lastPopBackJob?.cancel()
-    popBackStack()
+private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+fun NavHostController.safePopBackStack() {
+    if (lastPopBackJob?.isActive == true) return
+
     lastPopBackJob = coroutineScope.launch {
+        popBackStack()
         delay(1000)
         lastPopBackJob = null
     }

@@ -25,10 +25,22 @@ import androidx.compose.ui.unit.Density
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji888.compose.core.ui.WeIndication
 import com.laomuji888.compose.core.ui.ifCondition
+import com.laomuji888.compose.core.ui.isPreview
 import com.laomuji888.compose.core.ui.we.colorscheme.LocalWeColorScheme
 import com.laomuji888.compose.core.ui.we.colorscheme.WeColorScheme
 
-
+/**
+ * 设计系统入口
+ * 把值设为默认值
+ *
+ * @param weColorScheme 颜色
+ * @param weDimens 尺寸
+ * @param weTypography 字体
+ * @param content 内容
+ *
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 fun WeTheme(
     weColorScheme: WeColorScheme,
@@ -48,19 +60,25 @@ fun WeTheme(
         },
         LocalWeColorScheme provides weColorScheme,
         LocalWeDimens provides weDimens,
-        LocalWeTypography provides weTypography
+        LocalWeTypography provides weTypography,
     ) {
         WeBaseContent(content = content)
     }
 }
 
+/**
+ * 设计系统content封装
+ * 设置系统栏的颜色,适配高低版本.
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 private fun WeBaseContent(
     content: @Composable () -> Unit
 ) {
     val view = LocalView.current
     val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
-    if (!view.isInEditMode) {
+    if (!isPreview()) {
         val bottomBarBackground = WeTheme.colorScheme.bottomBarBackground.toArgb()
         val isDarkFont = WeTheme.colorScheme.isDarkFont
 
@@ -92,14 +110,22 @@ private fun WeBaseContent(
     Box(
         modifier = Modifier
             .background(WeTheme.colorScheme.background)
-            .ifCondition(condition = isOldWindowInsetsApi, onTrue = {
-                navigationBarsPadding()
-            })
+            .ifCondition(
+                condition = isOldWindowInsetsApi,
+                onTrue = {
+                    navigationBarsPadding()
+                },
+            )
     ) {
         content()
     }
 }
 
+/**
+ * 参考MaterialTheme,获取当前正在使用的设计系统的主题值.
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 object WeTheme {
     val colorScheme: WeColorScheme
         @Composable @ReadOnlyComposable get() = LocalWeColorScheme.current
