@@ -1,6 +1,6 @@
 ## Privacy Policy
 
-Quickly-Use-Jetpack-Compose (hereinafter referred to as "this project") is an open-source project developed by [Cheng-Kun-Liu]([https://github.com/laomuji888](https://github.com/Cheng-Kun-Liu)).
+Quickly-Use-Jetpack-Compose (hereinafter referred to as "this project") is an open-source project developed by Cheng-Kun-Liu.
 
 **Data Collection**
 
