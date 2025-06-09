@@ -3,6 +3,7 @@ package com.laomuji888.compose.core.ui.we
 import android.app.Activity
 import android.content.res.Configuration
 import android.os.Build
+import android.util.TypedValue
 import android.view.WindowInsets
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
@@ -12,8 +13,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
@@ -22,6 +21,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji888.compose.core.ui.WeIndication
 import com.laomuji888.compose.core.ui.ifCondition
@@ -48,13 +49,8 @@ fun WeTheme(
     weTypography: WeTypography,
     content: @Composable () -> Unit,
 ) {
-    val orientation = LocalConfiguration.current.orientation
-    val screenOrientation by remember { derivedStateOf { orientation } }
     CompositionLocalProvider(
-        LocalDensity provides if (screenOrientation == Configuration.ORIENTATION_PORTRAIT) Density(
-            density = LocalContext.current.resources.displayMetrics.widthPixels / 375f,
-            fontScale = LocalDensity.current.fontScale
-        ) else LocalDensity.current,
+        LocalDensity provides getAdapterDensity(),
         LocalIndication provides remember(weColorScheme) {
             WeIndication(weColorScheme.pressed)
         },
@@ -135,4 +131,42 @@ object WeTheme {
 
     val typography: WeTypography
         @Composable @ReadOnlyComposable get() = LocalWeTypography.current
+}
+
+
+@Composable
+internal fun getAdapterDensity(designWidth: Float = 375f): Density {
+    val orientation = LocalConfiguration.current.orientation
+    if (orientation != Configuration.ORIENTATION_PORTRAIT) {
+        return LocalDensity.current
+    } else {
+        val context = LocalContext.current
+        val resources = context.resources
+        val displayMetrics = resources.displayMetrics
+        val targetDensity = displayMetrics.widthPixels / designWidth
+        val systemScaledPxPerSp = TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_SP, 1f, displayMetrics
+        )
+        val fontScale = systemScaledPxPerSp / targetDensity
+        return Density(density = targetDensity, fontScale = fontScale)
+    }
+}
+
+/**
+ * 解决弹窗屏幕适配失效的问题
+ */
+@Composable
+fun WeDialog(
+    onDismissRequest: () -> Unit,
+    properties: DialogProperties = DialogProperties(),
+    content: @Composable () -> Unit
+) {
+    Dialog(
+        onDismissRequest = onDismissRequest,
+        properties = properties
+    ) {
+        CompositionLocalProvider(LocalDensity provides getAdapterDensity()) {
+            content()
+        }
+    }
 }

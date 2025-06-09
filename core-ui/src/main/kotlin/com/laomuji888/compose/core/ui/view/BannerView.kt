@@ -118,7 +118,8 @@ fun <T> BannerView(
                             }
                         }
                     }
-                }, onHorizontalDrag = { _, dragAmount ->
+                }, onHorizontalDrag = { change, dragAmount ->
+                    change.consume()
                     dragStartX += dragAmount
                 })
             },

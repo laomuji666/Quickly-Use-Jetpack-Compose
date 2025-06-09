@@ -12,13 +12,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.DragListDemo
-import com.laomuji888.compose.core.ui.view.PreviewBannerView
+import com.laomuji888.compose.core.ui.view.banner.PreviewBanner
+import com.laomuji888.compose.core.ui.we.WeDialog
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
@@ -37,7 +37,7 @@ fun UiDemoScreen(
         mutableStateOf(false)
     }
     if (showDragListDialog) {
-        Dialog(
+        WeDialog(
             onDismissRequest = {
                 showDragListDialog = false
             },
@@ -70,7 +70,7 @@ private fun UiDemoScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        PreviewBannerView()
+        PreviewBanner()
         WeOutline(weOutlineType = WeOutlineType.Split)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),

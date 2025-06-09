@@ -16,7 +16,7 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
+import com.laomuji888.compose.core.ui.we.WeDialog
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.widget.button.WeButton
 import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
@@ -31,7 +31,7 @@ internal fun AddDownloadDialog(
     onDownloadVideoClick: () -> Unit
 ) {
     val softwareKeyboardController = LocalSoftwareKeyboardController.current
-    Dialog(onDismissRequest = onDismissRequest) {
+    WeDialog(onDismissRequest = onDismissRequest) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()

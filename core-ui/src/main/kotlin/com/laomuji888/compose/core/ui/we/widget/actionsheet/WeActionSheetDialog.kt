@@ -8,9 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.laomuji888.compose.core.ui.clickableDebounce
+import com.laomuji888.compose.core.ui.we.WeDialog
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.animated.AnimatedSlideFromBottom
 import com.laomuji888.compose.core.ui.we.animated.AnimatedSlideFromBottomScope
@@ -20,7 +20,7 @@ import com.laomuji888.compose.core.ui.we.animated.AnimatedSlideFromBottomScope
 fun WeActionSheetDialog(
     onDismissRequest: () -> Unit = {}, content: @Composable AnimatedSlideFromBottomScope.() -> Unit
 ) {
-    Dialog(
+    WeDialog(
         onDismissRequest = {}, properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {
         Box(modifier = Modifier.fillMaxSize()) {
