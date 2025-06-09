@@ -9,8 +9,10 @@ import com.laomuji888.compose.core.ui.safePopBackStack
 import com.laomuji888.compose.core.ui.screen.SlideNavigation
 import com.laomuji888.compose.feature.biometric.BiometricScreenRoute.composeBiometricScreen
 import com.laomuji888.compose.feature.biometric.BiometricScreenRoute.navigateToBiometricScreen
+import com.laomuji888.compose.feature.chat.AiChatScreenRoute
 import com.laomuji888.compose.feature.chat.AiChatScreenRoute.composeAiChatScreen
 import com.laomuji888.compose.feature.chat.AiChatScreenRoute.navigateToAiChatScreen
+import com.laomuji888.compose.feature.chat.chat.ChatScreenRoute
 import com.laomuji888.compose.feature.chat.chat.ChatScreenRoute.Companion.composeChatScreen
 import com.laomuji888.compose.feature.chat.chat.ChatScreenRoute.Companion.navigateToChatScreen
 import com.laomuji888.compose.feature.date.DateScreenRoute.composeDateScreen
@@ -19,6 +21,7 @@ import com.laomuji888.compose.feature.firebase.FirebaseScreenRoute.composeFireba
 import com.laomuji888.compose.feature.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
 import com.laomuji888.compose.feature.http.HttpScreenRoute.composeHttpScreen
 import com.laomuji888.compose.feature.http.HttpScreenRoute.navigateToHttpScreen
+import com.laomuji888.compose.feature.language.LanguageScreenRoute
 import com.laomuji888.compose.feature.language.LanguageScreenRoute.composeLanguageScreen
 import com.laomuji888.compose.feature.language.LanguageScreenRoute.navigateToLanguageScreen
 import com.laomuji888.compose.feature.main.MainScreenRoute
@@ -51,67 +54,47 @@ fun NavigationHost(
         popExitTransition = SlideNavigation.popExitTransition
     ) {
         composeMainScreen(
-            onFirebaseClick = {
-                navHostController.navigateToFirebaseScreen()
-            },
-            onHttpClick = {
-                navHostController.navigateToHttpScreen()
-            },
-            onAiChatClick = {
-                navHostController.navigateToAiChatScreen()
-            },
-            onDateClick = {
-                navHostController.navigateToDateScreen()
-            },
-            onNestedScrollConnectionScreenClick = {
-                navHostController.navigateToNestedScrollConnectionScreen()
-            },
-            onNestedScrollDispatcherScreenClick = {
-                navHostController.navigateToNestedScrollDispatcherScreen()
-            },
-            onBiometricScreenClick = {
-                navHostController.navigateToBiometricScreen()
-            },
-            onPainterScreenClick = {
-                navHostController.navigateToPainterScreen()
-            },
-            onYoutubeDLClick = {
-                navHostController.navigateToYoutubeDLScreen()
-            },
-            onWebViewClick = {
-                activity?.let {
-                    WebViewActivity.openWebViewActivity("https://www.google.com/", activity)
+            navigateToGraph = {
+                when (it) {
+                    MainScreenRoute.Graph.AiChat -> navHostController.navigateToAiChatScreen()
+                    MainScreenRoute.Graph.Biometric -> navHostController.navigateToBiometricScreen()
+                    MainScreenRoute.Graph.Date -> navHostController.navigateToDateScreen()
+                    MainScreenRoute.Graph.Firebase -> navHostController.navigateToFirebaseScreen()
+                    MainScreenRoute.Graph.Http -> navHostController.navigateToHttpScreen()
+                    MainScreenRoute.Graph.Language -> navHostController.navigateToLanguageScreen()
+                    MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollConnectionScreen()
+                    MainScreenRoute.Graph.NestedScrollDispatcher -> navHostController.navigateToNestedScrollDispatcherScreen()
+                    MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
+                    MainScreenRoute.Graph.YoutubeDL -> navHostController.navigateToYoutubeDLScreen()
+                    MainScreenRoute.Graph.WebView -> activity?.let {
+                        WebViewActivity.openWebViewActivity("https://www.google.com/", activity)
+                    }
                 }
             },
-            onLanguageClick = {
-                navHostController.navigateToLanguageScreen()
-            }
         )
 
-        composeFirebaseScreen(
-            onBackClick = {
-                navHostController.safePopBackStack()
-            }
-        )
+        composeFirebaseScreen()
 
-        composeHttpScreen(
-            onBackClick = {
-                navHostController.safePopBackStack()
-            }
-        )
+        composeHttpScreen()
 
         composeAiChatScreen(
-            onContactClick = { account ->
-                navHostController.navigateToChatScreen(
-                    account = account
-                )
-            }
+            navigateToGraph = {
+                when (it) {
+                    is AiChatScreenRoute.Graph.Chat -> {
+                        navHostController.navigateToChatScreen(
+                            account = it.account
+                        )
+                    }
+                }
+            },
         )
 
         composeChatScreen(
-            onBackClick = {
-                navHostController.safePopBackStack()
-            }
+            navigateToGraph = {
+                when (it) {
+                    ChatScreenRoute.Graph.Back -> navHostController.safePopBackStack()
+                }
+            },
         )
 
         composeDateScreen()
@@ -126,9 +109,11 @@ fun NavigationHost(
         composeYoutubeDLScreen()
 
         composeLanguageScreen(
-            onBackClick = {
-                navHostController.safePopBackStack()
-            }
+            navigateToGraph = {
+                when (it) {
+                    LanguageScreenRoute.Graph.Back -> navHostController.safePopBackStack()
+                }
+            },
         )
     }
 }

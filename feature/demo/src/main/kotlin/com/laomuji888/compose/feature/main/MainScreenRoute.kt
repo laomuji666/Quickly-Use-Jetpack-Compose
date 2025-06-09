@@ -9,39 +9,33 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data object MainScreenRoute {
+
+    sealed interface Graph {
+        data object Firebase : Graph
+        data object Http : Graph
+        data object AiChat : Graph
+        data object Date : Graph
+        data object NestedScrollConnection : Graph
+        data object NestedScrollDispatcher : Graph
+        data object Biometric : Graph
+        data object Painter : Graph
+        data object YoutubeDL : Graph
+        data object WebView : Graph
+        data object Language : Graph
+    }
+
     fun NavHostController.navigateToMainScreen(
-        route: MainScreenRoute,
-        navOptions: NavOptions = navOptionsRemoveAll()
+        route: MainScreenRoute, navOptions: NavOptions = navOptionsRemoveAll()
     ) {
         navigate(route = route, navOptions = navOptions)
     }
 
     fun NavGraphBuilder.composeMainScreen(
-        onFirebaseClick: () -> Unit,
-        onHttpClick: () -> Unit,
-        onAiChatClick: () -> Unit,
-        onDateClick: () -> Unit,
-        onNestedScrollConnectionScreenClick: () -> Unit,
-        onNestedScrollDispatcherScreenClick: () -> Unit,
-        onBiometricScreenClick: () -> Unit,
-        onPainterScreenClick: () -> Unit,
-        onYoutubeDLClick: () -> Unit,
-        onWebViewClick: () -> Unit,
-        onLanguageClick: () -> Unit,
+        navigateToGraph: (Graph) -> Unit,
     ) {
         composable<MainScreenRoute> {
             MainScreen(
-                onFirebaseClick = onFirebaseClick,
-                onHttpClick = onHttpClick,
-                onAiChatClick = onAiChatClick,
-                onDateClick = onDateClick,
-                onNestedScrollConnectionScreenClick = onNestedScrollConnectionScreenClick,
-                onNestedScrollDispatcherScreenClick = onNestedScrollDispatcherScreenClick,
-                onBiometricScreenClick = onBiometricScreenClick,
-                onPainterScreenClick = onPainterScreenClick,
-                onYoutubeDLClick = onYoutubeDLClick,
-                onWebViewClick = onWebViewClick,
-                onLanguageClick = onLanguageClick,
+                navigateToGraph = navigateToGraph
             )
         }
     }

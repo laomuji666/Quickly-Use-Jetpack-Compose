@@ -4,10 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji888.compose.core.logic.AppLanguages
 import com.laomuji888.compose.core.logic.Language
+import com.laomuji888.compose.core.ui.emitGraph
 import com.laomuji888.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -17,6 +20,9 @@ import javax.inject.Inject
 class LanguageScreenViewModel @Inject constructor(
     private val language: Language
 ) : ViewModel() {
+    private val _graph = MutableSharedFlow<LanguageScreenRoute.Graph>()
+    val graph = _graph.asSharedFlow()
+
     private val _usingLanguage = MutableStateFlow(language.getAppUsingLanguage())
     private val _appLanguageList = MutableStateFlow(AppLanguages.getAppLanguageList())
 
@@ -45,6 +51,8 @@ class LanguageScreenViewModel @Inject constructor(
                     setAppLanguage(action)
                 }
             }
+
+            LanguageScreenAction.OnClickBack -> _graph.emitGraph(LanguageScreenRoute.Graph.Back)
         }
     }
 

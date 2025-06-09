@@ -14,13 +14,18 @@ const val CHAT_SCREEN_DEEP_LINK = "laomuji://compose.laomuji888.com/chat"
 data class ChatScreenRoute(
     val account: Long
 ){
+
+    sealed interface Graph {
+        data object Back : Graph
+    }
+
     companion object{
         fun NavHostController.navigateToChatScreen(account: Long, navOptions: NavOptions? = navOptionsPushBack()){
             return navigate(ChatScreenRoute(account), navOptions)
         }
 
         fun NavGraphBuilder.composeChatScreen(
-            onBackClick: ()->Unit
+            navigateToGraph: (Graph) -> Unit,
         ){
             composable<ChatScreenRoute>(
                 deepLinks = listOf(
@@ -28,7 +33,7 @@ data class ChatScreenRoute(
                 )
             ){
                 ChatScreen(
-                    onBackClick = onBackClick
+                    navigateToGraph = navigateToGraph
                 )
             }
         }

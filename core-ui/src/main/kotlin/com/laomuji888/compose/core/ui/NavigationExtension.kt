@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 /**
@@ -30,7 +31,9 @@ fun NavHostController.navOptionsPushBack(): NavOptions {
  */
 fun NavHostController.navOptionsRemoveAll(): NavOptions {
     return navOptions {
-        popUpTo(graph.startDestinationId) {
+        popUpTo(0) {
+            saveState = false
+            graph
             inclusive = true
         }
     }
@@ -49,5 +52,15 @@ fun NavHostController.safePopBackStack() {
         popBackStack()
         delay(1000)
         lastPopBackJob = null
+    }
+}
+
+/**
+ * 用于Graph导航
+ * 因为导航必须在主线程运行
+ */
+fun <T> MutableSharedFlow<T>.emitGraph(data: T) {
+    CoroutineScope(SupervisorJob() + Dispatchers.Main).launch {
+        emit(data)
     }
 }

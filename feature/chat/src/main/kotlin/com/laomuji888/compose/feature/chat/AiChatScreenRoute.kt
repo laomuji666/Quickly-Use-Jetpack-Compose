@@ -8,21 +8,21 @@ import com.laomuji888.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object AiChatScreenRoute{
-    fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack()){
+data object AiChatScreenRoute {
+    sealed interface Graph {
+        data class Chat(val account: Long) : Graph
+    }
+
+    fun NavHostController.navigateToAiChatScreen(navOptions: NavOptions = navOptionsPushBack()) {
         navigate(AiChatScreenRoute, navOptions)
     }
 
     fun NavGraphBuilder.composeAiChatScreen(
-        onContactClick: (account:Long)->Unit
-    ){
-        composable<AiChatScreenRoute>{
+        navigateToGraph: (Graph) -> Unit,
+    ) {
+        composable<AiChatScreenRoute> {
             AiChatScreen(
-                onContactClick = {
-                    onContactClick(
-                        it.account
-                    )
-                }
+                navigateToGraph = navigateToGraph
             )
         }
     }

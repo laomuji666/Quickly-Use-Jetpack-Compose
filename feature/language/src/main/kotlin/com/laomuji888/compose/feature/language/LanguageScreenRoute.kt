@@ -9,6 +9,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data object LanguageScreenRoute {
+
+    sealed interface Graph {
+        data object Back : Graph
+    }
+
     fun NavHostController.navigateToLanguageScreen(
         navOptions: NavOptions = navOptionsPushBack()
     ) {
@@ -16,11 +21,11 @@ data object LanguageScreenRoute {
     }
 
     fun NavGraphBuilder.composeLanguageScreen(
-        onBackClick: () -> Unit,
+        navigateToGraph: (Graph) -> Unit,
     ) {
         composable<LanguageScreenRoute> {
             LanguageScreen(
-                onBackClick = onBackClick,
+                navigateToGraph = navigateToGraph
             )
         }
     }

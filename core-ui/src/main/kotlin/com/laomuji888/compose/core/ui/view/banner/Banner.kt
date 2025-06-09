@@ -27,6 +27,8 @@ import com.laomuji888.compose.res.R
 
 /**
  * 支持任意数据类型的banner
+ * 等待重构
+ *
  * @param height Banner的高度
  * @param bannerList Banner的数据源
  * @param initialPage 初始页面
