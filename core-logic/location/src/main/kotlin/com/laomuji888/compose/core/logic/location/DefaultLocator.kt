@@ -16,9 +16,9 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.laomuji888.compose.core.logic.common.Log
+import com.laomuji888.compose.core.logic.common.dispatchers.IoCoroutineScope
 import kotlinx.coroutines.CancellableContinuation
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -37,7 +37,8 @@ import kotlin.coroutines.resume
  * 只有在 FusedLocationProviderClient 无法获取定位的情况才会使用 LocationManager
  */
 class DefaultLocator @Inject constructor(
-    private val application: Application
+    private val application: Application,
+    @IoCoroutineScope val coroutineScope: CoroutineScope,
 ) : Locator {
 
     companion object {
@@ -145,7 +146,11 @@ class DefaultLocator @Inject constructor(
 
     private fun <T> CancellableContinuation<T>.safeResume(value: T) {
         if (isActive) {
-            resume(value)
+            try {
+                resume(value)
+            }catch (ignored: Exception){
+                //resume后isActive会变为false,按道理不会走到这里,这里做一个兜底
+            }
         }
     }
 
@@ -153,7 +158,7 @@ class DefaultLocator @Inject constructor(
     private fun requestSingleLocation(
         cont: CancellableContinuation<LocatorResult>
     ) {
-        CoroutineScope(Dispatchers.IO).launch {
+        coroutineScope.launch {
             val locationListener = object : LocationListenerCompat {
                 private var isCalled = false
                 override fun onLocationChanged(location: Location) {
@@ -198,6 +203,11 @@ class DefaultLocator @Inject constructor(
                     locationListener,
                     Looper.getMainLooper()
                 )
+            }
+
+            //让协程保持存活
+            while (cont.isActive){
+                delay(500)
             }
         }
     }

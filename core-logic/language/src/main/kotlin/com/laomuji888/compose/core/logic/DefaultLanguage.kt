@@ -25,7 +25,7 @@ class DefaultLanguage @Inject constructor(
     }
 
     private var usingLanguageTag by cacheUtil.cacheable(
-        DEFAULT_LANGUAGE_USING_LANGUAGE_TAG, AppLanguages.FlowSystem.getTag()
+        DEFAULT_LANGUAGE_USING_LANGUAGE_TAG, AppLanguages.FlowSystem.tag
     )
 
     private val systemLocaleSettingIntent =
@@ -50,7 +50,7 @@ class DefaultLanguage @Inject constructor(
     }
 
     override fun setAppUsingLanguage(appLanguage: AppLanguages) {
-        usingLanguageTag = appLanguage.getTag()
+        usingLanguageTag = appLanguage.tag
         val needUpdateLanguage = if (systemLocaleSettingIntent == null) {
             true
         } else {
