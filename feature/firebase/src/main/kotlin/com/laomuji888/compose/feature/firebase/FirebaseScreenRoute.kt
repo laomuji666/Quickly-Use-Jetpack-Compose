@@ -13,13 +13,9 @@ data object FirebaseScreenRoute{
         navigate(FirebaseScreenRoute, navOptions)
     }
 
-    fun NavGraphBuilder.composeFirebaseScreen(
-        onBackClick: ()->Unit
-    ){
+    fun NavGraphBuilder.composeFirebaseScreen(){
         composable<FirebaseScreenRoute>{
-            FirebaseScreen(
-                onBackClick = onBackClick
-            )
+            FirebaseScreen()
         }
     }
 }

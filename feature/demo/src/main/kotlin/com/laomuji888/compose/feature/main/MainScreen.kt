@@ -4,10 +4,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.laomuji888.compose.core.ui.isPreview
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.icons.Device
@@ -18,6 +20,7 @@ import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBar
 import com.laomuji888.compose.core.ui.we.widget.bottombar.WeBottomBarItem
 import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.feature.main.MainScreenRoute.Graph
 import com.laomuji888.compose.feature.main.feature.FeatureScreen
 import com.laomuji888.compose.feature.main.settings.SettingsScreen
 import com.laomuji888.compose.feature.main.ui.UiDemoScreen
@@ -26,34 +29,17 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun MainScreen(
-    onFirebaseClick: () -> Unit,
-    onHttpClick: () -> Unit,
-    onAiChatClick: () -> Unit,
-    onDateClick: () -> Unit,
-    onNestedScrollConnectionScreenClick: () -> Unit,
-    onNestedScrollDispatcherScreenClick: () -> Unit,
-    onBiometricScreenClick: () -> Unit,
-    onPainterScreenClick: () -> Unit,
-    onYoutubeDLClick: () -> Unit,
-    onWebViewClick: () -> Unit,
-    onLanguageClick: () -> Unit,
+    viewModel: MainScreenViewModel = hiltViewModel(),
+    navigateToGraph: (Graph) -> Unit,
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.graph.collect {
+            navigateToGraph(it)
+        }
+    }
     MainScreenUi(
-        onAction = {
-            when (it) {
-                MainScreenAction.OnFirebaseClick -> onFirebaseClick()
-                MainScreenAction.OnHttpClick -> onHttpClick()
-                MainScreenAction.OnAiChatClick -> onAiChatClick()
-                MainScreenAction.OnDateClick -> onDateClick()
-                MainScreenAction.OnNestedScrollConnectionScreenClick -> onNestedScrollConnectionScreenClick()
-                MainScreenAction.OnNestedScrollDispatcherScreenClick -> onNestedScrollDispatcherScreenClick()
-                MainScreenAction.OnBiometricScreenClick -> onBiometricScreenClick()
-                MainScreenAction.OnPainterScreenClick -> onPainterScreenClick()
-                MainScreenAction.OnYoutubeDLClick -> onYoutubeDLClick()
-                MainScreenAction.OnWebViewClick -> onWebViewClick()
-                MainScreenAction.OnLanguageClick -> onLanguageClick()
-            }
-        })
+        onAction = viewModel::onAction
+    )
 }
 
 @Composable

@@ -42,9 +42,9 @@ import com.laomuji888.compose.core.ui.we.icons.More
 import com.laomuji888.compose.core.ui.we.icons.WeIcons
 import com.laomuji888.compose.core.ui.we.widget.button.WeButton
 import com.laomuji888.compose.core.ui.we.widget.button.WeButtonType
-import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.input.WeInput
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBarAction
 import com.laomuji888.compose.res.R
@@ -52,10 +52,15 @@ import com.laomuji888.compose.res.R
 @Composable
 fun ChatScreen(
     viewModel: ChatScreenViewModel = hiltViewModel(),
-    onBackClick: () -> Unit
+    navigateToGraph: (ChatScreenRoute.Graph) -> Unit,
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.graph.collect {
+            navigateToGraph(it)
+        }
+    }
+
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val softwareKeyboardController = LocalSoftwareKeyboardController.current
 
     LaunchedEffect(Unit) {
         viewModel.onAction(ChatScreenAction.DismissNotification)
@@ -63,29 +68,23 @@ fun ChatScreen(
 
     ChatScreenUi(
         uiState = uiState,
-        onBackClick = onBackClick,
-        onInputTextChanged = {
-            viewModel.onAction(ChatScreenAction.SetInputText(it))
-        },
-        onSendInputTextClick = {
-            viewModel.onAction(ChatScreenAction.SendInputText)
-            softwareKeyboardController?.hide()
-        }
+        onAction = viewModel::onAction,
     )
 }
 
 @Composable
 private fun ChatScreenUi(
     uiState: ChatScreenUiState,
-    onBackClick: () -> Unit,
-    onInputTextChanged: (String) -> Unit,
-    onSendInputTextClick: () -> Unit
+    onAction: (ChatScreenAction) -> Unit,
 ) {
+    val softwareKeyboardController = LocalSoftwareKeyboardController.current
     WeScaffold(
         topBar = {
             WeTopBar(
                 title = uiState.nickname,
-                onBackClick = onBackClick,
+                onBackClick = {
+                    onAction(ChatScreenAction.OnClickBack)
+                },
                 actions = {
                     WeTopBarAction(
                         imageVector = WeIcons.More
@@ -108,14 +107,22 @@ private fun ChatScreenUi(
                     WeInput(
                         modifier = Modifier.weight(1f),
                         value = uiState.inputText,
-                        onValueChange = onInputTextChanged,
+                        onValueChange = {
+                            onAction(ChatScreenAction.SetInputText(it))
+                        },
                         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
-                        onImeAction = onSendInputTextClick
+                        onImeAction = {
+                            onAction(ChatScreenAction.SendInputText)
+                            softwareKeyboardController?.hide()
+                        }
                     )
                     WeButton(
                         text = stringResource(id = R.string.string_chat_screen_send_text),
                         weButtonType = WeButtonType.Warp,
-                        onClick = onSendInputTextClick
+                        onClick = {
+                            onAction(ChatScreenAction.SendInputText)
+                            softwareKeyboardController?.hide()
+                        }
                     )
                 }
             }
@@ -156,8 +163,8 @@ private fun ChatMessageAvatar(
             AsyncImage(
                 model = imageRequest,
                 contentDescription = null,
-                placeholder = painterResource(id = com.laomuji888.compose.res.R.mipmap.ic_launcher),
-                error = painterResource(id = com.laomuji888.compose.res.R.mipmap.ic_launcher),
+                placeholder = painterResource(id = R.mipmap.ic_launcher),
+                error = painterResource(id = R.mipmap.ic_launcher),
                 modifier = Modifier
                     .fillMaxSize()
                     .clip(RoundedCornerShape(WeTheme.dimens.chatAvatarRoundedCornerDp)),
@@ -219,9 +226,9 @@ fun PreviewChatScreenUi() {
                     )
                 )
             ),
-            onBackClick = {},
-            onInputTextChanged = {},
-            onSendInputTextClick = {}
+            onAction = {
+
+            }
         )
     }
 }

@@ -8,18 +8,14 @@ import com.laomuji888.compose.core.ui.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object HttpScreenRoute{
-    fun NavHostController.navigateToHttpScreen(navOptions: NavOptions = navOptionsPushBack()){
+data object HttpScreenRoute {
+    fun NavHostController.navigateToHttpScreen(navOptions: NavOptions = navOptionsPushBack()) {
         navigate(HttpScreenRoute, navOptions)
     }
 
-    fun NavGraphBuilder.composeHttpScreen(
-        onBackClick:()->Unit
-    ){
-        composable<HttpScreenRoute>{
-            HttpScreen(
-                onBackClick = onBackClick
-            )
+    fun NavGraphBuilder.composeHttpScreen() {
+        composable<HttpScreenRoute> {
+            HttpScreen()
         }
     }
 }

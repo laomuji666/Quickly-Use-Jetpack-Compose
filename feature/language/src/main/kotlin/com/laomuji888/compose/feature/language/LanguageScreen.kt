@@ -15,22 +15,28 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.logic.AppLanguages
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
-import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
-import com.laomuji888.compose.core.ui.we.widget.radio.WeRadio
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji888.compose.core.ui.we.widget.radio.WeRadio
+import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji888.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji888.compose.feature.language.LanguageScreenRoute.Graph
 import com.laomuji888.compose.res.R
 
 @Composable
 fun LanguageScreen(
     viewModel: LanguageScreenViewModel = hiltViewModel(),
-    onBackClick: () -> Unit,
+    navigateToGraph: (Graph) -> Unit,
 ) {
+    LaunchedEffect(Unit) {
+        viewModel.graph.collect {
+            navigateToGraph(it)
+        }
+    }
+
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     LanguageScreenUi(
         uiState = uiState,
         onAction = viewModel::onAction,
-        onBackClick = onBackClick
     )
     LaunchedEffect(Unit) {
         viewModel.updateLanguageStatus()
@@ -41,14 +47,15 @@ fun LanguageScreen(
 private fun LanguageScreenUi(
     uiState: LanguageScreenUiState,
     onAction: (LanguageScreenAction) -> Unit,
-    onBackClick: () -> Unit,
 ) {
     val context = LocalContext.current
     WeScaffold(
         topBar = {
             WeTopBar(
                 title = stringResource(id = R.string.string_language_screen_title),
-                onBackClick = onBackClick
+                onBackClick = {
+                    onAction(LanguageScreenAction.OnClickBack)
+                }
             )
         }
     ) {
@@ -77,9 +84,9 @@ private fun PreviewLanguageScreenUi() {
             onAction = {
                 when (it) {
                     is LanguageScreenAction.OnLanguageClick -> usingLanguage = it.appLanguage
+                    LanguageScreenAction.OnClickBack -> Unit
                 }
             },
-            onBackClick = {}
         )
     }
 }

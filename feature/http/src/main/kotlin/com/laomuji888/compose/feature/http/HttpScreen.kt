@@ -29,15 +29,13 @@ import com.laomuji888.compose.res.R
 @Composable
 fun HttpScreen(
     viewModel: HttpScreenViewModel = hiltViewModel(),
-    onBackClick:()->Unit
-){
+) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
-    if(uiState.isError){
+    if (uiState.isError) {
         ErrorView {
             HttpScreen(
                 viewModel = hiltViewModel(key = uniqueKey()),
-                onBackClick = onBackClick
             )
         }
         return
@@ -46,26 +44,21 @@ fun HttpScreen(
     LoadingDialog(loading = uiState.isLoading)
 
     HttpScreenUi(
-        uiState = uiState,
-        onBackClick = onBackClick,
-        onAction = viewModel::onAction
+        uiState = uiState, onAction = viewModel::onAction
     )
 }
 
 @Composable
 private fun HttpScreenUi(
     uiState: HttpScreenUiState,
-    onBackClick:()->Unit,
     onAction: (HttpScreenAction) -> Unit,
-){
+) {
     WeScaffold(
         topBar = {
             WeTopBar(
                 title = stringResource(id = R.string.string_demo_screen_http_demo),
-                onBackClick = onBackClick
             )
-        }
-    ) {
+        }) {
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(id = R.string.string_http_screen_is_online, uiState.isConnect),
@@ -77,23 +70,22 @@ private fun HttpScreenUi(
         Spacer(modifier = Modifier.height(20.dp))
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_get_demo),
-            onClick = { onAction(HttpScreenAction.GetListUsers) }
-        )
+            onClick = { onAction(HttpScreenAction.GetListUsers) })
         HttpScreenSlot(
             text = stringResource(id = R.string.string_http_screen_post_demo),
-            onClick = { onAction(HttpScreenAction.CreateUser) }
-        )
+            onClick = { onAction(HttpScreenAction.CreateUser) })
         Text(text = uiState.responseText, color = WeTheme.colorScheme.fontColorHeavy)
     }
 }
 
 @Composable
 private fun HttpScreenSlot(
-    text:String,
-    onClick:()->Unit
-){
+    text: String, onClick: () -> Unit
+) {
     Column(modifier = Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
-        WeButton(weButtonType = WeButtonType.Big, weButtonColor = WeButtonColor.Primary, text = text) {
+        WeButton(
+            weButtonType = WeButtonType.Big, weButtonColor = WeButtonColor.Primary, text = text
+        ) {
             onClick()
         }
     }
@@ -103,13 +95,10 @@ private fun HttpScreenSlot(
 
 @Preview
 @Composable
-fun PreviewHttpScreenUi(){
+fun PreviewHttpScreenUi() {
     QuicklyTheme {
         HttpScreenUi(
-            onBackClick = {},
-            uiState = HttpScreenUiState(),
-            onAction = {}
-        )
+            uiState = HttpScreenUiState(), onAction = {})
     }
 }
 

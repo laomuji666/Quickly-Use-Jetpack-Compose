@@ -29,7 +29,6 @@ import com.laomuji888.compose.res.R
 @Composable
 fun FirebaseScreen(
     viewModel: FirebaseScreenViewModel = hiltViewModel(),
-    onBackClick:()->Unit
 ){
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val permissionLauncher = PermissionUtil.getPostNotificationLauncher {
@@ -37,7 +36,6 @@ fun FirebaseScreen(
     }
     FirebaseScreenUi(
         uiState = uiState,
-        onBackClick = onBackClick,
         logEventClick = {
             viewModel.onAction(FirebaseScreenAction.OnClickLogEvent)
         },
@@ -53,7 +51,6 @@ fun FirebaseScreen(
 @Composable
 private fun FirebaseScreenUi(
     uiState: FirebaseScreenUiState,
-    onBackClick: ()->Unit,
     logEventClick: () -> Unit,
     updatePushToken:()->Unit,
     testCrashlytics:()->Unit
@@ -62,7 +59,6 @@ private fun FirebaseScreenUi(
         topBar = {
             WeTopBar(
                 title = stringResource(id = R.string.string_demo_screen_firebase_demo),
-                onBackClick = onBackClick
             )
         }
     ){
@@ -110,7 +106,6 @@ fun PreviewFirebaseScreenUi(){
     QuicklyTheme {
         FirebaseScreenUi(
             uiState = FirebaseScreenUiState(),
-            onBackClick = {},
             logEventClick = {},
             updatePushToken = {},
             testCrashlytics = {}

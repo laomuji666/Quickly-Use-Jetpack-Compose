@@ -17,7 +17,6 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.view.DragListDemo
-import com.laomuji888.compose.core.ui.view.banner.PreviewBanner
 import com.laomuji888.compose.core.ui.we.WeDialog
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.outline.WeOutline
@@ -70,7 +69,6 @@ private fun UiDemoScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        PreviewBanner()
         WeOutline(weOutlineType = WeOutlineType.Split)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),

@@ -10,10 +10,13 @@ import com.laomuji888.compose.core.logic.database.entity.ContactInfoEntity
 import com.laomuji888.compose.core.logic.database.entity.MessageInfoEntity
 import com.laomuji888.compose.core.logic.notification.NotificationHelper
 import com.laomuji888.compose.core.logic.repository.module.chat.ChatRepository
+import com.laomuji888.compose.core.ui.emitGraph
 import com.laomuji888.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -26,6 +29,9 @@ class ChatScreenViewModel @Inject constructor(
     private val notificationHelper: NotificationHelper,
     @IoCoroutineScope val ioCoroutineScope: CoroutineScope
 ) : ViewModel() {
+    private val _graph = MutableSharedFlow<ChatScreenRoute.Graph>()
+    val graph = _graph.asSharedFlow()
+
     private val account = savedStateHandle.toRoute<ChatScreenRoute>().account
     private val _contactInfo = MutableStateFlow<ContactInfoEntity?>(null)
     private val _messageList = MutableStateFlow<List<MessageInfoEntity>>(emptyList())
@@ -56,6 +62,7 @@ class ChatScreenViewModel @Inject constructor(
             is ChatScreenAction.SetInputText -> setInputText(action.text)
             ChatScreenAction.SendInputText -> sendInputText()
             ChatScreenAction.DismissNotification -> dismissNotification()
+            ChatScreenAction.OnClickBack -> _graph.emitGraph(ChatScreenRoute.Graph.Back)
         }
     }
 
