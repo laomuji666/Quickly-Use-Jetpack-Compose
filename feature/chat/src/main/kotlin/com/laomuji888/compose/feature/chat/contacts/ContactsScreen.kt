@@ -94,7 +94,9 @@ private fun ContactsScreenUi(
                         modifier = Modifier, title = it.category
                     )
                 }
-                items(items = it.contactList) { item ->
+                items(items = it.contactList, key = { item ->
+                    item.account
+                }) { item ->
                     WeContactItem(
                         avatar = item.avatarUri, text = item.nickname, onClick = {
                             onContactClick(item)

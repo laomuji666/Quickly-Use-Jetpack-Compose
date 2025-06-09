@@ -15,6 +15,14 @@ import androidx.compose.ui.node.invalidateDraw
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * 点击效果
+ * @param pressedColor 按下时的颜色
+ * @param focusedColor 焦点时的颜色
+ * @param dragColor 拖拽时的颜色
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 data class WeIndication(
     val pressedColor: Color,
     val focusedColor: Color = pressedColor,

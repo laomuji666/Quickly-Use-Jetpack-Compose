@@ -2,6 +2,11 @@ package com.laomuji888.compose.core.ui.we.colorscheme
 
 import androidx.compose.ui.graphics.Color
 
+/**
+ * 所有用到的颜色值
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 object WeColors {
     val Color_000000 = Color(0xFF000000)
     val Color_000000_90 = Color(0xFF000000).copy(alpha = 0.9f)

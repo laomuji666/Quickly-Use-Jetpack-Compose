@@ -6,6 +6,11 @@ import androidx.compose.animation.ExitTransition
 import androidx.compose.animation.core.tween
 import androidx.navigation.NavBackStackEntry
 
+/**
+ * 不同屏幕间的切换,使用滑动进入滑动退出的效果
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 class SlideNavigation {
     companion object {
         private const val ANIM_TIME = 350

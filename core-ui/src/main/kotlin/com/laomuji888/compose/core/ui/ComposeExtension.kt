@@ -12,9 +12,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalInspectionMode
 
+/**
+ * 当前是不是Preview
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 fun isPreview() = LocalInspectionMode.current
 
+/**
+ * 根据条件返回不同的Modifier
+ * @param condition 条件
+ * @param onTrue 为true时的Modifier
+ * @param onFalse 为false时的Modifier
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 fun Modifier.ifCondition(
     condition: Boolean,
@@ -28,6 +41,14 @@ fun Modifier.ifCondition(
     }
 }
 
+/**
+ * 限制点击速度, 防止多次点击
+ * @param timeout 点击限速时间
+ * @param indication 点击效果
+ * @param onClick 点击事件
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 fun Modifier.clickableDebounce(
     timeout: Long = 300L,
@@ -40,8 +61,9 @@ fun Modifier.clickableDebounce(
         indication = indication,
         interactionSource = remember { MutableInteractionSource() },
         onClick = {
-            if (System.currentTimeMillis() - lastClickTime > timeout) {
-                lastClickTime = System.currentTimeMillis()
+            val currentTimeMillis = System.currentTimeMillis()
+            if (currentTimeMillis - lastClickTime > timeout) {
+                lastClickTime = currentTimeMillis
                 onClick()
             }
         })

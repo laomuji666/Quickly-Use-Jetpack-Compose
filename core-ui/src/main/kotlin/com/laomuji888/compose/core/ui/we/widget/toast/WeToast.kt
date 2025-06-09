@@ -25,9 +25,9 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.laomuji888.compose.core.ui.we.LocalWeDimens
+import com.laomuji888.compose.core.ui.we.WeDialog
 import com.laomuji888.compose.core.ui.we.WeTheme
 import com.laomuji888.compose.core.ui.we.icons.Done
 import com.laomuji888.compose.core.ui.we.icons.Error
@@ -40,7 +40,7 @@ import kotlinx.coroutines.isActive
 fun WeToast(
     weToastType: WeToastType, message: String, onDismissRequest: () -> Unit = {}
 ) {
-    Dialog(
+    WeDialog(
         onDismissRequest = onDismissRequest,
         properties = DialogProperties(usePlatformDefaultWidth = false)
     ) {

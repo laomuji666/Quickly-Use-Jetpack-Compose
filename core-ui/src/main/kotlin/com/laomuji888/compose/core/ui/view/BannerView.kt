@@ -118,7 +118,8 @@ fun <T> BannerView(
                             }
                         }
                     }
-                }, onHorizontalDrag = { _, dragAmount ->
+                }, onHorizontalDrag = { change, dragAmount ->
+                    change.consume()
                     dragStartX += dragAmount
                 })
             },
@@ -151,7 +152,7 @@ fun <T> BannerView(
         }
     }
 
-    LaunchedEffect(dragStartX) {
+    LaunchedEffect(dragStartX, scrollFinish) {
         while (isActive) {
             if (timeMillis < 1) {
                 break
@@ -171,7 +172,7 @@ fun <T> BannerView(
         }
     }
 
-
+    //在回到页面时,解决动画还没有播放完的问题.
     LaunchedEffect(Unit) {
         pagerState.animateScrollToPage(
             page = pagerState.currentPage, animationSpec = tween(animDurationMillis)

@@ -4,6 +4,11 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 
+/**
+ * 颜色设计
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 sealed class WeColorScheme(
     //顶部状态栏文字是否是深色
     val isDarkFont: Boolean,

@@ -5,8 +5,11 @@ import android.content.res.Resources
 import com.laomuji888.compose.res.R
 import java.util.Locale
 
-sealed class AppLanguages(val locale: Locale) {
-    data object FlowSystem : AppLanguages(getSystemLanguage())
+sealed class AppLanguages(open val locale: Locale) {
+    data object FlowSystem : AppLanguages(getSystemLanguage()) {
+        override val locale: Locale
+            get() = getSystemLanguage()
+    }
     data object ChineseSimpled : AppLanguages(Locale.forLanguageTag("zh-Hans"))
     data object ChineseTraditional : AppLanguages(Locale.forLanguageTag("zh-Hant"))
     data object English : AppLanguages(Locale("en"))

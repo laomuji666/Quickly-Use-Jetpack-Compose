@@ -4,6 +4,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
+/**
+ * 颜色风格类型
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 sealed class WeThemeColorType {
     data object FlowSystem : WeThemeColorType()
     data object Light : WeThemeColorType()

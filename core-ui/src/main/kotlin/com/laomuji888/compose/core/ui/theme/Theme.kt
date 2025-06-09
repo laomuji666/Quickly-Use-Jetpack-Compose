@@ -12,6 +12,12 @@ import com.laomuji888.compose.core.ui.we.colorscheme.WeColorSchemeDark
 import com.laomuji888.compose.core.ui.we.colorscheme.WeColorSchemeLight
 import com.laomuji888.compose.core.ui.we.colorscheme.WeThemeColorType
 
+/**
+ * 设计系统快速入口,不接受自定义主题.
+ * 如果需要自定义,需要使用[WeTheme].
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 @Composable
 fun QuicklyTheme(
     content: @Composable () -> Unit

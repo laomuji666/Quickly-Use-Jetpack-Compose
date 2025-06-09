@@ -8,21 +8,25 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.IntOffset
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-interface AnimatedScope {
+/**
+ * 从底部滑动起来的动画
+ * @author laomuji666
+ * @since 2025/5/23
+ */
+interface AnimatedSlideFromBottomScope {
     var animTime: Int
     var isInOrOut: MutableState<Boolean?>
     fun show()
     fun hide(callback: () -> Unit)
 }
 
-class AnimatedScopeImpl : AnimatedScope {
+class AnimatedSlideFromBottomScopeImpl : AnimatedSlideFromBottomScope {
     override var animTime: Int = 200
     override var isInOrOut: MutableState<Boolean?> = mutableStateOf(null)
     private var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default)
@@ -43,12 +47,8 @@ class AnimatedScopeImpl : AnimatedScope {
 }
 
 @Composable
-fun AnimatedSlide(content: @Composable AnimatedScope.() -> Unit) {
-    if (LocalView.current.isInEditMode) {
-        content(AnimatedScopeImpl())
-        return
-    }
-    val animatedScopeImpl = remember { AnimatedScopeImpl() }
+fun AnimatedSlideFromBottom(content: @Composable AnimatedSlideFromBottomScope.() -> Unit) {
+    val animatedScopeImpl = remember { AnimatedSlideFromBottomScopeImpl() }
     animatedScopeImpl.show()
     AnimatedVisibility(
         visible = animatedScopeImpl.isInOrOut.value == true, enter = slideIn(
