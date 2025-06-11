@@ -2,13 +2,13 @@ package com.laomuji888.compose.feature.scroll
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.draggable
-import androidx.compose.foundation.gestures.rememberDraggableState
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.gestures.rememberScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -25,6 +25,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.laomuji888.compose.core.ui.clickableDebounce
 import com.laomuji888.compose.core.ui.theme.QuicklyTheme
 import com.laomuji888.compose.core.ui.we.widget.click.WeClick
 import com.laomuji888.compose.core.ui.we.widget.scaffold.WeScaffold
@@ -34,32 +35,34 @@ import com.laomuji888.compose.res.R
  * 子节点对父节点的滑动进行劫持
  */
 @Composable
-fun NestedScrollDispatcherScreen(){
+internal fun NestedScrollDispatcherScreen() {
     val density = LocalDensity.current
 
-    val imageHeightMax by remember {
-        mutableFloatStateOf(with(density){
-            300.dp.toPx()
-        })
-    }
-    val imageHeightMin by remember {
-        mutableFloatStateOf(with(density){
-            100.dp.toPx()
-        })
-    }
-    var imageHeight by remember {
-        mutableFloatStateOf(imageHeightMax)
+    val imageHeightMax = with(density) { 300.dp.toPx() }
+    val imageHeightMin = with(density) { 100.dp.toPx() }
+    var imageHeight by remember { mutableFloatStateOf(imageHeightMax) }
+
+    val nestedScrollDispatcher = remember { NestedScrollDispatcher() }
+
+    val scrollState = rememberScrollableState { delta ->
+        val newHeight = (imageHeight + delta).coerceIn(imageHeightMin, imageHeightMax)
+        val consumed = newHeight - imageHeight
+        imageHeight = newHeight
+        val remaining = delta - consumed
+        nestedScrollDispatcher.dispatchPostScroll(
+            consumed = Offset(0f, consumed),
+            available = Offset(0f, remaining),
+            source = NestedScrollSource.UserInput
+        )
+        delta
     }
 
-    val nestedScrollDispatcher = remember {
-        NestedScrollDispatcher()
-    }
     WeScaffold {
-        LazyColumn(modifier = Modifier.fillMaxSize()) {
-            items(30){
-                WeClick(
-                    title = "$it",
-                )
+        LazyColumn(
+            modifier = Modifier.fillMaxSize()
+        ) {
+            items(30) {
+                WeClick(title = "$it")
             }
             item {
                 Image(
@@ -67,54 +70,34 @@ fun NestedScrollDispatcherScreen(){
                     contentDescription = null,
                     contentScale = ContentScale.FillBounds,
                     modifier = Modifier
-                        .height(with(density){
-                            imageHeight.toDp()
-                        })
+                        .height(with(density) { imageHeight.toDp() })
                         .fillMaxWidth()
-                        .draggable(
+                        .scrollable(
                             orientation = Orientation.Vertical,
-                            state = rememberDraggableState { onDelta ->
-                                //处理图片本身的滑动,在收缩或者展开后不再使用滑动
-                                val consumedY = if(onDelta < 0){
-                                    val remainHeight = imageHeightMin - imageHeight
-                                    if(remainHeight < onDelta){
-                                        onDelta
-                                    }else {
-                                        remainHeight
-                                    }
-                                }else{
-                                    val remainHeight = imageHeightMax - imageHeight
-                                    if(remainHeight > onDelta) {
-                                        onDelta
-                                    }else{
-                                        remainHeight
-                                    }
-                                }
-                                imageHeight+=consumedY
-
-
-                                //把多余的滑动交给父节点,去掉后不会把滑动传给父节点
-                                nestedScrollDispatcher.dispatchPostScroll(
-                                    consumed = Offset(0f, consumedY),
-                                    available = Offset(0f, onDelta - consumedY),
-                                    source = NestedScrollSource.UserInput
-                                )
-                            }
+                            state = scrollState,
+                            flingBehavior = ScrollableDefaults.flingBehavior(),
+                            reverseDirection = false
                         )
                         .nestedScroll(
                             connection = remember { object : NestedScrollConnection {} },
                             dispatcher = nestedScrollDispatcher
                         )
+                        .clickableDebounce {
+                            if(imageHeight == imageHeightMax){
+                                imageHeight = imageHeightMin
+                            }else{
+                                imageHeight = imageHeightMax
+                            }
+                        }
                 )
             }
-            items(30){
-                WeClick(
-                    title = "$it",
-                )
+            items(30) {
+                WeClick(title = "$it")
             }
         }
     }
 }
+
 
 @Preview
 @Composable

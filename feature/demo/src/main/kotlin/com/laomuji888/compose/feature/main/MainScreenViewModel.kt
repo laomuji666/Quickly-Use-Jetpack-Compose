@@ -21,10 +21,8 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
             MainScreenAction.OnHttpClick -> _graph.emitGraph(MainScreenRoute.Graph.Http)
             MainScreenAction.OnLanguageClick -> _graph.emitGraph(MainScreenRoute.Graph.Language)
             MainScreenAction.OnNestedScrollConnectionScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.NestedScrollConnection)
-            MainScreenAction.OnNestedScrollDispatcherScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.NestedScrollDispatcher)
             MainScreenAction.OnPainterScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.Painter)
             MainScreenAction.OnWebViewClick -> _graph.emitGraph(MainScreenRoute.Graph.WebView)
-            MainScreenAction.OnYoutubeDLClick -> _graph.emitGraph(MainScreenRoute.Graph.YoutubeDL)
         }
     }
 }

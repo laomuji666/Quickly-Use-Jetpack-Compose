@@ -10,7 +10,7 @@
     <string name="string_error_view_refresh">刷新当前页面</string>
     <string name="string_main_screen_page_features">功能</string>
     <string name="string_main_screen_page_settings">设置</string>
-    <string name="string_main_screen_page_ui">Ui</string>
+    <string name="string_main_screen_page_ui">UI</string>
     <string name="string_demo_screen_painter">绘画画板</string>
     <string name="string_demo_screen_date">自定义日历</string>
     <string name="string_demo_screen_scroll_connect">滑动嵌套 NestedScrollConnection</string>
@@ -27,7 +27,6 @@
     <string name="string_demo_screen_ai_chat">AI聊天</string>
     <string name="string_demo_screen_biometric">生物认证</string>
     <string name="string_demo_screen_google_login_demo">谷歌登录例子</string>
-    <string name="string_demo_screen_youtubedl_demo">万能视频下载例子</string>
     <string name="string_demo_screen_web_view_demo">WebView例子</string>
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>
@@ -76,14 +75,6 @@
     <string name="string_biometric_screen_status_hardware_success">生物认证成功</string>
     <string name="string_biometric_screen_status_hardware_fail">生物认证失败</string>
     <string name="string_painter_screen_clear">清空画板</string>
-    <string name="string_youtubedl_screen_duration_format">%1$d分%2$d秒</string>
-    <string name="string_youtubedl_screen_loading">获取视频信息</string>
-    <string name="string_youtubedl_screen_url_title">Url</string>
-    <string name="string_youtubedl_screen_url_tip">请输入视频链接</string>
-    <string name="string_youtubedl_screen_download">下载视频</string>
-    <string name="string_youtubedl_screen_download_error">下载失败</string>
-    <string name="string_youtubedl_screen_download_done">下载成功\n点击播放</string>
-    <string name="string_youtubedl_screen_download_stop">暂停下载</string>
     <string name="string_web_view_screen_open_browser_fail">该链接无法由外部打开,已复制链接到剪切板.</string>
     <string name="string_language_system">系统语言</string>
     <string name="string_language_screen_title">多语言</string>

@@ -16,10 +16,8 @@ data object MainScreenRoute {
         data object AiChat : Graph
         data object Date : Graph
         data object NestedScrollConnection : Graph
-        data object NestedScrollDispatcher : Graph
         data object Biometric : Graph
         data object Painter : Graph
-        data object YoutubeDL : Graph
         data object WebView : Graph
         data object Language : Graph
     }

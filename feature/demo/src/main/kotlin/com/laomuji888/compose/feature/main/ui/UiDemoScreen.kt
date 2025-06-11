@@ -83,16 +83,9 @@ private fun UiDemoScreenUi(
             weOutlineType = WeOutlineType.PaddingHorizontal,
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_scroll_connect),
+            title = "${stringResource(id = R.string.string_demo_screen_scroll_connect)}\n${stringResource(id = R.string.string_demo_screen_scroll_dispatcher)}",
             onClick = {
                 onAction(MainScreenAction.OnNestedScrollConnectionScreenClick)
-            },
-            weOutlineType = WeOutlineType.PaddingHorizontal,
-        )
-        WeClick(
-            title = stringResource(id = R.string.string_demo_screen_scroll_dispatcher),
-            onClick = {
-                onAction(MainScreenAction.OnNestedScrollDispatcherScreenClick)
             },
             weOutlineType = WeOutlineType.PaddingHorizontal,
         )
