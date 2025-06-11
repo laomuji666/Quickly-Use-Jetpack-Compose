@@ -56,7 +56,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + Lazy列表排序: 长按后拖动,对列表进行排序.
 + 生物认证: 通过指纹或锁屏密码进行生物认证.
 + 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
-+ 视频下载播放: 使用youtubedl进行万能视频下载,使用media3进行视频播放.
++ 视频播放.: 使用media3进行视频播放.
 + WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
 + 多语言: 动态切换多语言,支持SDK33的应用首选语言.
 + 切换动画: 为Compose和Activity提供进入和退出的滑动动画,兼容RTL布局.

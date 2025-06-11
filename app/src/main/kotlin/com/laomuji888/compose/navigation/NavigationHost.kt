@@ -28,12 +28,8 @@ import com.laomuji888.compose.feature.main.MainScreenRoute
 import com.laomuji888.compose.feature.main.MainScreenRoute.composeMainScreen
 import com.laomuji888.compose.feature.painter.PainterScreenRoute.composePainterScreen
 import com.laomuji888.compose.feature.painter.PainterScreenRoute.navigateToPainterScreen
-import com.laomuji888.compose.feature.scroll.composeNestedScrollConnectionScreen
-import com.laomuji888.compose.feature.scroll.composeNestedScrollDispatcherScreen
-import com.laomuji888.compose.feature.scroll.navigateToNestedScrollConnectionScreen
-import com.laomuji888.compose.feature.scroll.navigateToNestedScrollDispatcherScreen
-import com.laomuji888.compose.feature.youtubedl.YoutubeDLScreenRoute.composeYoutubeDLScreen
-import com.laomuji888.compose.feature.youtubedl.YoutubeDLScreenRoute.navigateToYoutubeDLScreen
+import com.laomuji888.compose.feature.scroll.NestedScrollScreenRoute.composeNestedScrollScreen
+import com.laomuji888.compose.feature.scroll.NestedScrollScreenRoute.navigateToNestedScrollScreen
 
 /**
  * 导航控制器
@@ -62,10 +58,8 @@ fun NavigationHost(
                     MainScreenRoute.Graph.Firebase -> navHostController.navigateToFirebaseScreen()
                     MainScreenRoute.Graph.Http -> navHostController.navigateToHttpScreen()
                     MainScreenRoute.Graph.Language -> navHostController.navigateToLanguageScreen()
-                    MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollConnectionScreen()
-                    MainScreenRoute.Graph.NestedScrollDispatcher -> navHostController.navigateToNestedScrollDispatcherScreen()
+                    MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollScreen()
                     MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
-                    MainScreenRoute.Graph.YoutubeDL -> navHostController.navigateToYoutubeDLScreen()
                     MainScreenRoute.Graph.WebView -> activity?.let {
                         WebViewActivity.openWebViewActivity("https://www.google.com/", activity)
                     }
@@ -99,14 +93,11 @@ fun NavigationHost(
 
         composeDateScreen()
 
-        composeNestedScrollConnectionScreen()
-        composeNestedScrollDispatcherScreen()
+        composeNestedScrollScreen()
 
         composeBiometricScreen()
 
         composePainterScreen()
-
-        composeYoutubeDLScreen()
 
         composeLanguageScreen(
             navigateToGraph = {

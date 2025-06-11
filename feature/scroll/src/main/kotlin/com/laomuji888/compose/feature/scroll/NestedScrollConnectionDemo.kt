@@ -34,7 +34,7 @@ import com.laomuji888.compose.res.R
  * 同节点的滑动事件,必须由共同的父节点对滑动进行处理.
  */
 @Composable
-fun NestedScrollConnectionScreen() {
+internal fun NestedScrollConnectionScreen() {
     val density = LocalDensity.current
 
     val imageHeightMax by remember {

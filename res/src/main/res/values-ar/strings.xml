@@ -27,7 +27,6 @@
     <string name="string_demo_screen_ai_chat">دردشة AI</string>
     <string name="string_demo_screen_biometric">المصادقة البيومترية</string>
     <string name="string_demo_screen_google_login_demo">مثال تسجيل الدخول بحساب Google</string>
-    <string name="string_demo_screen_youtubedl_demo">مثال تنزيل الفيديو العالمي</string>
     <string name="string_demo_screen_web_view_demo">مثال WebView</string>
     <string name="string_http_screen_is_online">الشبكة متاحة: %1$s</string>
     <string name="string_http_screen_get_demo">GET، تأخير 3 ثوانٍ في الخلفية</string>
@@ -76,14 +75,6 @@
     <string name="string_biometric_screen_status_hardware_success">نجحت المصادقة البيومترية</string>
     <string name="string_biometric_screen_status_hardware_fail">فشلت المصادقة البيومترية</string>
     <string name="string_painter_screen_clear">مسح اللوحة</string>
-    <string name="string_youtubedl_screen_duration_format">%1$d دقيقة %2$d ثانية</string>
-    <string name="string_youtubedl_screen_loading">جارِ الحصول على معلومات الفيديو</string>
-    <string name="string_youtubedl_screen_url_title">عنوان URL</string>
-    <string name="string_youtubedl_screen_url_tip">الرجاء إدخال رابط الفيديو</string>
-    <string name="string_youtubedl_screen_download">تنزيل الفيديو</string>
-    <string name="string_youtubedl_screen_download_error">فشل التنزيل</string>
-    <string name="string_youtubedl_screen_download_done">تم التنزيل بنجاح\nانقر للتشغيل</string>
-    <string name="string_youtubedl_screen_download_stop">إيقاف التنزيل مؤقتًا</string>
     <string name="string_web_view_screen_open_browser_fail">لا يمكن فتح هذا الرابط خارجيًا، تم نسخه إلى الحافظة.</string>
     <string name="string_language_system">لغة النظام</string>
     <string name="string_language_screen_title">لغة</string>

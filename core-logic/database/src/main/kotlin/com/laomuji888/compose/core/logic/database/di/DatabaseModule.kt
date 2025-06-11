@@ -30,8 +30,4 @@ internal object DatabaseModule {
     @Provides
     @Singleton
     fun provideMessageDao(database: Database) = database.messageDao()
-
-    @Provides
-    @Singleton
-    fun provideYoutubeDLDao(database: Database) = database.youtubeDLDao()
 }

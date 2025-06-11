@@ -150,11 +150,6 @@ private fun FeatureScreenUi(
             }, weOutlineType = WeOutlineType.PaddingHorizontal
         )
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_youtubedl_demo), onClick = {
-                onAction(MainScreenAction.OnYoutubeDLClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
-        )
-        WeClick(
             title = stringResource(id = R.string.string_demo_screen_web_view_demo), onClick = {
                 onAction(MainScreenAction.OnWebViewClick)
             }, weOutlineType = WeOutlineType.Split

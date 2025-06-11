@@ -71,12 +71,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 isMinifyEnabled = false
             }
 
-            //发布配置,不混淆代码
-            create("staging") {
-                signingConfig = signingConfigs.getByName("release")
-                isMinifyEnabled = false
-            }
-
             //发布配置,混淆代码
             release {
                 signingConfig = signingConfigs.getByName("release")
