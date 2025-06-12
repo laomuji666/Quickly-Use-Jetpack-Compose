@@ -98,6 +98,4 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 | 组件示例      | <img src="docs/images/WidgetScreen.gif" width="320"/>          |
 | 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
 
-## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=laomuji888/Quickly-Use-Jetpack-Compose&type=Date)](https://star-history.com/#laomuji888/Quickly-Use-Jetpack-Compose&Date)

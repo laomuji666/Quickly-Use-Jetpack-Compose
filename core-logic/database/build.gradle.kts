@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.laomuji888.compose.library)
-    alias(libs.plugins.laomuji888.compose.hilt)
+    alias(libs.plugins.laomuji1999.compose.library)
+    alias(libs.plugins.laomuji1999.compose.hilt)
 }
 
 android {
-    namespace = "com.laomuji888.compose.core.logic.database"
+    namespace = "com.laomuji1999.compose.core.logic.database"
     defaultConfig {
         ksp {
             arg("room.schemaLocation", "$projectDir/schemas")

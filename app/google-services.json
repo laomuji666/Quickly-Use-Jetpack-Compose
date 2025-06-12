@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "226623250513",
-    "project_id": "quickly-use-jetpack-compose",
-    "storage_bucket": "quickly-use-jetpack-compose.appspot.com"
+    "project_number": "489854727264",
+    "project_id": "q-u-j-c",
+    "storage_bucket": "q-u-j-c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:226623250513:android:bab2d0b21938b0d5a25870",
+        "mobilesdk_app_id": "1:489854727264:android:8a67910178fc5b30b6bf05",
         "android_client_info": {
-          "package_name": "com.laomuji888.compose"
+          "package_name": "com.laomuji1999.compose"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyD10PmCMBifwam3GUK8cQZq0ruBXdYcyY4"
+          "current_key": "AIzaSyC0XT-eD0DufSEX3OJsZ0oC262rESUZ3jU"
         }
       ],
       "services": {

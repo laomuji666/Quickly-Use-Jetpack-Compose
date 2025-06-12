@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
-        android:name="com.laomuji888.compose.ComposeApp"
+        android:name="com.laomuji1999.compose.ComposeApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:enableOnBackInvokedCallback="false"
@@ -23,7 +23,7 @@
         <profileable android:shell="true" />
 
         <activity
-            android:name="com.laomuji888.compose.MainActivity"
+            android:name="com.laomuji1999.compose.MainActivity"
             android:exported="true"
             android:theme="@style/AppTheme.SplashScreen"
             android:windowSoftInputMode="adjustResize">
@@ -34,17 +34,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
 
                 <data
-                    android:host="compose.laomuji888.com"
+                    android:host="compose.laomuji1999.com"
                     android:pathPattern="/chat/*"
                     android:scheme="laomuji" />
             </intent-filter>
         </activity>
 
         <activity-alias
-            android:name="com.laomuji888.compose.DefaultAliasActivity"
+            android:name="com.laomuji1999.compose.DefaultAliasActivity"
             android:enabled="true"
             android:exported="true"
-            android:targetActivity="com.laomuji888.compose.MainActivity">
+            android:targetActivity="com.laomuji1999.compose.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -52,11 +52,11 @@
         </activity-alias>
 
         <activity-alias
-            android:name="com.laomuji888.compose.DynamicAliasActivity"
+            android:name="com.laomuji1999.compose.DynamicAliasActivity"
             android:enabled="false"
             android:exported="true"
             android:icon="@mipmap/ic_launcher_dynamic"
-            android:targetActivity="com.laomuji888.compose.MainActivity">
+            android:targetActivity="com.laomuji1999.compose.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -70,7 +70,7 @@
         <activity
             android:name=".WebViewActivity"
             android:exported="true"
-            android:taskAffinity="com.laomuji888.compose.WebViewTask">
+            android:taskAffinity="com.laomuji1999.compose.WebViewTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
