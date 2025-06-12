@@ -52,15 +52,15 @@ class ApplicationConventionPlugin : Plugin<Project> {
         signingConfigs {
             getByName("debug") {
                 storeFile = project.file("../keystore/key.jks")
-                keyAlias = "laomuji"
-                storePassword = "laomuji888"
-                keyPassword = "laomuji888"
+                keyAlias = "laomuji1999"
+                storePassword = "laomuji1999123"
+                keyPassword = "laomuji1999123"
             }
             create("release") {
                 storeFile = project.file("../keystore/key.jks")
-                keyAlias = "laomuji"
-                storePassword = "laomuji888"
-                keyPassword = "laomuji888"
+                keyAlias = "laomuji1999"
+                storePassword = "laomuji1999123"
+                keyPassword = "laomuji1999123"
             }
         }
         //打包配置

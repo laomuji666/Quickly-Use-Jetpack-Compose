@@ -1,10 +1,10 @@
 plugins {
-    alias(libs.plugins.laomuji888.compose.library)
-    alias(libs.plugins.laomuji888.compose.hilt)
+    alias(libs.plugins.laomuji1999.compose.library)
+    alias(libs.plugins.laomuji1999.compose.hilt)
 }
 
 android {
-    namespace = "com.laomuji888.compose.feature.painter"
+    namespace = "com.laomuji1999.compose.feature.painter"
 }
 
 dependencies {
