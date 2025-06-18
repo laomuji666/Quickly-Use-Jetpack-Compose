@@ -8,7 +8,7 @@
 
 # 架构
 
-Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in Android App](https://github.com/android/nowinandroid).
+Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in Android App](https://github.com/android/nowinandroid).点击查看[DeepWiki](https://deepwiki.com/Cheng-Kun-Liu/Quickly-Use-Jetpack-Compose).
 
 ## 架构组件
 
